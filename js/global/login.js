@@ -52,7 +52,8 @@ $(document).ready(function ($) {
           console.log('no snapshot')
           var welcomedoc = firebase.database().ref('users/' + uid + '/docs/').push()
           welcomedoc.set({
-            'data': '<h1>Welcome To Graphite</h1><p><br></p><p>If you have any questions please email <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a></p>'
+            'data': '<h1>Welcome To Graphite</h1><p><br></p><p>If you have any questions please email <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a></p>',
+            'title': 'Welcome To Graphite'
           })
         }
         firebase.database().ref('users/' + uid + '/userinfo/').set({

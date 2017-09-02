@@ -81,14 +81,13 @@ $(document).ready(function ($) {
       function updateContents () {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
           var data = snapshot.val().data
-
           quill.setContents(data)
         })
       }
       updateContents()
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
-        console.log('change')
+        // console.log('change')
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       })
@@ -99,6 +98,7 @@ $(document).ready(function ($) {
           // Save Function
           event.preventDefault()
           var currentdocument = quill.getContents()
+          var Currenttitle = $('#title').text()
           saveDocument(currentdocument)
           return false
         };
