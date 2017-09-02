@@ -46,12 +46,16 @@ body {
 }
 .fab {
   background-color: rgb(235,189,66);
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
-  bottom: 0px;
-  right: 0px;
+  border-radius: 80px;
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+}
+.fa-large {
+  font-size: 40px;
 }
