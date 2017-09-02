@@ -71,14 +71,11 @@ $(document).ready(function ($) {
         // you have one. Use User.getToken() instead.
       }
       const documentname = GetURLParameter('d')
-      if (!documentname) {
-        window.location.href = '/app'
-      }
 
       function saveDocument (data) {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
           data: data,
-          title: $('#doctitle').text()
+          title: document.title
         })
       }
 
@@ -87,7 +84,6 @@ $(document).ready(function ($) {
           var data = snapshot.val().data
           var title = snapshot.val().title
           document.title = title
-          $('#doctitle').text(title)
           quill.setContents(data)
         })
       }
@@ -98,11 +94,14 @@ $(document).ready(function ($) {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       })
+<<<<<<< HEAD
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         console.log(currentdocument)
         saveDocument(currentdocument)
       })
+=======
+>>>>>>> parent of 591b066... title change
       $(document).keydown(function (event) {
         // If Control or Command key is pressed and the S key is pressed
         // run save function. 83 is the key code for S.
