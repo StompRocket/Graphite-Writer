@@ -20,13 +20,14 @@ $(document).ready(function ($) {
         $('#newDocModal').removeClass('is-active')
       })
       $('#newDocBtn').on('click', () => {
-        var newDocName = $('#newDocName').val()
+        var newDocName = $('#newDocName').text()
+        console.log(newDocName)
         var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
         newDocRef.set({
           'data': '',
           'title': newDocName
         })
-        $('#newDocName').val('')
+        $('#newDocName').text('')
         $('#newDocModal').removeClass('is-active')
       })
       var docsRef = firebase.database().ref('users/' + uid + '/docs/')
@@ -35,7 +36,7 @@ $(document).ready(function ($) {
         var docTitle = data.val().title
         console.log(data.val())
         var docLink = '/edit?d=' + docKey
-        $('#docContainer').append('<a href="' + docLink + '" class="box full-white noLine"><div class="columns"><div class="column is-three-quarters"><h1 class="title is-4">' + docTitle + '</h1></div><div class="column right"><span class="flex-right"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; &nbsp;<i class="fa fa-trash" aria-hidden="true"></i>&nbsp; &nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></span></div></div></a>')
+        $('#docContainer').append('<a href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1></a>')
       })
     }
   })
