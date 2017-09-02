@@ -3,8 +3,8 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bulma.css" />
-  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="/css/bulma.css" />
+  <link rel="stylesheet" href="/css/main.css" />
   <title>Graphite | Home</title>
 </head>
 
@@ -22,7 +22,8 @@
           <div class="navbar-end graphite">
             <a class="navbar-item noLine" href="/"><h1 class="title is-4 navtext graphite">Home</h1></a>
             <a class="navbar-item noLine" href="app"><h1 class="title is-4 navtext graphite">App</h1></a>
-            <a class="navbar-item noLine" href="editor"><h1 class="title is-4 navtext graphite">About</h1></a>
+            <a class="navbar-item noLine" href="about"><h1 class="title is-4 navtext graphite">About</h1></a>
+            <a id="loginContainer" class="navbar-item noLine" href="editor"><h1 id="loginBtn" class="title is-4 navtext graphite">Login</h1></a>
           </div>
 
         </div>
@@ -32,7 +33,7 @@
   </div>
 
 
-  <img src="yellow-big-pencil.jpg" width="100%;" />
+  <img src="/images/yellow-big-pencil.jpg" width="100%;" />
   <div class="container">
     <br />
     <h1 class="title is-3 graphite">What is Graphite?</h1>
@@ -41,7 +42,21 @@
     </p>
     <br />
   </div>
-  <scrip src="app.js"></scrip>
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
+      authDomain: "graphite-88e41.firebaseapp.com",
+      databaseURL: "https://graphite-88e41.firebaseio.com",
+      projectId: "graphite-88e41",
+      storageBucket: "graphite-88e41.appspot.com",
+      messagingSenderId: "158148550453"
+    };
+    firebase.initializeApp(config);
+    var provider = new firebase.auth.GoogleAuthProvider();
+  </script>
+  <script src="/js/global/login.js" charset="utf-8"></script>
 </body>
 
 </html>

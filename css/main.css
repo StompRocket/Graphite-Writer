@@ -44,3 +44,12 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
+#editor {
+  min-height: 100vh;
+}
+
+#editorContainer {
+  margin-left: 2%;
+  margin-right: 2%;
+}

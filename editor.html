@@ -11,8 +11,8 @@
   <!-- Theme included stylesheets -->
   <link href="//cdn.quilljs.com/1.3.1/quill.snow.css" rel="stylesheet">
   <link href="//cdn.quilljs.com/1.3.1/quill.bubble.css" rel="stylesheet">
-  <link href="bulma.css" rel="stylesheet" />
-  <link href="main.css" rel="stylesheet" />
+  <link href="/css/bulma.css" rel="stylesheet" />
+  <link href="/css/main.css" rel="stylesheet" />
 
 </head>
 
@@ -32,6 +32,7 @@
             <a class="navbar-item noLine" href="/"><h1 class="title is-4 navtext graphite">Home</h1></a>
             <a class="navbar-item noLine" href="app"><h1 class="title is-4 navtext graphite">App</h1></a>
             <a class="navbar-item noLine" href="about"><h1 class="title is-4 navtext graphite">About</h1></a>
+            <a id="loginContainer" class="navbar-item noLine" href="editor"><h1 id="loginBtn" class="title is-4 navtext graphite">Login</h1></a>
           </div>
 
         </div>
@@ -47,9 +48,22 @@
 
     </div>
   </div>
-
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
+      authDomain: "graphite-88e41.firebaseapp.com",
+      databaseURL: "https://graphite-88e41.firebaseio.com",
+      projectId: "graphite-88e41",
+      storageBucket: "graphite-88e41.appspot.com",
+      messagingSenderId: "158148550453"
+    };
+    firebase.initializeApp(config);
+    var provider = new firebase.auth.GoogleAuthProvider();
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="app.js"></script>
+  <script src="/js/editor/app.js"></script>
 </body>
 
 </html>
