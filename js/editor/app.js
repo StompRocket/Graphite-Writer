@@ -95,11 +95,14 @@ $(document).ready(function ($) {
         saveDocument(currentdocument)
       })
 <<<<<<< HEAD
+<<<<<<< HEAD
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         console.log(currentdocument)
         saveDocument(currentdocument)
       })
+=======
+>>>>>>> parent of 591b066... title change
 =======
 >>>>>>> parent of 591b066... title change
       $(document).keydown(function (event) {
