@@ -100,6 +100,7 @@ $(document).ready(function ($) {
       })
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
+        console.log(currentdocument)
         saveDocument(currentdocument)
       })
       $(document).keydown(function (event) {
@@ -126,5 +127,5 @@ $(document).ready(function ($) {
   })
   var tooltip = quill.theme.tooltip
   var input = tooltip.root.querySelector('input[data-link]')
-  input.dataset.link = 'https://www.github.com'
+  input.dataset.link = 'https://www.google.com'
 })
