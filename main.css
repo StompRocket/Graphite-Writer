@@ -1,22 +1,28 @@
-body {
-  height: 100vh;
-}
-.noLine {
-  text-decoration: none;
-}
+  body {
+    height: 100vh;
+  }
 
-.graphite {
-  background-color: #292929;
-  color: white;
-}
+  .noLine {
+    text-decoration: none;
+  }
 
-.editor {
-  background-color: #292929;
-}
+  .graphite {
+    background-color: #292929;
+    color: white;
+  }
 
-.white {
-  background-color: white;
-}
-.navtext:hover, .navtext:active{
-  color: white !important;
-}
+  .editor {
+    background-color: #292929;
+  }
+
+  .white {
+    background-color: white;
+  }
+
+  .navtext:hover, .navtext:active {
+    color: white !important;
+  }
+
+  .navtext {
+    font-weight: bold;
+  }
