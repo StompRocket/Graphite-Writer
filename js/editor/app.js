@@ -113,4 +113,7 @@ $(document).ready(function ($) {
     placeholder: 'Compose an epic...',
     theme: 'snow'
   })
+  var tooltip = quill.theme.tooltip
+  var input = tooltip.root.querySelector('input[data-link]')
+  input.dataset.link = 'https://www.github.com'
 })
