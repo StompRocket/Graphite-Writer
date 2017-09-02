@@ -71,11 +71,14 @@ $(document).ready(function ($) {
         // you have one. Use User.getToken() instead.
       }
       const documentname = GetURLParameter('d')
+      if (!documentname) {
+        window.location.href = '/app'
+      }
 
       function saveDocument (data) {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
           data: data,
-          title: document.title
+          title: $('#doctitle').text()
         })
       }
 
@@ -84,6 +87,7 @@ $(document).ready(function ($) {
           var data = snapshot.val().data
           var title = snapshot.val().title
           document.title = title
+          $('#doctitle').text(title)
           quill.setContents(data)
         })
       }
@@ -91,6 +95,10 @@ $(document).ready(function ($) {
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
         // console.log('change')
+        var currentdocument = quill.getContents()
+        saveDocument(currentdocument)
+      })
+      $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       })
