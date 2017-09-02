@@ -26,3 +26,12 @@
   .navtext {
     font-weight: bold;
   }
+
+  #editor {
+    min-height: 100vh;
+  }
+
+  #editorContainer {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
