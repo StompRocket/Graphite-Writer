@@ -24,7 +24,7 @@
             <a class="navbar-item noLine" href="/"><h1 class="title is-4 navtext graphite">Home</h1></a>
             <a class="navbar-item noLine" href="app"><h1 class="title is-4 navtext graphite">App</h1></a>
             <a class="navbar-item noLine" href="editor"><h1 class="title is-4 navtext graphite">About</h1></a>
-            <a id="loginContainer" class="navbar-item noLine" href="editor"><h1 id="loginBtn" class="title is-4 navtext graphite">Login</h1></a>
+            <a id="loginContainer" class="navbar-item noLine" href="#"><h1 id="loginBtn" class="title is-4 navtext graphite">Login</h1></a>
           </div>
 
         </div>
@@ -71,22 +71,23 @@
   </div>
 
   <a class="fab noLine"><i class="fa fa-plus" aria-hidden="true"></i></a>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
   <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
-      authDomain: "graphite-88e41.firebaseapp.com",
-      databaseURL: "https://graphite-88e41.firebaseio.com",
-      projectId: "graphite-88e41",
-      storageBucket: "graphite-88e41.appspot.com",
-      messagingSenderId: "158148550453"
-    };
-    firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
+      authDomain: "graphite-88e41.firebaseapp.com",
+      databaseURL: "https://graphite-88e41.firebaseio.com",
+      projectId: "graphite-88e41",
+      storageBucket: "graphite-88e41.appspot.com",
+      messagingSenderId: "158148550453"
+    };
+    firebase.initializeApp(config);
     var provider = new firebase.auth.GoogleAuthProvider();
   </script>
-
-  <scrip src="js/app.js"></scrip>
+  <script src="/js/global/login.js" charset="utf-8"></script>
+  <!--  <script src="js/app/app.js"></script>-->
 </body>
 
 </html>
