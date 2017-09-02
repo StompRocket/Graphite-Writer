@@ -94,20 +94,12 @@ $(document).ready(function ($) {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       })
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         console.log(currentdocument)
         saveDocument(currentdocument)
       })
-=======
->>>>>>> parent of 591b066... title change
-=======
->>>>>>> parent of 591b066... title change
-=======
->>>>>>> parent of 591b066... title change
+
       $(document).keydown(function (event) {
         // If Control or Command key is pressed and the S key is pressed
         // run save function. 83 is the key code for S.
