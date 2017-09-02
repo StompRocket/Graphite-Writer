@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   height: 100vh;
 }
@@ -44,3 +45,42 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+=======
+  body {
+    height: 100vh;
+  }
+
+  .noLine {
+    text-decoration: none;
+  }
+
+  .graphite {
+    background-color: #292929;
+    color: white;
+  }
+
+  .editor {
+    background-color: #292929;
+  }
+
+  .white {
+    background-color: white;
+  }
+
+  .navtext:hover, .navtext:active {
+    color: white !important;
+  }
+
+  .navtext {
+    font-weight: bold;
+  }
+
+  #editor {
+    min-height: 100vh;
+  }
+
+  #editorContainer {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+>>>>>>> 080d6e7c885b2fdfad20d540af0ba60166defba0
