@@ -74,13 +74,16 @@ $(document).ready(function ($) {
 
       function saveDocument (data) {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
-          data: data
+          data: data,
+          title: document.title
         })
       }
 
       function updateContents () {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
           var data = snapshot.val().data
+          var title = snapshot.val().title
+          document.title = title
           quill.setContents(data)
         })
       }

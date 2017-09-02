@@ -32,53 +32,22 @@
     </div>
     <br />
   </div>
+
   <div class="container">
-    <div class="box full-white ">
-      <div class="columns">
-        <div class="column is-three-quarters">
-          <h1 class="title is-4">Why I Hate Toads: a dramatic reading</h1>
-        </div>
-        <div class="column right">
-          <span class="flex-right">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-            &nbsp; &nbsp;
-            <i class="fa fa-trash" aria-hidden="true"></i>
-            &nbsp; &nbsp;
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </span>
-        </div>
-      </div>
+    <div id="docContainer"></div>
 
-    </div>
 
-    <div class="box full-white ">
-      <div class="columns">
-        <div class="column is-three-quarters">
-          <h1 class="title is-4">Last-Minute Humanities Homework</h1>
-        </div>
-        <div class="column right">
-          <span class="flex-right">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-            &nbsp; &nbsp;
-            <i class="fa fa-trash" aria-hidden="true"></i>
-            &nbsp; &nbsp;
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-          </span>
-        </div>
-      </div>
-
-    </div>
   </div>
 
-  <a class="fab noLine"><i class="fa fa-plus fa-large" aria-hidden="true"></i></a>
+  <a id="newDocFab" class="fab noLine"><i class="fa fa-plus fa-large" aria-hidden="true"></i></a>
 
-  <div class="modal is-active" id="newDocModal">
+  <div class="modal" id="newDocModal">
     <div class="modal-background">
 
     </div>
     <div class="modal-content">
       <div class="box">
-        <h1 class="title is-4">New Document Name:r</h1>
+        <h1 class="title is-4">New Document Name</h1>
         <div class="box graphite" id="newDocName" contenteditable="true"></div>
         <a class="button noLine navtext graphite" id="newDocBtn">Create</a>
       </div>
@@ -100,7 +69,7 @@
     var provider = new firebase.auth.GoogleAuthProvider();
   </script>
   <script src="/js/global/login.js" charset="utf-8"></script>
-  <!--  <script src="js/app/app.js"></script>-->
+  <script src="js/app/app.js"></script>
 </body>
 
 </html>
