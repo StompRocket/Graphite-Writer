@@ -1,28 +1,46 @@
-  body {
-    height: 100vh;
-  }
+body {
+  height: 100vh;
+}
 
-  .noLine {
-    text-decoration: none;
-  }
+.noLine {
+  text-decoration: none;
+}
 
-  .graphite {
-    background-color: #292929;
-    color: white;
-  }
+.graphite {
+  background-color: #292929;
+  color: white;
+}
 
-  .editor {
-    background-color: #292929;
-  }
+.editor {
+  background-color: #292929;
+}
 
-  .white {
-    background-color: white;
-  }
+.white {
+  background-color: white;
+}
 
-  .navtext:hover, .navtext:active {
-    color: white !important;
-  }
+.full-white {
+  background-color: white;
+  color: #292929;
+}
 
-  .navtext {
-    font-weight: bold;
-  }
+.navtext:hover, .navtext:active {
+  color: white !important;
+}
+
+.navtext {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-container {
+  width: 100%;
+  float: right;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+}
