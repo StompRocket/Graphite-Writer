@@ -1,34 +1,28 @@
-body {
-  height: 100vh;
-}
-.noLine {
-  text-decoration: none;
-}
+  body {
+    height: 100vh;
+  }
 
-.graphite {
-  background-color: #292929;
-  color: white;
-}
+  .noLine {
+    text-decoration: none;
+  }
 
-.editor {
-  background-color: #292929;
-}
+  .graphite {
+    background-color: #292929;
+    color: white;
+  }
 
-.white {
-  background-color: white;
-}
-<<<<<<< HEAD
-<<<<<<< HEAD
-.navtext:hover, .navtext:active{
-  color: white !important;
-=======
+  .editor {
+    background-color: #292929;
+  }
 
-.navtext {
-  font-weight: bold;
->>>>>>> 411e636f3049c5c8cc70d2e847e00af9927c4e80
-=======
+  .white {
+    background-color: white;
+  }
 
-.navtext {
-  font-weight: bold;
->>>>>>> 411e636f3049c5c8cc70d2e847e00af9927c4e80
-}
+  .navtext:hover, .navtext:active {
+    color: white !important;
+  }
+
+  .navtext {
+    font-weight: bold;
+  }
