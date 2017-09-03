@@ -234,12 +234,12 @@ footer {}
 
 #editor {
   min-height: 100vh;
-  width: 90%;
   word-wrap: break-word;
+  width: 100%;
 }
 
 #editorContainer {
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
