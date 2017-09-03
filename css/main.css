@@ -1,5 +1,73 @@
-body {
-  height: 100vh;
+body, html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#header {
+  min-height: 90vh;
+  background-color: white;
+  color: #292929;
+  text-align: center;
+  padding: 5%;
+  padding-bottom: 0px;
+}
+
+#header h1 {
+  font-size: 90pt;
+  margin-bottom: 2%;
+  font-weight: 400;
+}
+
+#header a {
+  border-color: #292929;
+  border-width: 5px;
+  color: #292929;
+  width: 200px;
+  height: 100px;
+  font-weight: bold;
+  transition-duration: 1s;
+  margin: 2%;
+}
+
+#header a:hover {
+  background-color: #292929;
+  color: white;
+  transition-duration: 1s;
+}
+
+#header img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#sectiontwo {
+  height: 40vh;
+  display: table;
+}
+
+.smallContainer {
+  width: 100%;
+  padding: 10%;
+}
+
+#vcenter {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#sectiontwo h1 {
+  text-align: center;
+  color: white;
+  font-size: 40pt;
+  font-weight: 900;
+}
+
+#sectiontwo p {
+  text-align: left;
+  color: white;
+  font-size: 20pt;
+  font-weight: 500;
 }
 
 .noLine {
@@ -54,6 +122,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 .center {
   display: flex;
   align-items: center;
