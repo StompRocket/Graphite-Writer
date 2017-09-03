@@ -111,7 +111,7 @@ $(document).ready(function ($) {
           var Currenttitle = $('#title').text()
           saveDocument(currentdocument)
           return false
-        };
+        }
       })
     }
   })
