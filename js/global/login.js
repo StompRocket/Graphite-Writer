@@ -21,9 +21,6 @@ $(document).ready(function ($) {
         // Handle Errors here.
         var errorCode = error.code
         var errorMessage = error.message
-        if (errorCode) {
-          window.alert(errorCode, errorMessage)
-        }
         // The email of the user's account used.
         var email = error.email
         // The firebase.auth.AuthCredential type that was used.
@@ -52,7 +49,7 @@ $(document).ready(function ($) {
           console.log('no snapshot')
           var welcomedoc = firebase.database().ref('users/' + uid + '/docs/').push()
           welcomedoc.set({
-            'data': '<h1>Welcome To Graphite</h1><p><br></p><p>If you have any questions please email <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a></p>',
+            'data': '{"ops":[{"attributes":{"color":"#363636","bold":true},"insert":"Welcome To Graphite"},{"attributes":{"header":1},"insert":"\\n"},{"insert":"A modern approach to text editing"},{"attributes":{"header":2},"insert":"\\n"},{"insert":"\\nIf you have any questions or concerns please contact us at "},{"attributes":{"link":"mailto:support@graphitewriter.com"},"insert":"support@graphitewriter.com"},{"insert":"\\n"},{"attributes":{"header":1},"insert":"\\n"}]}',
             'title': 'Welcome To Graphite'
           })
         }
