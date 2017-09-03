@@ -5,6 +5,7 @@ body, html {
 
 #header {
   min-height: 100vh;
+  background-color: white;
   color: #292929;
   text-align: center;
   padding: 5%;
