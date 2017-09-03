@@ -12,6 +12,10 @@ body, html {
   padding-bottom: 0px;
   background-image: url(/images/joanna-kosinska-129039.jpg);
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #header h1 {
@@ -234,12 +238,12 @@ footer {}
 
 #editor {
   min-height: 100vh;
+  width: 90%;
   word-wrap: break-word;
-  width: 100%;
 }
 
 #editorContainer {
-  width: 100%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
