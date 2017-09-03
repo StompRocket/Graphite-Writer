@@ -259,3 +259,7 @@ footer {}
   align-content: center;
   justify-content: center;
 }
+
+#doctitle:focus {
+  outline: none;
+}

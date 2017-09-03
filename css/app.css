@@ -1,5 +1,6 @@
 body {
   height: 100vh;
+  background-color: white;
 }
 
 .noLine {
@@ -26,6 +27,9 @@ body {
   display: inline-block;
   margin: 5px;
   transition-duration: 0.3s;
+  height: 100px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .full-white:hover {
@@ -55,7 +59,6 @@ body {
 }
 
 .fab {
-  background-color: rgb(235, 189, 66);
   width: 60px;
   height: 60px;
   display: flex;
@@ -67,8 +70,21 @@ body {
   position: absolute;
 }
 
-.fab:hover {
+#main {
+  margin-top: 5%;
+}
+
+#newDocFab:hover {
   background-color: rgb(209, 168, 58);
+}
+
+#newDocFab {
+  background-color: rgb(235, 189, 66);
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
 }
 
 .fa-large {
