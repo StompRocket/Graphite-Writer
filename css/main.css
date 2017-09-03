@@ -4,7 +4,7 @@ body, html {
 }
 
 #header {
-  min-height: 90vh;
+  min-height: 100vh;
   background-color: white;
   color: #292929;
   text-align: center;
@@ -13,7 +13,7 @@ body, html {
 }
 
 #header h1 {
-  font-size: 90pt;
+  font-size: 70pt;
   margin-bottom: 2%;
   font-weight: 400;
 }
@@ -42,7 +42,7 @@ body, html {
 }
 
 #sectiontwo {
-  height: 40vh;
+  height: 120vh;
   display: table;
 }
 
@@ -56,11 +56,16 @@ body, html {
   vertical-align: middle;
 }
 
+.vcenter {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 #sectiontwo h1 {
   text-align: center;
   color: white;
   font-size: 40pt;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 #sectiontwo p {
@@ -68,6 +73,47 @@ body, html {
   color: white;
   font-size: 20pt;
   font-weight: 500;
+}
+
+#sectionthree {
+  height: 100vh;
+  background-color: white;
+  color: #292929
+}
+
+#sectionthree h1 {
+  font-weight: 500;
+  text-align: center;
+  font-size: 50pt;
+}
+
+#sectionthree h2 {
+  font-weight: 700;
+  text-align: left;
+  font-size: 50pt;
+}
+
+#sectionthree .column {
+  height: 70vh;
+  display: table;
+  padding: 3%;
+  text-align: left;
+}
+
+#sectionthree p {
+  font-size: 20pt;
+  color: #4a4a4a;
+}
+
+#sectionthree .columns {
+  padding: 5%;
+}
+
+#column1 {
+  text-align: left;
+  border-right-color: rgb(235, 189, 66);
+  border-right-style: solid;
+  border-right-width: 2px;
 }
 
 .noLine {
