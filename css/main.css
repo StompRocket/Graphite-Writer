@@ -4,7 +4,7 @@ body, html {
 }
 
 #header {
-  min-height: 100vh;
+  height: 100%;
   background-color: white;
   color: #292929;
   text-align: center;
@@ -49,7 +49,7 @@ body, html {
 }
 
 #sectiontwo {
-  height: 120vh;
+  height: 70%;
   display: table;
 }
 
