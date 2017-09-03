@@ -3,6 +3,10 @@ body, html {
   font-family: 'Open Sans', sans-serif;
 }
 
+#loginBtn {
+  color: rgb(235, 189, 66);
+}
+
 #header {
   height: 100%;
   background-color: white;
@@ -19,7 +23,7 @@ body, html {
 }
 
 #header h1 {
-  font-size: 70pt;
+  font-size: 60pt;
   margin-bottom: 2%;
   font-weight: 400;
 }
@@ -38,7 +42,7 @@ body, html {
 
 #header a:hover {
   background-color: #292929;
-  color: white;
+  color: rgb(235, 189, 66);
   transition-duration: 1s;
 }
 
@@ -104,7 +108,7 @@ body, html {
 #sectionthree .column {
   height: 70vh;
   display: table;
-  padding: 3%;
+  padding: 2%;
   text-align: left;
 }
 
@@ -123,6 +127,7 @@ body, html {
   border-right-color: rgb(235, 189, 66);
   border-right-style: solid;
   border-right-width: 2px;
+  width: 50%;
 }
 
 #column2 {
@@ -159,7 +164,7 @@ body, html {
 
 #sectionfour .dollar {
   display: block!important;
-  margin-left: auto;
+  margin-left: none;
   margin-right: auto;
   width: 30%;
   height: 400px;
