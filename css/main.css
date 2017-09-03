@@ -5,12 +5,11 @@ body, html {
 
 #header {
   min-height: 100vh;
-  background-color: white;
   color: #292929;
   text-align: center;
   padding: 5%;
   padding-bottom: 0px;
-  background-image: url(/images/joanna-kosinska-129039.jpg);
+  background-image: url(/images/joanna-kosinska-129039.jpg) no-repeat center center;
 }
 
 #header h1 {
