@@ -19,9 +19,9 @@ body, html {
 }
 
 #header a {
-  border-color: #292929;
+  border-color: rgb(235, 189, 66);
   border-width: 5px;
-  color: #292929;
+  color: rgb(235, 189, 66);
   width: 200px;
   height: 100px;
   font-weight: bold;
@@ -30,7 +30,7 @@ body, html {
 }
 
 #header a:hover {
-  background-color: #292929;
+  background-color: rgb(235, 189, 66);
   color: white;
   transition-duration: 1s;
 }
