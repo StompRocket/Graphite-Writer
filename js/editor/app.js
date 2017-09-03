@@ -75,7 +75,7 @@ $(document).ready(function ($) {
       function saveDocument (data) {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
           data: data,
-          title: document.title
+          title: $('#doctitle').text()
         })
       }
 
@@ -83,7 +83,7 @@ $(document).ready(function ($) {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
           var data = snapshot.val().data
           var title = snapshot.val().title
-
+          $('#doctitle').text(title)
           document.title = title
           quill.setContents(data)
         })
