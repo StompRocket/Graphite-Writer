@@ -5,13 +5,16 @@ body, html {
 
 #header {
   min-height: 100vh;
-  background-color: white;
   color: #292929;
   text-align: center;
   padding: 5%;
   padding-bottom: 0px;
+<<<<<<< HEAD
   background-image: url(/images/joanna-kosinska-129039.jpg);
   background-repeat: no-repeat;
+=======
+  background-image: url(/images/joanna-kosinska-129039.jpg) no-repeat center center;
+>>>>>>> fa363c5b59ac39fac33392717f9b1a40fd8ea907
 }
 
 #header h1 {
