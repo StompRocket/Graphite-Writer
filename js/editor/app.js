@@ -73,19 +73,25 @@ $(document).ready(function ($) {
       const documentname = GetURLParameter('d')
 
       function saveDocument (data) {
+        var date = new Date()
+        date = date.toString()
+        $('#lastedited').text(date)
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
           data: data,
-          title: $('#doctitle').text()
+          title: $('#doctitle').text(),
+          date: date
         })
       }
 
       function updateContents () {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
-          var data = snapshot.val().data
-          var title = snapshot.val().title
-          $('#doctitle').text(title)
-          document.title = title
-          quill.setContents(data)
+          var fbdata = snapshot.val().data
+          var fbtitle = snapshot.val().title
+          var fbdate = snapshot.val().date
+          $('#lastedited').text(fbdate)
+          $('#doctitle').text(fbtitle)
+          document.title = fbtitle
+          quill.setContents(fbdata)
         })
       }
       updateContents()

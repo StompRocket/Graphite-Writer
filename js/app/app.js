@@ -20,14 +20,14 @@ $(document).ready(function ($) {
         $('#newDocModal').removeClass('is-active')
       })
       $('#newDocBtn').on('click', () => {
-        var newDocName = $('#newDocName').text()
+        var newDocName = $('#newDocName').val()
         console.log(newDocName)
         var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
         newDocRef.set({
           'data': '',
           'title': newDocName
         })
-        $('#newDocName').text('')
+        $('#newDocName').val('')
         $('#newDocModal').removeClass('is-active')
       })
       var docsRef = firebase.database().ref('users/' + uid + '/docs/')
