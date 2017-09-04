@@ -49,7 +49,6 @@ $(document).ready(function ($) {
       })
 
       function test () {
-        var searching = 0
         $('#search').on('keyup', function (acache) {
           var query = $('#search').val().toLowerCase()
 
@@ -57,8 +56,6 @@ $(document).ready(function ($) {
           var $pictureList = $('#docContainer a')
           if (query) {
             $pictureList.hide()
-
-            searching = 1
 
             $pictureList.each(function () {
               if ($(this).attr('alt').indexOf(query) >= 0) {
@@ -68,7 +65,6 @@ $(document).ready(function ($) {
               }
             })
           } else {
-            searching = 0
             $pictureList.fadeIn(400, function () {
               // Stuff to do *after* the animation takes place
             })
