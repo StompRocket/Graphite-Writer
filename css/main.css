@@ -101,7 +101,6 @@ body, html {
 
 #sectionthree h2 {
   font-weight: 700;
-  text-align: left;
   font-size: 50pt;
 }
 
@@ -116,6 +115,7 @@ body, html {
   font-size: 20pt;
   color: #4a4a4a;
   max-width: 600px;
+  margin: none:
 }
 
 #sectionthree .columns {
@@ -123,7 +123,7 @@ body, html {
 }
 
 #column1 {
-  text-align: left;
+  text-align: right!important;
   border-right-color: rgb(235, 189, 66);
   border-right-style: solid;
   border-right-width: 2px;
@@ -132,6 +132,10 @@ body, html {
 
 #column2 {
   margin-right: 5%;
+}
+
+#buitforspeed {
+  float: right;
 }
 
 #sectionfour {
