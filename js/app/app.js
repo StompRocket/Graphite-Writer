@@ -21,17 +21,21 @@ $(document).ready(function ($) {
       })
       $('#newDocBtn').on('click', () => {
         var newDocName = $('#newDocName').val()
-        console.log(newDocName)
-        var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
-        var date = new Date()
-        date = date.toString()
-        newDocRef.set({
-          'data': '',
-          'title': newDocName,
-          'date': date
-        })
-        $('#newDocName').val('')
-        $('#newDocModal').removeClass('is-active')
+        if (newDocName) {
+          console.log(newDocName)
+          var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+          var date = new Date()
+          date = date.toString()
+          newDocRef.set({
+            'data': '',
+            'title': newDocName,
+            'date': date
+          })
+          $('#newDocName').val('')
+          $('#newDocModal').removeClass('is-active')
+        } else {
+          window.alert('Document Names Must Be More than 1 Character')
+        }
       })
       var docsRef = firebase.database().ref('users/' + uid + '/docs/')
       docsRef.on('child_added', function (data) {
