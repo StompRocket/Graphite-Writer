@@ -79,6 +79,7 @@ $(document).ready(function ($) {
         } else {
           var date = new Date()
           date = date.toString()
+          date = date.split(' ').slice(0, 5).join(' ')
           $('#lastedited').text(date)
           firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
             data: data,
@@ -93,6 +94,7 @@ $(document).ready(function ($) {
           var fbdata = snapshot.val().data
           var fbtitle = snapshot.val().title
           var fbdate = snapshot.val().date
+          fbdate = fbdate.split(' ').slice(0, 5).join(' ')
           $('#lastedited').text(fbdate)
           $('#doctitle').text(fbtitle)
           document.title = fbtitle

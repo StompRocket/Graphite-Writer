@@ -43,10 +43,39 @@ $(document).ready(function ($) {
         var docTitle = data.val().title
         var docDate = data.val().date
         docDate = docDate.split(' ').slice(0, 4).join(' ')
-        console.log(data.val())
+
         var docLink = '/edit?d=' + docKey
-        $('#docContainer').append('<a href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
+        $('#docContainer').prepend('<a alt="' + docTitle.toLowerCase() + '" href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
       })
+
+      function test () {
+        var searching = 0
+        $('#search').on('keyup', function (acache) {
+          var query = $('#search').val().toLowerCase()
+
+          //  console.log(myImage)
+          var $pictureList = $('#docContainer a')
+          if (query) {
+            $pictureList.hide()
+
+            searching = 1
+
+            $pictureList.each(function () {
+              if ($(this).attr('alt').indexOf(query) >= 0) {
+                $(this).fadeIn(400, function () {
+                  // Stuff to do *after* the animation takes place
+                })
+              }
+            })
+          } else {
+            searching = 0
+            $pictureList.fadeIn(400, function () {
+              // Stuff to do *after* the animation takes place
+            })
+          }
+        })
+      }
+      test()
     }
   })
 })
