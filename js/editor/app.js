@@ -71,16 +71,21 @@ $(document).ready(function ($) {
         // you have one. Use User.getToken() instead.
       }
       const documentname = GetURLParameter('d')
+      var prevent = 1
 
       function saveDocument (data) {
-        var date = new Date()
-        date = date.toString()
-        $('#lastedited').text(date)
-        firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
-          data: data,
-          title: $('#doctitle').text(),
-          date: date
-        })
+        if (prevent === 1) {
+          prevent = 2
+        } else {
+          var date = new Date()
+          date = date.toString()
+          $('#lastedited').text(date)
+          firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
+            data: data,
+            title: $('#doctitle').text(),
+            date: date
+          })
+        }
       }
 
       function updateContents () {
