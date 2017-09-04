@@ -249,7 +249,9 @@ footer {}
   min-height: 100vh;
   width: 100%;
   word-wrap: break-word;
-  font-size: 15pt;
+  font-size: 12pt;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 #editorContainer {
@@ -267,4 +269,9 @@ footer {}
 
 #doctitle:focus {
   outline: none;
+}
+
+#doccontainer {
+  padding-left: 5%;
+  padding-right: 5%;
 }
