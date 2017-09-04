@@ -23,9 +23,12 @@ $(document).ready(function ($) {
         var newDocName = $('#newDocName').val()
         console.log(newDocName)
         var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+        var date = new Date()
+        date = date.toString()
         newDocRef.set({
           'data': '',
-          'title': newDocName
+          'title': newDocName,
+          'date': date
         })
         $('#newDocName').val('')
         $('#newDocModal').removeClass('is-active')
@@ -34,9 +37,11 @@ $(document).ready(function ($) {
       docsRef.on('child_added', function (data) {
         var docKey = data.key
         var docTitle = data.val().title
+        var docDate = data.val().date
+        docDate = docDate.split(' ').slice(0, 4).join(' ')
         console.log(data.val())
         var docLink = '/edit?d=' + docKey
-        $('#docContainer').append('<a href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1></a>')
+        $('#docContainer').append('<a href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
       })
     }
   })

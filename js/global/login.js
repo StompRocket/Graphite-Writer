@@ -49,9 +49,12 @@ $(document).ready(function ($) {
         if (!snapshot.val()) {
           console.log('no snapshot')
           var welcomedoc = firebase.database().ref('users/' + uid + '/docs/').push()
+          var date = new Date()
+          date = date.toString()
           welcomedoc.set({
             'data': '{"ops":[{"attributes":{"color":"#363636","bold":true},"insert":"Welcome To Graphite"},{"attributes":{"header":1},"insert":"\\n"},{"insert":"A modern text editor"},{"attributes":{"header":2},"insert":"\\n"},{"insert":"\\nIf you have any questions or concerns please contact us at "},{"attributes":{"link":"mailto:support@graphitewriter.com"},"insert":"support@graphitewriter.com"},{"insert":"\\n"},{"attributes":{"header":1},"insert":"\\n"}]}',
-            'title': 'Welcome To Graphite'
+            'title': 'Welcome To Graphite',
+            'date': date
           })
         }
         firebase.database().ref('users/' + uid + '/userinfo/').set({
