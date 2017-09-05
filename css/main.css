@@ -291,6 +291,16 @@ footer {}
   cursor: pointer;
 }
 
+#printDoc {
+  float: right;
+  margin-right: 10px;
+  color: #292929
+}
+
+#printDoc:hover {
+  color: #212121;
+}
+
 #deleteDoc:hover {
   color: #c13e31;
 }
