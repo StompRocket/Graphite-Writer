@@ -1,0 +1,20 @@
+header nav, footer, .nav, #titleContainer, .noLine, .ql-toolbar {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+.ql-container, .ql-editor {
+  border: none!important;
+  height: 100%;
+}
+
+@page {
+  size: auto;
+  /* auto is the initial value */
+  margin: 0mm;
+  /* this affects the margin in the printer settings */
+}

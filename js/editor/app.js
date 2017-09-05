@@ -114,6 +114,8 @@ $(document).ready(function ($) {
         saveDocument(currentdocument)
       })
 
+      // create canvas object
+
       $(document).keydown(function (event) {
         // If Control or Command key is pressed and the S key is pressed
         // run save function. 83 is the key code for S.
@@ -123,18 +125,6 @@ $(document).ready(function ($) {
           var currentdocument = quill.getContents()
           var Currenttitle = $('#title').text()
           saveDocument(currentdocument)
-          return false
-        }
-        if ((event.ctrlKey || event.metaKey) && event.which == 80) {
-          // Print Function
-          event.preventDefault()
-          var title = $('#doctitle').text()
-          var html = quill.root.innerHTML
-          // window.alert(html)
-          var finalhtml = '<!doctype html><html><head><title>' + title + '</title><link href="//graphitewriter.com/css/quill.snow.css" rel="stylesheet"><style>body,html {height: 100%;font-family: "Open Sans", sans-serif;color: #292929;}.ql-container {border: none!important;}</style></head><body class=""><div class="ql-snow ql-container"><div class="ql-editor">' + html + '</div></div></body></html>'
-          var uri = 'data:text/html,' + encodeURIComponent(finalhtml)
-          var printWindow = window.open(uri)
-
           return false
         }
       })
