@@ -275,3 +275,26 @@ footer {}
   padding-left: 5%;
   padding-right: 5%;
 }
+
+#deleteDoc {
+  display: inline;
+  width: 10%;
+  float: right;
+  margin-top: none;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+#deleteDoc:hover {
+  color: #c13e31;
+}
+
+#lasteditedcontainer, #lastedited {
+  font-weight: 400!important;
+  margin-bottom: none;
+}
+
+#lasteditedcontainer {
+  width: 80%;
+  display: inline;
+}

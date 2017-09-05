@@ -113,9 +113,15 @@ $(document).ready(function ($) {
         console.log(currentdocument)
         saveDocument(currentdocument)
       })
-
-      // create canvas object
-
+      $('#deleteDoc').on('click', () => {
+        var deletedoc = confirm('Are you sure you want to delete this document?')
+        if (deletedoc == true) {
+          var updates = {}
+          updates['users/' + uid + '/docs/' + documentname] = null
+          firebase.database().ref().update(updates)
+          window.location.href = '/app'
+        }
+      })
       $(document).keydown(function (event) {
         // If Control or Command key is pressed and the S key is pressed
         // run save function. 83 is the key code for S.
