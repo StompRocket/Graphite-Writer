@@ -100,3 +100,11 @@ body {
 .date {
   font-size: 10pt;
 }
+
+.ql-container {
+  background-color: #292929!important;
+}
+
+.ql-toolbar {
+  background-color: white!important;
+}

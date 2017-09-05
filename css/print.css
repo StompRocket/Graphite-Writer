@@ -18,3 +18,14 @@ html, body {
   margin: 0mm;
   /* this affects the margin in the printer settings */
 }
+
+#editor {
+  margin: 0;
+  border: initial;
+  border-radius: initial;
+  width: initial;
+  min-height: initial;
+  box-shadow: initial;
+  background: initial;
+  page-break-after: always;
+}

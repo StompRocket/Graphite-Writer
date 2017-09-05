@@ -252,12 +252,22 @@ footer {}
 }
 
 #editor {
-  min-height: 100vh;
+  /*min-height: 100vh;
   width: 100%;
+
+
+  padding-left: 2%;
+  padding-right: 2%;*/
   word-wrap: break-word;
   font-size: 12pt;
-  padding-left: 2%;
-  padding-right: 2%;
+  width: 8.5in;
+  min-height: 29.7cm;
+  padding: 2cm;
+  margin: 1cm auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 #editorContainer {
@@ -313,4 +323,14 @@ footer {}
 #lasteditedcontainer {
   width: 80%;
   display: inline;
+}
+
+.ql-toolbar {
+  background-color: white!important;
+}
+
+.sticking {
+  width: 100%;
+  z-index: 999;
+  background-color: #ffffff;
 }
