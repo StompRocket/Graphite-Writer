@@ -3,6 +3,12 @@ body {
   background-color: white;
 }
 
+#logoimg {
+  width: auto;
+  height: 60px;
+  top: 0px;
+}
+
 .noLine {
   text-decoration: none;
 }
