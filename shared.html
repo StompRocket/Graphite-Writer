@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Edit</title>
+  <title>Shared Document</title>
 
   <script src="//cdn.quilljs.com/1.3.1/quill.min.js"></script>
   <!-- Theme included stylesheets -->
@@ -67,9 +67,8 @@
 
   <div id="doccontainer" style="margin-bottom: 2%;">
     <div style="height: 130px" id="titleContainer" class="box">
-      <h1 id="doctitle" style="font-weight: 500;" contenteditable="true" class="title is-1"></h1>
+      <h1 id="doctitle" style="font-weight: 500;" contenteditable="false" class="title is-1"></h1>
       <h2 id="lasteditedcontainer" class="subtitle is-5">Last Edited: <span id="lastedited"></span></h2>
-      <h2 class="" id="deleteDoc">Delete</h2><a id="printDoc" href="javascript:window.print()" class="noPrint noLine">Print</a><a id="share" class="noPrint noLine" href="#">Share<sup class="beta">BETA</sup></a>
     </div>
 
 
@@ -108,7 +107,7 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
   <script src="/js/global/login.js " charset="utf-8 "></script>
-  <script src="/js/editor/app.js"></script>
+  <script src="/js/editor/shared.js"></script>
 </body>
 
 </html>

@@ -307,6 +307,12 @@ footer {}
   color: #292929
 }
 
+#share {
+  float: right;
+  margin-right: 10px;
+  color: #292929
+}
+
 #printDoc:hover {
   color: #212121;
 }
@@ -336,4 +342,9 @@ footer {}
   top: 0;
   position: fixed;
   width: 100%;
+}
+
+.beta {
+  font-weight: bold;
+  color: #545454;
 }

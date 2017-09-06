@@ -91,7 +91,7 @@ $(document).ready(function ($) {
       $('#loginBtn').text('Logout')
     } else {
       $('#loginBtn').text('Login')
-      if (window.location.href.indexOf('app') >= 0 || window.location.href.indexOf('edit') >= 0) {
+      if (window.location.href.indexOf('app') >= 0 || window.location.href.indexOf('edit') >= 0 || window.location.href.indexOf('shared') >= 0) {
         firebase.auth().signInWithRedirect(provider)
       }
     }

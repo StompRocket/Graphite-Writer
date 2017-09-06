@@ -103,6 +103,18 @@ $(document).ready(function ($) {
           })
         }
       }
+      $('#share').on('click', () => {
+        var sharedDocRef = firebase.database().ref('shared/' + uid + '/docs/' + documentname)
+        var date = new Date()
+        date = date.toString()
+        date = date.split(' ').slice(0, 5).join(' ')
+        sharedDocRef.set({
+          'data': quill.getContents(),
+          'title': $('#doctitle').text(),
+          'date': date
+        })
+        window.alert('A view only document has been created. If you want to edit this document open it normally, to update the version that is avalible to the public click the share button again. Your link is: graphitewriter.com/shared?u=' + uid + '&d=' + documentname)
+      })
 
       function updateContents () {
         firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
