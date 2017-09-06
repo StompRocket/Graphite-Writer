@@ -329,8 +329,10 @@ footer {}
   background-color: white!important;
 }
 
-.sticking {
+.stick {
   width: 100%;
   z-index: 999;
-  background-color: #ffffff;
+  top: 0;
+  position: fixed;
+  width: 100%;
 }

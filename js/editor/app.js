@@ -54,6 +54,20 @@ var toolbarOptions = [
   ['clean'] // remove formatting button
 ]
 $(document).ready(function ($) {
+  document.addEventListener('scroll', function (event) {
+    var element_position = $('#deleteDoc').offset().top
+    console.log(element_position)
+    if (element_position < 1) {
+      console.log('triggerd')
+      $('.ql-toolbar').css('width', '100%')
+      $('.ql-toolbar').css('z-index', '999')
+      $('.ql-toolbar').css('top', '0')
+      $('.ql-toolbar').css('position', 'fixed')
+    } else {
+      $('.ql-toolbar').css('top', 'initial')
+      $('.ql-toolbar').css('position', 'static')
+    }
+  }, true /* Capture event */)
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       var user = firebase.auth().currentUser
