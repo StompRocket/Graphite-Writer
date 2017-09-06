@@ -17,7 +17,7 @@ var toolbarOptions = [
     'size': []
   }],
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-  ['blockquote', 'link', 'code-block'],
+  ['blockquote', 'link', 'code-block', 'image'],
   [{
     'color': []
   }, {
@@ -43,9 +43,6 @@ var toolbarOptions = [
   }, {
     'indent': '+1'
   }], // outdent/indent
-  [{
-    'direction': 'rtl'
-  }], // text direction
 
   [{
     'align': []
