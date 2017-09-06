@@ -10,8 +10,19 @@ function GetURLParameter (sParam) {
 }
 
 var toolbarOptions = [
+  [{
+    'font': []
+  }],
+  [{
+    'size': []
+  }],
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote', 'link', 'code-block'],
+  [{
+    'color': []
+  }, {
+    'background': []
+  }], // dropdown with defaults from theme
   [{
     'header': 1
   }, {
@@ -36,18 +47,6 @@ var toolbarOptions = [
     'direction': 'rtl'
   }], // text direction
 
-  [{
-    'size': []
-  }],
-
-  [{
-    'color': []
-  }, {
-    'background': []
-  }], // dropdown with defaults from theme
-  [{
-    'font': []
-  }],
   [{
     'align': []
   }],
