@@ -121,6 +121,10 @@ $(document).ready(function ($) {
           var fbdata = snapshot.val().data
           var fbtitle = snapshot.val().title
           var fbdate = snapshot.val().date
+          console.log(fbdate + 'date')
+          if (fbdate == null || fbdate == 'undefined') {
+            window.location.href = '/app'
+          }
           fbdate = fbdate.split(' ').slice(0, 5).join(' ')
           $('#lastedited').text(fbdate)
           $('#doctitle').text(fbtitle)
