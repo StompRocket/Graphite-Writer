@@ -63,7 +63,9 @@ $(document).ready(function ($) {
       $('.ql-toolbar').css('z-index', '999')
       $('.ql-toolbar').css('top', '0')
       $('.ql-toolbar').css('position', 'fixed')
+      $('.ql-toolbar').css('margin-left', '-5%')
     } else {
+      $('.ql-toolbar').css('margin', '0px')
       $('.ql-toolbar').css('top', 'initial')
       $('.ql-toolbar').css('position', 'static')
     }

@@ -327,6 +327,7 @@ footer {}
 
 .ql-toolbar {
   background-color: white!important;
+  border-radius: 5px;
 }
 
 .stick {
