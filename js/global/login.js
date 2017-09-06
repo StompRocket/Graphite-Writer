@@ -63,28 +63,28 @@ $(document).ready(function ($) {
                 'attributes': {
                   'header': 1
                 },
-                'insert': '\\n'
+                'insert': '\n'
               }, {
                 'insert': 'A modern text editor'
               }, {
                 'attributes': {
                   'header': 2
                 },
-                'insert': '\\n'
+                'insert': '\n'
               }, {
-                'insert': '\\nIf you have any questions or concerns please contact us at '
+                'insert': '\nIf you have any questions or concerns please contact us at '
               }, {
                 'attributes': {
                   'link': 'mailto:support@graphitewriter.com'
                 },
                 'insert': 'support@graphitewriter.com'
               }, {
-                'insert': '\\n'
+                'insert': '\n'
               }, {
                 'attributes': {
                   'header': 1
                 },
-                'insert': '\\n'
+                'insert': '\n'
               }]
             },
             'title': 'Welcome To Graphite',
