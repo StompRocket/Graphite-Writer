@@ -56,21 +56,17 @@ $(document).ready(function ($) {
               'ops': [{
                 'attributes': {
                   'color': '#363636',
-                  'bold': true
+                  'bold': true,
+                  'size': 'huge'
                 },
                 'insert': 'Welcome To Graphite'
               }, {
-                'attributes': {
-                  'header': 1
-                },
                 'insert': '\n'
               }, {
+                'attributes': {
+                  'size': 'large'
+                },
                 'insert': 'A modern text editor'
-              }, {
-                'attributes': {
-                  'header': 2
-                },
-                'insert': '\n'
               }, {
                 'insert': '\nIf you have any questions or concerns please contact us at '
               }, {
@@ -79,11 +75,6 @@ $(document).ready(function ($) {
                 },
                 'insert': 'support@graphitewriter.com'
               }, {
-                'insert': '\n'
-              }, {
-                'attributes': {
-                  'header': 1
-                },
                 'insert': '\n'
               }]
             },
