@@ -53,7 +53,6 @@ var toolbarOptions = [
 $(document).ready(function ($) {
   document.addEventListener('scroll', function (event) {
     var element_position = $('#deleteDoc').offset().top
-    console.log(element_position)
     if (element_position < 1) {
       console.log('triggerd')
       $('.ql-toolbar').css('width', '100%')
@@ -85,6 +84,17 @@ $(document).ready(function ($) {
       const documentname = GetURLParameter('d')
       var prevent = 1
 
+      function encrypt (o) {
+        var data = quill.getContents()
+        o = JSON.stringify(data)
+        return sjcl.encrypt(uid, o)
+      }
+
+      function decrypt (o) {
+        o = sjcl.decrypt(uid, o)
+        return JSON.parse(o)
+      }
+
       function saveDocument (data) {
         if (prevent === 1) {
           prevent = 2
@@ -93,6 +103,7 @@ $(document).ready(function ($) {
           date = date.toString()
           date = date.split(' ').slice(0, 5).join(' ')
           $('#lastedited').text(date)
+
           firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
             data: data,
             title: $('#doctitle').text(),
