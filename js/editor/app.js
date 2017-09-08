@@ -108,6 +108,7 @@ $(document).ready(function ($) {
           data: encrypt(data),
           title: $('#doctitle').text(),
           date: date,
+          utcdate: new Date().getTime(),
           enc: true
         }).then(() => {
           $('#saving').text('Saved')

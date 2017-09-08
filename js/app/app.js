@@ -29,7 +29,8 @@ $(document).ready(function ($) {
           newDocRef.set({
             'data': '',
             'title': newDocName,
-            'date': date
+            'date': date,
+            'utcdate': new Date().getTime()
           })
           $('#newDocName').val('')
           $('#newDocModal').removeClass('is-active')
@@ -37,7 +38,7 @@ $(document).ready(function ($) {
           window.alert('Document Names Must Be More than 1 Character')
         }
       })
-      var docsRef = firebase.database().ref('users/' + uid + '/docs/')
+      var docsRef = firebase.database().ref('users/' + uid + '/docs/').orderByChild('utcdate')
       docsRef.on('child_added', function (data) {
         var docKey = data.key
         var docTitle = data.val().title
