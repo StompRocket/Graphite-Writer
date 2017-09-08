@@ -169,12 +169,16 @@ $(document).ready(function ($) {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       }
-
+      var prevention = 1
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
-        $('#saving').text('Waiting...')
-        clearTimeout(typingTimer)
-        typingTimer = setTimeout(doneTyping, doneTypingInterval)
+        if (prevention === 1) {
+          prevention++
+        } else {
+          $('#saving').text('Waiting...')
+          clearTimeout(typingTimer)
+          typingTimer = setTimeout(doneTyping, doneTypingInterval)
+        }
       })
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
