@@ -21,7 +21,9 @@ html, body {
 }
 
 #editor {
-  margin: 0;
+  margin-top: 5mm;
+  margin-left: 10mm;
+  margin-right: 10mm;
   border: initial;
   border-radius: initial;
   width: initial;
