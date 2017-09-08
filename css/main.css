@@ -301,6 +301,14 @@ footer {}
   cursor: pointer;
 }
 
+#saving {
+  display: inline;
+  margin-top: none;
+  color: rgb(235, 189, 66);
+  font-weight: bold;
+  margin-left: 5px;
+}
+
 #printDoc {
   float: right;
   margin-right: 10px;

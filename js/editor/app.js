@@ -87,7 +87,9 @@ $(document).ready(function ($) {
       function encrypt (o) {
         var data = quill.getContents()
         o = JSON.stringify(data)
-        return sjcl.encrypt(uid, o)
+        o = sjcl.encrypt(uid, o)
+
+        return o
       }
 
       function decrypt (o) {
@@ -96,19 +98,20 @@ $(document).ready(function ($) {
       }
 
       function saveDocument (data) {
-        if (prevent === 1) {
-          prevent = 2
-        } else {
-          var date = new Date()
-          date = date.toString()
-          date = date.split(' ').slice(0, 5).join(' ')
+        $('#saving').text('Saving...')
+        var date = new Date()
+        date = date.toString()
+        date = date.split(' ').slice(0, 5).join(' ')
+
+        firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
+          data: encrypt(data),
+          title: $('#doctitle').text(),
+          date: date,
+          enc: true
+        }).then(() => {
+          $('#saving').text('Saved')
           $('#lastedited').text(date)
-          firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
-            data: data,
-            title: $('#doctitle').text(),
-            date: date
-          })
-        }
+        })
       }
       $('#share').on('click', () => {
         var sharedDocRef = firebase.database().ref('shared/' + uid + '/docs/' + documentname)
@@ -133,6 +136,7 @@ $(document).ready(function ($) {
           var fbdata = snapshot.val().data
           var fbtitle = snapshot.val().title
           var fbdate = snapshot.val().date
+          var enc = snapshot.val().enc
           console.log(fbdate + 'date')
           if (fbdate == null || fbdate == 'undefined') {
             window.location.href = '/app'
@@ -141,16 +145,44 @@ $(document).ready(function ($) {
           $('#lastedited').text(fbdate)
           $('#doctitle').text(fbtitle)
           document.title = fbtitle
-          quill.setContents(fbdata)
+
+          if (enc) {
+            quill.setContents(decrypt(fbdata))
+          } else {
+            quill.setContents(fbdata)
+          }
         })
       }
       updateContents()
+      window.onbeforeunload = function () {
+        if ($('#saving').text() !== 'Saved') {
+          saveDocument(quill.getContents())
+          return 'Your document has not been saved please wait untill it has finished'
+        }
+      }
+      // setup before functions
+      var typingTimer // timer identifier
+      var doneTypingInterval = 2000 // time in ms
+
+      // on keyup, start the countdown
+      $('#editor').keyup(function () {
+        $('#saving').text('Waiting...')
+        clearTimeout(typingTimer)
+        typingTimer = setTimeout(doneTyping, doneTypingInterval)
+      })
+
+      // user is "finished typing," do something
+      function doneTyping () {
+        var currentdocument = quill.getContents()
+        saveDocument(currentdocument)
+      }
+      /*
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
         // console.log('change')
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
-      })
+      }) */
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         console.log(currentdocument)
