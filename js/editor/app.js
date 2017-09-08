@@ -164,25 +164,18 @@ $(document).ready(function ($) {
       var typingTimer // timer identifier
       var doneTypingInterval = 2000 // time in ms
 
-      // on keyup, start the countdown
-      $('#editor').keyup(function () {
-        $('#saving').text('Waiting...')
-        clearTimeout(typingTimer)
-        typingTimer = setTimeout(doneTyping, doneTypingInterval)
-      })
-
       // user is "finished typing," do something
       function doneTyping () {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       }
-      /*
+
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
-        // console.log('change')
-        var currentdocument = quill.getContents()
-        saveDocument(currentdocument)
-      }) */
+        $('#saving').text('Waiting...')
+        clearTimeout(typingTimer)
+        typingTimer = setTimeout(doneTyping, doneTypingInterval)
+      })
       $('#doctitle').on('keyup', (e) => {
         var currentdocument = quill.getContents()
         console.log(currentdocument)
