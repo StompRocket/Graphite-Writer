@@ -64,25 +64,33 @@
     </div>
     <br />
   </div>
-
-  <div id="doccontainer" style="margin-bottom: 2%;">
-    <div style="height: 130px" id="titleContainer" class="box">
-      <h1 id="doctitle" style="font-weight: 500;" contenteditable="true" class="title is-1"></h1>
-      <h2 id="lasteditedcontainer" class="subtitle is-5">Last Edited: <span id="lastedited"></span></h2>
-      <p id="saving" class="noLine">Saved</p>
-      <h2 class="" id="deleteDoc">Delete</h2>
-      <a id="printDoc" href="javascript:window.print()" class="noPrint noLine">Print</a><a id="share" class="noPrint noLine" href="#">Share<sup class="beta">BETA</sup></a>
+  <main>
+    <div id="loader" class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
     </div>
+    <div id="doccontainer" style="margin-bottom: 2%;">
+      <div style="height: 130px" id="titleContainer" class="box">
+        <h1 id="doctitle" style="font-weight: 500;" contenteditable="true" class="title is-1"></h1>
+        <h2 id="lasteditedcontainer" class="subtitle is-5">Last Edited: <span id="lastedited"></span></h2>
+        <p id="saving" class="noLine">Saved</p>
+        <h2 class="" id="deleteDoc">Delete</h2>
+        <a id="printDoc" href="javascript:window.print()" class="noPrint noLine">Print</a><a id="share" class="noPrint noLine" href="#">Share<sup class="beta">BETA</sup></a>
+      </div>
 
 
-    <div id="editorContainer" class=" ">
-      <div id="editor" class="">
+      <div id="editorContainer" class=" ">
+        <div id="editor" class="">
 
 
 
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+
   <div id="shareModal" class="modal ">
     <div class="modal-background close-share"></div>
     <div class="modal-card">
