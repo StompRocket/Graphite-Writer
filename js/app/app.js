@@ -37,7 +37,7 @@ $(document).ready(function ($) {
           window.alert('Document Names Must Be More than 1 Character')
         }
       })
-      var docsRef = firebase.database().ref('users/' + uid + '/docs/')
+      var docsRef = firebase.database().ref('users/' + uid + '/docs/').orderByChild('date')
       docsRef.on('child_added', function (data) {
         var docKey = data.key
         var docTitle = data.val().title
@@ -45,7 +45,8 @@ $(document).ready(function ($) {
         docDate = docDate.split(' ').slice(0, 4).join(' ')
 
         var docLink = '/edit?d=' + docKey
-        $('#docContainer').prepend('<a alt="' + docTitle.toLowerCase() + '" href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
+        $('#docContainer').append('<a alt="' + docTitle.toLowerCase() + '" href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
+        $('#loader').hide()
       })
 
       function test () {
