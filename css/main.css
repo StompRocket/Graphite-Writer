@@ -46,6 +46,17 @@ body, html {
   background-color: rgba(18, 176, 115, 0);
 }
 
+#learnMore {
+  border-color: #424242!important;
+  color: #424242!important;
+}
+
+#learnMore:hover {
+  background-color: #424242!important;
+  color: rgb(235, 189, 66)!important;
+  transition-duration: 1s;
+}
+
 main {
   min-height: 90vh;
 }
@@ -461,4 +472,27 @@ footer {}
     transform: perspective(140px) rotateY(180deg);
     opacity: 0;
   }
+}
+
+#Why {
+  width: 100%;
+  text-align: center;
+}
+
+#aboutText {
+  font-size: 20pt;
+  height: 80vh;
+  background-color: white;
+  color: #343434;
+}
+
+#aboutText h1 {
+  margin-top: 3%;
+  font-weight: bold;
+  text-align: center;
+}
+
+#contact {
+  background-color: white;
+  padding: 5%;
 }

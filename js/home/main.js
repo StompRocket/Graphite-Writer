@@ -57,4 +57,10 @@ $(document).ready(function ($) {
       }())
     }, 5000)
   }, 5000)
+  $('#learnMore').on('click', () => {
+    $('html,body').animate({
+      scrollTop: $('#sectiontwo ').offset().top
+    },
+      'slow')
+  })
 })
