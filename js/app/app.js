@@ -32,6 +32,7 @@ $(document).ready(function ($) {
             'date': date,
             'utcdate': new Date().getTime()
           })
+
           $('#newDocName').val('')
           $('#newDocModal').removeClass('is-active')
         } else {
@@ -39,6 +40,7 @@ $(document).ready(function ($) {
         }
       })
       var docsRef = firebase.database().ref('users/' + uid + '/docs/').orderByChild('utcdate')
+
       docsRef.on('child_added', function (data) {
         var docKey = data.key
         var docTitle = data.val().title
