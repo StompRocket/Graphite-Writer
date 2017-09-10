@@ -29,21 +29,22 @@ body, html {
 }
 
 #header h1 {
-  font-size: 60pt;
+  font-size: 6vw;
   margin-bottom: 2%;
   font-weight: 400;
 }
 
 #header a {
   border-color: #292929;
-  border-width: 5px;
+  border-width: 0.3vw;
   color: #292929;
-  width: 200px;
-  height: 100px;
+  width: 10vw;
+  height: 5vw;
   font-weight: bold;
   transition-duration: 1s;
   margin: 2%;
   background-color: rgba(18, 176, 115, 0);
+  font-size: 1vw;
 }
 
 #learnMore {
@@ -96,14 +97,14 @@ main {
 #sectiontwo h1 {
   text-align: center;
   color: white;
-  font-size: 40pt;
+  font-size: 2.7vw;
   font-weight: 700;
 }
 
 #sectiontwo p {
   text-align: left;
   color: white;
-  font-size: 20pt;
+  font-size: 2vw;
   font-weight: 500;
 }
 
@@ -117,12 +118,12 @@ main {
 #sectionthree h1 {
   font-weight: 500;
   text-align: center;
-  font-size: 50pt;
+  font-size: 6vh;
 }
 
 #sectionthree h2 {
   font-weight: 700;
-  font-size: 50pt;
+  font-size: 4vw;
 }
 
 #sectionthree .column {
@@ -133,9 +134,9 @@ main {
 }
 
 #sectionthree p {
-  font-size: 20pt;
+  font-size: 1.5vw;
   color: #4a4a4a;
-  max-width: 600px;
+  max-width: 30vw;
   margin: none:
 }
 
@@ -172,18 +173,18 @@ main {
 #sectionfour h1 {
   font-weight: 500;
   text-align: center;
-  font-size: 50pt;
+  font-size: 3vw;
 }
 
 #sectionfour h2 {
   font-weight: 700;
   text-align: center;
-  font-size: 30pt;
+  font-size: 2vw;
   display: inline;
 }
 
 #sectionfour p {
-  font-size: 20pt;
+  font-size: 1.5vw;
   color: #4a4a4a;
 }
 
@@ -197,17 +198,17 @@ main {
 
 #sectionfour h3 {
   color: rgb(235, 189, 66);
-  font-size: 200pt;
+  font-size: 15vw;
   text-align: center;
 }
 
 #sectionfour a {
   border-color: rgb(235, 189, 66);
-  border-width: 5px;
+  border-width: 0.3vw;
   color: rgb(235, 189, 66);
-  width: 400px;
-  height: 100px;
-  font-size: 30pt;
+  width: 16vw;
+  height: 4vw;
+  font-size: 1.8vw;
   font-weight: bold;
   display: block;
   transition-duration: 1s;
@@ -221,7 +222,9 @@ main {
   transition-duration: 1s;
 }
 
-footer {}
+footer p {
+  font-size: 0.7vw;
+}
 
 .noLine {
   text-decoration: none;
