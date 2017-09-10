@@ -483,7 +483,7 @@ footer p {
 }
 
 #aboutText {
-  font-size: 20pt;
+  font-size: 1.5vw;
   height: 80vh;
   background-color: white;
   color: #343434;
@@ -493,9 +493,19 @@ footer p {
   margin-top: 3%;
   font-weight: bold;
   text-align: center;
+  font-size: 3vw
+}
+
+#contact h1 {
+  font-size: 4vw;
+  margin-bottom: 0.8vw;
 }
 
 #contact {
   background-color: white;
   padding: 5%;
+}
+
+#contact label {
+  font-size: 0.8vw;
 }

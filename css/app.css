@@ -97,6 +97,10 @@ body {
   margin-bottom: 2%;
 }
 
+footer p {
+  font-size: 0.7vw;
+}
+
 .fa-large {
   font-size: 40px;
 }
