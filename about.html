@@ -148,6 +148,9 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/js/global/jquery.pjax.min.js" charset="utf-8"></script>
+  <link rel='stylesheet' href='/js/global/nprogress.min.css' />
+  <script src='/js/global/nprogress.min.js'></script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -161,6 +164,13 @@
     };
     firebase.initializeApp(config);
     var provider = new firebase.auth.GoogleAuthProvider();
+    $(document).pjax('a', 'body')
+    $(document).on('pjax:start', function() {
+      NProgress.start();
+    });
+    $(document).on('pjax:end', function() {
+      NProgress.done();
+    });
   </script>
 
   <script src="/js/home/main.min.js" charset="utf-8"></script>

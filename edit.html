@@ -129,6 +129,18 @@
   </script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+  <script src="/js/global/jquery.pjax.min.js" charset="utf-8"></script>
+  <link rel='stylesheet' href='/js/global/nprogress.min.css' />
+  <script src='/js/global/nprogress.min.js'></script>
+  <script type="text/javascript">
+    $(document).pjax('a', 'body')
+    $(document).on('pjax:start', function() {
+      NProgress.start();
+    });
+    $(document).on('pjax:end', function() {
+      NProgress.done();
+    });
+  </script>
   <script src="/js/editor/quill.min.js"></script>
   <!-- Theme included stylesheets -->
 
