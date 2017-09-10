@@ -195,7 +195,6 @@ $(document).ready(function ($) {
           var updates = {}
           updates['users/' + uid + '/docs/' + documentname] = null
           firebase.database().ref().update(updates)
-
           window.location.href = '/app'
         }
       })
