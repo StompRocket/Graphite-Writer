@@ -51,7 +51,6 @@ var toolbarOptions = [
   ['clean'] // remove formatting button
 ]
 $(document).ready(function ($) {
-  $('#doccontainer').hide()
   document.addEventListener('scroll', function (event) {
     var element_position = $('#deleteDoc').offset().top
     if (element_position < 1) {
@@ -173,6 +172,11 @@ $(document).ready(function ($) {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       }
+      $('#doctitle').on('keyup', function () {
+        $('#saving').text('Waiting...')
+        clearTimeout(typingTimer)
+        typingTimer = setTimeout(doneTyping, doneTypingInterval)
+      })
       var prevention = 1
       quill.update()
       quill.on('text-change', function (delta, oldDelta, source) {
@@ -184,11 +188,7 @@ $(document).ready(function ($) {
           typingTimer = setTimeout(doneTyping, doneTypingInterval)
         }
       })
-      $('#doctitle').on('keyup', (e) => {
-        var currentdocument = quill.getContents()
-        console.log(currentdocument)
-        saveDocument(currentdocument)
-      })
+
       $('#deleteDoc').on('click', () => {
         var deletedoc = confirm('Are you sure you want to delete this document?')
         if (deletedoc == true) {

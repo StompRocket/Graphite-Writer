@@ -305,6 +305,15 @@ footer p {
   outline: none;
 }
 
+#doctitle {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 60px;
+  white-space: nowrap;
+  /* Don't forget this one */
+  text-overflow: ellipsis;
+}
+
 #doccontainer {
   padding-left: 5%;
   padding-right: 5%;
@@ -315,26 +324,28 @@ footer p {
   display: inline;
   width: 10%;
   float: right;
-  margin-top: none;
+  margin-top: -10px;
   color: #e74c3c;
   cursor: pointer;
 }
 
 #saving {
   display: inline;
-  margin-top: none;
+  margin-top: -20px;
   color: rgb(235, 189, 66);
   font-weight: bold;
   margin-left: 5px;
 }
 
 #printDoc {
+  margin-top: -10px;
   float: right;
   margin-right: 10px;
   color: #292929
 }
 
 #share {
+  margin-top: -10px;
   float: right;
   margin-right: 10px;
   color: #292929
@@ -354,6 +365,8 @@ footer p {
 }
 
 #lasteditedcontainer {
+  margin-top: -20px;
+  margin-bottom: 5px;
   width: 80%;
   display: inline;
 }
