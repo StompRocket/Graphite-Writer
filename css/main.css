@@ -311,7 +311,6 @@ footer p {
   height: 60px;
   white-space: nowrap;
   /* Don't forget this one */
-  text-overflow: ellipsis;
 }
 
 #doccontainer {
