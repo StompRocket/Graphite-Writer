@@ -223,7 +223,7 @@ main {
 }
 
 footer p {
-  font-size: 0.7vw;
+  font-size: 1vw;
 }
 
 .noLine {
@@ -306,8 +306,6 @@ footer p {
 }
 
 #doctitle {
-  overflow-x: hidden;
-  overflow-y: hidden;
   height: 60px;
   white-space: nowrap;
   /* Don't forget this one */
@@ -520,4 +518,11 @@ footer p {
 
 #contact label {
   font-size: 0.8vw;
+  float: right;
+}
+
+@media (min-width: 1366px) {
+  footer p {
+    font-size: 0.6vw;
+  }
 }

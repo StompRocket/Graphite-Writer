@@ -1,4 +1,7 @@
 $(document).ready(function ($) {
+  NProgress.configure({
+    showSpinner: false
+  })
   var str = 'a modern text editor.t',
     i = 0,
     isTag,
