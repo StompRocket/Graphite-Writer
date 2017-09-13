@@ -51,9 +51,6 @@ var toolbarOptions = [
   ['clean'] // remove formatting button
 ]
 $(document).ready(function ($) {
-  NProgress.configure({
-    showSpinner: false
-  })
   document.addEventListener('scroll', function (event) {
     var element_position = $('#deleteDoc').offset().top
     if (element_position < 1) {
