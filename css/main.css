@@ -517,8 +517,8 @@ footer p {
 }
 
 #contact label {
-  font-size: 0.8vw;
-  float: right;
+  font-size: 1vw;
+  float: left;
 }
 
 @media (min-width: 1366px) {
