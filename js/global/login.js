@@ -82,10 +82,13 @@ $(document).ready(function ($) {
             'date': date
           })
         }
+        date = new Date()
+        date = date.toString()
         firebase.database().ref('users/' + uid + '/userinfo/').set({
           username: name,
           email: email,
-          profile_picture: photoUrl
+          profile_picture: photoUrl,
+          last_seen: date
         })
       })
       $('#loginBtn').text('Logout')
