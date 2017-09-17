@@ -21,9 +21,9 @@ html, body {
 }
 
 #editor {
-  margin-top: 5mm;
-  margin-left: 15mm;
-  margin-right: 15mm;
+  margin-top: 0.8in;
+  margin-left: 0.8in;
+  margin-right: 0.8in;
   border: initial;
   border-radius: initial;
   width: initial;

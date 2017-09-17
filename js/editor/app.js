@@ -125,7 +125,7 @@ $(document).ready(function ($) {
           'date': date
         })
         $('#shareLink').text('graphitewriter.com/shared?u=' + uid + '&d=' + documentname)
-        $('#shareLink').attr('href', 'http://graphitewriter.com/shared?u=' + uid + '&d=' + documentname)
+        $('#shareLink').attr('href', 'https://graphitewriter.com/shared?u=' + uid + '&d=' + documentname)
         $('#shareModal').addClass('is-active')
         $('.close-share').on('click', () => {
           $('#shareModal').removeClass('is-active')
