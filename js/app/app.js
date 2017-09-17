@@ -28,7 +28,9 @@ $(document).ready(function ($) {
       var vm = new Vue({
         el: '#app',
         data: {
-          loaded: true
+          loaded: true,
+          newDocName: '',
+          modalDisplay: false
         },
         firebase: {
           // can bind to either a direct Firebase reference or a query
@@ -57,13 +59,13 @@ $(document).ready(function ($) {
             }
           },
           openNewDoc: function () {
-            $('#newDocModal').addClass('is-active')
+            this.modalDisplay = true
           },
           closeNewDoc: function () {
-            $('#newDocModal').removeClass('is-active')
+            this.modalDisplay = false
           },
           createNewDoc: function () {
-            var newDocName = $('#newDocName').val()
+            var newDocName = this.newDocName
             if (newDocName) {
               console.log(newDocName)
               var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
@@ -75,8 +77,8 @@ $(document).ready(function ($) {
                 'date': date,
                 'utcdate': new Date().getTime()
               })
-              $('#newDocName').val('')
-              $('#newDocModal').removeClass('is-active')
+              this.newDocName = ''
+              this.modalDisplay = false
             } else {
               window.alert('Document Names Must Be More than 1 Character')
             }
