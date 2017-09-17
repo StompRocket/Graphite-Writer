@@ -57,66 +57,72 @@
     </div>
     <br />
   </div>
-
-  <div id="main" class="container">
-    <div class="field">
-      <label class="label">Search</label>
-      <div class="control">
-        <input autocomplete="off" class="input" id="search" type="search" placeholder="EX. My Great Report">
-      </div>
-    </div>
-    <a id="newDocFab" class="noLine button large">Create A New Document</a>
-    <div id="docContainer">
-
-      <div id="loader" class="sk-folding-cube">
-        <div class="sk-cube1 sk-cube"></div>
-        <div class="sk-cube2 sk-cube"></div>
-        <div class="sk-cube4 sk-cube"></div>
-        <div class="sk-cube3 sk-cube"></div>
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-
-  <div class="modal" id="newDocModal">
-    <div class="modal-background">
-
-    </div>
-    <div class="modal-content">
-      <div class="box">
-        <h1 class="title is-4">New Document Name</h1>
-
-        <div class="field">
-          <div class="control">
-            <input class="input" id="newDocName" type="text" placeholder="EX. My Great Report">
-          </div>
+  <div id="app">
+    <div id="main" class="container">
+      <div class="field">
+        <label class="label">Search</label>
+        <div class="control">
+          <input autocomplete="off" class="input" id="search" type="search" placeholder="EX. My Great Report">
         </div>
-        <a class="button noLine navtext graphite" id="newDocBtn">Create</a>
       </div>
+      <a id="newDocFab" @click='openNewDoc' class="noLine button large">Create A New Document</a>
+      <div id="docContainer">
+
+        <div v-if="loaded" id="loader" class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+        </div>
+        <a v-if="show(doc.title)" v-for="(doc, key) in docs" :alt="getAlt(doc.title)" :href="getUrl(doc)" class="box full-white noLine"><h1 class="title is-4">{{doc.title}}</h1><p class="date">Last Edited: {{doc.date}}</p></a>
+      </div>
+
+
     </div>
-  </div>
-  <br><br>
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p>
-          Graphite Writer is a passion project by Ronan.F with help from Sasha.S. If you have any questions or suggestions, please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a><br> Developed by <b>Stomp Rocket</b>          &copy; 2017 Stomp Rocket all rights reserved. <br>Home page photo by Joanna Kosinska on Unsplash.
-          <br><br> Graphite Writer is proudly sponsered by the folowing: <b>Ronan, Rohan.P</b> <br>Would you like yor name up here? please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a>
-        </p>
+
+
+
+    <div class="modal" id="newDocModal">
+      <div @click="closeNewDoc" class="modal-background">
 
       </div>
+      <div class="modal-content">
+        <div class="box">
+          <h1 class="title is-4">New Document Name</h1>
+          <form @submit.prevent="createNewDoc">
+
+            <div class="field">
+              <div class="control">
+                <input class="input" id="newDocName" type="text" placeholder="EX. My Great Report">
+              </div>
+            </div>
+            <button type="submit" name="submit" class="button noLine navtext graphite" id="newDocBtn">Create</button>
+          </form>
+
+        </div>
+      </div>
     </div>
-  </footer>
+    <br><br>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            Graphite Writer is a passion project by Ronan.F with help from Sasha.S. If you have any questions or suggestions, please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a><br> Developed by <b>Stomp Rocket</b>            &copy; 2017 Stomp Rocket all rights reserved. <br>Home page photo by Joanna Kosinska on Unsplash.
+            <br><br> Graphite Writer is proudly sponsered by the folowing: <b>Ronan, Rohan.P</b> <br>Would you like yor name up here? please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a>
+          </p>
+
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="/js/global/jquery.pjax.min.js" charset="utf-8"></script>
   <link rel='stylesheet' href='/js/global/nprogress.min.css' />
   <script src='/js/global/nprogress.min.js'></script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -127,7 +133,8 @@
       storageBucket: "graphite-88e41.appspot.com",
       messagingSenderId: "158148550453"
     };
-    firebase.initializeApp(config);
+    var firebaseApp = firebase.initializeApp(config);
+    var db = firebaseApp.database()
     var provider = new firebase.auth.GoogleAuthProvider();
     $(document).pjax('a', 'body')
     $(document).on('pjax:start', function() {

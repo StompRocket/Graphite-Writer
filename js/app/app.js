@@ -16,41 +16,72 @@ $(document).ready(function ($) {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
       }
+
       $('#newDocFab').on('click', function () {
+        console.log('newdoc')
         $('#newDocModal').addClass('is-active')
       })
       $('.modal-background').on('click', function () {
         $('#newDocModal').removeClass('is-active')
       })
-      $('#newDocBtn').on('click', () => {
-        var newDocName = $('#newDocName').val()
-        if (newDocName) {
-          console.log(newDocName)
-          var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
-          var date = new Date()
-          date = date.toString()
-          newDocRef.set({
-            'data': '',
-            'title': newDocName,
-            'date': date,
-            'utcdate': new Date().getTime()
-          })
-          $('#newDocName').val('')
-          $('#newDocModal').removeClass('is-active')
-        } else {
-          window.alert('Document Names Must Be More than 1 Character')
-        }
-      })
-      var docsRef = firebase.database().ref('users/' + uid + '/docs/').orderByChild('utcdate')
-      docsRef.on('child_added', function (data) {
-        var docKey = data.key
-        var docTitle = data.val().title
-        var docDate = data.val().date
-        docDate = docDate.split(' ').slice(0, 4).join(' ')
 
-        var docLink = '/edit?d=' + docKey
-        $('#docContainer').prepend('<a alt="' + docTitle.toLowerCase() + '" href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
-        $('#loader').hide()
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          loaded: true
+        },
+        firebase: {
+          // can bind to either a direct Firebase reference or a query
+          docs: db.ref('/users/' + uid + '/docs/')
+        },
+        methods: {
+          getUrl: function (key) {
+            this.loaded = false
+            var docKey = Object.values(key).slice(-1)[0]
+            return '/edit?d=' + docKey
+          },
+          getAlt: function (title) {
+            if (title) {
+              title = JSON.stringify(title)
+              title = title.toLowerCase()
+              return title
+            } else {
+              return 'ERROR'
+            }
+          },
+          show: function (title) {
+            if (title) {
+              return true
+            } else {
+              return false
+            }
+          },
+          openNewDoc: function () {
+            $('#newDocModal').addClass('is-active')
+          },
+          closeNewDoc: function () {
+            $('#newDocModal').removeClass('is-active')
+          },
+          createNewDoc: function () {
+            var newDocName = $('#newDocName').val()
+            if (newDocName) {
+              console.log(newDocName)
+              var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+              var date = new Date()
+              date = date.toString()
+              newDocRef.set({
+                'data': '',
+                'title': newDocName,
+                'date': date,
+                'utcdate': new Date().getTime()
+              })
+              $('#newDocName').val('')
+              $('#newDocModal').removeClass('is-active')
+            } else {
+              window.alert('Document Names Must Be More than 1 Character')
+            }
+          }
+        }
       })
 
       function test () {
