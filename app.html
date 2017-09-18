@@ -62,7 +62,7 @@
       <div class="field">
         <label class="label">Search</label>
         <div class="control">
-          <input autocomplete="off" class="input" id="search" type="search" placeholder="EX. My Great Report">
+          <input @keyup="search" v-model="docSearch" autocomplete="off" class="input" id="search" type="search" placeholder="EX. My Great Report">
         </div>
       </div>
       <a id="newDocFab" @click='openNewDoc' class="noLine button large">Create A New Document</a>
