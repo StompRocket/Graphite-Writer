@@ -27,16 +27,32 @@ $(document).ready(function ($) {
 
       var vm = new Vue({
         el: '#app',
+
+        firebase: {
+          // can bind to either a direct Firebase reference or a query
+          fbdocs: {
+            source: db.ref('/users/' + uid + '/docs/').orderByChild('utcdate'),
+            readyCallback: function () {
+              this.docs = this.fbdocs.slice().reverse()
+            //  console.log('ready', 'data')
+            //  this.docs = this.docs.slice().reverse()
+            //  console.log(this.docs)
+            }
+          }
+        },
         data: {
           loaded: true,
           newDocName: '',
+          docs: [],
           modalDisplay: false
         },
-        firebase: {
-          // can bind to either a direct Firebase reference or a query
-          docs: db.ref('/users/' + uid + '/docs/')
+
+        mounted: function () {
+        //  console.log('ready')
         },
+
         methods: {
+
           getUrl: function (key) {
             this.loaded = false
             var docKey = Object.values(key).slice(-1)[0]
@@ -82,6 +98,11 @@ $(document).ready(function ($) {
             } else {
               window.alert('Document Names Must Be More than 1 Character')
             }
+          }
+        },
+        filters: {
+          reverse: function (array) {
+            return array.slice().reverse()
           }
         }
       })
