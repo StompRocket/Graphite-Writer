@@ -33,7 +33,8 @@ $(document).ready(function ($) {
           fbdocs: {
             source: db.ref('/users/' + uid + '/docs/').orderByChild('utcdate'),
             readyCallback: function () {
-              this.docs = this.fbdocs.slice().reverse()
+              this.fbdocs = this.fbdocs.slice().reverse()
+              this.docs = this.fbdocs
 
               //  console.log('ready', 'data')
               //  this.docs = this.docs.slice().reverse()
