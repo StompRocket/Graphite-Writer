@@ -1,82 +1,139 @@
-$(document).ready(function ($) {
-  NProgress.configure({
-    showSpinner: false
-  })
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      var user = firebase.auth().currentUser
-      var name, email, photoUrl, uid, emailVerified
+NProgress.configure({
+  showSpinner: false
+})
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    var user = firebase.auth().currentUser
+    var name, email, photoUrl, uid, emailVerified
 
-      if (user != null) {
-        name = user.displayName
-        email = user.email
-        photoUrl = user.photoURL
-        emailVerified = user.emailVerified
-        uid = user.uid // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-      }
-      $('#newDocFab').on('click', function () {
-        $('#newDocModal').addClass('is-active')
-      })
-      $('.modal-background').on('click', function () {
-        $('#newDocModal').removeClass('is-active')
-      })
-      $('#newDocBtn').on('click', () => {
-        var newDocName = $('#newDocName').val()
-        if (newDocName) {
-          console.log(newDocName)
-          var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
-          var date = new Date()
-          date = date.toString()
-          newDocRef.set({
-            'data': '',
-            'title': newDocName,
-            'date': date,
-            'utcdate': new Date().getTime()
-          })
-          $('#newDocName').val('')
-          $('#newDocModal').removeClass('is-active')
-        } else {
-          window.alert('Document Names Must Be More than 1 Character')
-        }
-      })
-      var docsRef = firebase.database().ref('users/' + uid + '/docs/').orderByChild('utcdate')
-      docsRef.on('child_added', function (data) {
-        var docKey = data.key
-        var docTitle = data.val().title
-        var docDate = data.val().date
-        docDate = docDate.split(' ').slice(0, 4).join(' ')
-
-        var docLink = '/edit?d=' + docKey
-        $('#docContainer').prepend('<a alt="' + docTitle.toLowerCase() + '" href="' + docLink + '" class="box full-white noLine"><h1 class="title is-4">' + docTitle + '</h1><p class="date">Last Edited: ' + docDate + '</p></a>')
-        $('#loader').hide()
-      })
-
-      function test () {
-        $('#search').on('keyup', function (acache) {
-          var query = $('#search').val().toLowerCase()
-
-          //  console.log(myImage)
-          var $pictureList = $('#docContainer a')
-          if (query) {
-            $pictureList.hide()
-
-            $pictureList.each(function () {
-              if ($(this).attr('alt').indexOf(query) >= 0) {
-                $(this).fadeIn(400, function () {
-                  // Stuff to do *after* the animation takes place
-                })
-              }
-            })
-          } else {
-            $pictureList.fadeIn(400, function () {
-              // Stuff to do *after* the animation takes place
-            })
-          }
-        })
-      }
-      test()
+    if (user != null) {
+      name = user.displayName
+      email = user.email
+      photoUrl = user.photoURL
+      emailVerified = user.emailVerified
+      uid = user.uid // The user's ID, unique to the Firebase project. Do NOT use
+      // this value to authenticate with your backend server, if
+      // you have one. Use User.getToken() instead.
     }
-  })
+
+    var vm = new Vue({
+      el: '#app',
+
+      firebase: {
+        // can bind to either a direct Firebase reference or a query
+        fbdocs: {
+          source: db.ref('/users/' + uid + '/docs/').orderByChild('utcdate'),
+          readyCallback: function () {
+            this.fbdocs = this.fbdocs.slice().reverse()
+            this.docs = this.fbdocs
+
+            //  console.log('ready', 'data')
+            //  this.docs = this.docs.slice().reverse()
+            //  console.log(this.docs)
+          }
+        },
+        fbdocsstor: db.ref('/users/' + uid + '/docsStorage/')
+      },
+      data: {
+        loaded: true,
+        newDocName: '',
+        docs: [],
+        modalDisplay: false,
+        docSearch: '',
+        cache: []
+      },
+
+      mounted: function () {
+        //  console.log('ready')
+      },
+
+      methods: {
+
+        getUrl: function (key) {
+          this.loaded = false
+          var docKey = Object.values(key).slice(-1)[0]
+          if (key.version === 2) {
+            return '/edit?d=' + docKey + '&v=2'
+          } else {
+            return '/edit?d=' + docKey + '&v=1'
+          }
+        },
+        getAlt: function (title) {
+          if (title) {
+            title = JSON.stringify(title)
+            title = title.toLowerCase()
+            return title
+          } else {
+            return 'ERROR'
+          }
+        },
+        show: function (title) {
+          if (title) {
+            return true
+          } else {
+            return false
+          }
+        },
+        openNewDoc: function () {
+          this.modalDisplay = true
+        },
+        closeNewDoc: function () {
+          this.modalDisplay = false
+        },
+        createNewDoc: function () {
+          var newDocName = this.newDocName
+          if (newDocName) {
+            console.log(newDocName)
+            // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+
+            var date = new Date()
+            date = date.toString()
+            var newDoc = {
+              'data': '',
+              'title': newDocName,
+              'date': date,
+              'utcdate': new Date().getTime(),
+              'version': 1
+            }
+            vm.$firebaseRefs.fbdocs.push(newDoc).then(() => {
+              vm.$firebaseRefs.fbdocsstor.push(newDoc).then(() => {
+                location.reload()
+              })
+            })
+            this.newDocName = ''
+            this.modalDisplay = false
+          } else {
+            window.alert('Document Names Must Be More than 1 Character')
+          }
+        },
+        search: function () {
+          var query = this.docSearch.toLowerCase()
+          let result = this.fbdocs
+          if (!query) {
+            // console.log(this.fbdocs)
+            this.docs = this.fbdocs
+            this.searching = false
+            return this.fbdocs
+          }
+
+          const filterValue = query
+
+          const filter = (docs) => {
+            if (JSON.stringify(docs.title)) {
+              return JSON.stringify(docs.title).toLowerCase().includes(filterValue)
+            }
+          }
+
+          this.docs = result.filter(filter)
+          //  console.log(this.docs)
+        }
+
+      },
+      filters: {
+        reverse: function (array) {
+          return array.slice().reverse()
+        }
+      }
+    })
+  }
 })

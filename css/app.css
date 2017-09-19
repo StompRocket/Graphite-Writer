@@ -223,3 +223,7 @@ footer p {
     font-size: 0.6vw;
   }
 }
+
+.hide {
+  display: none;
+}
