@@ -39,7 +39,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         docs: [],
         modalDisplay: false,
         docSearch: '',
-        cache: []
+        cache: [],
+        searching: false
       },
 
       mounted: function () {
@@ -79,15 +80,17 @@ firebase.auth().onAuthStateChanged(function (user) {
           var newDocName = this.newDocName
           if (newDocName) {
             console.log(newDocName)
-            var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+            // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+
             var date = new Date()
             date = date.toString()
-            newDocRef.set({
+            var newDoc = {
               'data': '',
               'title': newDocName,
               'date': date,
               'utcdate': new Date().getTime()
-            })
+            }
+            vm.$firebaseRefs.fbdocs.push(newDoc)
             this.newDocName = ''
             this.modalDisplay = false
           } else {
@@ -99,8 +102,14 @@ firebase.auth().onAuthStateChanged(function (user) {
           let result = this.fbdocs
           if (!query) {
             // console.log(this.fbdocs)
-            this.docs = this.fbdocs
+            this.docs = this.cache[0]
+            this.searching = false
+            this.cache.splice(0, 1)
             return this.fbdocs
+          }
+          if (!this.searching) {
+            this.searching = true
+            this.cache.push(this.fbdocs)
           }
 
           const filterValue = query
