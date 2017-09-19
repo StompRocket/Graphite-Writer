@@ -53,8 +53,12 @@ firebase.auth().onAuthStateChanged(function (user) {
           this.loaded = false
           var docKey = Object.values(key).slice(-1)[0]
           console.log(key.version)
-          if (key.version === 2) {
-            return '/edit?d=' + docKey + '&v=2'
+          if (key.version) {
+            if (key.version === 2) {
+              return '/edit?d=' + docKey + '&v=2'
+            } else {
+              return '/edit?d=' + docKey + '&v=1'
+            }
           } else {
             return '/edit?d=' + docKey + '&v=1'
           }
