@@ -52,6 +52,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         getUrl: function (key) {
           this.loaded = false
           var docKey = Object.values(key).slice(-1)[0]
+          console.log(key.version)
           if (key.version === 2) {
             return '/edit?d=' + docKey + '&v=2'
           } else {

@@ -1,4 +1,4 @@
-function GetURLParameter (sParam) {
+function GetURLParameter(sParam) {
   var sPageURL = window.location.search.substring(1)
   var sURLVariables = sPageURL.split('&')
   for (var i = 0; i < sURLVariables.length; i++) {
@@ -50,8 +50,8 @@ var toolbarOptions = [
 
   ['clean'] // remove formatting button
 ]
-$(document).ready(function ($) {
-  document.addEventListener('scroll', function (event) {
+$(document).ready(function($) {
+  document.addEventListener('scroll', function(event) {
     var element_position = $('#deleteDoc').offset().top
     if (element_position < 1) {
       console.log('triggerd')
@@ -65,8 +65,8 @@ $(document).ready(function ($) {
       $('.ql-toolbar').css('top', 'initial')
       $('.ql-toolbar').css('position', 'static')
     }
-  }, true /* Capture event */)
-  firebase.auth().onAuthStateChanged(function (user) {
+  }, true /* Capture event */ )
+  firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var user = firebase.auth().currentUser
 
@@ -85,7 +85,7 @@ $(document).ready(function ($) {
       const docVersion = GetURLParameter('v')
       var prevent = 1
 
-      function encrypt (o) {
+      function encrypt(o) {
         var data = quill.getContents()
         o = JSON.stringify(data)
         o = sjcl.encrypt(uid, o)
@@ -93,12 +93,12 @@ $(document).ready(function ($) {
         return o
       }
 
-      function decrypt (o) {
+      function decrypt(o) {
         o = sjcl.decrypt(uid, o)
         return JSON.parse(o)
       }
 
-      function saveDocument (data) {
+      function saveDocument(data) {
         $('#saving').text('Saving...')
         var date = new Date()
         date = date.toString()
@@ -152,14 +152,14 @@ $(document).ready(function ($) {
         })
       })
 
-      function updateContents () {
+      function updateContents() {
         if (docVersion == 2) {
           var docRef = firebase.database().ref('users/' + uid + '/docsStorage/' + documentname + '/')
         } else {
           docRef = firebase.database().ref('users/' + uid + '/docs/' + documentname + '/')
         }
-
-        docRef.once('value').then(function (snapshot) {
+        console.log(docRef)
+        docRef.once('value').then(function(snapshot) {
           var fbdata = snapshot.val().data
           var fbtitle = snapshot.val().title
           var fbdate = snapshot.val().date
@@ -184,7 +184,7 @@ $(document).ready(function ($) {
         })
       }
       updateContents()
-      window.onbeforeunload = function () {
+      window.onbeforeunload = function() {
         if ($('#saving').text() !== 'Saved') {
           saveDocument(quill.getContents())
           return 'Your document has not been saved please wait untill it has finished'
@@ -195,18 +195,18 @@ $(document).ready(function ($) {
       var doneTypingInterval = 2000 // time in ms
 
       // user is "finished typing," do something
-      function doneTyping () {
+      function doneTyping() {
         var currentdocument = quill.getContents()
         saveDocument(currentdocument)
       }
-      $('#doctitle').on('keyup', function () {
+      $('#doctitle').on('keyup', function() {
         $('#saving').text('Waiting...')
         clearTimeout(typingTimer)
         typingTimer = setTimeout(doneTyping, doneTypingInterval)
       })
       var prevention = 1
       quill.update()
-      quill.on('text-change', function (delta, oldDelta, source) {
+      quill.on('text-change', function(delta, oldDelta, source) {
         if (prevention === 1) {
           prevention++
         } else {
@@ -227,7 +227,7 @@ $(document).ready(function ($) {
           window.location.href = '/app'
         }
       })
-      $(document).keydown(function (event) {
+      $(document).keydown(function(event) {
         // If Control or Command key is pressed and the S key is pressed
         // run save function. 83 is the key code for S.
         if ((event.ctrlKey || event.metaKey) && event.which == 83) {
