@@ -82,6 +82,7 @@ $(document).ready(function ($) {
         // you have one. Use User.getToken() instead.
       }
       const documentname = GetURLParameter('d')
+      const docVersion = GetURLParameter('v')
       var prevent = 1
 
       function encrypt (o) {
@@ -103,16 +104,35 @@ $(document).ready(function ($) {
         date = date.toString()
         date = date.split(' ').slice(0, 5).join(' ')
 
-        firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
+        firebase.database().ref('users/' + uid + '/docsStorage/' + documentname + '/').set({
           data: encrypt(data),
           title: $('#doctitle').text(),
           date: date,
           utcdate: new Date().getTime(),
-          enc: true
+          enc: true,
+          version: 2
         }).then(() => {
           $('#saving').text('Saved')
           $('#lastedited').text(date)
         })
+        firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').set({
+          data: '',
+          title: $('#doctitle').text(),
+          date: date,
+          utcdate: new Date().getTime(),
+          enc: true,
+          version: 2
+        })
+        var url = window.location.href
+        var lastPart = url.substr(url.lastIndexOf('=') + 1)
+        if (lastPart == 1) {
+          var stateObj = {
+            foo: 'bar'
+          }
+
+          url = (url.slice(0, -1) + '2')
+          history.pushState(stateObj, 'page 2', url)
+        }
       }
       $('#share').on('click', () => {
         var sharedDocRef = firebase.database().ref('shared/' + uid + '/docs/' + documentname)
@@ -133,7 +153,13 @@ $(document).ready(function ($) {
       })
 
       function updateContents () {
-        firebase.database().ref('users/' + uid + '/docs/' + documentname + '/').once('value').then(function (snapshot) {
+        if (docVersion == 2) {
+          var docRef = firebase.database().ref('users/' + uid + '/docsStorage/' + documentname + '/')
+        } else {
+          docRef = firebase.database().ref('users/' + uid + '/docs/' + documentname + '/')
+        }
+
+        docRef.once('value').then(function (snapshot) {
           var fbdata = snapshot.val().data
           var fbtitle = snapshot.val().title
           var fbdate = snapshot.val().date
@@ -195,7 +221,9 @@ $(document).ready(function ($) {
         if (deletedoc == true) {
           var updates = {}
           updates['users/' + uid + '/docs/' + documentname] = null
+          updates['users/' + uid + '/docsStorage/' + documentname] = null
           firebase.database().ref().update(updates)
+
           window.location.href = '/app'
         }
       })

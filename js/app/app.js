@@ -31,7 +31,8 @@ firebase.auth().onAuthStateChanged(function (user) {
             //  this.docs = this.docs.slice().reverse()
             //  console.log(this.docs)
           }
-        }
+        },
+        fbdocsstor: db.ref('/users/' + uid + '/docsStorage/')
       },
       data: {
         loaded: true,
@@ -39,8 +40,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         docs: [],
         modalDisplay: false,
         docSearch: '',
-        cache: [],
-        searching: false
+        cache: []
       },
 
       mounted: function () {
@@ -52,7 +52,11 @@ firebase.auth().onAuthStateChanged(function (user) {
         getUrl: function (key) {
           this.loaded = false
           var docKey = Object.values(key).slice(-1)[0]
-          return '/edit?d=' + docKey
+          if (key.version === 2) {
+            return '/edit?d=' + docKey + '&v=2'
+          } else {
+            return '/edit?d=' + docKey + '&v=1'
+          }
         },
         getAlt: function (title) {
           if (title) {
@@ -88,9 +92,14 @@ firebase.auth().onAuthStateChanged(function (user) {
               'data': '',
               'title': newDocName,
               'date': date,
-              'utcdate': new Date().getTime()
+              'utcdate': new Date().getTime(),
+              'version': 1
             }
-            vm.$firebaseRefs.fbdocs.push(newDoc)
+            vm.$firebaseRefs.fbdocs.push(newDoc).then(() => {
+              vm.$firebaseRefs.fbdocsstor.push(newDoc).then(() => {
+                location.reload()
+              })
+            })
             this.newDocName = ''
             this.modalDisplay = false
           } else {
@@ -102,14 +111,9 @@ firebase.auth().onAuthStateChanged(function (user) {
           let result = this.fbdocs
           if (!query) {
             // console.log(this.fbdocs)
-            this.docs = this.cache[0]
+            this.docs = this.fbdocs
             this.searching = false
-            this.cache.splice(0, 1)
             return this.fbdocs
-          }
-          if (!this.searching) {
-            this.searching = true
-            this.cache.push(this.fbdocs)
           }
 
           const filterValue = query
