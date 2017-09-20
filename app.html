@@ -74,7 +74,8 @@
           <div class="sk-cube4 sk-cube"></div>
           <div class="sk-cube3 sk-cube"></div>
         </div>
-        <a v-if="show(doc.title)" v-for="(doc, key) in docs" :alt="getAlt(doc.title)" :href="getUrl(doc)" class="box full-white noLine"><h1 class="title is-4">{{doc.title}}</h1><p class="date">Last Edited: {{doc.date}}</p></a>
+        <a id="doc" v-if="show(doc.title)" v-for="(doc, key) in docs" :alt="getAlt(doc.title)" :href="getUrl(doc)" class="box full-white noLine"><h1 class="title is-4">{{doc.title}}</h1><p class="date">Last Edited: {{doc.date}}</p></a>
+
       </div>
 
 
@@ -115,7 +116,9 @@
       </div>
     </div>
   </footer>
-
+  <script>
+    document.getElementById('doc').style.display = 'none';
+  </script>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -147,6 +150,9 @@
   </script>
   <script src="/js/global/login.min.js" charset="utf-8"></script>
   <script src="js/app/app.min.js"></script>
+  <script type="text/javascript">
+    document.getElementById('doc').style.display = 'inline-block'
+  </script>
 </body>
 
 </html>

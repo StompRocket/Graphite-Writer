@@ -45,6 +45,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
       mounted: function () {
         //  console.log('ready')
+
       },
 
       methods: {
