@@ -45,6 +45,10 @@ $(document).ready(function ($) {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
       }
+      if (window.location.href.indexOf('about') >= 0) {
+        $('#name').val(name).attr('disabled', 'true')
+        $('#email').val(email).attr('disabled', 'true')
+      }
       firebase.database().ref('/users/' + uid + '/userinfo/username').once('value').then(function (snapshot) {
         if (!snapshot.val()) {
           console.log('no snapshot')
