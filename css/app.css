@@ -5,8 +5,9 @@ body {
 
 #logoimg {
   width: auto;
-  height: 60px;
-  top: 0px;
+  height: 40px;
+  top: 0;
+  margin-bottom: 20px;
 }
 
 .noLine {

@@ -50,6 +50,7 @@ var toolbarOptions = [
 
   ['clean'] // remove formatting button
 ]
+
 $(document).ready(function ($) {
   document.addEventListener('scroll', function (event) {
     var element_position = $('#deleteDoc').offset().top
@@ -244,7 +245,7 @@ $(document).ready(function ($) {
 
   var quill = new Quill('#editor', {
     modules: {
-      'toolbar': toolbarOptions
+      toolbar: toolbarOptions
     },
     placeholder: 'Compose an epic...',
     theme: 'snow'
