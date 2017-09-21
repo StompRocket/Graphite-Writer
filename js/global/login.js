@@ -46,8 +46,8 @@ $(document).ready(function ($) {
         // you have one. Use User.getToken() instead.
       }
       if (window.location.href.indexOf('about') >= 0) {
-        $('#name').val(name).attr('disabled', 'true')
-        $('#email').val(email).attr('disabled', 'true')
+        $('#name').val(name)
+        $('#email').val(email)
       }
       firebase.database().ref('/users/' + uid + '/userinfo/username').once('value').then(function (snapshot) {
         if (!snapshot.val()) {
