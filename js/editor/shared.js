@@ -29,7 +29,7 @@ $(document).ready(function ($) {
       const docuid = GetURLParameter('u')
       if (docuid == uid) {
         if (window.confirm('You are viewing a view only version of your own document. Click ok to redirect to an editable version of this document, or click cancel to continue viewing this version.') == true) {
-          window.location.href = '/edit?d=' + documentname
+          window.location.href = '/edit?d=' + documentname + '&v=2'
         }
       }
       var prevent = 1
