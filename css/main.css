@@ -249,6 +249,10 @@ footer p {
   color: #292929;
 }
 
+#titleContainer {
+  padding: 1% !important;
+}
+
 .navtext:hover, .navtext:active {
   color: white !important;
 }
@@ -361,7 +365,7 @@ footer p {
 
 #lasteditedcontainer, #lastedited {
   font-weight: 400!important;
-  margin-bottom: none;
+  margin-bottom: 1%;
 }
 
 #lasteditedcontainer {
