@@ -82,12 +82,11 @@
       </div>
     </div>
   </div>
-  <footer class="footer">
+  <footer id="footer" class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <p>
-          Graphite Writer is a passion project by Ronan.F with help from Sasha.S. If you have any questions or suggestions, please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a><br> Developed by <b>Stomp Rocket</b>          &copy; 2017 Stomp Rocket all rights reserved. <br>Home page photo by Joanna Kosinska on Unsplash.
-          <br><br> Graphite Writer is proudly sponsered by the folowing: <b>Ronan, Rohan.P</b> <br>Would you like yor name up here? please contact us at <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a>
+
+        <p v-html="footer">
         </p>
 
       </div>
@@ -122,6 +121,8 @@
   </script>
   <script src="/js/global/login.min.js " charset="utf-8 "></script>
   <script src="/js/editor/shared.min.js"></script>
+  <script src="/js/global/vue.min.js"></script>
+  <script src="/js/global/footer.min.js" charset="utf-8"></script>
 </body>
 
 </html>
