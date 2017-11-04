@@ -1,4 +1,4 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
   NProgress.configure({
     showSpinner: false
   })
@@ -8,7 +8,7 @@ $(document).ready(function($) {
       isTag,
       text;
 
-    (function type() {
+    (function type () {
       text = str.slice(0, ++i)
       if (text === str) return
 
@@ -21,13 +21,13 @@ $(document).ready(function($) {
       if (isTag) return type()
       setTimeout(type, 80)
     }())
-    setTimeout(function() {
+    setTimeout(function () {
       var str = 'a faster text editor.t',
         i = 0,
         isTag,
         text;
 
-      (function type() {
+      (function type () {
         text = str.slice(0, ++i)
         if (text === str) return
 
@@ -40,13 +40,13 @@ $(document).ready(function($) {
         if (isTag) return type()
         setTimeout(type, 80)
       }())
-      setTimeout(function() {
+      setTimeout(function () {
         var str = 'an easier text editor.t',
           i = 0,
           isTag,
           text;
 
-        (function type() {
+        (function type () {
           text = str.slice(0, ++i)
           if (text === str) return
 
@@ -64,8 +64,8 @@ $(document).ready(function($) {
   }
   $('#learnMore').on('click', () => {
     $('html,body').animate({
-        scrollTop: $('#sectiontwo ').offset().top
-      },
+      scrollTop: $('#sectiontwo ').offset().top
+    },
       'slow')
   })
 })
