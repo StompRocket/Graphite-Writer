@@ -285,9 +285,9 @@ footer p {
   font-size: 12pt;
   width: 8.5in;
   min-height: 29.7cm;
-  padding-top: 1in;
-  padding-left: 1in;
-  padding-right: 1in;
+  padding-top: 0.2in;
+  padding-left: 0.8in;
+  padding-right: 0.8in;
   margin: 1cm auto;
   border: 1px #D3D3D3 solid;
   border-radius: 5px;
