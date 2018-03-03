@@ -4,6 +4,7 @@ import home from '@/components/home'
 import about from '@/components/about'
 import documents from '@/components/documents'
 import editor from '@/components/editor'
+import login from '@/components/login'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +27,11 @@ export default new Router({
       path: '/d/:document',
       name: 'editor',
       component: editor
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     }
   ]
 })
