@@ -5,11 +5,22 @@
     <br />
     <span class="multi-input">
       <input class="input" type="text" width="100%" placeholder="Search"/>
-      <a class="button primary input" width="100%" href="#newDocumentModal">Search</a>
+      <a class="button input" width="100%" href="#newDocumentModal">Search</a>
     </span>
     <br />
     <br />
-    <a class="button dark" width="100%" href="#newDocumentModal">New Document</a>
+    <a class="button primary" width="100%" href="#newDocumentModal">New Document</a>
+
+    <br /> <br />
+
+    <div class="document-preview">
+      <div class="box material container">
+        <h3>Document Name</h3>
+        <small>
+         <i>Last Edited: datetime</i>
+        </small>
+      </div>
+    </div>
   </div>
 
   <div class="modal" id="newDocumentModal">
