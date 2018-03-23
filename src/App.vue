@@ -8,7 +8,7 @@
       </div>
       <a class="nav-burger" href="#nav-mobile"><i class="fas fa-bars"></i></a>
       <div class="nav-menu">
-        <a class="minimal" href="/documents">Documents</a>
+        <router-link class="minimal" to="documents">Documents</router-link>
       </div>
     </div>
   </nav>
