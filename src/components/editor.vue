@@ -1,7 +1,18 @@
 <template>
 <div class="page editor">
-  <h1>editor</h1>
-  <p>Document: {{ $route.params.document }}</p>
+  <br />
+  <div class="container">
+    <div class="box container material">
+      <h2>
+       <span contenteditable="true" id="docTitle">Document Name</span>
+      </h2>
+       <p>Document ID {{ $route.params.document }}</p>
+    </div>
+
+    <div id="editor box container">
+      <i>Compose an epic...</i>
+    </div>
+  </div>
 </div>
 </template>
 <script>
@@ -12,4 +23,5 @@ export default {
 
   })
 }
+
 </script>
