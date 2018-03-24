@@ -2,16 +2,13 @@
 <div class="page editor">
   <br />
   <div class="container">
-    <div class="box container material">
-      <h2>
+    <div class="box container">
+      <h1>
        <span contenteditable="true" id="docTitle">Document Name</span>
-      </h2>
-       <p>Document ID {{ $route.params.document }}</p>
+      </h1>
+       <small>Document ID {{ $route.params.document }}</small>
     </div>
 
-    <div id="editor box container">
-      <i>Compose an epic...</i>
-    </div>
   </div>
 </div>
 </template>
