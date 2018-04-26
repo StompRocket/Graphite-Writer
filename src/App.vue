@@ -4,11 +4,11 @@
   <nav class="navbar material white">
     <div class="container">
       <div class="nav-logo">
-        <h2>Graphite Writer</h2>
+        <img src="./assets/wordmark.png" />
       </div>
       <a class="nav-burger" href="#nav-mobile"><i class="fas fa-bars"></i></a>
       <div class="nav-menu">
-        <router-link class="minimal" :to="{ name: 'documents' }">Documents</router-link>
+        <router-link class="white" :to="{ name: 'documents' }">Documents</router-link>
       </div>
     </div>
   </nav>

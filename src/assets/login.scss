@@ -1,0 +1,9 @@
+.page.login {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	& .center-box {
+		width: 400px;
+		max-width: 100%;
+	}
+}
