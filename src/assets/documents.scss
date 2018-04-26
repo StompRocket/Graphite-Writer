@@ -1,0 +1,10 @@
+.page.documents {
+	background-color: #fff;
+	min-height: 100vh;
+	& .fullwidth {
+		width: 100%;
+		& .input:not(.button) {
+			width: auto;
+		}
+	}
+}

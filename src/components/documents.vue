@@ -1,15 +1,15 @@
 <template>
 <div class="page documents">
   <div class="container">
-    <h2>Documents</h2>
     <br />
-    <span class="multi-input">
+    <h1>Documents</h1>
+    <span class="multi-input fullwidth">
       <input class="input" type="text" width="100%" placeholder="Search"/>
-      <a class="button input" width="100%" href="#newDocumentModal">Search</a>
+      <a class="button input warning" width="100%" href="#newDocumentModal">Search</a>
     </span>
     <br />
     <br />
-    <a class="button primary" width="100%" href="#newDocumentModal">New Document</a>
+    <a class="button warning" width="100%" href="#newDocumentModal">New Document</a>
 
     <br /> <br />
 

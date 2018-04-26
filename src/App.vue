@@ -1,7 +1,7 @@
 <template>
 <div class="page">
 
-  <nav class="navbar material white">
+  <nav class="navbar white">
     <div class="container">
       <div class="nav-logo">
         <img src="./assets/wordmark.png" />
