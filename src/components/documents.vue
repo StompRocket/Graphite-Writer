@@ -6,19 +6,19 @@
     <h1>Documents</h1>
     <span class="multi-input fullwidth">
       <input class="input" type="text" width="100%" placeholder="Search"/>
-      <a class="button input warning" width="100%" href="#newDocumentModal">Search</a>
+      <a class="button input warning" width="100%">Search</a>
     </span>
     <br />
     <br />
-    <a class="button warning" width="100%" href="#newDocumentModal">New Document</a>
+    <a class="button warning" width="100%">New Document</a>
 
     <br /> <br />
 
-    <router-link v-for="doc in docs" :to="{ name: 'editor', params: {document: '234fsdf'} }" class="document-preview">
+    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.title" :to="{ name: 'editor', params: {document: doc.key} }" class="document-preview">
       <div class="box material container">
-        <h3>{{doc.title}}</h3>
+        <h3>{{doc.doc.title}}</h3>
         <small>
-         <i>Last Edited: datetime</i>
+         <i>Last Edited: {{doc.doc.date}}</i>
         </small>
       </div>
 
@@ -31,7 +31,7 @@
         <h3>Create Document </h3>
         <span class="multi-input">
           <input type="text" class="input" v-model="newDocName" placeholder="Name Your Document" @keyup.enter="newDoc"/>
-          <router-link class="button primary input" :to="{name: 'editor', params: {document: 'new', name: newDocName}}">Create</router-link>
+          <button class="button primary input" @click="newDoc" >Create</button>
         </span>
       </div>
     </div>
@@ -67,7 +67,7 @@ export default {
             this.loading = false;
             snapshot.forEach(doc => {
               var docKey = doc.key;
-              this.docs.push(doc.val());
+              this.docs.unshift({doc: doc.val(), key: docKey});
               // ...
             });
           });
@@ -78,13 +78,7 @@ export default {
   },
   methods: {
     newDoc() {
-      this.$router.push({
-        name: "editor",
-        params: {
-          document: "new",
-          name: this.newDocName
-        }
-      });
+      
     }
   }
 };
