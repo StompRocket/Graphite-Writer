@@ -10,6 +10,9 @@
       <div class="nav-menu">
         <router-link class="white" :to="{ name: 'documents' }">Documents</router-link>
       </div>
+       <div class="nav-menu">
+        <a @click="login" class="white">{{loginText}}</a>
+      </div>
     </div>
   </nav>
   <router-view/>
@@ -36,12 +39,51 @@
 </template>
 
 <script>
-import '../node_modules/minireset.css/minireset.min.css'
-import './assets/global.scss'
+import "../node_modules/minireset.css/minireset.min.css";
+import "./assets/global.scss";
+const firebase = require("firebase");
 export default {
-  name: 'App'
-}
+  name: "App",
+  data() {
+    return {
+      loginText: "Login"
+    };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log("loggedIn");
+        // User is signed in.
+        this.loginText = "Logout";
+      } else {
+        this.loginText = "Login";
+      }
+    });
+  },
+  methods: {
+    login() {
+      let user = firebase.auth().currentUser;
+
+      if (user) {
+        // User is signed in.
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch(function(error) {
+            // An error happened.
+          });
+      } else {
+        // No user is signed in.
+        this.$router.push("/login");
+      }
+    }
+  }
+};
 </script>
 
 <style>
+
 </style>
