@@ -1,5 +1,6 @@
 <template>
 <div class="page documents">
+  <loadingScreen v-if="loading"></loadingScreen>
   <div class="container">
     <br />
     <h1>Documents</h1>
@@ -13,9 +14,9 @@
 
     <br /> <br />
 
-    <router-link :to="{ name: 'editor', params: {document: '234fsdf'} }" class="document-preview">
+    <router-link v-for="doc in docs" :to="{ name: 'editor', params: {document: '234fsdf'} }" class="document-preview">
       <div class="box material container">
-        <h3>Document Name</h3>
+        <h3>{{doc.title}}</h3>
         <small>
          <i>Last Edited: datetime</i>
         </small>
@@ -38,24 +39,53 @@
 </div>
 </template>
 <script>
-import '../assets/documents.scss'
+import "../assets/documents.scss";
+import firebase from "firebase";
+import loadingScreen from "./loadingScreen.vue";
+import { log } from "util";
+
 export default {
   name: "documents",
+  components: {
+    loadingScreen
+  },
   data: () => ({
-    newDocName: ''
+    newDocName: "",
+    loading: true,
+    uid: null,
+    docs: []
   }),
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.uid = user.uid;
+        const db = firebase.database();
+        db
+          .ref(`users/${this.uid}/docs`)
+          .orderByChild("utcdate")
+          .once("value", snapshot => {
+            this.loading = false;
+            snapshot.forEach(doc => {
+              var docKey = doc.key;
+              this.docs.push(doc.val());
+              // ...
+            });
+          });
+      } else {
+        this.$router.push("/login");
+      }
+    });
+  },
   methods: {
-
     newDoc() {
       this.$router.push({
-        name: 'editor',
+        name: "editor",
         params: {
-          document: 'new',
+          document: "new",
           name: this.newDocName
         }
-      })
+      });
     }
-
   }
-}
+};
 </script>

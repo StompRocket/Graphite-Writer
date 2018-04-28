@@ -1,14 +1,14 @@
 .page.login {
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	& .center-box {
-		width: 400px;
-		max-width: 100%;
-	}
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  & .center-box {
+    width: 400px;
+    max-width: 100%;
+  }
 
-	& .column {
-		display: flex;
-		align-items: space-around;
-	}
+  & .column {
+    display: flex;
+    align-items: space-around;
+  }
 }

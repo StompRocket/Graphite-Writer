@@ -1,5 +1,6 @@
 <template>
 <div class="page login">
+	<loadingScreen v-if="loading"></loadingScreen>
 <div class="center-box box material deep container">
 	<h3>Login to Continue:</h3>
 	<br />
@@ -12,6 +13,7 @@
 </template>
 <script>
 import "../assets/login.scss";
+import loadingScreen from "./loadingScreen.vue";
 const firebase = require("firebase");
 const provider = new firebase.auth.GoogleAuthProvider();
 export default {
@@ -28,13 +30,21 @@ export default {
         } else {
           this.$router.push("/documents/");
         }
+      } else {
+        this.loading = false;
       }
     });
   },
+  components: {
+    loadingScreen
+  },
   data: () => ({
+    loading: true
+  }),
+  methods: {
     loginWithGoogle() {
       firebase.auth().signInWithRedirect(provider);
     }
-  })
+  }
 };
 </script>
