@@ -140,6 +140,27 @@ a {
   }
 }
 
+a.dark {
+  color: #333;
+  text-decoration: none;
+  transition: all .2s ease-in;
+
+  &:hover {
+    transition: all .2s ease-out;
+    box-shadow:  0 -1px 0 0 white inset, 0 -2px 0 0 #333 inset ;
+  }
+
+  &::selection {
+    color: white; background: #333;
+    text-shadow: none;
+  }
+  &:visited {
+    color: #333;
+    text-decoration: none;
+    text-shadow: none;
+  }
+}
+
 a.white {
   color: #fff;
   text-decoration: none;

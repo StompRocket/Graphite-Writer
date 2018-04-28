@@ -1,5 +1,6 @@
 .page.home {
 	min-height: 100vh;
+	background-color: #fff;
 
 	& .banner-image {
 		background-image: url("../assets/homepage-banner.jpg");
@@ -19,5 +20,23 @@
 
 	& h1.big {
 		font-size: 3.5em;
+	}
+
+	& .container.white {
+		background-color: #fff;
+	}
+
+	& .column.center {
+		display: flex;
+		justify-content: center;
+	}
+
+	& .underline-warning {
+		text-decoration: underline;
+		color: #F2BE2E;
+
+		& h1 {
+			color: #333;
+		}
 	}
 }
