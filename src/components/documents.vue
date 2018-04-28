@@ -15,13 +15,13 @@
     <br /> <br />
 
     <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.title" :to="{ name: 'editor', params: {document: doc.key} }" class="document-preview">
-      <div class="box material container">
+      <div class="box material hover-deep container">
         <h3>{{doc.doc.title}}</h3>
         <small>
          <i>Last Edited: {{doc.doc.date}}</i>
         </small>
       </div>
-
+      <br />
     </router-link>
   </div>
   <div class="modal" id="newDocumentModal">
