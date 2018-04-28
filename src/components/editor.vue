@@ -3,19 +3,20 @@
     <loadingScreen v-if="loading"></loadingScreen>
   <br />
   <div class="container">
-    <div class="box container">
+    <div class="box container docInfo">
       <h1>
        <span contenteditable="true" id="docTitle">{{doc.title}}</span>
       </h1>
        <small>Last Edited: {{doc.date}}</small>
     </div>
-    
+    <quill id="quillEditor" ref="quill"/>
   </div>
-   <quill ref="quill"/>
+   
 </div>
 </template>
 <script>
 import "../assets/editor.scss";
+import "../assets/quill.snow.css";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
@@ -61,6 +62,10 @@ export default {
               this.loading = false;
               this.decryptedDoc.data = decrypt(this.doc.data, this.uid);
               console.log(decrypt(this.doc.data, this.uid));
+              this.$refs.quill.editor.setContents(
+                this.decryptedDoc.data,
+                "silent"
+              );
 
               // ...
             });

@@ -4,11 +4,9 @@
 </div>
 </template>
 <script>
-import '../assets/about.scss'
+import "../assets/about.scss";
 export default {
   name: "about",
-  data: () => ({
-
-  })
-}
+  data: () => ({})
+};
 </script>

@@ -40,11 +40,9 @@
 </div>
 </template>
 <script>
-import '../assets/home.scss'
+import "../assets/home.scss";
 export default {
   name: "home",
-  data: () => ({
-
-  })
-}
+  data: () => ({})
+};
 </script>

@@ -10,7 +10,7 @@
     </span>
     <br />
     <br />
-    <a class="button warning" width="100%">New Document</a>
+    <a @click="openNewDoc" class="button warning" width="100%">New Document</a>
 
     <br /> <br />
 
@@ -24,22 +24,12 @@
       <br />
     </router-link>
   </div>
-  <div class="modal" id="newDocumentModal">
-    <div class="modal-body box material deep">
-      <div class="container">
-        <i class="modal-close fas fa-times" /> <br />
-        <h3>Create Document </h3>
-        <span class="multi-input">
-          <input type="text" class="input" v-model="newDocName" placeholder="Name Your Document" @keyup.enter="newDoc"/>
-          <button class="button primary input" @click="newDoc" >Create</button>
-        </span>
-      </div>
-    </div>
-  </div>
+
 </div>
 </template>
 <script>
 import "../assets/documents.scss";
+import swal from "sweetalert";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import { log } from "util";
@@ -53,7 +43,8 @@ export default {
     newDocName: "",
     loading: true,
     uid: null,
-    docs: []
+    docs: [],
+    newDoc: false
   }),
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -63,11 +54,12 @@ export default {
         db
           .ref(`users/${this.uid}/docs`)
           .orderByChild("utcdate")
-          .once("value", snapshot => {
+          .on("value", snapshot => {
             this.loading = false;
+            this.docs = [];
             snapshot.forEach(doc => {
               var docKey = doc.key;
-              this.docs.unshift({doc: doc.val(), key: docKey});
+              this.docs.unshift({ doc: doc.val(), key: docKey });
               // ...
             });
           });
@@ -77,8 +69,38 @@ export default {
     });
   },
   methods: {
-    newDoc() {
-      
+    openNewDoc() {
+      swal("New Document Name:", {
+        content: "input"
+      }).then(name => {
+        if (!name) {
+          name = "Untitled";
+        }
+        if (/^\s+$/.test(name)) {
+          name = "Untitled";
+        }
+        console.log(name);
+        // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+
+        let date = new Date();
+        date = date.toString();
+        let newDoc = {
+          title: name,
+          date: date,
+          utcdate: new Date().getTime(),
+          version: 2
+        };
+        let newDocRef = firebase
+          .database()
+          .ref(`users/${this.uid}/docs/`)
+          .push();
+        console.log(newDocRef.key);
+        let newDocStorRef = firebase
+          .database()
+          .ref(`users/${this.uid}/docsStorage/${newDocRef.key}`);
+        newDocRef.set(newDoc);
+        newDocStorRef.set(newDoc);
+      });
     }
   }
 };
