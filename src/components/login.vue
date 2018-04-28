@@ -4,18 +4,37 @@
 	<h3>Login to Continue:</h3>
 	<br />
 	<div class="row">
-		<div class="column"> <a class="button warning" href="#!">Google</a> </div>
-		<div class="column"> <a class="button dark" href="#!">Github</a> </div>
+		<div class="column"> <a @click="loginWithGoogle" class="button warning">Google</a> </div>
+		<div class="column"> <a class="button dark">Github</a> </div>
 	</div>
 </div>
 </div>
 </template>
 <script>
-import '../assets/login.scss'
+import "../assets/login.scss";
+const firebase = require("firebase");
+const provider = new firebase.auth.GoogleAuthProvider();
 export default {
-name: "login",
-data: () => ({
-
-})
-}
+  name: "login",
+  created() {
+    console.log(localStorage.getItem("redirect") + " params");
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log("loggedIn");
+        // User is signed in.
+        if (localStorage.getItem("redirect")) {
+          this.$router.push(localStorage.getItem("redirect"));
+          localStorage.removeItem("redirect", null);
+        } else {
+          this.$router.push("/documents/");
+        }
+      }
+    });
+  },
+  data: () => ({
+    loginWithGoogle() {
+      firebase.auth().signInWithRedirect(provider);
+    }
+  })
+};
 </script>
