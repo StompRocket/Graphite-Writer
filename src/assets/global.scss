@@ -114,6 +114,7 @@ a {
   color: $blue;
   text-decoration: none;
   transition: all 0.2s ease-in;
+  cursor: pointer;
 
   &:hover {
     transition: all 0.2s ease-out;
