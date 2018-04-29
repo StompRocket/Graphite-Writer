@@ -71,6 +71,7 @@ export default {
   methods: {
     openNewDoc() {
       swal("New Document Name:", {
+        customClass: 'swal-modal',
         content: "input"
       }).then(name => {
         if (!name) {
