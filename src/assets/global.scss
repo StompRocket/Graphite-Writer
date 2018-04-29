@@ -388,9 +388,9 @@ pre code::after {
 
 
 .box.material.hover-deep {
-  -webkit-transition: -webkit-box-shadow 120ms ease-in;
-  -moz-transition: -moz-box-shadow 120ms ease-in;
-  transition: box-shadow 120ms ease-in;
+  -webkit-transition: -webkit-box-shadow 120ms ease-out;
+  -moz-transition: -moz-box-shadow 120ms ease-out;
+  transition: box-shadow 120ms ease-out;
 }
 
 .box.material.hover-deep:hover {
