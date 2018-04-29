@@ -1,7 +1,6 @@
 <template>
   <div id="loading">
-      <h1>Loading</h1>
-      
+      <span class="cssload-loader"><span class="cssload-loader-inner"></span></span>
   </div>
   
 </template>

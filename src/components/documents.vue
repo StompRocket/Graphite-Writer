@@ -6,7 +6,7 @@
     <h1>Documents</h1>
     <span class="multi-input fullwidth">
       <input class="input" type="text" width="100%" placeholder="Search"/>
-      <a class="button input warning" width="100%">Search</a>
+      <a class="button input dark" width="100%">Search</a>
     </span>
     <br />
     <br />
