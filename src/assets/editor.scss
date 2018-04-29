@@ -1,3 +1,4 @@
+@import "./vars.scss";
 .page.editor {
   min-height: 100vh;
   & .docInfo {
@@ -9,6 +10,6 @@
   }
 
   & #quillEditor {
-  	border-radius: 10px;
+    border-radius: 10px;
   }
 }

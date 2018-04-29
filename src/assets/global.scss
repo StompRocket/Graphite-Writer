@@ -1,5 +1,5 @@
 /* @imports here */
-
+@import "./vars.scss";
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,500,500i,700,700i");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 @import "./vars.scss";
@@ -136,15 +136,16 @@ a {
 a.dark {
   color: #333;
   text-decoration: none;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 
   &:hover {
-    transition: all .2s ease-out;
-    box-shadow:  0 -1px 0 0 white inset, 0 -2px 0 0 #333 inset ;
+    transition: all 0.2s ease-out;
+    box-shadow: 0 -1px 0 0 white inset, 0 -2px 0 0 #333 inset;
   }
 
   &::selection {
-    color: white; background: #333;
+    color: white;
+    background: #333;
     text-shadow: none;
   }
   &:visited {
@@ -365,7 +366,6 @@ pre code::after {
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.19);
 }
 
-
 .box.material {
   border: 0.5px solid $gray-accent;
   border-radius: 3px;
@@ -385,7 +385,6 @@ pre code::after {
   -moz-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
     0 15px 12px rgba(0, 0, 0, 0.22);
 }
-
 
 .box.material.hover-deep {
   -webkit-transition: -webkit-box-shadow 120ms ease-out;
@@ -921,9 +920,8 @@ footer.footer.material.inner {
   width: 100%;
 }
 
-
 #bottom-logo {
-  opacity: .25;
+  opacity: 0.25;
   width: 15vw;
   height: 15vw;
   position: absolute;
