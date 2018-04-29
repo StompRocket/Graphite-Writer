@@ -3,13 +3,14 @@
     <loadingScreen v-if="loading"></loadingScreen>
   <br />
   <div class="container">
-    <div class="box container docInfo">
+    <div class="box container material docInfo">
       <h1>
        <span contenteditable="true" id="docTitle">{{doc.title}}</span>
       </h1>
        <small>Last Edited: {{doc.date}}</small>
     </div>
-    <quill @input="saveDoc" id="quillEditor" ref="quill"/>
+    <quill @input="saveDoc" id="quillEditor"  ref="quill"/>
+    <br />
   </div>
    
 </div>

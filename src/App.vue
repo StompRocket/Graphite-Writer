@@ -14,21 +14,24 @@
       </div>
     </div>
   </nav>
-  <router-view/>
+  <router-view />
   <footer class="footer">
+    <div class="child-div">
+      <img src="./assets/icon.svg" style="background-color: transparent;" id="bottom-logo" />
+    </div>
     <div class="container">
       <br />
 
       <div class="row">
         <div class="column">
-          Graphite Writer is supported by: (names)
+          Graphite Writer is supported by <b>Ronan.N, Rohan.P, Liam.J, Merideth.O</b>. Want your name up here? Help support our development by buying a shirt, or donating. 
         </div>
         <div class="column">
           Website is licenced under
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><b>CC-BY-NC-SA 4.0</b></a>
+          <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" class="dark"><b>Apache Licene 2.0</b></a>. A simplified explenation of the license can be found <a href="https://tldrlegal.com/license/apache-license-2.0-%28apache-2.0%29" target="_blank" class="dark"><b>here</b></a>.
         </div>
         <div class="column">
-          Created by Ronan and Sasha S.
+          Created by Ronan and Sasha S. View the code on <a href="https://github.com/StompRocket/Graphite-Writer" class="dark"><b>Github</b></a>. Have a question, or a suggestion? Send us an <a href="mailto:hello@stomprocket.io" class="dark"><b>email</b></a>. We'll try our best to respond as soon as we can.
         </div>
       </div>
       <br />

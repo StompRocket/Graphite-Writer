@@ -1,10 +1,14 @@
 .page.editor {
   min-height: 100vh;
-  .docInfo {
+  & .docInfo {
     margin-bottom: 3%;
   }
-  .ql-toolbar,
-  .ql-editor {
+  & .ql-toolbar,
+  & .ql-editor {
     background-color: white !important;
+  }
+
+  & #quillEditor {
+  	border-radius: 10px;
   }
 }

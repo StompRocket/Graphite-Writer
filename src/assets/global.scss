@@ -920,3 +920,14 @@ footer.footer.material.inner {
 .fullwidth {
   width: 100%;
 }
+
+
+#bottom-logo {
+  opacity: .2;
+  width: 15vw;
+  height: 15vw;
+  position: absolute;
+  display: inline-block;
+  transform: translateY(-8vw);
+  z-index: 5;
+}
