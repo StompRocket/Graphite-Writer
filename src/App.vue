@@ -24,7 +24,7 @@
 
       <div class="row">
         <div class="column">
-          Graphite Writer is supported by <b>Ronan.N, Rohan.P, Liam.J, Merideth.O</b>. Want your name up here? Help support our development by buying a shirt, or donating. 
+          Graphite Writer is supported by <b>{{supporters}}</b>. Want your name up here? Help support our development by buying a shirt, or donating. 
         </div>
         <div class="column">
           Website is licenced under
@@ -48,7 +48,8 @@ export default {
   name: "App",
   data() {
     return {
-      loginText: "Login"
+      loginText: "Login",
+      supporters: "Ronan.N, Rohan.P, Liam.J, Merideth.O"
     };
   },
   created() {
