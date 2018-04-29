@@ -44,7 +44,8 @@ export default {
     loading: true,
     uid: null,
     docs: [],
-    newDoc: false
+    newDoc: false,
+    search: ""
   }),
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -69,9 +70,13 @@ export default {
     });
   },
   methods: {
+    searchFilter(doc) {
+      let title = doc.doc.title.toLowerCase().split(" ");
+      return title.indexOf(this.search.toLowerCase()) > -1;
+    },
     openNewDoc() {
       swal("New Document Name:", {
-        customClass: 'swal-modal',
+        customClass: "swal-modal",
         content: "input"
       }).then(name => {
         if (!name) {
