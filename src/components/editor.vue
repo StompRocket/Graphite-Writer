@@ -103,8 +103,19 @@ export default {
             .database()
             .ref(`/documentMeta/${this.docUser}/${this.docId}/info`)
             .on("value", snapshot => {
-              this.docMeta = snapshot.val();
-              this.loading = false;
+              if (snapshot.val()) {
+                this.docMeta = snapshot.val();
+                this.loading = false;
+                firebase
+                  .database()
+                  .ref(`/users/${this.uid}/docs/${this.docId}/`)
+                  .set({
+                    docId: this.docId,
+                    uid: this.docUser
+                  });
+              } else {
+                this.$router.push("/documents");
+              }
 
               // ...
             });
