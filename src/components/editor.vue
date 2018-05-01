@@ -4,7 +4,7 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <input id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
+      <input @input="saveDoc()" id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
       
        <small>Last Edited: {{docMeta.date}}</small>
     </div>
@@ -74,7 +74,8 @@ export default {
       placeholder: "Compose an epic...",
       readOnly: false,
       theme: "snow"
-    }
+    },
+    initTime: null
   }),
   created() {
     const db = firebase.database();
@@ -95,6 +96,7 @@ export default {
               this.saveHandler();
               this.decryptedDoc.data = decrypt(this.doc.data, this.uid);
               this.editor.setContents(this.decryptedDoc.data);
+              this.initTime = Date.now();
               console.log("updating");
             });
           firebase
@@ -106,6 +108,21 @@ export default {
 
               // ...
             });
+          firebase
+            .database()
+            .ref(`/documents/${this.docUser}/${this.docId}/changes`)
+            .on("child_added", data => {
+              if (
+                data.val().time > this.initTime &&
+                data.val().uid != this.uid
+              ) {
+                try {
+                  this.editor.updateContents(data.val().delta);
+                } catch (e) {
+                  window.alert(e);
+                }
+              }
+            });
         } else {
           this.$router.push("/documents");
         }
@@ -116,38 +133,47 @@ export default {
   },
   methods: {
     saveHandler() {
-      console.log("savehandler");
+      // console.log("savehandler");
       this.editor.on("text-change", (delta, oldDelta, source) => {
         // console.log("change");
         if (source == "api") {
           // console.log("An API call triggered this change.");
         } else if (source == "user") {
-          this.saveDoc();
-          console.log("save", delta, oldDelta);
+          this.saveDoc(delta);
+          // console.log("save", delta, oldDelta);
         }
       });
     },
 
-    saveDoc() {
+    saveDoc(delta) {
       updates = [];
       let date = new Date();
       date = date.toString();
       let utcDate = new Date().getTime();
-      console.log("saving");
+      //console.log("saving");
       let data = this.editor.getContents();
-      console.log(data, this.docUser);
+      //console.log(data, this.docUser);
       data = encrypt(data, this.docUser);
-      let newDocMetaRef = firebase
+      let DocMetaRef = firebase
         .database()
         .ref(`documentMeta/${this.docUser}/${this.docId}/info`);
-      let newDocStorRef = firebase
+      let DocStorRef = firebase
         .database()
-        .ref(`documents/${this.docUser}/${this.docId}`);
+        .ref(`documents/${this.docUser}/${this.docId}/data`);
+      if (delta) {
+        let docChangeLogRef = firebase
+          .database()
+          .ref(`documents/${this.docUser}/${this.docId}/changes`)
+          .push();
+        docChangeLogRef.set({
+          delta: delta,
+          uid: this.uid,
+          time: utcDate
+        });
+      }
 
-      newDocStorRef.set({
-        data: data
-      });
-      newDocMetaRef.set({
+      DocStorRef.set(data);
+      DocMetaRef.set({
         title: this.docMeta.title,
         date: date,
         utcDate: utcDate

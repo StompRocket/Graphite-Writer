@@ -18,7 +18,7 @@
 <p @click="openNewDoc">Go make some!</p>
 
 </div>
-    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: uid} }" class="document-preview">
+    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
@@ -75,7 +75,11 @@ export default {
                   .once("value")
                   .then(docMeta => {
                     console.log(docMeta.val());
-                    this.docs.unshift({ doc: docMeta.val(), key: docKey });
+                    this.docs.unshift({
+                      doc: docMeta.val(),
+                      key: docKey,
+                      uid: doc.val().uid
+                    });
                     // ...
                   });
 
