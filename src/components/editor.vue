@@ -114,7 +114,6 @@ export default {
             .on("value", snapshot => {
               if (snapshot.val()) {
                 this.docMeta = snapshot.val();
-                this.loading = false;
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)
