@@ -29,7 +29,7 @@ let router = new Router({
       }
     },
     {
-      path: "/d/:document",
+      path: "/d/:user/:document",
       name: "editor",
       component: editor,
       meta: {
@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   // console.log(`requiresAuth: ${requiresAuth} user: ${currentUser}`);
   if (requiresAuth && !currentUser) {
-    console.log(to.path);
+    //console.log(to.path);
     localStorage.setItem("redirect", to.path);
     next({
       name: "login",

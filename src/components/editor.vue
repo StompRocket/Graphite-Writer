@@ -9,7 +9,6 @@
       </h1>
        <small>Last Edited: {{doc.date}}</small>
     </div>
-    <quill @input="saveDoc" id="quillEditor"  ref="quill"/>
     <br />
   </div>
    
@@ -57,6 +56,7 @@ export default {
     loading: true,
     uid: null,
     docId: null,
+    docUser: null,
     doc: false,
     decryptedDoc: {}
   }),
@@ -66,22 +66,16 @@ export default {
       if (user) {
         this.uid = user.uid;
 
-        if (this.$route.params.document) {
+        if (this.$route.params.document && this.$route.params.document) {
           this.docId = this.$route.params.document;
+          this.docUser = this.$route.params.user;
           firebase
             .database()
-            .ref(`/users/${this.uid}/docsStorage/${this.docId}/`)
+            .ref(`/users/${this.docUser}/docsStorage/${this.docId}/`)
             .on("value", snapshot => {
               this.doc = snapshot.val();
               this.loading = false;
               this.decryptedDoc.data = decrypt(this.doc.data, this.uid);
-              console.log(decrypt(this.doc.data, this.uid));
-              if (this.$refs.quill) {
-                this.$refs.quill.editor.setContents(
-                  this.decryptedDoc.data,
-                  "silent"
-                );
-              }
 
               // ...
             });

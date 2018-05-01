@@ -22,7 +22,7 @@ export default {
     console.log(localStorage.getItem("redirect") + " params");
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("loggedIn");
+        //console.log("loggedIn");
         // User is signed in.
         if (localStorage.getItem("redirect")) {
           this.$router.push(localStorage.getItem("redirect"));

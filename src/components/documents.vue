@@ -13,8 +13,12 @@
     <a @click="openNewDoc" class="button warning" width="100%">New Document</a>
 
     <br /> <br />
+<div v-if="noDocs">
+<h3>U have no docs pleb</h3>
+<p @click="openNewDoc">Go make some!</p>
 
-    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.title" :to="{ name: 'editor', params: {document: doc.key} }" class="document-preview">
+</div>
+    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.title" :to="{ name: 'editor', params: {document: doc.key, user: uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.title}}</h3>
         <small>
@@ -45,7 +49,8 @@ export default {
     uid: null,
     docs: [],
     newDoc: false,
-    search: ""
+    search: "",
+    noDocs: true
   }),
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -58,11 +63,16 @@ export default {
           .on("value", snapshot => {
             this.loading = false;
             this.docs = [];
-            snapshot.forEach(doc => {
-              var docKey = doc.key;
-              this.docs.unshift({ doc: doc.val(), key: docKey });
-              // ...
-            });
+            if (!snapshot.val()) {
+              this.noDocs = true;
+            } else {
+              this.noDocs = false;
+              snapshot.forEach(doc => {
+                var docKey = doc.key;
+                this.docs.unshift({ doc: doc.val(), key: docKey });
+                // ...
+              });
+            }
           });
       } else {
         this.$router.push("/login");

@@ -9,12 +9,12 @@ Vue.use(VueQuill);
 const firebase = require("firebase");
 let vueApp;
 const config = {
-  apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
-  authDomain: "graphite-88e41.firebaseapp.com",
-  databaseURL: "https://graphite-88e41.firebaseio.com",
-  projectId: "graphite-88e41",
-  storageBucket: "graphite-88e41.appspot.com",
-  messagingSenderId: "158148550453"
+  apiKey: "AIzaSyD8ebk4UWxgYLMikkwqiBahVMpjhEDfwKg",
+  authDomain: "graphite-writer-v2.firebaseapp.com",
+  databaseURL: "https://graphite-writer-v2.firebaseio.com",
+  projectId: "graphite-writer-v2",
+  storageBucket: "",
+  messagingSenderId: "744364654162"
 };
 firebase.initializeApp(config);
 Vue.config.productionTip = false;
