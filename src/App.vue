@@ -1,6 +1,5 @@
 <template>
 <div class="page">
-
   <nav class="navbar white">
     <div class="container">
       <div class="nav-logo">
@@ -58,10 +57,39 @@ export default {
         console.log("loggedIn");
         // User is signed in.
         this.loginText = "Logout";
+
+        firebase
+          .database()
+          .ref("users/" + user.uid + "/info")
+          .set({
+            name: user.displayName,
+            email: user.email,
+            profile_picture: user.photoURL,
+            uid: user.uid
+          });
+        firebase
+          .database()
+          .ref("users/" + user.uid + "/publicInfo")
+          .set({
+            name: user.displayName,
+            profile_picture: user.photoURL,
+            uid: user.uid
+          });
       } else {
         this.loginText = "Login";
       }
     });
+  },
+  updated() {
+    var user = firebase.auth().currentUser;
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/timeData")
+      .push()
+      .set({
+        utc: new Date().getTime(),
+        route: this.$route.path
+      });
   },
   methods: {
     login() {

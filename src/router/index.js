@@ -5,6 +5,7 @@ import about from "@/components/about";
 import documents from "@/components/documents";
 import editor from "@/components/editor";
 import login from "@/components/login";
+import shareRedirect from "@/components/shareRedirect";
 import firebase from "firebase";
 Vue.use(Router);
 
@@ -47,6 +48,14 @@ let router = new Router({
     {
       path: "/d/",
       redirect: "/documents"
+    },
+    {
+      path: "/s/:user/:document",
+      name: "shareRedirect",
+      component: shareRedirect,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "*",

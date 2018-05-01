@@ -12,6 +12,6 @@
 <script>
 import "../assets/loading.scss";
 export default {
-  name: "login"
+  name: "loading"
 };
 </script>

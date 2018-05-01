@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "firebase": "^4.13.1",
+    "hashids": "^1.1.4",
     "minireset.css": "0.0.3",
     "sweetalert": "^2.1.0",
     "vue": "^2.5.2",

@@ -12,6 +12,31 @@
     <div id="toolbar"></div>
     <div id="editor"></div>
   </div>
+  <div v-bind:class="{open: shareSettings}" class="modal">
+    <div class="modal-contents container">
+      <div class="box material">
+        <button @click="closeSave">Close</button>
+<h1>Share</h1>
+<hr>
+<h3>Shareable Link (view only)</h3>
+<a>https://graphitewriter.com/#/s/{{shareUrl}}</a>
+
+<h3>Collaberators</h3>
+<div>
+  <div class="user" v-for="user in users" :key="user.uid">
+    <img :src="user.profile_picture" :alt="user.name">
+    <h4>{{user.name}}</h4>
+  </div>
+</div>
+<form @submit.prevent>
+  <input type="email" placeholder="Add an collaberator">
+  <button type="submit">Add</button>
+</form>
+<br>
+ <button @click="closeSave">Done</button>
+      </div>
+    </div>
+  </div>
    
 </div>
 </template>
@@ -22,11 +47,24 @@ import "../assets/quill/quill.min.js";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
-import loadingScreenVue from "./loadingScreen.vue";
-import { log } from "util";
+
+const Hashids = require("hashids");
+let hashids = new Hashids();
 let typingTimer; //timer identifier
 let doneTypingInterval = 5000;
 let updates = [];
+String.prototype.hashCode = function() {
+  var hash = 0,
+    i,
+    chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr = this.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
 function debounce(func, wait, immediate) {
   var timeout;
   return function() {
@@ -63,6 +101,19 @@ function decrypt(data, key) {
     return data;
   }
 }
+function hash(data) {
+  //console.log(data);
+  let result = data.hashCode();
+  // console.log(result);
+  result = String(result);
+  //console.log(result);
+  result = result.replace("-", "");
+  //console.log(result);
+  result = Number(result);
+  //console.log(result);
+  result = hashids.encode(result);
+  return result;
+}
 export default {
   name: "editor",
   components: {
@@ -84,7 +135,10 @@ export default {
       readOnly: false,
       theme: "snow"
     },
-    initTime: null
+    initTime: null,
+    shareSettings: false,
+    users: [],
+    shareUrl: null
   }),
   created() {
     const db = firebase.database();
@@ -142,6 +196,20 @@ export default {
                 console.log("comit from my self");
               }
             });
+          firebase
+            .database()
+            .ref(`/documentMeta/${this.docUser}/${this.docId}/users`)
+            .on("value", snapshot => {
+              snapshot.forEach(user => {
+                firebase
+                  .database()
+                  .ref("/users/" + user.val() + "/publicInfo")
+                  .once("value")
+                  .then(snapshot => {
+                    this.users.push(snapshot.val());
+                  });
+              });
+            });
         } else {
           this.$router.push("/documents");
         }
@@ -150,7 +218,11 @@ export default {
       }
     });
   },
+
   methods: {
+    closeSave() {
+      this.shareSettings = false;
+    },
     saveHandler() {
       // console.log("savehandler");
       this.editor.on("text-change", (delta, oldDelta, source) => {
@@ -163,7 +235,19 @@ export default {
         }
       });
     },
-    share() {},
+    share() {
+      let user = hash(this.docUser);
+      let doc = hash(this.docId);
+      this.shareUrl = `${user}/${doc}`;
+      this.shareSettings = true;
+      firebase
+        .database()
+        .ref(`refs/${user}/${doc}/`)
+        .set({
+          docUser: this.docUser,
+          docId: this.docId
+        });
+    },
     saveDoc(delta) {
       updates = [];
       let date = new Date();
