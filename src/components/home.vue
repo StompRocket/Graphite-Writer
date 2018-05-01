@@ -7,7 +7,7 @@
         <h2>A Cloud Based Document Editor Focused On Speed And Usability</h2>
 	  		
 	  		&nbsp;
-	  		<router-link class="button dark" to="/login">Get Started</router-link>
+	  		<router-link class="button dark" to="/login">Start Now</router-link>
 	  	</div>
   	</div>
   </div>
