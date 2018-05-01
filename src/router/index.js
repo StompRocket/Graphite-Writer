@@ -43,6 +43,14 @@ let router = new Router({
       props: {
         redirect: false
       }
+    },
+    {
+      path: "/d/",
+      redirect: "/documents"
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });

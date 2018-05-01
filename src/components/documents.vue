@@ -71,7 +71,7 @@ export default {
                 .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
                 .once("value")
                 .then(docMeta => {
-                  console.log(docMeta.val());
+                  // console.log(docMeta.val());
                   this.docs.unshift({
                     doc: docMeta.val(),
                     key: docKey,
@@ -96,53 +96,52 @@ export default {
     },
     openNewDoc() {
       swal("New Document Name:", {
-        customClass: "swal-modal",
+        className: "swal-modal",
         content: "input"
       }).then(name => {
-        if (!name) {
-          name = "Untitled";
-        }
-        if (/^\s+$/.test(name)) {
-          name = "Untitled";
-        }
-        console.log(name);
-        // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
+        if (name) {
+          if (/^\s+$/.test(name)) {
+            name = "Untitled";
+          }
+          console.log(name);
+          // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
 
-        let date = new Date();
-        date = date.toString();
-        let utcDate = new Date().getTime();
-        let newDoc = {
-          title: name,
-          date: date,
-          utcdate: utcDate
-        };
-        let newDocUserRef = firebase
-          .database()
-          .ref(`users/${this.uid}/docs/`)
-          .push();
-        let newDocMetaRef = firebase
-          .database()
-          .ref(`documentMeta/${this.uid}/${newDocUserRef.key}/`);
-        let newDocStorRef = firebase
-          .database()
-          .ref(`documents/${this.uid}/${newDocUserRef.key}`);
-        newDocUserRef.set({
-          docId: newDocUserRef.key,
-          uid: this.uid
-        });
-        newDocStorRef.set({
-          data: ""
-        });
-        newDocMetaRef.set({
-          info: {
+          let date = new Date();
+          date = date.toString();
+          let utcDate = new Date().getTime();
+          let newDoc = {
             title: name,
             date: date,
-            utcDate: utcDate
-          },
-          users: {
-            [this.uid]: this.uid
-          }
-        });
+            utcdate: utcDate
+          };
+          let newDocUserRef = firebase
+            .database()
+            .ref(`users/${this.uid}/docs/`)
+            .push();
+          let newDocMetaRef = firebase
+            .database()
+            .ref(`documentMeta/${this.uid}/${newDocUserRef.key}/`);
+          let newDocStorRef = firebase
+            .database()
+            .ref(`documents/${this.uid}/${newDocUserRef.key}`);
+          newDocUserRef.set({
+            docId: newDocUserRef.key,
+            uid: this.uid
+          });
+          newDocStorRef.set({
+            data: ""
+          });
+          newDocMetaRef.set({
+            info: {
+              title: name,
+              date: date,
+              utcDate: utcDate
+            },
+            users: {
+              [this.uid]: this.uid
+            }
+          });
+        }
       });
     }
   }

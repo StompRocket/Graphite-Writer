@@ -4,7 +4,7 @@
   <nav class="navbar white">
     <div class="container">
       <div class="nav-logo">
-        <img src="./assets/wordmark.png" />
+       <router-link to="/"><img src="./assets/wordmark.png" /></router-link> 
       </div>
       <a class="nav-burger" href="#nav-mobile"><i class="fas fa-bars"></i></a>
       <div class="nav-menu">
