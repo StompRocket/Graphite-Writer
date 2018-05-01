@@ -13,16 +13,16 @@
     <a @click="openNewDoc" class="button warning" width="100%">New Document</a>
 
     <br /> <br />
-<div v-if="noDocs">
+<div class="box material" style="padding: 2%;" v-if="noDocs">
 <h3>U have no docs pleb</h3>
 <p @click="openNewDoc">Go make some!</p>
 
 </div>
-    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.title" :to="{ name: 'editor', params: {document: doc.key, user: uid} }" class="document-preview">
+    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: uid} }" class="document-preview">
       <div class="box material hover-deep container">
-        <h3 >{{doc.doc.title}}</h3>
+        <h3 >{{doc.doc.info.title}}</h3>
         <small>
-         <i>Last Edited: {{doc.doc.date}}</i>
+         <i>Last Edited: {{doc.doc.info.date}}</i>
         </small>
       </div>
       <br />
@@ -68,8 +68,17 @@ export default {
             } else {
               this.noDocs = false;
               snapshot.forEach(doc => {
-                var docKey = doc.key;
-                this.docs.unshift({ doc: doc.val(), key: docKey });
+                let docKey = doc.key;
+                firebase
+                  .database()
+                  .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
+                  .once("value")
+                  .then(docMeta => {
+                    console.log(docMeta.val());
+                    this.docs.unshift({ doc: docMeta.val(), key: docKey });
+                    // ...
+                  });
+
                 // ...
               });
             }
@@ -100,22 +109,39 @@ export default {
 
         let date = new Date();
         date = date.toString();
+        let utcDate = new Date().getTime();
         let newDoc = {
           title: name,
           date: date,
-          utcdate: new Date().getTime(),
-          version: 2
+          utcdate: utcDate
         };
-        let newDocRef = firebase
+        let newDocUserRef = firebase
           .database()
           .ref(`users/${this.uid}/docs/`)
           .push();
-        console.log(newDocRef.key);
+        let newDocMetaRef = firebase
+          .database()
+          .ref(`documentMeta/${this.uid}/${newDocUserRef.key}/`);
         let newDocStorRef = firebase
           .database()
-          .ref(`users/${this.uid}/docsStorage/${newDocRef.key}`);
-        newDocRef.set(newDoc);
-        newDocStorRef.set(newDoc);
+          .ref(`documents/${this.uid}/${newDocUserRef.key}`);
+        newDocUserRef.set({
+          docId: newDocUserRef.key,
+          uid: this.uid
+        });
+        newDocStorRef.set({
+          data: ""
+        });
+        newDocMetaRef.set({
+          info: {
+            title: name,
+            date: date,
+            utcDate: utcDate
+          },
+          users: {
+            [this.uid]: this.uid
+          }
+        });
       });
     }
   }

@@ -4,22 +4,29 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <h1>
-       <span contenteditable="true" id="docTitle">{{doc.title}}</span>
-      </h1>
-       <small>Last Edited: {{doc.date}}</small>
+      <input id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
+      
+       <small>Last Edited: {{docMeta.date}}</small>
     </div>
     <br />
+    <div id="toolbar"></div>
+    <div id="editor"></div>
   </div>
    
 </div>
 </template>
 <script>
 import "../assets/editor.scss";
-import "../assets/quill.snow.css";
+import "../assets/quill/quill.snow.css";
+import "../assets/quill/quill.min.js";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
+import loadingScreenVue from "./loadingScreen.vue";
+import { log } from "util";
+let typingTimer; //timer identifier
+let doneTypingInterval = 5000;
+let updates = [];
 function debounce(func, wait, immediate) {
   var timeout;
   return function() {
@@ -38,7 +45,7 @@ function debounce(func, wait, immediate) {
 //console.log(sjcl);
 function encrypt(data, key) {
   data = JSON.stringify(data);
-  data = sjcl.encrypt(key, o);
+  data = sjcl.encrypt(key, data);
 
   return data;
 }
@@ -58,7 +65,16 @@ export default {
     docId: null,
     docUser: null,
     doc: false,
-    decryptedDoc: {}
+    docMeta: false,
+    decryptedDoc: {},
+    editor: false,
+    opts: {
+      //    debug: "info",
+      modules: {},
+      placeholder: "Compose an epic...",
+      readOnly: false,
+      theme: "snow"
+    }
   }),
   created() {
     const db = firebase.database();
@@ -68,14 +84,25 @@ export default {
 
         if (this.$route.params.document && this.$route.params.document) {
           this.docId = this.$route.params.document;
+          this.editor = new Quill("#editor", this.opts);
           this.docUser = this.$route.params.user;
           firebase
             .database()
-            .ref(`/users/${this.docUser}/docsStorage/${this.docId}/`)
-            .on("value", snapshot => {
+            .ref(`/documents/${this.docUser}/${this.docId}/`)
+            .once("value", snapshot => {
               this.doc = snapshot.val();
               this.loading = false;
+              this.saveHandler();
               this.decryptedDoc.data = decrypt(this.doc.data, this.uid);
+              this.editor.setContents(this.decryptedDoc.data);
+              console.log("updating");
+            });
+          firebase
+            .database()
+            .ref(`/documentMeta/${this.docUser}/${this.docId}/info`)
+            .on("value", snapshot => {
+              this.docMeta = snapshot.val();
+              this.loading = false;
 
               // ...
             });
@@ -88,9 +115,44 @@ export default {
     });
   },
   methods: {
-    saveDoc: debounce(content => {
-      console.log(content);
-    }, 500)
+    saveHandler() {
+      console.log("savehandler");
+      this.editor.on("text-change", (delta, oldDelta, source) => {
+        // console.log("change");
+        if (source == "api") {
+          // console.log("An API call triggered this change.");
+        } else if (source == "user") {
+          this.saveDoc();
+          console.log("save", delta, oldDelta);
+        }
+      });
+    },
+
+    saveDoc() {
+      updates = [];
+      let date = new Date();
+      date = date.toString();
+      let utcDate = new Date().getTime();
+      console.log("saving");
+      let data = this.editor.getContents();
+      console.log(data, this.docUser);
+      data = encrypt(data, this.docUser);
+      let newDocMetaRef = firebase
+        .database()
+        .ref(`documentMeta/${this.docUser}/${this.docId}/info`);
+      let newDocStorRef = firebase
+        .database()
+        .ref(`documents/${this.docUser}/${this.docId}`);
+
+      newDocStorRef.set({
+        data: data
+      });
+      newDocMetaRef.set({
+        title: this.docMeta.title,
+        date: date,
+        utcDate: utcDate
+      });
+    }
   }
 };
 </script>

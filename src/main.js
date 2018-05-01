@@ -3,9 +3,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import VueQuill from "vue-quill";
 
-Vue.use(VueQuill);
 const firebase = require("firebase");
 let vueApp;
 const config = {
