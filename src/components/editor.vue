@@ -5,8 +5,8 @@
   <div class="container">
     <div class="box container material docInfo">
       <input @input="saveDoc()" id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
-      
-       <small>Last Edited: {{docMeta.date}}</small>
+      <button @click="share">Share</button>
+       <p>Last Edited: {{docMeta.date}}</p>
     </div>
     <br />
     <div id="toolbar"></div>
@@ -164,7 +164,7 @@ export default {
         }
       });
     },
-
+    share() {},
     saveDoc(delta) {
       updates = [];
       let date = new Date();
