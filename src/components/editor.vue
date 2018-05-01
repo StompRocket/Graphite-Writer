@@ -136,7 +136,7 @@ export default {
                   this.editor.updateContents(delta);
                   console.log("dekta update");
                 } catch (e) {
-                  console.throw(e);
+                  console.log(e);
                 }
               }
             });
