@@ -55,8 +55,13 @@ function encrypt(data, key) {
 }
 
 function decrypt(data, key) {
-  data = sjcl.decrypt(key, data);
-  return JSON.parse(data);
+  if (data && key) {
+    data = sjcl.decrypt(key, data);
+    return JSON.parse(data);
+  } else {
+    console.log("no data or key", data, key);
+    return data;
+  }
 }
 export default {
   name: "editor",
@@ -131,13 +136,11 @@ export default {
                 data.val().time > this.initTime &&
                 data.val().uid != this.uid
               ) {
-                try {
-                  let delta = decrypt(data.val().delta, this.docUser);
-                  this.editor.updateContents(delta);
-                  console.log("dekta update");
-                } catch (e) {
-                  console.log(e);
-                }
+                let delta = decrypt(data.val().delta, this.docUser);
+                this.editor.updateContents(delta);
+                console.log("dekta update");
+              } else {
+                console.log("comit from my self");
               }
             });
         } else {

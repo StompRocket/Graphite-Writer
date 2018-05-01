@@ -57,36 +57,33 @@ export default {
       if (user) {
         this.uid = user.uid;
         const db = firebase.database();
-        db
-          .ref(`users/${this.uid}/docs`)
-          .orderByChild("utcdate")
-          .on("value", snapshot => {
-            this.loading = false;
-            this.docs = [];
-            if (!snapshot.val()) {
-              this.noDocs = true;
-            } else {
-              this.noDocs = false;
-              snapshot.forEach(doc => {
-                let docKey = doc.key;
-                firebase
-                  .database()
-                  .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
-                  .once("value")
-                  .then(docMeta => {
-                    console.log(docMeta.val());
-                    this.docs.unshift({
-                      doc: docMeta.val(),
-                      key: docKey,
-                      uid: doc.val().uid
-                    });
-                    // ...
+        db.ref(`users/${this.uid}/docs`).on("value", snapshot => {
+          this.loading = false;
+          this.docs = [];
+          if (!snapshot.val()) {
+            this.noDocs = true;
+          } else {
+            this.noDocs = false;
+            snapshot.forEach(doc => {
+              let docKey = doc.key;
+              firebase
+                .database()
+                .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
+                .once("value")
+                .then(docMeta => {
+                  console.log(docMeta.val());
+                  this.docs.unshift({
+                    doc: docMeta.val(),
+                    key: docKey,
+                    uid: doc.val().uid
                   });
+                  // ...
+                });
 
-                // ...
-              });
-            }
-          });
+              // ...
+            });
+          }
+        });
       } else {
         this.$router.push("/login");
       }
