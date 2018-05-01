@@ -44,10 +44,14 @@ function debounce(func, wait, immediate) {
 }
 //console.log(sjcl);
 function encrypt(data, key) {
-  data = JSON.stringify(data);
-  data = sjcl.encrypt(key, data);
-
-  return data;
+  if (data && key) {
+    data = JSON.stringify(data);
+    data = sjcl.encrypt(key, data);
+    return data;
+  } else {
+    console.log("no data or key", data, key);
+    return data;
+  }
 }
 
 function decrypt(data, key) {
@@ -130,8 +134,9 @@ export default {
                 try {
                   let delta = decrypt(data.val().delta, this.docUser);
                   this.editor.updateContents(delta);
+                  console.log("dekta update");
                 } catch (e) {
-                  console.log(e);
+                  window.alert(e);
                 }
               }
             });
@@ -173,13 +178,14 @@ export default {
         .database()
         .ref(`documents/${this.docUser}/${this.docId}/data`);
       if (delta) {
-        let delta = encrypt(delta, this.docUser);
+        let encDelta = encrypt(delta, this.docUser);
         let docChangeLogRef = firebase
           .database()
           .ref(`documents/${this.docUser}/${this.docId}/changes`)
           .push();
+        //console.log(encDelta + " delta");
         docChangeLogRef.set({
-          delta: delta,
+          delta: encDelta,
           uid: this.uid,
           time: utcDate
         });
