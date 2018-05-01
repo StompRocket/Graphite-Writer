@@ -94,7 +94,7 @@ export default {
               this.doc = snapshot.val();
               this.loading = false;
               this.saveHandler();
-              this.decryptedDoc.data = decrypt(this.doc.data, this.uid);
+              this.decryptedDoc.data = decrypt(this.doc.data, this.docUser);
               this.editor.setContents(this.decryptedDoc.data);
               this.initTime = Date.now();
               console.log("updating");
@@ -128,9 +128,10 @@ export default {
                 data.val().uid != this.uid
               ) {
                 try {
-                  this.editor.updateContents(data.val().delta);
+                  let delta = decrypt(data.val().delta, this.docUser);
+                  this.editor.updateContents(delta);
                 } catch (e) {
-                  window.alert(e);
+                  console.log(e);
                 }
               }
             });
@@ -172,6 +173,7 @@ export default {
         .database()
         .ref(`documents/${this.docUser}/${this.docId}/data`);
       if (delta) {
+        let delta = encrypt(delta, this.docUser);
         let docChangeLogRef = firebase
           .database()
           .ref(`documents/${this.docUser}/${this.docId}/changes`)
