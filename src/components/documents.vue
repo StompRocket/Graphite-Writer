@@ -15,7 +15,7 @@
     <br /> <br />
 <div class="box material" style="padding: 2%;" v-if="noDocs">
 <h3>U have no docs pleb</h3>
-<p @click="openNewDoc">Go make some!</p>
+<a class="animated" @click="openNewDoc">Go make some!</a>
 
 </div>
     <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
