@@ -4,7 +4,8 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <input @input="saveDoc()" id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
+      <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text">
+      <p v-if="opts.readOnly">Read Only</p>
       <button v-if="!opts.readOnly" @click="share">Share</button>
        <p>Last Edited: {{docMeta.date}}</p>
     </div>
