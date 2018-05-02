@@ -5,7 +5,7 @@
   <div class="container">
     <div class="box container material docInfo">
       <input @input="saveDoc()" id="docTitle" v-model="docMeta.title" type="text" contenteditable="true">
-      <button @click="share">Share</button>
+      <button v-if="!opts.readOnly" @click="share">Share</button>
        <p>Last Edited: {{docMeta.date}}</p>
     </div>
     <br />
@@ -148,8 +148,30 @@ export default {
 
         if (this.$route.params.document && this.$route.params.document) {
           this.docId = this.$route.params.document;
-          this.editor = new Quill("#editor", this.opts);
           this.docUser = this.$route.params.user;
+          firebase
+            .database()
+            .ref(`/documentMeta/${this.docUser}/${this.docId}/users`)
+            .on("value", snapshot => {
+              console.log(snapshot.val(), this.uid);
+              if (snapshot.val()[this.uid]) {
+                this.editor = new Quill("#editor", this.opts);
+                console.log("i can write");
+              } else {
+                this.opts.readOnly = true;
+                console.log("i cant write");
+                this.editor = new Quill("#editor", this.opts);
+              }
+              snapshot.forEach(user => {
+                firebase
+                  .database()
+                  .ref("/users/" + user.val() + "/publicInfo")
+                  .once("value")
+                  .then(snapshot => {
+                    this.users.push(snapshot.val());
+                  });
+              });
+            });
           firebase
             .database()
             .ref(`/documents/${this.docUser}/${this.docId}/`)
@@ -184,6 +206,7 @@ export default {
           firebase
             .database()
             .ref(`/documents/${this.docUser}/${this.docId}/changes`)
+            .limitToLast(5)
             .on("child_added", data => {
               if (
                 data.val().time > this.initTime &&
@@ -195,20 +218,6 @@ export default {
               } else {
                 console.log("comit from my self");
               }
-            });
-          firebase
-            .database()
-            .ref(`/documentMeta/${this.docUser}/${this.docId}/users`)
-            .on("value", snapshot => {
-              snapshot.forEach(user => {
-                firebase
-                  .database()
-                  .ref("/users/" + user.val() + "/publicInfo")
-                  .once("value")
-                  .then(snapshot => {
-                    this.users.push(snapshot.val());
-                  });
-              });
             });
         } else {
           this.$router.push("/documents");
