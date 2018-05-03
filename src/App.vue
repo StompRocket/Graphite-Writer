@@ -16,7 +16,7 @@
   <router-view />
   <footer class="footer">
     <div class="child-div">
-      <img src="./assets/icon.svg" style="background-color: transparent;" id="bottom-logo" />
+      <img v-if="$route.path == '/'" src="./assets/icon.svg" style="background-color: transparent;" id="bottom-logo" />
     </div>
     <div class="container">
       <br />

@@ -131,9 +131,6 @@ export default {
             docId: newDocUserRef.key,
             uid: this.uid
           });
-          newDocStorRef.set({
-            data: ""
-          });
           newDocMetaRef.set({
             info: {
               title: name,
@@ -143,6 +140,9 @@ export default {
             users: {
               [this.uid]: this.uid
             }
+          });
+          newDocStorRef.set({
+            data: ""
           });
         }
       });

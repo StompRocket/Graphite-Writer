@@ -58,6 +58,21 @@ let hashids = new Hashids();
 let typingTimer; //timer identifier
 let doneTypingInterval = 5000;
 let updates = [];
+var Clipboard = Quill.import("modules/clipboard");
+
+class MyClipboard extends Clipboard {
+  onPaste(e) {
+    var wrapper = document.querySelector("#editor-wrapper");
+    var scrollTop = wrapper.scrollTop;
+    super.onPaste(e);
+    setTimeout(function() {
+      wrapper.scrollTop = scrollTop;
+    }, 10);
+  }
+}
+
+Quill.register("modules/clipboard", MyClipboard, true);
+
 const toolbarOptions = [
   [{ font: [] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],

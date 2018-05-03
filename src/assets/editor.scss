@@ -1,6 +1,13 @@
 @import "./vars.scss";
 .page.editor {
   min-height: 100vh;
+  #editor,
+  .ql-editor {
+    min-height: 100vh;
+  }
+  #editor {
+    margin-bottom: 5%;
+  }
   & .docInfo {
     margin-bottom: 3%;
   }
