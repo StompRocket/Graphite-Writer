@@ -198,12 +198,12 @@ export default {
             });
           firebase
             .database()
-            .ref(`/documents/${this.docUser}/${this.docId}/`)
+            .ref(`/documents/${this.docUser}/${this.docId}/data`)
             .once("value", snapshot => {
               this.doc = snapshot.val();
               this.loading = false;
               this.saveHandler();
-              this.decryptedDoc.data = decrypt(this.doc.data, this.docUser);
+              this.decryptedDoc.data = decrypt(this.doc, this.docUser);
               this.editor.setContents(this.decryptedDoc.data);
               this.initTime = Date.now();
               // console.log("updating");
