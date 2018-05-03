@@ -5,6 +5,7 @@ import about from "@/components/about";
 import documents from "@/components/documents";
 import editor from "@/components/editor";
 import login from "@/components/login";
+import fourOhFour from "@/components/fourOhFour";
 import shareRedirect from "@/components/shareRedirect";
 import firebase from "firebase";
 Vue.use(Router);
@@ -58,8 +59,13 @@ let router = new Router({
       }
     },
     {
+      path: "/404",
+      name: "fourOhFour",
+      component: fourOhFour
+    },
+    {
       path: "*",
-      redirect: "/"
+      redirect: "/404"
     }
   ]
 });

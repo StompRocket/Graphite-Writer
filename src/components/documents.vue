@@ -36,7 +36,6 @@ import "../assets/documents.scss";
 import swal from "sweetalert";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
-import { log } from "util";
 
 export default {
   name: "documents",

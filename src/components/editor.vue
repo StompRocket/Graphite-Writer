@@ -51,6 +51,7 @@ import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
 import swal from "sweetalert";
 import MagicUrl from "quill-magic-url";
+
 Quill.register("modules/magicUrl", MagicUrl);
 
 const Hashids = require("hashids");
