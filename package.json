@@ -11,6 +11,7 @@
     "start": "npm run dev",
     "build": "node build/build.js"
   },
+  "license": "Apache License 2.0",
   "dependencies": {
     "firebase": "^4.13.1",
     "hashids": "^1.1.4",
