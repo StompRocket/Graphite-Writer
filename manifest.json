@@ -1,0 +1,27 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Graphite Writer BETA",
+  "scope": "/",
+  "display": "browser",
+  "start_url": "https://beta.graphitewriter.com/",
+  "short_name": "Graphite Writer",
+  "theme_color": "transparent",
+  "description": "A beta of Graphite Writer",
+  "orientation": "landscape",
+  "background_color": "transparent",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/static/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
