@@ -66,6 +66,27 @@ String.prototype.hashCode = function() {
   }
   return hash;
 };
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return (
+    s4() +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    s4() +
+    s4()
+  );
+}
 function debounce(func, wait, immediate) {
   var timeout;
   return function() {
@@ -139,7 +160,8 @@ export default {
     initTime: null,
     shareSettings: false,
     users: [],
-    shareUrl: null
+    shareUrl: null,
+    realTimeId: null
   }),
   created() {
     const db = firebase.database();
@@ -150,17 +172,18 @@ export default {
         if (this.$route.params.document && this.$route.params.document) {
           this.docId = this.$route.params.document;
           this.docUser = this.$route.params.user;
+          this.realTimeId = guid();
           firebase
             .database()
             .ref(`/documentMeta/${this.docUser}/${this.docId}/users`)
             .on("value", snapshot => {
-              console.log(snapshot.val(), this.uid);
+              //  console.log(snapshot.val(), this.uid);
               if (snapshot.val()[this.uid]) {
                 this.editor = new Quill("#editor", this.opts);
-                console.log("i can write");
+                //   console.log("i can write");
               } else {
                 this.opts.readOnly = true;
-                console.log("i cant write");
+                // console.log("i cant write");
                 this.editor = new Quill("#editor", this.opts);
               }
               snapshot.forEach(user => {
@@ -183,7 +206,7 @@ export default {
               this.decryptedDoc.data = decrypt(this.doc.data, this.docUser);
               this.editor.setContents(this.decryptedDoc.data);
               this.initTime = Date.now();
-              console.log("updating");
+              // console.log("updating");
             });
           firebase
             .database()
@@ -191,12 +214,16 @@ export default {
             .on("value", snapshot => {
               if (snapshot.val()) {
                 this.docMeta = snapshot.val();
+                let date = new Date();
+                date = date.toString();
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)
                   .set({
                     docId: this.docId,
-                    uid: this.docUser
+                    uid: this.docUser,
+                    utc: new Date().getTime(),
+                    lastOpened: date
                   });
               } else {
                 this.$router.push("/documents");
@@ -211,13 +238,13 @@ export default {
             .on("child_added", data => {
               if (
                 data.val().time > this.initTime &&
-                data.val().uid != this.uid
+                data.val().realTimeId != this.realTimeId
               ) {
                 let delta = decrypt(data.val().delta, this.docUser);
                 this.editor.updateContents(delta);
-                console.log("dekta update");
+                // console.log("dekta update");
               } else {
-                console.log("comit from my self");
+                // console.log("comit from my self");
               }
             });
         } else {
@@ -283,7 +310,8 @@ export default {
         docChangeLogRef.set({
           delta: encDelta,
           uid: this.uid,
-          time: utcDate
+          time: utcDate,
+          realTimeId: this.realTimeId
         });
       }
 

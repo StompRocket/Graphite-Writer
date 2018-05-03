@@ -66,6 +66,9 @@ export default {
             this.noDocs = false;
             snapshot.forEach(doc => {
               let docKey = doc.key;
+              let utc = doc.val().utc;
+              let lastOpened = doc.val().lastOpened;
+              //console.log(utc, lastOpened, docKey);
               firebase
                 .database()
                 .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
@@ -77,6 +80,7 @@ export default {
                     key: docKey,
                     uid: doc.val().uid
                   });
+
                   // ...
                 });
 
