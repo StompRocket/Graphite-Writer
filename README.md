@@ -1,6 +1,8 @@
-# graphite-writer
+# Graphite Writer V2
 
-> A modren web based text editor, with Firebase, Vue JS, and Quill JS 
+> A modern web based text editor, with Firebase, Vue JS, and Quill JS 
+
+Preview the beta at [beta.graphitewriter.com](https://beta.graphitewriter.com)
 
 ## Build Setup
 
