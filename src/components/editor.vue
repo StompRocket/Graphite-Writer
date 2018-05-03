@@ -20,7 +20,7 @@
 <h1>Share</h1>
 <hr>
 <h3>Shareable Link (view only)</h3>
-<a>https://graphitewriter.com/#/s/{{shareUrl}}</a>
+<a>https://beta.graphitewriter.com/#/s/{{shareUrl}}</a>
 
 <h3>Collaberators</h3>
 <div>
