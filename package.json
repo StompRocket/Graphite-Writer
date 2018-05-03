@@ -13,6 +13,7 @@
     "firebase": "^4.13.1",
     "hashids": "^1.1.4",
     "minireset.css": "0.0.3",
+    "quill-magic-url": "^0.1.0",
     "sweetalert": "^2.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

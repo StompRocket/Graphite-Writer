@@ -50,12 +50,33 @@ import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
 import swal from "sweetalert";
+import MagicUrl from "quill-magic-url";
+Quill.register("modules/magicUrl", MagicUrl);
 
 const Hashids = require("hashids");
 let hashids = new Hashids();
 let typingTimer; //timer identifier
 let doneTypingInterval = 5000;
 let updates = [];
+const toolbarOptions = [
+  [{ font: [] }],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  ["bold", "italic", "underline", "strike"], // toggled buttons
+  ["blockquote", "link", "code-block", "image"],
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ script: "sub" }, { script: "super" }], // superscript/subscript
+  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  [
+    {
+      align: []
+    }
+  ],
+  [{ direction: "rtl" }], // text direction
+
+  ["clean"] // remove formatting button
+];
+
 String.prototype.hashCode = function() {
   var hash = 0,
     i,
@@ -154,7 +175,10 @@ export default {
     editor: false,
     opts: {
       //    debug: "info",
-      modules: {},
+      modules: {
+        toolbar: toolbarOptions,
+        magicUrl: true
+      },
       placeholder: "Compose an epic...",
       readOnly: false,
       theme: "snow"
