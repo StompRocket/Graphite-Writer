@@ -82,14 +82,16 @@ export default {
   },
   updated() {
     var user = firebase.auth().currentUser;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/timeData")
-      .push()
-      .set({
-        utc: new Date().getTime(),
-        route: this.$route.path
-      });
+    if (user) {
+      firebase
+        .database()
+        .ref("users/" + user.uid + "/timeData")
+        .push()
+        .set({
+          utc: new Date().getTime(),
+          route: this.$route.path
+        });
+    }
   },
   methods: {
     login() {

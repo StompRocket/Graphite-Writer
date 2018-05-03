@@ -69,8 +69,7 @@ export default {
               let utc = doc.val().utc;
               let lastOpened = doc.val().lastOpened;
               //console.log(utc, lastOpened, docKey);
-              firebase
-                .database()
+              db
                 .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
                 .once("value")
                 .then(docMeta => {

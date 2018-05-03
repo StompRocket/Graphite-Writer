@@ -7,6 +7,7 @@
       <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text">
       <p v-if="opts.readOnly">Read Only</p>
       <button v-if="!opts.readOnly" @click="share">Share</button>
+       <button  @click="remove">Remove From Library</button>
        <p>Last Edited: {{docMeta.date}}</p>
     </div>
     <br />
@@ -48,6 +49,7 @@ import "../assets/quill/quill.min.js";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
+import swal from "sweetalert";
 
 const Hashids = require("hashids");
 let hashids = new Hashids();
@@ -164,6 +166,7 @@ export default {
     realTimeId: null
   }),
   created() {
+    const startLoad = performance.now();
     const db = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -206,7 +209,22 @@ export default {
               this.decryptedDoc.data = decrypt(this.doc, this.docUser);
               this.editor.setContents(this.decryptedDoc.data);
               this.initTime = Date.now();
-              // console.log("updating");
+              const endLoad = performance.now();
+              firebase
+                .database()
+                .ref(`/analytics/loadTimes/`)
+                .push()
+                .set({
+                  docId: this.docId,
+                  uid: this.docUser,
+                  utc: new Date().getTime(),
+                  uid: this.uid,
+                  startLoad: startLoad,
+                  endLoad: endLoad,
+                  time: endLoad - startLoad,
+                  page: "documents"
+                });
+              console.log(endLoad - startLoad + " loaded");
             });
           firebase
             .database()
@@ -257,6 +275,15 @@ export default {
   },
 
   methods: {
+    remove() {
+      firebase
+        .database()
+        .ref(`users/${this.uid}/docs/${this.docId}`)
+        .remove()
+        .then(() => {
+          swal("Removed from your library");
+        });
+    },
     closeSave() {
       this.shareSettings = false;
     },
