@@ -5,6 +5,7 @@ import about from "@/components/about";
 import documents from "@/components/documents";
 import editor from "@/components/editor";
 import login from "@/components/login";
+import v2 from "@/components/v2";
 import fourOhFour from "@/components/fourOhFour";
 import shareRedirect from "@/components/shareRedirect";
 import firebase from "firebase";
@@ -21,6 +22,11 @@ let router = new Router({
       path: "/about",
       name: "about",
       component: about
+    },
+    {
+      path: "/v2",
+      name: "v2",
+      component: v2
     },
     {
       path: "/documents",

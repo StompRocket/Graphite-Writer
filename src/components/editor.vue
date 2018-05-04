@@ -4,38 +4,42 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text">
+      <span class="multi-input">
+        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input">
+        <button v-if="!opts.readOnly" @click="share" class="button dark input">Share</button>
+      </span>
       <p v-if="opts.readOnly">Read Only</p>
-      <button v-if="!opts.readOnly" @click="share">Share</button>
-       <button  @click="remove">Remove From Library</button>
+       <button  @click="remove" class="button warning"><i class="fas fa-trash"></i></button>
        <p>Last Edited: {{docMeta.date}}</p>
     </div>
     <br />
     <div id="toolbar"></div>
     <div id="editor"></div>
   </div>
-  <div v-bind:class="{open: shareSettings}" class="modal">
-    <div class="modal-contents container">
-      <div class="box material">
-        <button @click="closeSave">Close</button>
-<h1>Share</h1>
-<hr>
-<h3>Shareable Link (view only)</h3>
-<a>https://beta.graphitewriter.com/#/s/{{shareUrl}}</a>
+  <div class="share-modal-container">
+    <div v-bind:class="{open: shareSettings}" class="modal share-modal-container">
+      <div class="modal-contents share-modal">
+        <div class="box material container">
+          <button @click="closeSave" class="button warning">Close</button>
+          <h1>Share</h1>
+          <hr>
+          <h3>Shareable Link (view only)</h3>
+          <a>https://beta.graphitewriter.com/#/s/{{shareUrl}}</a>
 
-<h3>Collaberators</h3>
-<div>
-  <div class="user" v-for="user in users" :key="user.uid">
-    <img :src="user.profile_picture" :alt="user.name">
-    <h4>{{user.name}}</h4>
-  </div>
-</div>
-<form @submit.prevent>
-  <input type="email" placeholder="Add an collaberator">
-  <button type="submit">Add</button>
-</form>
-<br>
- <button @click="closeSave">Done</button>
+          <h3>Collaberators</h3>
+          <div>
+            <div class="user" v-for="user in users" :key="user.uid">
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big">
+              <h4>{{user.name}}</h4>
+            </div>
+          </div>
+          <form @submit.prevent class="multi-input">
+            <input type="email" placeholder="Add a collaberator" class="input">
+            <button type="submit" class="input button dark">Add</button>
+          </form>
+          <br>
+          <button @click="closeSave" class="button warning">Done</button>
+        </div>
       </div>
     </div>
   </div>

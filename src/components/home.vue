@@ -3,11 +3,10 @@
   <div class="banner-image">
   	<div class="container">
   		<div class="center-box">
-	  		<h1 class="big">Graphite Writer</h1>
-        <h2>A Cloud Based Document Editor Focused On Speed And Usability</h2>
+	  		<h1 class="big"><b>Graphite Writer</b> v2</h1>
 	  		
-	  		&nbsp;
 	  		<router-link class="button dark" to="/login">Start Now</router-link>
+        <router-link class="button dark" to="/v2">What's New</router-link>
 	  	</div>
   	</div>
   </div>
