@@ -4,28 +4,28 @@
   <div class="container">
     <br />
     <h1>Documents</h1>
-    <span class="multi-input fullwidth">
-      <input v-model="search" class="input" type="text" width="100%" placeholder="Search"/>
-      <a class="button input dark" width="100%">Search</a>
+    <span class="multi-input">
+      <input v-model="search" class="input full-input" type="text" placeholder="Search"/>
+      <a @click="openNewDoc" class="button warning input" width="100%">New Document</a>
     </span>
     <br />
     <br />
-    <a @click="openNewDoc" class="button warning" width="100%">New Document</a>
+    
 
     <br /> <br />
-<div class="box material" style="padding: 2%;" v-if="noDocs">
-<h3>It looks like you have no docs.</h3>
-<button class="button" @click="openNewDoc">Create a new one!</button>
+    <div class="box material" style="padding: 2%;" v-if="noDocs">
+      <h3>It looks like you have no docs.</h3>
+      <button class="button" @click="openNewDoc">Create a new one!</button>
 
-</div>
-<div class="box material" style="padding: 2%; margin-bottom: 2%;" v-if="shareOffers">
-<h3>Shared With You:</h3>
+    </div>
+    <div class="box material" style="padding: 2%; margin-bottom: 2%;" v-if="shareOffers">
+      <h3>Shared With You:</h3>
 
-<button @click="openShared(doc)" class="shareOfferDoc button" v-for="doc in shareOffers" :key="doc.docId">
-{{doc.name}}
-</button>
+      <button @click="openShared(doc)" class="shareOfferDoc button" v-for="doc in shareOffers" :key="doc.docId">
+      {{doc.name}}
+      </button>
 
-</div>
+    </div>
     <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>

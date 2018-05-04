@@ -4,13 +4,14 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <span class="multi-input share-multi">
+      <span class="multi-input">
         <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input">
+        <button  @click="remove" class="button warning input"><i class="fas fa-trash"></i>
+        </button>
       </span>
       <p v-if="opts.readOnly">Read Only</p>
       <div class="share-row">
-        <button  @click="remove" class="button warning" tooltip="Remove Document"><i class="fas fa-trash"></i>
-        </button>
+        
         <div class="share-col">
           <span class="user" v-for="user in users" :key="user.uid">
             <img :src="user.profile_picture" :alt="user.name" class="round-profile share-item" :tooltip="user.name">

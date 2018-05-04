@@ -854,6 +854,12 @@ a.button {
   text-decoration: none;
   color: #576574 !important;
   font-size: 0.8rem;
+  width: calc(100% - .2em);
+}
+
+.multi-input .input.button {
+  white-space: nowrap;
+  width: min-content;
 }
 .multi-input .input:focus {
   outline: none;
@@ -863,6 +869,7 @@ a.button {
 
 .multi-input {
   height: min-content;
+  display: flex;
 }
 
 .multi-input .input {
