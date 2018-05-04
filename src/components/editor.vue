@@ -4,13 +4,21 @@
   <br />
   <div class="container">
     <div class="box container material docInfo">
-      <span class="multi-input">
+      <span class="multi-input share-multi">
         <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input">
-        <button v-if="!opts.readOnly" @click="share" class="button dark input">Share</button>
       </span>
       <p v-if="opts.readOnly">Read Only</p>
-       <button  @click="remove" class="button warning"><i class="fas fa-trash"></i></button>
-       <p>Last Edited: {{docMeta.date}}</p>
+      <div class="share-row">
+        <button  @click="remove" class="button warning" tooltip="Remove Document"><i class="fas fa-trash"></i>
+        </button>
+        <div class="share-col">
+         <div class="user" v-for="user in users" :key="user.uid">
+            <img :src="user.profile_picture" :alt="user.name" class="round-profile" :tooltip="user.name">
+          </div>
+          <button v-if="!opts.readOnly" @click="share" class="button dark input"><i class="fas fa-user-plus"></i></button>
+        </div>
+      </div>
+      <p class="last-edited">Last Edited: {{docMeta.date}}</p>
     </div>
     <br />
     <div id="toolbar"></div>
@@ -20,17 +28,14 @@
     <div v-bind:class="{open: shareSettings}" class="modal share-modal-container">
       <div class="modal-contents share-modal">
         <div class="box material container">
-          <button @click="closeSave" class="button warning">Close</button>
           <h1>Share</h1>
-          <hr>
           <h3>Shareable Link (view only)</h3>
           <a>https://beta.graphitewriter.com/#/s/{{shareUrl}}</a>
 
           <h3>Collaberators</h3>
           <div>
             <div class="user" v-for="user in users" :key="user.uid">
-              <img :src="user.profile_picture" :alt="user.name" class="round-profile big">
-              <h4>{{user.name}}</h4>
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" :tooltip="user.name">
             </div>
           </div>
           <form @submit.prevent class="multi-input">
