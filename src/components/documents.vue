@@ -67,11 +67,12 @@ export default {
         const db = firebase.database();
         db.ref(`users/${this.uid}/docs`).on("value", snapshot => {
           this.loading = false;
-          this.docs = [];
+
           if (!snapshot.val()) {
             this.noDocs = true;
           } else {
             this.noDocs = false;
+            this.docs = [];
             snapshot.forEach(doc => {
               let docKey = doc.key;
               let utc = doc.val().utc;
