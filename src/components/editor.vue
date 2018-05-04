@@ -39,9 +39,12 @@
               <img :src="user.profile_picture" :alt="user.name" class="round-profile big" :tooltip="user.name">
             </div>
           </div>
-          <form @submit.prevent class="multi-input">
-            <input type="email" placeholder="Add a collaberator" class="input">
+          <form @submit.prevent="shareWithPerson" class="multi-input">
+            <input id="shareAdd" v-model="personToShareWith" type="email" placeholder="Add a collaberator" class="input">
+ 
             <button type="submit" class="input button dark">Add</button>
+                       <p >{{shareError}}</p>
+
           </form>
           <br>
           <button @click="closeSave" class="button warning">Done</button>
@@ -61,6 +64,8 @@ import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
 import swal from "sweetalert";
 import MagicUrl from "quill-magic-url";
+import { encode } from "punycode";
+import { log } from "util";
 
 Quill.register("modules/magicUrl", MagicUrl);
 
@@ -102,7 +107,10 @@ const toolbarOptions = [
 
   ["clean"] // remove formatting button
 ];
-
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 String.prototype.hashCode = function() {
   var hash = 0,
     i,
@@ -172,6 +180,17 @@ function decrypt(data, key) {
     return data;
   }
 }
+function encodeEmail(email) {
+  let encodedEmail = encodeURIComponent(email);
+  encodedEmail = encodedEmail.replace(/\./g, "%dot");
+  return encodedEmail;
+}
+function decodeEmail(email) {
+  let encodedEmail = email.replace(/%dot/g, ".");
+  encodedEmail = decodeURIComponent(email);
+
+  return encodedEmail;
+}
 function hash(data) {
   //console.log(data);
   let result = data.hashCode();
@@ -213,7 +232,9 @@ export default {
     shareSettings: false,
     users: [],
     shareUrl: null,
-    realTimeId: null
+    realTimeId: null,
+    personToShareWith: null,
+    shareError: null
   }),
   created() {
     const startLoad = performance.now();
@@ -239,6 +260,7 @@ export default {
                 // console.log("i cant write");
                 this.editor = new Quill("#editor", this.opts);
               }
+              this.users = [];
               snapshot.forEach(user => {
                 firebase
                   .database()
@@ -325,6 +347,41 @@ export default {
   },
 
   methods: {
+    shareWithPerson() {
+      if (validateEmail(this.personToShareWith)) {
+        let encodedEmail = encodeEmail(this.personToShareWith);
+        console.log(encodedEmail);
+
+        firebase
+          .database()
+          .ref(`userDB/byEmail/${encodedEmail}`)
+          .once("value", snapshot => {
+            if (snapshot.val()) {
+              let shareUID = snapshot.val().uid;
+              firebase
+                .database()
+                .ref(
+                  `/documentMeta/${this.docUser}/${
+                    this.docId
+                  }/users/${shareUID}`
+                )
+                .set(snapshot.val().uid);
+              firebase
+                .database()
+                .ref(`/users/${shareUID}/shareOffers/${this.docId}`)
+                .set({
+                  name: this.docMeta.title,
+                  docId: this.docId,
+                  docUser: this.docUser
+                });
+            } else {
+              this.shareError = "Not a user of Graphite Wirter";
+            }
+          });
+      } else {
+        this.shareError = "Not a valid email";
+      }
+    },
     remove() {
       firebase
         .database()
