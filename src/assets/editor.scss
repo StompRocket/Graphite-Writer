@@ -75,4 +75,26 @@
   .last-edited {
     margin-bottom: 0;
   }
+  .share-item {
+    margin-top: .5em;
+  }
+
+  .ql-toolbar {
+    border-top-right: 0.5px solid $gray-accent;
+    border-top-right-radius: 3px;
+    border-top-left: 0.5px solid $gray-accent;
+    border-top-left-radius: 3px;
+  }
+ 
+  .ql-container {
+    border-bottom-right: 0.5px solid $gray-accent;
+    border-bottom-right-radius: 3px;
+    border-bottom-left: 0.5px solid $gray-accent;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.23);
+  }
 }

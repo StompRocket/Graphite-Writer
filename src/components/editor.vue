@@ -12,9 +12,10 @@
         <button  @click="remove" class="button warning" tooltip="Remove Document"><i class="fas fa-trash"></i>
         </button>
         <div class="share-col">
-          <i class="user" v-for="user in users" :key="user.uid">
-            <img :src="user.profile_picture" :alt="user.name" class="round-profile" :tooltip="user.name">
-          </i>
+          <span class="user" v-for="user in users" :key="user.uid">
+            <img :src="user.profile_picture" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
+          </span>
+          &nbsp;
           <button v-if="!opts.readOnly" @click="share" class="button dark input"><i class="fas fa-user-plus"></i></button>
         </div>
       </div>
