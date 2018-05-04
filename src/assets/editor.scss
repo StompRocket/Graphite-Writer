@@ -75,11 +75,14 @@
     justify-content: space-between;
   }
 
+  .share-button {
+  }
+
   .last-edited {
     margin-bottom: 0;
   }
   .share-item {
-    margin-top: 0.5em;
+    vertical-align: sub;
   }
 
   .ql-toolbar {

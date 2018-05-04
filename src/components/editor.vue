@@ -13,11 +13,11 @@
       <div class="share-row">
         
         <div class="share-col">
-          <span class="user" v-for="user in currentUsers" :key="user.uid">
+          <element class="user" v-for="user in currentUsers" :key="user.uid">
             <img :src="user.image" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
-          </span>
+          </element>
           &nbsp;
-          <button v-if="!opts.readOnly" @click="share" class="button dark input"><i class="fas fa-user-plus"></i></button>
+          <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-user-plus"></i></button>
         </div>
       </div>
       <p class="last-edited">Last Edited: {{docMeta.date}}</p>
