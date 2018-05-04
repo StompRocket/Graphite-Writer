@@ -373,6 +373,7 @@ export default {
                   docId: this.docId,
                   docUser: this.docUser
                 });
+              this.personToShareWith = null;
             } else {
               this.shareError = "Not a user of Graphite Wirter";
             }

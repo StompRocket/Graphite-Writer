@@ -18,6 +18,14 @@
 <button class="button" @click="openNewDoc">Create a new one!</button>
 
 </div>
+<div class="box material" style="padding: 2%; margin-bottom: 2%;" v-if="shareOffers">
+<h3>Shared With You:</h3>
+
+<button @click="openShared(doc)" class="shareOfferDoc button" v-for="doc in shareOffers" :key="doc.docId">
+{{doc.name}}
+</button>
+
+</div>
     <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
@@ -49,7 +57,8 @@ export default {
     docs: [],
     newDoc: false,
     search: "",
-    noDocs: true
+    noDocs: true,
+    shareOffers: false
   }),
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -86,6 +95,24 @@ export default {
             });
           }
         });
+        db.ref(`users/${this.uid}/shareOffers`).on("value", snapshot => {
+          if (!snapshot.val()) {
+            this.shareOffers = false;
+          } else {
+            this.shareOffers = [];
+            snapshot.forEach(doc => {
+              let docKey = doc.key;
+
+              this.shareOffers.push({
+                name: doc.val().name,
+                docId: doc.val().docId,
+                docUser: doc.val().docUser
+              });
+
+              // ...
+            });
+          }
+        });
       } else {
         this.$router.push("/login");
       }
@@ -95,6 +122,17 @@ export default {
     searchFilter(doc) {
       let title = doc.doc.title.toLowerCase().split(" ");
       return title.indexOf(this.search.toLowerCase()) > -1;
+    },
+    openShared(doc) {
+      firebase
+        .database()
+        .ref(`users/${this.uid}/shareOffers/${doc.docId}`)
+        .remove();
+
+      this.$router.push({
+        name: "editor",
+        params: { document: doc.docId, user: doc.docUser }
+      });
     },
     openNewDoc() {
       swal("New Document Name:", {

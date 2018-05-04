@@ -1,5 +1,10 @@
 @import "./vars.scss";
 .page.documents {
+  .shareOfferDoc {
+    display: block;
+    width: 100%;
+    margin-top: 2%;
+  }
   background-color: #fff;
   min-height: 100vh;
   & .fullwidth {
