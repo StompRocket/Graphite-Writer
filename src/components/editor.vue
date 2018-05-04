@@ -35,17 +35,16 @@
 
           <h3>Collaberators</h3>
           <div>
-            <div class="user" v-for="user in users" :key="user.uid">
+            <i class="user" v-for="user in users" :key="user.uid">
               <img :src="user.profile_picture" :alt="user.name" class="round-profile big" :tooltip="user.name">
-            </div>
+              &nbsp;
+            </i>
           </div>
           <form @submit.prevent="shareWithPerson" class="multi-input">
             <input id="shareAdd" v-model="personToShareWith" type="email" placeholder="Add a collaberator" class="input">
- 
             <button type="submit" class="input button dark">Add</button>
-                       <p >{{shareError}}</p>
-
           </form>
+          <p >{{shareError}}</p>
           <br>
           <button @click="closeSave" class="button warning">Done</button>
         </div>
