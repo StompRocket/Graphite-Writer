@@ -355,17 +355,24 @@ export default {
           .database()
           .ref(`userDB/byEmail/${encodedEmail}`)
           .once("value", snapshot => {
-            console.log(snapshot.val());
             if (snapshot.val()) {
-              console.log(snapshot.val());
+              let shareUID = snapshot.val().uid;
               firebase
                 .database()
                 .ref(
-                  `/documentMeta/${this.docUser}/${this.docId}/users/${
-                    snapshot.val().uid
-                  }`
+                  `/documentMeta/${this.docUser}/${
+                    this.docId
+                  }/users/${shareUID}`
                 )
                 .set(snapshot.val().uid);
+              firebase
+                .database()
+                .ref(`/users/${shareUID}/shareOffers/${this.docId}`)
+                .set({
+                  name: this.docMeta.title,
+                  docId: this.docId,
+                  docUser: this.docUser
+                });
             } else {
               this.shareError = "Not a user of Graphite Wirter";
             }
