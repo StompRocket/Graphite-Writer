@@ -5,6 +5,9 @@
   .ql-editor {
     min-height: 100vh;
   }
+  .ql-font-roboto {
+    font-family: "Roboto", sans-serif;
+  }
   #editor {
     margin-bottom: 5%;
   }
@@ -62,7 +65,7 @@
   }
 
   .input {
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
 
   .share-row {
@@ -76,7 +79,7 @@
     margin-bottom: 0;
   }
   .share-item {
-    margin-top: .5em;
+    margin-top: 0.5em;
   }
 
   .ql-toolbar {
@@ -85,7 +88,7 @@
     border-top-left: 0.5px solid $gray-accent;
     border-top-left-radius: 3px;
   }
- 
+
   .ql-container {
     border-bottom-right: 0.5px solid $gray-accent;
     border-bottom-right-radius: 3px;

@@ -13,8 +13,8 @@
       <div class="share-row">
         
         <div class="share-col">
-          <span class="user" v-for="user in users" :key="user.uid">
-            <img :src="user.profile_picture" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
+          <span class="user" v-for="user in currentUsers" :key="user.uid">
+            <img :src="user.image" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
           </span>
           &nbsp;
           <button v-if="!opts.readOnly" @click="share" class="button dark input"><i class="fas fa-user-plus"></i></button>
@@ -68,14 +68,15 @@ import { encode } from "punycode";
 import { log } from "util";
 
 Quill.register("modules/magicUrl", MagicUrl);
-
+const FontAttributor = Quill.import("attributors/class/font");
 const Hashids = require("hashids");
 let hashids = new Hashids();
 let typingTimer; //timer identifier
 let doneTypingInterval = 5000;
 let updates = [];
-var Clipboard = Quill.import("modules/clipboard");
-
+const Clipboard = Quill.import("modules/clipboard");
+FontAttributor.whitelist = ["roboto", "Serif", "Sans Serif"];
+Quill.register(FontAttributor, true);
 class MyClipboard extends Clipboard {
   onPaste(e) {
     var wrapper = document.querySelector("#editor-wrapper");
@@ -234,7 +235,8 @@ export default {
     shareUrl: null,
     realTimeId: null,
     personToShareWith: null,
-    shareError: null
+    shareError: null,
+    currentUsers: []
   }),
   created() {
     const startLoad = performance.now();
@@ -296,6 +298,33 @@ export default {
                   time: endLoad - startLoad,
                   page: "documents"
                 });
+              firebase
+                .database()
+                .ref(
+                  `/documentMeta/${this.docUser}/${this.docId}/currentUsers/${
+                    this.uid
+                  }`
+                )
+                .set({
+                  uid: this.uid,
+                  image: firebase.auth().currentUser.photoURL,
+                  name: firebase.auth().currentUser.displayName
+                });
+              firebase
+                .database()
+                .ref(
+                  `/documentMeta/${this.docUser}/${this.docId}/currentUsers/${
+                    this.uid
+                  }`
+                )
+                .onDisconnect()
+                .remove();
+              firebase
+                .database()
+                .ref(`/documentMeta/${this.docUser}/${this.docId}/currentUsers`)
+                .on("value", data => {
+                  this.currentUsers = data.val();
+                });
               console.log(endLoad - startLoad + " loaded");
             });
           firebase
@@ -345,7 +374,27 @@ export default {
       }
     });
   },
-
+  beforeRouteLeave: function(to, from, next) {
+    firebase
+      .database()
+      .ref(
+        `/documentMeta/${this.docUser}/${this.docId}/currentUsers/${this.uid}`
+      )
+      .remove();
+    firebase
+      .database()
+      .ref(`/documents/${this.docUser}/${this.docId}/changes`)
+      .off();
+    firebase
+      .database()
+      .ref(`/documentMeta/${this.docUser}/${this.docId}/info`)
+      .off();
+    firebase
+      .database()
+      .ref(`/documentMeta/${this.docUser}/${this.docId}/currentUsers`)
+      .off();
+    next();
+  },
   methods: {
     shareWithPerson() {
       if (validateEmail(this.personToShareWith)) {
