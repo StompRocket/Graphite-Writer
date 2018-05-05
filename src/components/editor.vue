@@ -37,8 +37,8 @@
 
           <h3>Collaberators</h3>
           <div>
-            <i class="user" v-for="user in users" :key="user.uid">
-              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)"  v-tooltip="user.name">
+            <i class="user" v-for="user in users" :key="user.uid"  v-tooltip="user.name">
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)" >
               &nbsp;
             </i>
           </div>

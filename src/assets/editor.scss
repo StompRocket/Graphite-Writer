@@ -39,11 +39,6 @@
     -moz-transition: -moz-box-shadow 100ms ease-in;
     transition: box-shadow 100ms ease-in;
   }
-  .round-profile:hover {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
   .round-profile.big {
     width: 5em;
     height: 5em;
