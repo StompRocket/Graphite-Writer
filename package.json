@@ -18,6 +18,7 @@
     "quill-image-resize-module": "^3.0.0",
     "quill-magic-url": "^0.1.0",
     "sweetalert": "^2.1.0",
+    "v-tooltip": "^2.0.0-rc.31",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

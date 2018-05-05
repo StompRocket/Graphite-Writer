@@ -15,7 +15,7 @@
         </div>
         <div class="share-col">
           <element class="user" v-for="user in currentUsers" :key="user.uid">
-            <img :src="user.image" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
+            <img :src="user.image" :alt="user.name" class="round-profile share-item" v-tooltip="user.name">
           </element>
           &nbsp;
           <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-users large-icon"></i></button>
@@ -38,7 +38,7 @@
           <h3>Collaberators</h3>
           <div>
             <i class="user" v-for="user in users" :key="user.uid">
-              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)"  :tooltip="user.name">
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)"  v-tooltip="user.name">
               &nbsp;
             </i>
           </div>
