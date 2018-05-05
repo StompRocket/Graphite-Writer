@@ -21,7 +21,7 @@
           <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-users large-icon"></i></button>
         </div>
       </div>
-      <small class="last-edited">Last Edited: {{getTimeAgo(docMeta.utcDate)}}</small>
+      <small v-if="!loading" class="last-edited">Last Edited: {{getTimeAgo(docMeta.utcDate)}}</small>
     </div>
     <br />
     <div id="toolbar"></div>
