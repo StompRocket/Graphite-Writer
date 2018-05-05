@@ -25,7 +25,7 @@ export default {
     firebase
       .auth()
       .getRedirectResult()
-      .then(function(result) {
+      .then((result)=> {
         if (result.credential) {
           // This gives you a GitHub Access Token. You can use it to access the GitHub API.
           var token = result.credential.accessToken;
@@ -39,11 +39,8 @@ export default {
         } else {
           this.$router.push("/documents/");
         }
-      })
-      .catch(function(error) {
-        console.log(error);
-        // ...
-      });
+      }).catch((err)=> console.log(err))
+      
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         //console.log("loggedIn");
