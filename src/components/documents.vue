@@ -28,7 +28,7 @@
     </div>
     <br v-if="shareOffers" />
     <br v-if="shareOffers" />
-    <router-link v-for="doc in sortedDocs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
+    <router-link v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
@@ -135,9 +135,26 @@ export default {
       }
 
       return this.docs.sort(compare);
+    },
+    filterSearch() {
+      let query = this.search.toLowerCase()
+      let result = this.sortedDocs
+     
+      if (!query) {
+        return result
+      } else {
+        const filter = (docs) => {
+    
+            if (JSON.stringify(docs.doc.info.title)) {
+              return JSON.stringify(docs.doc.info.title).toLowerCase().includes(query)
+            }
+        }
+        return result.filter(filter)
+      }
     }
   },
   methods: {
+    
     getTimeAgo(date) {
       return timeAgo.format(date);
     },
