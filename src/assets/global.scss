@@ -691,7 +691,7 @@ table tr:nth-child(2n) {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  background-color: #2f3542;
+  background-color: $dark;
   color: #fff;
   content: attr(tooltip);
   text-transform: uppercase;
@@ -706,7 +706,7 @@ table tr:nth-child(2n) {
   left: 50%;
   margin-left: -5px;
   width: 0;
-  border-top: 5px solid #2f3542;
+  border-top: 5px solid $dark;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   content: " ";
@@ -774,8 +774,8 @@ table tr:nth-child(2n) {
   color: #ffffff;
 }
 .button.dark {
-  border: 1px solid #2f3542;
-  background: #2f3542;
+  border: 1px solid $dark;
+  background: $dark;
   padding: 9px 18px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -787,12 +787,12 @@ table tr:nth-child(2n) {
   text-transform: uppercase;
 }
 .button.dark:hover {
-  background: #474d59;
+  background: $dark-accent;
   color: #ffffff;
 }
 .button.dark:active {
-  border-color: #474d59;
-  background: #474d59;
+  border-color: $dark-accent;
+  background: $dark-accent;
   color: #ffffff;
 }
 
