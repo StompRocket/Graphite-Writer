@@ -28,7 +28,7 @@
     </div>
     <br v-if="shareOffers" />
     <br v-if="shareOffers" />
-    <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
+    <router-link v-for="doc in sortedDocs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
@@ -124,6 +124,17 @@ export default {
         this.$router.push("/login");
       }
     });
+  },
+  computed: {
+    sortedDocs: function() {
+      function compare(a, b) {
+        if (a.doc.info.utcDate > b.doc.info.utcDate) return -1;
+        if (a.doc.info.utcDate < b.doc.info.utcDate) return 1;
+        return 0;
+      }
+
+      return this.docs.sort(compare);
+    }
   },
   methods: {
     getTimeAgo(date) {
