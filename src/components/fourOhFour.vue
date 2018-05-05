@@ -9,7 +9,10 @@
 <script>
 import "@/assets/fourOhFour.scss";
 export default {
-  name: "fourOhFour"
+  name: "fourOhFour",
+  created() {
+    document.title = "Graphite Writer | 404"
+  }
 };
 </script>
 

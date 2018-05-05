@@ -67,6 +67,7 @@ export default {
     shareOffers: false
   }),
   created() {
+    document.title = `Graphite Writer | Documents`
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.uid = user.uid;

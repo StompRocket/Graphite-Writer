@@ -7,6 +7,9 @@
 import "../assets/v2.scss";
 export default {
   name: "v2",
-  data: () => ({})
+  data: () => ({}),
+  created() {
+    document.title = "Graphite Writer | Whats New"
+  }
 };
 </script>

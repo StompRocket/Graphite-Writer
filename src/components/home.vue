@@ -43,6 +43,9 @@
 import "../assets/home.scss";
 export default {
   name: "home",
-  data: () => ({})
+  data: () => ({}),
+  created() {
+     document.title = "Graphite Writer BETA v0.4.0 | Create Text Documents Online For Free"
+  }
 };
 </script>

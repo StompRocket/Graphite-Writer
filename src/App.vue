@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       loginText: "Login",
-      supporters: "Ronan.N, Rohan.P, Liam.J, Merideth.O"
+      supporters: "Jack, Rohan, Liam, Merideth"
     };
   },
   created() {

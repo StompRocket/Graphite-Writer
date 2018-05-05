@@ -2,6 +2,10 @@
 @import "./tooltips.scss";
 .page.editor {
   min-height: 100vh;
+  .collaberatorsContainer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
   #editor,
   .ql-editor {
     min-height: 100vh;
@@ -76,7 +80,6 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .share-button {}
   .last-edited {
     margin-bottom: 0;
     font-weight: 100;
@@ -96,4 +99,5 @@
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
+ 
 }

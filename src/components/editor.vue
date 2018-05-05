@@ -35,10 +35,11 @@
           <h3>Shareable Link (view only)</h3>
           <a>https://beta.graphitewriter.com/#/s/{{shareUrl}}</a>
 
-          <h3>Collaberators</h3>
-          <div>
-            <i class="user" v-for="user in users" :key="user.uid"  v-tooltip="user.name">
-              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)" >
+      
+          <div class="collaberatorsContainer">
+                <h3>Collaberators</h3>
+            <i class="user" v-for="user in users" :key="user.uid"  >
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)" v-tooltip="{content: user.name, placement: 'bottom-center'}" >
               &nbsp;
             </i>
           </div>
@@ -346,6 +347,7 @@ export default {
                 this.docMeta = snapshot.val();
                 let date = new Date();
                 date = date.toString();
+                document.title = `Graphite Writer | ${this.docMeta.title}`
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)

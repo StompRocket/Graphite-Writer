@@ -20,6 +20,7 @@ const gitHub = new firebase.auth.GithubAuthProvider();
 export default {
   name: "login",
   created() {
+     document.title = `Graphite Writer | Login`
     console.log(localStorage.getItem("redirect") + " params");
     firebase
       .auth()
