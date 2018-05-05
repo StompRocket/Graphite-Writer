@@ -5,8 +5,8 @@
 	<h3>Login to Continue:</h3>
 	<br />
 	<div class="row">
-		<div class="column"> <a @click="loginWithGoogle" class="button warning">Google</a> </div>
-		<div class="column"> <a @click="loginWithGithub" class="button dark">Github</a> </div>
+		<div class="column"> <button @click="loginWithGoogle" class="button warning full-button">Google</button> </div>
+		<div class="column"> <button @click="loginWithGithub" class="button dark full-button">Github</button> </div>
 	</div>
 </div>
 </div>
