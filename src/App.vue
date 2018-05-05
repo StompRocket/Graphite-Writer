@@ -54,7 +54,7 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("loggedIn");
+      
         // User is signed in.
         this.loginText = "Logout";
 
