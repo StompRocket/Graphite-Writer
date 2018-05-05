@@ -237,13 +237,15 @@ export default {
     realTimeId: null,
     personToShareWith: null,
     shareError: null,
-    currentUsers: []
+    currentUsers: [],
+    user: null
   }),
   created() {
     const startLoad = performance.now();
     const db = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        this.user = user;
         this.uid = user.uid;
 
         if (this.$route.params.document && this.$route.params.document) {
@@ -394,6 +396,10 @@ export default {
       .database()
       .ref(`/documentMeta/${this.docUser}/${this.docId}/currentUsers`)
       .off();
+    firebase
+      .database()
+      .ref(`/documentMeta/${this.docUser}/${this.docId}/cursors/${this.uid}`)
+      .remove();
     next();
   },
   methods: {
@@ -448,6 +454,29 @@ export default {
     },
     saveHandler() {
       // console.log("savehandler");
+      this.editor.on("selection-change", (range, oldRange, source) => {
+        if (range) {
+          firebase
+            .database()
+            .ref(
+              `/documentMeta/${this.docUser}/${this.docId}/cursors/${this.uid}`
+            )
+            .set({
+              uid: this.uid,
+              name: this.user.displayName,
+              range: range
+            });
+        } else {
+          console.log("Cursor not in the editor");
+          firebase
+            .database()
+            .ref(
+              `/documentMeta/${this.docUser}/${this.docId}/cursors/${this.uid}`
+            )
+            .remove();
+        }
+      });
+
       this.editor.on("text-change", (delta, oldDelta, source) => {
         // console.log("change");
         if (source == "api") {
