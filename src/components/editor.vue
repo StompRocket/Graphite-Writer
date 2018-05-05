@@ -5,7 +5,7 @@
   <div class="container">
     <div class="box container material docInfo">
       <span class="multi-input">
-        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input">
+        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input" autocomplete="off">
       </span>
       <p v-if="opts.readOnly">Read Only</p>
       <div class="share-row">
@@ -18,7 +18,7 @@
             <img :src="user.image" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
           </element>
           &nbsp;
-          <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-user-plus"></i></button>
+          <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-users large-icon"></i></button>
         </div>
       </div>
       <small class="last-edited">Last Edited: {{docMeta.date}}</small>

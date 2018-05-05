@@ -735,6 +735,7 @@ table tr:nth-child(2n) {
   font-size: 0.8rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.2s ease-out;
 }
 .button:hover {
   border: 1px solid #000000;

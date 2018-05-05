@@ -6,27 +6,28 @@
     <h1>Documents</h1>
     <span class="multi-input">
       <input v-model="search" class="input full-input" type="text" placeholder="Search"/>
-      <a @click="openNewDoc" class="button warning input" width="100%">New Document</a>
     </span>
+    <button @click="openNewDoc" class="button warning full-width">New Document</button>
     <br />
     <br />
     
 
     <br /> <br />
-    <div class="box material container" v-if="noDocs">
+    <div class="box material deep container" v-if="noDocs">
       <h3>It looks like you have no docs.</h3>
       <br>
       <button class="button" @click="openNewDoc">Create a new one!</button>
 
     </div>
-    <div class="box material container" v-if="shareOffers">
+    <div class="box material deep container" v-if="shareOffers">
       <h3>Shared With You:</h3>
 
-      <button @click="openShared(doc)" class="shareOfferDoc button" v-for="doc in shareOffers" :key="doc.docId">
+      <button @click="openShared(doc)" class="full-width button dark" v-for="doc in shareOffers" :key="doc.docId">
       {{doc.name}}
       </button>
-
     </div>
+    <br v-if="shareOffers" />
+    <br v-if="shareOffers" />
     <router-link v-for="doc in docs" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
