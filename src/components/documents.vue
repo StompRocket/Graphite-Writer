@@ -158,10 +158,6 @@ export default {
     getTimeAgo(date) {
       return timeAgo.format(date);
     },
-    searchFilter(doc) {
-      let title = doc.doc.title.toLowerCase().split(" ");
-      return title.indexOf(this.search.toLowerCase()) > -1;
-    },
     openShared(doc) {
       firebase
         .database()
