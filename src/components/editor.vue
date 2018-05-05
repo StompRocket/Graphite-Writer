@@ -5,7 +5,7 @@
   <div class="container">
     <div class="box container material docInfo">
       <span class="multi-input">
-        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input" autocomplete="off">
+        <input @keydown="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input" autocomplete="off">
       </span>
       <p v-if="opts.readOnly">Read Only</p>
       <div class="share-row">
@@ -38,7 +38,7 @@
           <h3>Collaberators</h3>
           <div>
             <i class="user" v-for="user in users" :key="user.uid">
-              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" :tooltip="user.name">
+              <img :src="user.profile_picture" :alt="user.name" class="round-profile big" @click="removeUser(user)"  :tooltip="user.name">
               &nbsp;
             </i>
           </div>
@@ -260,12 +260,17 @@ export default {
             .on("value", snapshot => {
               //  console.log(snapshot.val(), this.uid);
               if (snapshot.val()[this.uid]) {
-                this.editor = new Quill("#editor", this.opts);
+                if (this.editor == false) {
+                  this.editor = new Quill("#editor", this.opts);
+                }
+
                 //   console.log("i can write");
               } else {
                 this.opts.readOnly = true;
                 // console.log("i cant write");
-                this.editor = new Quill("#editor", this.opts);
+                if (this.editor == false) {
+                  this.editor = new Quill("#editor", this.opts);
+                }
               }
               this.users = [];
               snapshot.forEach(user => {
@@ -407,8 +412,32 @@ export default {
   },
 
   methods: {
+    removeUser(user) {
+      this.closeSave();
+      swal({
+        title: "Are you sure?",
+        text: `You are about to remove acess for ${user.name} to this document`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          firebase
+            .database()
+            .ref(
+              `/documentMeta/${this.docUser}/${this.docId}/users/${user.uid}`
+            )
+            .remove();
+          swal(`${user.name} has been removed`, {
+            icon: "success"
+          });
+        }
+      });
+    },
     getTimeAgo(date) {
-      return timeAgo.format(date);
+      if (date) {
+        return timeAgo.format(date);
+      }
     },
     shareWithPerson() {
       if (validateEmail(this.personToShareWith)) {
