@@ -11,7 +11,7 @@ import "@/assets/fourOhFour.scss";
 export default {
   name: "fourOhFour",
   created() {
-    document.title = "Graphite Writer | 404"
+    document.title = `Graphite Writer BETA v${this.$parent.version}  | 404`
   }
 };
 </script>

@@ -9,7 +9,7 @@ export default {
   name: "v2",
   data: () => ({}),
   created() {
-    document.title = "Graphite Writer | Whats New"
+    document.title = `Graphite Writer BETA v${this.$parent.version}  | Whats New`
   }
 };
 </script>

@@ -42,13 +42,15 @@
 <script>
 import "../node_modules/minireset.css/minireset.min.css";
 import "./assets/global.scss";
+const version = require("../package.json").version
 const firebase = require("firebase");
 export default {
   name: "App",
   data() {
     return {
       loginText: "Login",
-      supporters: "Jack, Rohan, Liam, Merideth"
+      supporters: "Jack, Rohan, Liam, Merideth",
+      version: version
     };
   },
   created() {

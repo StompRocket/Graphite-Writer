@@ -45,7 +45,7 @@ export default {
   name: "home",
   data: () => ({}),
   created() {
-     document.title = "Graphite Writer BETA v0.4.0 | Create Text Documents Online For Free"
+     document.title = `Graphite Writer BETA v${this.$parent.version} | Create Text Documents Online For Free`
   }
 };
 </script>

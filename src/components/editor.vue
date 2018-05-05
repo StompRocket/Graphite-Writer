@@ -347,7 +347,7 @@ export default {
                 this.docMeta = snapshot.val();
                 let date = new Date();
                 date = date.toString();
-                document.title = `Graphite Writer | ${this.docMeta.title}`
+                document.title = `Graphite Writer BETA v${this.$parent.version} | ${this.docMeta.title}`
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)
