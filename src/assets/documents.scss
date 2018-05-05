@@ -19,7 +19,12 @@
   .full-input {
     width: 100%;
   }
-
+  .document-preview {
+    color: #333;
+  }
+  .document-preview * {
+    color: #333;
+  }
 
 }
 .swal-content__input {
