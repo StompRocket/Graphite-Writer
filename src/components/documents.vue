@@ -16,13 +16,13 @@
     <div class="box material deep container" v-if="noDocs">
       <h3>It looks like you have no docs.</h3>
       <br>
-      <button class="button" @click="openNewDoc">Create a new one!</button>
+      <button class="button warning full-width" @click="openNewDoc">Create a new one!</button>
 
     </div>
     <div class="box material deep container" v-if="shareOffers">
       <h3>Shared With You:</h3>
 
-      <button @click="openShared(doc)" class="full-width button dark" v-for="doc in shareOffers" :key="doc.docId">
+      <button @click="openShared(doc)" class="full-width button warning" v-for="doc in shareOffers" :key="doc.docId">
       {{doc.name}}
       </button>
     </div>
