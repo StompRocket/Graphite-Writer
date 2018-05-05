@@ -32,7 +32,7 @@
       <div class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
-         <i>Last Edited: {{doc.doc.info.date}}</i>
+         <i>Last Edited: {{getTimeAgo(doc.doc.info.utcDate)}}</i>
         </small>
       </div>
       <br />
@@ -46,7 +46,11 @@ import "../assets/documents.scss";
 import swal from "sweetalert";
 import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
+TimeAgo.locale(en);
+const timeAgo = new TimeAgo("en-US");
 export default {
   name: "documents",
   components: {
@@ -122,6 +126,9 @@ export default {
     });
   },
   methods: {
+    getTimeAgo(date) {
+      return timeAgo.format(date);
+    },
     searchFilter(doc) {
       let title = doc.doc.title.toLowerCase().split(" ");
       return title.indexOf(this.search.toLowerCase()) > -1;
