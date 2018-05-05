@@ -5,7 +5,7 @@
   <div class="container">
     <div class="box container material docInfo">
       <span class="multi-input">
-        <input @keydown="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input" autocomplete="off">
+        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input" autocomplete="off">
       </span>
       <p v-if="opts.readOnly">Read Only</p>
       <div class="share-row">
