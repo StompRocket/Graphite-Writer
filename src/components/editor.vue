@@ -5,13 +5,14 @@
   <div class="container">
     <div class="box container material docInfo">
       <span class="multi-input">
-        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input">
-        <button  @click="remove" class="button warning input"><i class="fas fa-trash"></i>
-        </button>
+        <input @input="saveDoc()" :disabled="opts.readOnly" id="docTitle" v-model="docMeta.title" type="text" class="input title-input">
       </span>
       <p v-if="opts.readOnly">Read Only</p>
       <div class="share-row">
-        
+        <div class="share-col">
+          <button  @click="remove" class="button issue"><i class="fas fa-trash"></i>
+        </button>
+        </div>
         <div class="share-col">
           <element class="user" v-for="user in currentUsers" :key="user.uid">
             <img :src="user.image" :alt="user.name" class="round-profile share-item" :tooltip="user.name">
@@ -20,7 +21,7 @@
           <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-user-plus"></i></button>
         </div>
       </div>
-      <p class="last-edited">Last Edited: {{docMeta.date}}</p>
+      <small class="last-edited">Last Edited: {{docMeta.date}}</small>
     </div>
     <br />
     <div id="toolbar"></div>

@@ -13,12 +13,13 @@
     
 
     <br /> <br />
-    <div class="box material" style="padding: 2%;" v-if="noDocs">
+    <div class="box material container" v-if="noDocs">
       <h3>It looks like you have no docs.</h3>
+      <br>
       <button class="button" @click="openNewDoc">Create a new one!</button>
 
     </div>
-    <div class="box material" style="padding: 2%; margin-bottom: 2%;" v-if="shareOffers">
+    <div class="box material container" v-if="shareOffers">
       <h3>Shared With You:</h3>
 
       <button @click="openShared(doc)" class="shareOfferDoc button" v-for="doc in shareOffers" :key="doc.docId">

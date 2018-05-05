@@ -75,14 +75,22 @@
     justify-content: space-between;
   }
 
+  .share-col {
+    display: flex;
+    align-items: center;
+  }
+
+  .title-input {
+    font-size: 1.6em;
+    font-weight: 250;
+    border: none!important;
+  }
+
   .share-button {
   }
 
   .last-edited {
     margin-bottom: 0;
-  }
-  .share-item {
-    vertical-align: sub;
   }
 
   .ql-toolbar {

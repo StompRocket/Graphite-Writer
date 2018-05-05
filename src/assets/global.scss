@@ -846,6 +846,29 @@ a.button {
   color: #ffffff;
 }
 
+.button.issue {
+  border: 1px solid $issue;
+  background: $issue;
+  padding: 9px 18px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  vertical-align: middle;
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+.button.issue:hover {
+  background: $issue-accent;
+  color: #ffffff;
+}
+.button.issue:active {
+  border-color: $issue;
+  background: $issue-accent;
+  color: #ffffff;
+}
+
 /* Inputs */
 
 .multi-input .input:not(.button) {
