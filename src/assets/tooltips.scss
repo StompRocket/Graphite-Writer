@@ -1,4 +1,5 @@
 .tooltip {
+  transition: all .2s ease-out;
   display: block !important;
   z-index: 100000;
   .tooltip-inner {
@@ -92,3 +93,8 @@
     transition: opacity .15s;
   }
 }
+
+.tooltip * {
+  transition: all .2s ease-out;
+}
+
