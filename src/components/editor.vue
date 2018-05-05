@@ -21,7 +21,7 @@
           <button v-if="!opts.readOnly" @click="share" class="button dark input share-button"><i class="fas fa-users large-icon"></i></button>
         </div>
       </div>
-      <small class="last-edited">Last Edited: {{docMeta.date}}</small>
+      <small class="last-edited">Last Edited: {{getTimeAgo(docMeta.utcDate)}}</small>
     </div>
     <br />
     <div id="toolbar"></div>
@@ -65,9 +65,11 @@ import loadingScreen from "./loadingScreen.vue";
 import sjcl from "../assets/sjcl.js";
 import swal from "sweetalert";
 import MagicUrl from "quill-magic-url";
-import { encode } from "punycode";
-import { log } from "util";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
+TimeAgo.locale(en);
+const timeAgo = new TimeAgo("en-US");
 Quill.register("modules/magicUrl", MagicUrl);
 const FontAttributor = Quill.import("attributors/class/font");
 const Hashids = require("hashids");
@@ -285,6 +287,7 @@ export default {
               this.saveHandler();
               this.decryptedDoc.data = decrypt(this.doc, this.docUser);
               this.editor.setContents(this.decryptedDoc.data);
+
               this.initTime = Date.now();
               const endLoad = performance.now();
               firebase
@@ -402,7 +405,11 @@ export default {
       .remove();
     next();
   },
+
   methods: {
+    getTimeAgo(date) {
+      return timeAgo.format(date);
+    },
     shareWithPerson() {
       if (validateEmail(this.personToShareWith)) {
         let encodedEmail = encodeEmail(this.personToShareWith);

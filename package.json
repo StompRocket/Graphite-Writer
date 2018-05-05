@@ -13,6 +13,7 @@
   "dependencies": {
     "firebase": "^4.13.1",
     "hashids": "^1.1.4",
+    "javascript-time-ago": "^1.0.30",
     "minireset.css": "0.0.3",
     "quill-image-resize-module": "^3.0.0",
     "quill-magic-url": "^0.1.0",
