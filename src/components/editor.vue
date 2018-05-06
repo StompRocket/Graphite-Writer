@@ -68,7 +68,6 @@ import swal from "sweetalert";
 import MagicUrl from "quill-magic-url";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-
 TimeAgo.locale(en);
 const timeAgo = new TimeAgo("en-US");
 Quill.register("modules/magicUrl", MagicUrl);
@@ -347,7 +346,9 @@ export default {
                 this.docMeta = snapshot.val();
                 let date = new Date();
                 date = date.toString();
-                document.title = `Graphite Writer BETA v${this.$parent.version} | ${this.docMeta.title}`
+                document.title = `Graphite Writer BETA v${
+                  this.$parent.version
+                } | ${this.docMeta.title}`;
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)

@@ -44,8 +44,8 @@
     </div>
     <br v-if="shareOffers" />
     <br v-if="shareOffers" />
-    <router-link v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
-      <div class="box material hover-deep container">
+    <router-link   v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
+      <div @contextmenu.prevent="$refs.ctxMenu.open($event, doc)" class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
          <i>Last Edited: {{getTimeAgo(doc.doc.info.utcDate)}}</i>
@@ -53,9 +53,15 @@
       </div>
       <br />
     </router-link>
+    <context-menu id="context-menu" ref="ctxMenu">
+  <li >option 1</li>
+  <li class="disabled">option 2</li>
+  <li>option 3</li>
+</context-menu>
   </div>
 
 </div>
+
 </template>
 <script>
 import "../assets/documents.scss";
@@ -64,13 +70,14 @@ import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-
+import contextMenu from "vue-context-menu";
 TimeAgo.locale(en);
 const timeAgo = new TimeAgo("en-US");
 export default {
   name: "documents",
   components: {
-    loadingScreen
+    loadingScreen,
+    contextMenu
   },
   data: () => ({
     newDocName: "",
@@ -83,7 +90,9 @@ export default {
     shareOffers: false
   }),
   created() {
-    document.title = `Graphite Writer BETA v${this.$parent.version} | Documents`
+    document.title = `Graphite Writer BETA v${
+      this.$parent.version
+    } | Documents`;
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.uid = user.uid;
@@ -153,24 +162,24 @@ export default {
       return this.docs.sort(compare);
     },
     filterSearch() {
-      let query = this.search.toLowerCase()
-      let result = this.sortedDocs
-     
+      let query = this.search.toLowerCase();
+      let result = this.sortedDocs;
+
       if (!query) {
-        return result
+        return result;
       } else {
-        const filter = (docs) => {
-    
-            if (JSON.stringify(docs.doc.info.title)) {
-              return JSON.stringify(docs.doc.info.title).toLowerCase().includes(query)
-            }
-        }
-        return result.filter(filter)
+        const filter = docs => {
+          if (JSON.stringify(docs.doc.info.title)) {
+            return JSON.stringify(docs.doc.info.title)
+              .toLowerCase()
+              .includes(query);
+          }
+        };
+        return result.filter(filter);
       }
     }
   },
   methods: {
-    
     getTimeAgo(date) {
       return timeAgo.format(date);
     },
