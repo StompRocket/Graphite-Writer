@@ -18,6 +18,19 @@
 		}
 	}
 
+	.quote-testimonial {
+		opacity: .7;
+		transform: translateX(-.5em);
+		transform: translateY(-.5em);
+
+	}
+	.quote-testimonial-end {
+		opacity: .7;
+		transform: translateX(-.5em);
+		transform: translateY(.5em);
+
+	}
+
 	& h1.big {
 		font-size: 3.5em;
 	}

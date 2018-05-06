@@ -54,7 +54,7 @@
       <br />
     </router-link>
     <context-menu id="context-menu" ref="ctxMenu">
-      <div class="box material container">
+      <div>
         <h5>Add To Collection</h5>
       </div>
     </context-menu>
