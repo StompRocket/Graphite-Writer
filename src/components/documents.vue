@@ -11,7 +11,7 @@
     <br />
     <br />
     
-    <button class="button primary fab">
+    <button class="button primary fab"> </button>
 
     <br /> <br />
     <div class="box material deep container" v-if="noDocs">
