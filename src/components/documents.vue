@@ -55,7 +55,7 @@
       </div>
       <br />
     </router-link>
-   <v-context ref="menu">
+   <v-context ref="menu" class="context-menu">
      <template scope="child">
        <ul>
           <li @click="addToCollection(child)" class="context-collection">Add to collection</li>
