@@ -13,6 +13,7 @@
         <small><i>5 Documents Inside </i></small>
       </div>
     </div>
+    
 
   </div>
   <loadingScreen v-if="loading"></loadingScreen>
@@ -62,6 +63,7 @@
      </template>
    </v-context>
 
+</div>
 </div>
 
 </template>
