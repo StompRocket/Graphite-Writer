@@ -1,6 +1,6 @@
 <template>
 <div class="page documents">
-  <button @click="toggleCollections" class="button warning fab"><i class="fas fa-folder"></i></button>
+  <button @click="toggleCollections" class="button warning fab"><i class="fas fa-folder" v-if="!collectionsOpen"></i><i class="fas fa-folder-open" v-if="collectionsOpen"></i></button>
 
   <div  v-if="collectionsOpen" class="folder-float box material">
     <div class="container">
