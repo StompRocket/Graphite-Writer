@@ -620,6 +620,10 @@ table tr:nth-child(2n) {
   -webkit-position: relative;
   float: right;
 }
+.nav-mobile.open {
+  opacity: 1;
+  pointer-events: auto;
+}
 .nav-mobile .nav-close {
   float: right;
   display: block;
