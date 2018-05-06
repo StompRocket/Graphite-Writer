@@ -36,12 +36,12 @@
       <br />
     </div>
   </footer>
-  <div v-if="mobileNav" class="nav-mobile open" id="nav-modal">
+  <div :class="{open: mobileNav}" class="nav-mobile" id="nav-modal">
     <div class="modal-background">
 
     </div>
-    <div class="nav-body">
-      <a class="nav-close" id="nav-close"><i class="fa fa-times"></i></a>
+    <div @click="openMobileNav" class="nav-body">
+      <a  class="nav-close" id="nav-close"><i class="fa fa-times"></i></a>
       <img src="./assets/wordmark_dark.png" />
       <h3>
         <router-link class="dark" :to="{ name: 'documents' }">Documents</router-link>
