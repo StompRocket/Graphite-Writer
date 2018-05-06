@@ -44,8 +44,8 @@
     </div>
     <br v-if="shareOffers" />
     <br v-if="shareOffers" />
-    <router-link   v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
-      <div @contextmenu.prevent="$refs.ctxMenu.open($event, doc)" class="box material hover-deep container">
+    <router-link    v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
+      <div  @contextmenu.prevent="$refs.menu.open($event, doc)" class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
          <i>Last Edited: {{getTimeAgo(doc.doc.info.utcDate)}}</i>
@@ -53,12 +53,14 @@
       </div>
       <br />
     </router-link>
-    <context-menu id="context-menu" ref="ctxMenu">
-      <div>
-        <h5>Add To Collection</h5>
-      </div>
-    </context-menu>
-  </div>
+   <v-context ref="menu">
+     <template scope="child">
+       <ul>
+          <li @click="addToCollection(child)">Add to collection</li>
+          <li @click="remove(child)">Delete</li>
+       </ul>
+     </template>
+   </v-context>
 
 </div>
 
@@ -70,14 +72,14 @@ import firebase from "firebase";
 import loadingScreen from "./loadingScreen.vue";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import contextMenu from "vue-context-menu";
+import vContext from "vue-context";
 TimeAgo.locale(en);
 const timeAgo = new TimeAgo("en-US");
 export default {
   name: "documents",
   components: {
     loadingScreen,
-    contextMenu
+    vContext
   },
   data: () => ({
     newDocName: "",
@@ -87,7 +89,9 @@ export default {
     newDoc: false,
     search: "",
     noDocs: true,
-    shareOffers: false
+    shareOffers: false,
+    collections: [],
+    contextDoc: false
   }),
   created() {
     document.title = `Graphite Writer BETA v${
@@ -152,6 +156,8 @@ export default {
     });
   },
   computed: {
+    remove(doc) {},
+    addToCollection(doc) {},
     sortedDocs: function() {
       function compare(a, b) {
         if (a.doc.info.utcDate > b.doc.info.utcDate) return -1;
