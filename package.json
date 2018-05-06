@@ -20,7 +20,7 @@
     "sweetalert": "^2.1.0",
     "v-tooltip": "^2.0.0-rc.31",
     "vue": "^2.5.2",
-    "vue-context-menu": "^2.0.6",
+    "vue-context": "^2.0.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
