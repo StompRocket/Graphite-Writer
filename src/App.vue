@@ -5,7 +5,7 @@
       <div class="nav-logo">
        <router-link to="/"><img src="./assets/wordmark.png" /></router-link> 
       </div>
-      <a class="nav-burger" href="#nav-mobile"><i class="fas fa-bars"></i></a>
+      <a class="nav-burger"><i class="fas fa-bars"></i></a>
       <div class="nav-menu">
         <router-link class="white" :to="{ name: 'documents' }">Documents</router-link>
         &nbsp;&nbsp;
@@ -36,7 +36,23 @@
       <br />
     </div>
   </footer>
+  <div class="nav-mobile" id="nav-modal">
+    <div class="modal-background">
+
+    </div>
+    <div class="nav-body">
+      <a class="nav-close" id="nav-close"><i class="fa fa-times"></i></a>
+      <img src="./assets/wordmark_dark.png" />
+      <h3>
+        <router-link class="dark" :to="{ name: 'documents' }">Documents</router-link>
+      </h3>
+      <h3>
+        <a @click="login" class="white">{{loginText}}</a>
+      </h3>
+    </div>
+  </div>
 </div>
+
 </template>
 
 <script>
