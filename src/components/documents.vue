@@ -158,8 +158,6 @@ export default {
     });
   },
   computed: {
-    remove(doc) {},
-    addToCollection(doc) {},
     sortedDocs: function() {
       function compare(a, b) {
         if (a.doc.info.utcDate > b.doc.info.utcDate) return -1;
@@ -188,6 +186,12 @@ export default {
     }
   },
   methods: {
+    remove(doc) {
+      console.log(doc);
+    },
+    addToCollection(doc) {
+      console.log(doc);
+    },
     getTimeAgo(date) {
       return timeAgo.format(date);
     },
