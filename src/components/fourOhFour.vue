@@ -1,8 +1,8 @@
 <template>
   <div id="fourOhFour" class="page">
-      <h1>404</h1>
-      <h1>Uh Oh...</h1>
-      <h3>It looks like we've lost this page :(</h3>
+      <h1 class="big">404</h1>
+      <h2>This page could not be found</h2>
+      <br>
       <router-link to="/" class="button warning">Return Home</router-link>
   </div>
 </template>

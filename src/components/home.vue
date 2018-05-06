@@ -42,20 +42,32 @@
       <h2><i class="fas fa-quote-left quote-testimonial"></i>Loads like a million times faster<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
       <i> - Max, satisfied Graphite Writer user</i>
     </div>
+    <br>
+    <div class="box material container">
+      <h2><i class="fas fa-quote-left quote-testimonial"></i>A fantastic tool. I would never use any other.<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
+      <i> - Jack, equally satisfied Graphite Writer user</i>
+    </div>
+    <br>
+    <div class="box material container">
+      <h2><i class="fas fa-quote-left quote-testimonial"></i>Graphite Write combines the features and usability of programs such as Microsoft Word or Google Docs with a speed and simplicity unparalleled by competitors.<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
+      <i> - Sam, even more satisfied Graphite Writer user</i>
+    </div>
 
     <br>
-    <h1>What's New in v2?</h1>
+    <h1>Full Changelog</h1>
+    <ol>
+      <li>Increased performance across the site, speeding up loading times by up to 3 seconds</li>
+      <li>New more optimized database for faster and more secure document storage</li>
+      <li>Introducing Collections. Collections are a brand new way to organize your documents. </li>
+      <li>Redesigned documents page makes organizing files a breeze. </li>
+      <li>New UI optimized for more productivity.</li>
+      <li>Real Time sharing has been added to the site, allowing for a streamlined collaboration experience.</li>
+      <li>While editing, you can now see when users are on the document with you. </li>
+      <li>Easily remove unwanted users by restricting their access to read-only.</li>
+      <li>Share a read-only link with as many people as you want to easily share your writing anywhere</li>
+      <li><s>Steals your information</s></li>
+    </ol>
 
-  </div>
-
-  <div class="row">
-    <div class="column container">
-     <h2>Introducing</h2>
-     <h1>Real-Time Sharing</h1>
-   </div>
-   <div class="column">
-     <img src="">
-   </div>
   </div>
 
   <div class="container">
