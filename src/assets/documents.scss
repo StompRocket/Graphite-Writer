@@ -25,15 +25,17 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    z-index: 1000;
   }
 
   .folder-float {
     position: fixed;
     bottom: 5em;
     right: 1em;
-    width: 100px;
+    width: 9em;
     max-height: calc(100% - 11em);
     min-height: 5em;
+    z-index: 1000;
   }
 
   .collection-rule {
@@ -43,34 +45,6 @@
 
   .fab-container {
     padding: 1em;
-  }
-
-  /* Larger than phone */
-  @media screen and (min-width: 400px) {
-    .folder-float {
-      width: calc(calc(100% - 380px) / 2 - 2em);
-    }
-  }
-
-  /* Larger than large phone */
-  @media screen and (min-width: 550px) {
-    .folder-float {
-      width: calc(calc(100% - 520px) / 2 - 2em);
-    }
-  }
-
-  /* Larger than tablet */
-  @media screen and (min-width: 750px) {
-    .folder-float {
-      width: calc(calc(100% - 700px) / 2 - 2em);
-    }
-  }
-
-  /* Larger than desktop */
-  @media screen and (min-width: 1000px) {
-    .folder-float {
-      width: calc(calc(100% - 850px) / 2 - 2em);
-    }
   }
 
   /* Larger than Desktop HD */
