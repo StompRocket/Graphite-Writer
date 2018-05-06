@@ -4,7 +4,8 @@
 
   <div  v-if="collectionsOpen" class="folder-float box material">
     <div class="container">
-      <h3 style="margin-top: 0;">Your Collections:</h3>
+      <h3 style="margin-top: 0;">Your Collections: </h3>
+      <button class="button warning full-width">New Collection</button>
     </div>
     <div  class="collection" v-for="collection in collections">
       <hr class="collection-rule">
@@ -57,8 +58,8 @@
    <v-context ref="menu">
      <template scope="child">
        <ul>
-          <li @click="addToCollection(child)">Add to collection</li>
-          <li @click="remove(child)">Delete</li>
+          <li @click="addToCollection(child)" class="context-collection">Add to collection</li>
+          <li @click="remove(child)" class="context-delete">Delete</li>
        </ul>
      </template>
    </v-context>
