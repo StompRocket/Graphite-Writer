@@ -5,13 +5,12 @@
   <div  v-if="collectionsOpen" class="folder-float box material">
     <div class="container">
       <h3 style="margin-top: 0;">Your Collections: </h3>
-      <button class="button warning full-width">New Collection</button>
+      <button @click="newCollection" class="button warning full-width">New Collection</button>
     </div>
     <div  class="collection" v-for="collection in collections">
       <hr class="collection-rule">
       <div class="fab-container">
-        <h5>Collection Name</h5>
-        <small><i>5 Documents Inside </i></small>
+        <h5>{{collection.name}}</h5>
       </div>
     </div>
     
@@ -105,6 +104,7 @@ export default {
       if (user) {
         this.uid = user.uid;
         const db = firebase.database();
+
         db.ref(`users/${this.uid}/docs`).on("value", snapshot => {
           this.loading = false;
 
@@ -135,6 +135,9 @@ export default {
               // ...
             });
           }
+        });
+        db.ref(`users/${this.uid}/collections`).on("value", snapshot => {
+          this.collections = snapshot.val();
         });
         db.ref(`users/${this.uid}/shareOffers`).on("value", snapshot => {
           if (!snapshot.val()) {
@@ -188,6 +191,26 @@ export default {
     }
   },
   methods: {
+    newCollection() {
+      swal("New Collection Name:", {
+        className: "swal-modal",
+        content: "input"
+      }).then(name => {
+        if (name) {
+          if (/^\s+$/.test(name)) {
+            name = "Untitled";
+          }
+          let newCollectionRef = firebase
+            .database()
+            .ref(`/users/${this.uid}/collections/`)
+            .push();
+          newCollectionRef.set({
+            name: name,
+            key: newCollectionRef.key
+          });
+        }
+      });
+    },
     toggleCollections() {
       if (this.collectionsOpen) {
         this.collectionsOpen = false;
