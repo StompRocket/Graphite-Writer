@@ -45,7 +45,7 @@
     <br v-if="shareOffers" />
     <br v-if="shareOffers" />
     <router-link    v-for="doc in filterSearch" :key="doc.key" :alt="doc.doc.info.title" :to="{ name: 'editor', params: {document: doc.key, user: doc.uid} }" class="document-preview">
-      <div  @contextmenu.prevent="$refs.menu.open" class="box material hover-deep container">
+      <div  @contextmenu.prevent="$refs.menu.open($event, doc)" class="box material hover-deep container">
         <h3 >{{doc.doc.info.title}}</h3>
         <small>
          <i>Last Edited: {{getTimeAgo(doc.doc.info.utcDate)}}</i>
@@ -56,10 +56,12 @@
 
   </div>
    <v-context ref="menu">
+     <template scope="child">
        <ul>
-          <li >Add to collection</li>
-          <li>Delete</li>
+          <li @click="addToCollection(child)">Add to collection</li>
+          <li @click="remove(child)">Delete</li>
        </ul>
+     </template>
    </v-context>
 
 </div>
@@ -156,6 +158,8 @@ export default {
     });
   },
   computed: {
+    remove(doc) {},
+    addToCollection(doc) {},
     sortedDocs: function() {
       function compare(a, b) {
         if (a.doc.info.utcDate > b.doc.info.utcDate) return -1;
