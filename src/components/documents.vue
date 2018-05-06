@@ -1,5 +1,20 @@
 <template>
 <div class="page documents">
+  <button class="button warning fab"><i class="fas fa-folder"></i></button>
+
+  <div class="folder-float box material">
+    <div class="container">
+      <h3 style="margin-top: 0;">Your Collections:</h3>
+    </div>
+    <div class="collection" v-for="collection in collections">
+      <hr class="collection-rule">
+      <div class="fab-container">
+        <h5>Collection Name</h5>
+        <small><i>5 Documents Inside </i></small>
+      </div>
+    </div>
+
+  </div>
   <loadingScreen v-if="loading"></loadingScreen>
   <div class="container">
     <br />
@@ -11,7 +26,7 @@
     <br />
     <br />
     
-    <button class="button primary fab"> </button>
+
 
     <br /> <br />
     <div class="box material deep container" v-if="noDocs">
