@@ -1,12 +1,12 @@
 <template>
 <div class="page documents">
-  <button class="button warning fab"><i class="fas fa-folder"></i></button>
+  <button @click="toggleCollections" class="button warning fab"><i class="fas fa-folder"></i></button>
 
-  <div class="folder-float box material">
+  <div  v-if="collectionsOpen" class="folder-float box material">
     <div class="container">
       <h3 style="margin-top: 0;">Your Collections:</h3>
     </div>
-    <div class="collection" v-for="collection in collections">
+    <div  class="collection" v-for="collection in collections">
       <hr class="collection-rule">
       <div class="fab-container">
         <h5>Collection Name</h5>
@@ -93,7 +93,8 @@ export default {
     noDocs: true,
     shareOffers: false,
     collections: [],
-    contextDoc: false
+    contextDoc: false,
+    collectionsOpen: false
   }),
   created() {
     document.title = `Graphite Writer BETA v${
@@ -158,8 +159,6 @@ export default {
     });
   },
   computed: {
-    remove(doc) {},
-    addToCollection(doc) {},
     sortedDocs: function() {
       function compare(a, b) {
         if (a.doc.info.utcDate > b.doc.info.utcDate) return -1;
@@ -188,6 +187,19 @@ export default {
     }
   },
   methods: {
+    toggleCollections() {
+      if (this.collectionsOpen) {
+        this.collectionsOpen = false;
+      } else {
+        this.collectionsOpen = true;
+      }
+    },
+    remove(doc) {
+      console.log(doc);
+    },
+    addToCollection(doc) {
+      console.log(doc);
+    },
     getTimeAgo(date) {
       return timeAgo.format(date);
     },
