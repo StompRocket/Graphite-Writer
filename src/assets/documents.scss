@@ -47,6 +47,12 @@
     padding: 1em;
   }
 
+  #context-menu {
+    border: none!important;
+    margin: 0!important;
+    padding: 0!important;
+  }
+
   /* Larger than Desktop HD */
   @media screen and (min-width: 1200px) {
     .folder-float {

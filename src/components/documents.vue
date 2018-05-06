@@ -54,10 +54,10 @@
       <br />
     </router-link>
     <context-menu id="context-menu" ref="ctxMenu">
-  <li >option 1</li>
-  <li class="disabled">option 2</li>
-  <li>option 3</li>
-</context-menu>
+      <div class="box material container">
+        <h5>Add To Collection</h5>
+      </div>
+    </context-menu>
   </div>
 
 </div>
