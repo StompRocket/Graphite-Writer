@@ -3,9 +3,9 @@
   <nav class="navbar white">
     <div class="container">
       <div class="nav-logo">
-       <router-link to="/"><img src="./assets/wordmark.png" /></router-link> 
+       <router-link to="/"><img alt="Graphite Writer" src="./assets/wordmark.png" /></router-link> 
       </div>
-      <a class="nav-burger"><i class="fas fa-bars"></i></a>
+      <a class="nav-burger" @click="openMobileNav"><i class="fas fa-bars"></i></a>
       <div class="nav-menu">
         <router-link class="white" :to="{ name: 'documents' }">Documents</router-link>
         &nbsp;&nbsp;
@@ -36,7 +36,7 @@
       <br />
     </div>
   </footer>
-  <div class="nav-mobile" id="nav-modal">
+  <div v-if="mobileNav" class="nav-mobile open" id="nav-modal">
     <div class="modal-background">
 
     </div>
@@ -58,7 +58,7 @@
 <script>
 import "../node_modules/minireset.css/minireset.min.css";
 import "./assets/global.scss";
-const version = require("../package.json").version
+const version = require("../package.json").version;
 const firebase = require("firebase");
 export default {
   name: "App",
@@ -66,13 +66,13 @@ export default {
     return {
       loginText: "Login",
       supporters: "Jack, Rohan, Liam, Merideth",
-      version: version
+      version: version,
+      mobileNav: false
     };
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-      
         // User is signed in.
         this.loginText = "Logout";
 
@@ -112,6 +112,13 @@ export default {
     }
   },
   methods: {
+    openMobileNav() {
+      if (this.mobileNav) {
+        this.mobileNav = false;
+      } else {
+        this.mobileNav = true;
+      }
+    },
     login() {
       let user = firebase.auth().currentUser;
 
