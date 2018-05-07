@@ -64,7 +64,7 @@
    </v-context>
 
   </div>
-  <div class="modal open" id="addToCollectionModal">
+  <div class="modal" id="addToCollectionModal">
     <div class="modal-context container">
       <div class="box container material deep">
         <h1>Add To Collection: </h1>
