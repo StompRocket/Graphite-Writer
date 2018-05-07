@@ -76,7 +76,7 @@
           <button class="input button warning">Add</button>
         </span>
         <br>
-        <button class="button dark">Cancel</button>
+        <button @click="addToCollection" class="button dark">Cancel</button>
       </div>
     </div>
   </div>
