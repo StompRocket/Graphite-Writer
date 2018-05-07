@@ -7,7 +7,7 @@
       <h3 style="margin-top: 0;">Your Collections: </h3>
       <button @click="newCollection" class="button warning full-width">New Collection</button>
     </div>
-    <div  class="collection" v-for="collection in collections" :key="collection.key">
+    <div @click="filterBy(collection)"  class="collection" v-for="collection in collections" :key="collection.key">
       <hr class="collection-rule">
       <div class="fab-container">
         <h5>{{collection.name}}</h5>
@@ -113,7 +113,8 @@ export default {
     collectionsOpen: false,
     addToCollectionModal: false,
     addDoc: false,
-    collectionToAdd: null
+    collectionToAdd: null,
+    collectionFilter: false
   }),
   created() {
     document.title = `Graphite Writer BETA v${
@@ -205,11 +206,17 @@ export default {
               .includes(query);
           }
         };
-        return result.filter(filter);
+        if (this.collectionFilter) {
+        } else {
+          return result.filter(filter);
+        }
       }
     }
   },
   methods: {
+    filterBy(collection) {
+      this.collectionFilter = collection.key;
+    },
     addDocToCollection() {
       let docId = this.addDoc.userData.key;
       let userId = this.addDoc.userData.uid;
