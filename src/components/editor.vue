@@ -352,7 +352,7 @@ export default {
                 firebase
                   .database()
                   .ref(`/users/${this.uid}/docs/${this.docId}/`)
-                  .set({
+                  .update({
                     docId: this.docId,
                     uid: this.docUser,
                     utc: new Date().getTime(),

@@ -216,11 +216,9 @@ export default {
       let collectionKey = this.collectionToAdd;
       firebase
         .database()
-        .ref(`users/${this.uid}/collections/${collectionKey}/docs/${docId}`)
-        .set({
-          docId: docId,
-          userId: userId
-        });
+        .ref(`users/${this.uid}/docs/${docId}/collections/${collectionKey}`)
+        .set({ key: collectionKey });
+
       this.addToCollectionModal = false;
     },
     newCollection() {
