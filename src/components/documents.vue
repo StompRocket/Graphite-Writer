@@ -7,12 +7,12 @@
       <h3 style="margin-top: 0;">Your Collections: </h3>
       <button @click="newCollection" class="button warning full-width">New Collection</button>
     </div>
-    <div @click="filterBy(collection)"  class="collection" v-for="collection in collections" :key="collection.key">
+    <a @click="filterBy(collection)"  class="collection collection-link" v-for="collection in collections" :key="collection.key">
       <hr class="collection-rule">
       <div class="fab-container">
-        <h5>{{collection.name}}</h5>
+          <h5>{{collection.name}}</h5>
       </div>
-    </div>
+    </a>
     
 
   </div>

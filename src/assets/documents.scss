@@ -87,6 +87,16 @@
     border-radius: 0;
   }
 
+  .collection-link {
+    transition: all .1s ease-out;
+    color: $dark;
+  }
+
+  .collection-link:hover {
+    color: $warning;
+    transition: all .1s ease-out;
+  }
+
   .fab-container {
     padding: 1em;
     padding-top: 5px;
