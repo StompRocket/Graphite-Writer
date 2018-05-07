@@ -24,6 +24,15 @@
     color: $warning;
   }
 
+  #addToCollectionModal select {
+    background-color: #fff;
+  }
+
+  #addToCollectionModal > * {
+    max-height: 70vh;
+    margin-top: 15vh;
+  }
+
   .context-delete {
     color: $issue;
   }

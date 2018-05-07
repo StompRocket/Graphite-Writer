@@ -876,6 +876,13 @@ a.button {
 
 /* Inputs */
 
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
 .multi-input .input:not(.button) {
   border: 1px solid #8395a7;
   background: #ffffff;
