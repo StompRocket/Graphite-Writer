@@ -70,10 +70,10 @@
       <div class="box container material deep">
         <h1>Add To Collection: </h1>
         <span class="multi-input">
-          <select class="input">
-            <option :name="collection.key" :key="collection.key" v-for="collection in collections">{{collection.name}}</option>
+          <select v-model="collectionToAdd" class="input">
+            <option :name="collection.key" :key="collection.key" :value="collection.key" v-for="collection in collections">{{collection.name}}</option>
           </select>
-          <button class="input button warning">Add</button>
+          <button @click="addDocToCollection" class="input button warning">Add</button>
         </span>
         <br>
         <button @click="addToCollection" class="button dark">Cancel</button>
@@ -111,7 +111,9 @@ export default {
     collections: [],
     contextDoc: false,
     collectionsOpen: false,
-    addToCollectionModal: false
+    addToCollectionModal: false,
+    addDoc: false,
+    collectionToAdd: null
   }),
   created() {
     document.title = `Graphite Writer BETA v${
@@ -208,6 +210,19 @@ export default {
     }
   },
   methods: {
+    addDocToCollection() {
+      let docId = this.addDoc.userData.key;
+      let userId = this.addDoc.userData.uid;
+      let collectionKey = this.collectionToAdd;
+      firebase
+        .database()
+        .ref(`users/${this.uid}/collections/${collectionKey}/docs/${docId}`)
+        .set({
+          docId: docId,
+          userId: userId
+        });
+      this.addToCollectionModal = false;
+    },
     newCollection() {
       swal("New Collection Name:", {
         className: "swal-modal",
@@ -239,6 +254,7 @@ export default {
       console.log(doc);
     },
     addToCollection(doc) {
+      this.addDoc = doc;
       if (this.addToCollectionModal) {
         this.addToCollectionModal = false;
       } else {
