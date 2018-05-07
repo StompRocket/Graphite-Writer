@@ -63,7 +63,20 @@
   
    </v-context>
 
-</div>
+  </div>
+  <div class="modal open" id="addToCollectionModal">
+    <div class="modal-context container">
+      <div class="box container material deep">
+        <h1>Add To Collection: </h1>
+        <span class="multi-input">
+          <select class="input">
+            <option v-for="collection in collections">{{collection.name}}</option>
+          </select>
+          <button class="input button warning">Add</button>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 
 </template>
