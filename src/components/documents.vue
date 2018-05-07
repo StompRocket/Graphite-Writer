@@ -64,13 +64,13 @@
    </v-context>
 
   </div>
-  <div class="modal open" id="addToCollectionModal">
+  <div :class="{open: addToCollectionModal}" class="modal" id="addToCollectionModal">
     <div class="modal-context container">
       <div class="box container material deep">
         <h1>Add To Collection: </h1>
         <span class="multi-input">
           <select class="input">
-            <option v-for="collection in collections">{{collection.name}}</option>
+            <option :name="collection.key" v-for="collection in collections">{{collection.name}}</option>
           </select>
           <button class="input button warning">Add</button>
         </span>
@@ -107,7 +107,8 @@ export default {
     shareOffers: false,
     collections: [],
     contextDoc: false,
-    collectionsOpen: false
+    collectionsOpen: false,
+    addToCollectionModal: false
   }),
   created() {
     document.title = `Graphite Writer BETA v${
@@ -235,7 +236,11 @@ export default {
       console.log(doc);
     },
     addToCollection(doc) {
-      console.log(doc);
+      if (this.addToCollectionModal) {
+        this.addToCollectionModal = false;
+      } else {
+        this.addToCollectionModal = true;
+      }
     },
     getTimeAgo(date) {
       return timeAgo.format(date);
