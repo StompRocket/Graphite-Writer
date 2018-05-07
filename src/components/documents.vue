@@ -7,7 +7,7 @@
       <h3 style="margin-top: 0;">Your Collections: </h3>
       <button @click="newCollection" class="button warning full-width">New Collection</button>
     </div>
-    <div  class="collection" v-for="collection in collections">
+    <div  class="collection" v-for="collection in collections" :key="collection.key">
       <hr class="collection-rule">
       <div class="fab-container">
         <h5>{{collection.name}}</h5>
@@ -55,12 +55,12 @@
       <br />
     </router-link>
    <v-context ref="menu" class="context-menu">
-     <template scope="child">
-       <ul>
+
+       <ul slot-scope="child">
           <li @click="addToCollection(child)" class="context-collection">Add to collection</li>
           <li @click="remove(child)" class="context-delete">Delete</li>
        </ul>
-     </template>
+  
    </v-context>
 
 </div>
