@@ -70,7 +70,7 @@
         <h1>Add To Collection: </h1>
         <span class="multi-input">
           <select class="input">
-            <option :name="collection.key" v-for="collection in collections">{{collection.name}}</option>
+            <option :name="collection.key" :key="collection.key" v-for="collection in collections">{{collection.name}}</option>
           </select>
           <button class="input button warning">Add</button>
         </span>
