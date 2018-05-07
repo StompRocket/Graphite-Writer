@@ -9,6 +9,8 @@
       <div class="nav-menu">
         <router-link class="white" :to="{ name: 'documents' }">Documents</router-link>
         &nbsp;&nbsp;
+        <router-link class="white" :to="{ name: 'about' }">About</router-link>
+        &nbsp;&nbsp;
         <a @click="login" class="white">{{loginText}}</a>
       </div>
     </div>
