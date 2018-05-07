@@ -65,7 +65,6 @@
    </v-context>
 
   </div>
-<div class="modal" id="addToCollectionModal">
   <div :class="{open: addToCollectionModal}" class="modal" id="addToCollectionModal">
     <div class="modal-context container">
       <div class="box container material deep">
@@ -76,10 +75,11 @@
           </select>
           <button class="input button warning">Add</button>
         </span>
+        <br>
+        <button class="button dark">Cancel</button>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 </template>
