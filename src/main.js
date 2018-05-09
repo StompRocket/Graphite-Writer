@@ -5,6 +5,7 @@ import App from "./App";
 import router from "./router";
 import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
+
 const firebase = require("firebase");
 let vueApp;
 const config = {

@@ -1,5 +1,5 @@
 <template>
-<div class="page documents">
+<div  class="page documents">
   <button @click="toggleCollections" class="button warning fab"><i class="fas fa-folder" v-if="!collectionsOpen"></i><i class="fas fa-folder-open" v-if="collectionsOpen"></i></button>
 
   <div  v-if="collectionsOpen" class="folder-float box material">
@@ -230,6 +230,7 @@ export default {
         this.collectionFilter = collection.key;
       }
     },
+
     addDocToCollection() {
       let docId = this.addDoc.userData.key;
       let userId = this.addDoc.userData.uid;
@@ -269,7 +270,26 @@ export default {
       }
     },
     remove(doc) {
-      console.log(doc);
+      swal({
+        title: "Are you sure?",
+        text: `You are about to remove this document from your library`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          firebase
+            .database()
+            .ref(`users/${this.uid}/docs/${doc.userData.key}`)
+            .remove()
+            .then(err => {
+              swal({
+                text: "Removed from your library",
+                icon: "success"
+              });
+            });
+        }
+      });
     },
     addToCollection(doc) {
       this.addDoc = doc;

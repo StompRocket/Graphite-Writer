@@ -1,5 +1,5 @@
 <template>
-<div class="page editor">
+<div @keypress.224.s.prevent="saveDoc" @keypress.17.s.prevent="saveDoc" class="page editor">
     <loadingScreen v-if="loading"></loadingScreen>
   <br />
   <div class="container">
@@ -480,13 +480,26 @@ export default {
       }
     },
     remove() {
-      firebase
-        .database()
-        .ref(`users/${this.uid}/docs/${this.docId}`)
-        .remove()
-        .then(() => {
-          swal("Removed from your library");
-        });
+      swal({
+        title: "Are you sure?",
+        text: `You are about to remove this document from your library`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          firebase
+            .database()
+            .ref(`users/${this.uid}/docs/${this.docId}`)
+            .remove()
+            .then(() => {
+              swal({
+                text: "Removed from your library",
+                icon: "success"
+              });
+            });
+        }
+      });
     },
     closeSave() {
       this.shareSettings = false;
