@@ -7,12 +7,12 @@
       <h3 style="margin-top: 0;">Your Collections: </h3>
       <button @click="newCollection" class="button warning full-width">New Collection</button>
     </div>
-    <a @click="filterBy(collection)"  class="collection collection-link" v-for="collection in collections" :key="collection.key">
+    <div @click="filterBy(collection)" v-bind:class="{selected: collection.key == collectionFilter }"  class="collection" v-for="collection in collections" :key="collection.key">
       <hr class="collection-rule">
       <div class="fab-container">
-          <h5>{{collection.name}}</h5>
+        <h5>{{collection.name}}</h5>
       </div>
-    </a>
+    </div>
     
 
   </div>
@@ -137,6 +137,7 @@ export default {
               let docKey = doc.key;
               let utc = doc.val().utc;
               let lastOpened = doc.val().lastOpened;
+              let collections = doc.val().collections;
               //console.log(utc, lastOpened, docKey);
               db
                 .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
@@ -146,7 +147,8 @@ export default {
                   this.docs.unshift({
                     doc: docMeta.val(),
                     key: docKey,
-                    uid: doc.val().uid
+                    uid: doc.val().uid,
+                    collections: collections
                   });
 
                   // ...
@@ -195,7 +197,16 @@ export default {
     filterSearch() {
       let query = this.search.toLowerCase();
       let result = this.sortedDocs;
-
+      if (this.collectionFilter) {
+        const collectionFilter = doc => {
+          if (doc.collections) {
+            if (doc.collections[this.collectionFilter]) {
+              return true;
+            }
+          }
+        };
+        result = result.filter(collectionFilter);
+      }
       if (!query) {
         return result;
       } else {
@@ -206,16 +217,18 @@ export default {
               .includes(query);
           }
         };
-        if (this.collectionFilter) {
-        } else {
-          return result.filter(filter);
-        }
+
+        return result.filter(filter);
       }
     }
   },
   methods: {
     filterBy(collection) {
-      this.collectionFilter = collection.key;
+      if (this.collectionFilter == collection.key) {
+        this.collectionFilter = false;
+      } else {
+        this.collectionFilter = collection.key;
+      }
     },
     addDocToCollection() {
       let docId = this.addDoc.userData.key;
