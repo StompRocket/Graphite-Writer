@@ -58,31 +58,31 @@
 </div>
 </template>
 <script>
-import "../assets/editor.scss";
-import "../assets/quill/quill.snow.css";
-import "../assets/quill/quill.min.js";
-import firebase from "firebase";
-import loadingScreen from "./loadingScreen.vue";
-import sjcl from "../assets/sjcl.js";
-import swal from "sweetalert";
-import MagicUrl from "quill-magic-url";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
+import '../assets/editor.scss';
+import '../assets/quill/quill.snow.css';
+import '../assets/quill/quill.min.js';
+import firebase from 'firebase';
+import loadingScreen from './loadingScreen.vue';
+import sjcl from '../assets/sjcl.js';
+import swal from 'sweetalert';
+import MagicUrl from 'quill-magic-url';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 TimeAgo.locale(en);
-const timeAgo = new TimeAgo("en-US");
-Quill.register("modules/magicUrl", MagicUrl);
-const FontAttributor = Quill.import("attributors/class/font");
-const Hashids = require("hashids");
+const timeAgo = new TimeAgo('en-US');
+Quill.register('modules/magicUrl', MagicUrl);
+const FontAttributor = Quill.import('attributors/class/font');
+const Hashids = require('hashids');
 let hashids = new Hashids();
 let typingTimer; //timer identifier
 let doneTypingInterval = 5000;
 let updates = [];
-const Clipboard = Quill.import("modules/clipboard");
-FontAttributor.whitelist = ["roboto", "Serif", "Sans Serif"];
+const Clipboard = Quill.import('modules/clipboard');
+FontAttributor.whitelist = ['roboto', 'Serif', 'Sans Serif'];
 Quill.register(FontAttributor, true);
 class MyClipboard extends Clipboard {
   onPaste(e) {
-    var wrapper = document.querySelector("#editor-wrapper");
+    var wrapper = document.querySelector('#editor-wrapper');
     var scrollTop = wrapper.scrollTop;
     super.onPaste(e);
     setTimeout(function() {
@@ -91,25 +91,25 @@ class MyClipboard extends Clipboard {
   }
 }
 
-Quill.register("modules/clipboard", MyClipboard, true);
+Quill.register('modules/clipboard', MyClipboard, true);
 
 const toolbarOptions = [
   [{ font: [] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  ["bold", "italic", "underline", "strike"], // toggled buttons
-  ["blockquote", "link", "code-block", "image"],
+  ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+  ['blockquote', 'link', 'code-block', 'image'],
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-  [{ list: "ordered" }, { list: "bullet" }],
-  [{ script: "sub" }, { script: "super" }], // superscript/subscript
-  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+  [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
   [
     {
       align: []
     }
   ],
-  [{ direction: "rtl" }], // text direction
+  [{ direction: 'rtl' }], // text direction
 
-  ["clean"] // remove formatting button
+  ['clean'] // remove formatting button
 ];
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -136,13 +136,13 @@ function guid() {
   return (
     s4() +
     s4() +
-    "-" +
+    '-' +
     s4() +
-    "-" +
+    '-' +
     s4() +
-    "-" +
+    '-' +
     s4() +
-    "-" +
+    '-' +
     s4() +
     s4() +
     s4()
@@ -170,7 +170,7 @@ function encrypt(data, key) {
     data = sjcl.encrypt(key, data);
     return data;
   } else {
-    console.log("no data or key", data, key);
+    console.log('no data or key', data, key);
     return data;
   }
 }
@@ -180,17 +180,17 @@ function decrypt(data, key) {
     data = sjcl.decrypt(key, data);
     return JSON.parse(data);
   } else {
-    console.log("no data or key", data, key);
+    console.log('no data or key', data, key);
     return data;
   }
 }
 function encodeEmail(email) {
   let encodedEmail = encodeURIComponent(email);
-  encodedEmail = encodedEmail.replace(/\./g, "%dot");
+  encodedEmail = encodedEmail.replace(/\./g, '%dot');
   return encodedEmail;
 }
 function decodeEmail(email) {
-  let encodedEmail = email.replace(/%dot/g, ".");
+  let encodedEmail = email.replace(/%dot/g, '.');
   encodedEmail = decodeURIComponent(email);
 
   return encodedEmail;
@@ -201,7 +201,7 @@ function hash(data) {
   // console.log(result);
   result = String(result);
   //console.log(result);
-  result = result.replace("-", "");
+  result = result.replace('-', '');
   //console.log(result);
   result = Number(result);
   //console.log(result);
@@ -209,7 +209,7 @@ function hash(data) {
   return result;
 }
 export default {
-  name: "editor",
+  name: 'editor',
   components: {
     loadingScreen
   },
@@ -228,9 +228,9 @@ export default {
         toolbar: toolbarOptions,
         magicUrl: true
       },
-      placeholder: "Compose an epic...",
+      placeholder: 'Compose an epic...',
       readOnly: false,
-      theme: "snow"
+      theme: 'snow'
     },
     initTime: null,
     shareSettings: false,
@@ -257,11 +257,11 @@ export default {
           firebase
             .database()
             .ref(`/documentMeta/${this.docUser}/${this.docId}/users`)
-            .on("value", snapshot => {
+            .on('value', snapshot => {
               //  console.log(snapshot.val(), this.uid);
               if (snapshot.val()[this.uid]) {
                 if (this.editor == false) {
-                  this.editor = new Quill("#editor", this.opts);
+                  this.editor = new Quill('#editor', this.opts);
                 }
 
                 //   console.log("i can write");
@@ -269,15 +269,15 @@ export default {
                 this.opts.readOnly = true;
                 // console.log("i cant write");
                 if (this.editor == false) {
-                  this.editor = new Quill("#editor", this.opts);
+                  this.editor = new Quill('#editor', this.opts);
                 }
               }
               this.users = [];
               snapshot.forEach(user => {
                 firebase
                   .database()
-                  .ref("/users/" + user.val() + "/publicInfo")
-                  .once("value")
+                  .ref('/users/' + user.val() + '/publicInfo')
+                  .once('value')
                   .then(snapshot => {
                     this.users.push(snapshot.val());
                   });
@@ -286,7 +286,7 @@ export default {
           firebase
             .database()
             .ref(`/documents/${this.docUser}/${this.docId}/data`)
-            .once("value", snapshot => {
+            .once('value', snapshot => {
               this.doc = snapshot.val();
               this.loading = false;
               this.saveHandler();
@@ -295,6 +295,25 @@ export default {
 
               this.initTime = Date.now();
               const endLoad = performance.now();
+              // Get the header
+              let header = document.getElementsByClassName('ql-toolbar')[0];
+
+              let sticky = header.offsetTop;
+              //console.log(header);
+              window.onscroll = () => {
+                if (header) {
+                  if (window.pageYOffset >= sticky) {
+                    header.classList.add('sticky');
+                    //console.log('sticky');
+                  } else {
+                    header.classList.remove('sticky');
+                    //console.log('un sticky');
+                  }
+                }
+              };
+
+              // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+
               firebase
                 .database()
                 .ref(`/analytics/loadTimes/`)
@@ -307,7 +326,7 @@ export default {
                   startLoad: startLoad,
                   endLoad: endLoad,
                   time: endLoad - startLoad,
-                  page: "documents"
+                  page: 'documents'
                 });
               firebase
                 .database()
@@ -333,15 +352,15 @@ export default {
               firebase
                 .database()
                 .ref(`/documentMeta/${this.docUser}/${this.docId}/currentUsers`)
-                .on("value", data => {
+                .on('value', data => {
                   this.currentUsers = data.val();
                 });
-              console.log(endLoad - startLoad + " loaded");
+              console.log(endLoad - startLoad + ' loaded');
             });
           firebase
             .database()
             .ref(`/documentMeta/${this.docUser}/${this.docId}/info`)
-            .on("value", snapshot => {
+            .on('value', snapshot => {
               if (snapshot.val()) {
                 this.docMeta = snapshot.val();
                 let date = new Date();
@@ -359,7 +378,7 @@ export default {
                     lastOpened: date
                   });
               } else {
-                this.$router.push("/documents");
+                this.$router.push('/documents');
               }
 
               // ...
@@ -368,7 +387,7 @@ export default {
             .database()
             .ref(`/documents/${this.docUser}/${this.docId}/changes`)
             .limitToLast(5)
-            .on("child_added", data => {
+            .on('child_added', data => {
               if (
                 data.val().time > this.initTime &&
                 data.val().realTimeId != this.realTimeId
@@ -381,10 +400,10 @@ export default {
               }
             });
         } else {
-          this.$router.push("/documents");
+          this.$router.push('/documents');
         }
       } else {
-        this.$router.push("/login");
+        this.$router.push('/login');
       }
     });
   },
@@ -418,9 +437,9 @@ export default {
     removeUser(user) {
       this.closeSave();
       swal({
-        title: "Are you sure?",
+        title: 'Are you sure?',
         text: `You are about to remove acess for ${user.name} to this document`,
-        icon: "warning",
+        icon: 'warning',
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
@@ -432,7 +451,7 @@ export default {
             )
             .remove();
           swal(`${user.name} has been removed`, {
-            icon: "success"
+            icon: 'success'
           });
         }
       });
@@ -450,7 +469,7 @@ export default {
         firebase
           .database()
           .ref(`userDB/byEmail/${encodedEmail}`)
-          .once("value", snapshot => {
+          .once('value', snapshot => {
             if (snapshot.val()) {
               let shareUID = snapshot.val().uid;
               firebase
@@ -472,18 +491,18 @@ export default {
               this.personToShareWith = null;
               this.shareError = null;
             } else {
-              this.shareError = "Not a user of Graphite Wirter";
+              this.shareError = 'Not a user of Graphite Wirter';
             }
           });
       } else {
-        this.shareError = "Not a valid email";
+        this.shareError = 'Not a valid email';
       }
     },
     remove() {
       swal({
-        title: "Are you sure?",
+        title: 'Are you sure?',
         text: `You are about to remove this document from your library`,
-        icon: "warning",
+        icon: 'warning',
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
@@ -494,8 +513,8 @@ export default {
             .remove()
             .then(() => {
               swal({
-                text: "Removed from your library",
-                icon: "success"
+                text: 'Removed from your library',
+                icon: 'success'
               });
             });
         }
@@ -506,7 +525,7 @@ export default {
     },
     saveHandler() {
       // console.log("savehandler");
-      this.editor.on("selection-change", (range, oldRange, source) => {
+      this.editor.on('selection-change', (range, oldRange, source) => {
         if (range) {
           firebase
             .database()
@@ -519,7 +538,7 @@ export default {
               range: range
             });
         } else {
-          console.log("Cursor not in the editor");
+          console.log('Cursor not in the editor');
           firebase
             .database()
             .ref(
@@ -529,11 +548,11 @@ export default {
         }
       });
 
-      this.editor.on("text-change", (delta, oldDelta, source) => {
+      this.editor.on('text-change', (delta, oldDelta, source) => {
         // console.log("change");
-        if (source == "api") {
+        if (source == 'api') {
           // console.log("An API call triggered this change.");
-        } else if (source == "user") {
+        } else if (source == 'user') {
           this.saveDoc(delta);
           // console.log("save", delta, oldDelta);
         }
