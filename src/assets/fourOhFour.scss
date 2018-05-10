@@ -1,14 +1,12 @@
+@import './vars.scss';
 #fourOhFour {
-  height: 80vh;
+  height: 70vh;
   color: white;
   text-align: center;
- .rickNotFound {
- 	display: none;
- 	opacity: 0;
- 	visibility: hidden;
- }
-
- .big {
- 	font-size: 4em;
- }
+  h1 {
+    font-size: 10rem;
+    font-weight: bold;
+    margin-bottom: 2%;
+    color: $warning;
+  }
 }
