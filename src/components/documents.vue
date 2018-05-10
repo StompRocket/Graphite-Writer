@@ -84,28 +84,28 @@
 
 </template>
 <script>
-import "../assets/documents.scss";
-import swal from "sweetalert";
-import firebase from "firebase";
-import loadingScreen from "./loadingScreen.vue";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
-import vContext from "vue-context";
+import '../assets/documents.scss';
+import swal from 'sweetalert';
+import firebase from 'firebase';
+import loadingScreen from './loadingScreen.vue';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import vContext from 'vue-context';
 TimeAgo.locale(en);
-const timeAgo = new TimeAgo("en-US");
+const timeAgo = new TimeAgo('en-US');
 export default {
-  name: "documents",
+  name: 'documents',
   components: {
     loadingScreen,
     vContext
   },
   data: () => ({
-    newDocName: "",
+    newDocName: '',
     loading: true,
     uid: null,
     docs: [],
     newDoc: false,
-    search: "",
+    search: '',
     noDocs: true,
     shareOffers: false,
     collections: [],
@@ -117,6 +117,7 @@ export default {
     collectionFilter: false
   }),
   created() {
+    window.scroll(0, 0);
     document.title = `Graphite Writer BETA v${
       this.$parent.version
     } | Documents`;
@@ -125,7 +126,7 @@ export default {
         this.uid = user.uid;
         const db = firebase.database();
 
-        db.ref(`users/${this.uid}/docs`).on("value", snapshot => {
+        db.ref(`users/${this.uid}/docs`).on('value', snapshot => {
           this.loading = false;
 
           if (!snapshot.val()) {
@@ -141,7 +142,7 @@ export default {
               //console.log(utc, lastOpened, docKey);
               db
                 .ref(`documentMeta/${doc.val().uid}/${doc.val().docId}`)
-                .once("value")
+                .once('value')
                 .then(docMeta => {
                   // console.log(docMeta.val());
                   this.docs.unshift({
@@ -158,10 +159,10 @@ export default {
             });
           }
         });
-        db.ref(`users/${this.uid}/collections`).on("value", snapshot => {
+        db.ref(`users/${this.uid}/collections`).on('value', snapshot => {
           this.collections = snapshot.val();
         });
-        db.ref(`users/${this.uid}/shareOffers`).on("value", snapshot => {
+        db.ref(`users/${this.uid}/shareOffers`).on('value', snapshot => {
           if (!snapshot.val()) {
             this.shareOffers = false;
           } else {
@@ -180,7 +181,7 @@ export default {
           }
         });
       } else {
-        this.$router.push("/login");
+        this.$router.push('/login');
       }
     });
   },
@@ -243,13 +244,13 @@ export default {
       this.addToCollectionModal = false;
     },
     newCollection() {
-      swal("New Collection Name:", {
-        className: "swal-modal",
-        content: "input"
+      swal('New Collection Name:', {
+        className: 'swal-modal',
+        content: 'input'
       }).then(name => {
         if (name) {
           if (/^\s+$/.test(name)) {
-            name = "Untitled";
+            name = 'Untitled';
           }
           let newCollectionRef = firebase
             .database()
@@ -271,9 +272,9 @@ export default {
     },
     remove(doc) {
       swal({
-        title: "Are you sure?",
+        title: 'Are you sure?',
         text: `You are about to remove this document from your library`,
-        icon: "warning",
+        icon: 'warning',
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
@@ -284,8 +285,8 @@ export default {
             .remove()
             .then(err => {
               swal({
-                text: "Removed from your library",
-                icon: "success"
+                text: 'Removed from your library',
+                icon: 'success'
               });
             });
         }
@@ -309,18 +310,18 @@ export default {
         .remove();
 
       this.$router.push({
-        name: "editor",
+        name: 'editor',
         params: { document: doc.docId, user: doc.docUser }
       });
     },
     openNewDoc() {
-      swal("New Document Name:", {
-        className: "swal-modal",
-        content: "input"
+      swal('New Document Name:', {
+        className: 'swal-modal',
+        content: 'input'
       }).then(name => {
         if (name) {
           if (/^\s+$/.test(name)) {
-            name = "Untitled";
+            name = 'Untitled';
           }
           console.log(name);
           // var newDocRef = firebase.database().ref('users/' + uid + '/docs/').push()
@@ -358,7 +359,7 @@ export default {
             }
           });
           newDocStorRef.set({
-            data: ""
+            data: ''
           });
         }
       });
