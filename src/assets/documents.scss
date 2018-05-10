@@ -120,6 +120,15 @@
     }
   }
 
+  .collection {
+    transition: all .1s ease-out;
+    cursor: pointer;
+  }
+
+  .collection.selected {
+    color: $warning;
+  }
+
   
   .full-input {
     width: 100%;
