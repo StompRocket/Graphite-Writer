@@ -4,9 +4,9 @@
   	<div class="container">
   		<div class="center-box">
 	  		<h1 class="big" style="margin-bottom: 0; padding-bottom: 0;"><b>Graphite Writer</b> v2</h1>
-	  		<h2 style="margin-bottom: 1em; font-weight: 500;">A Modern Text Editor</h2>
+	  		<h2 style="margin-bottom: 1em; font-weight: 500;">A Modern Document Editor Focused On Speed And Usability</h2>
 	  		<router-link class="button dark" to="/login">Start Now</router-link>
-        <a  class="button dark"  @click="toggleVideo"><i class="fas fa-play"></i> What's New</a>
+        <a  class="button dark"  @click="toggleVideo"><i class="fas fa-play"></i> Watch</a>
 	  	</div>
   	</div>
   </div>
@@ -14,64 +14,59 @@
   <div class="container white">
     <br />
     <br />
-    <h3>From the begenning we noticed a problem, text editors were either fast or cloud based, not both. We built Graphite Writer to solve tihs problem. Graphite Writer was designed from the ground up as a fast, easy to use, and secure text editor. All your documents are saved in the cloud, and can be accessed from anywhere. </h3>
+    <p class="blurb">From the beginning we noticed a problem, text editors were either fast or cloud-based, not both. We built Graphite Writer to solve this problem. Graphite Writer was designed from the ground up as a fast, easy to use, and secure text editor. All your documents are saved in the cloud instantly and can be accessed from anywhere. </p>
     
     <br>
     <br>
 
-    <div class="row">
+    <div class="row threeFeatures">
       <div class="column center">
         <span class="underline-warning">
-          <h1>Speed</h1>
+          <h3>Speed</h3>
 
         </span>
-        Graphite was developed with speed in mind, achieving much faster loading times than other cloud based alternatives. Graphite has been clocked up to 10 seconds faster than similar programs.
+        <p>Graphite Writer was developed with speed in mind, achieving much faster loading times than other cloud based alternatives. Graphite Writer has been clocked up to 10 seconds faster than similar programs.</p>
       </div>
       <div class="column center">
         <span class="underline-warning">
-          <h1>Usability</h1>
+          <h3>Usability</h3>
         </span>
 
-        Graphite was designed for ease of use, not computer whizzes. We pride ourselves on Graphite's accessibility. In addition, if you see a problem or something you would like changed, we are always willing to consider suggestions.
+        <p>Graphite Writer was designed for ease of use, not computer whizzes. We pride ourselves on Graphite Writer's accessibility. In addition, if you see a problem or something you would like changed, we are always willing to consider suggestions.</p>
       </div>
       <div class="column center">
         <span class="underline-warning">
-          <h1>Security</h1>
+          <h3>Security</h3>
         </span>
-        At Graphite Writer we respect your privacy. That's why all your documents are encrypted with military grade security. Unlike <a href="https://www.theguardian.com/commentisfree/2014/apr/18/corporations-google-should-not-sell-customer-data" class="dark" target="_blank">some companies</a>, we believe your information is <i>yours</i>, which is why we don't sell it, or give it away without your permission.
+        <p>At Graphite Writer we respect your privacy, we encrypt all of your data, and never sell it to third parties.</p>
       </div>
     </div>
-    <h1>Over 150 satisfied users</h1>
-
-    <div class="box material container">
-      <h2><i class="fas fa-quote-left quote-testimonial"></i>Loads like a million times faster<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
-      <i> - Max, satisfied Graphite Writer user</i>
+    <h2 class="sectionHeading">Over 150 satisfied users</h2>
+<carousel :perPage="1">
+  <slide>
+    <div class="testamonialContainer">
+      <q>Graphite Writer combines the features and usability of programs such as Microsoft Word or Google Docs with a speed and simplicity unparalleled by competitors.</q>
+      <p> - Sam M.</p>
     </div>
-    <br>
-    <div class="box material container">
-      <h2><i class="fas fa-quote-left quote-testimonial"></i>A fantastic tool. I would never use any other.<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
-      <i> - Jack, equally satisfied Graphite Writer user</i>
+  </slide>
+  <slide>
+   <div class="testamonialContainer">
+      <q>Loads like a million times faster</q>
+      <p> - Max H.</p>
     </div>
-    <br>
-    <div class="box material container">
-      <h2><i class="fas fa-quote-left quote-testimonial"></i>Graphite Write combines the features and usability of programs such as Microsoft Word or Google Docs with a speed and simplicity unparalleled by competitors.<i class="fas fa-quote-right quote-testimonial-end"></i></h2>
-      <i> - Sam, even more satisfied Graphite Writer user</i>
+  </slide>
+  <slide>
+    <div class="testamonialContainer">
+      <q>A fantastic tool. I would never use any other.</q>
+      <p> -Jack K.</p>
     </div>
-
-    <br>
-    <h1>v2 Changelog</h1>
-    <ol>
-      <li>Increased performance across the site, speeding up loading times by up to 3 seconds</li>
-      <li>New more optimized database for faster and more secure document storage</li>
-      <li>Introducing Collections. Collections are a brand new way to organize your documents. </li>
-      <li>Redesigned documents page makes organizing files a breeze. </li>
-      <li>New UI optimized for more productivity.</li>
-      <li>Real Time sharing has been added to the site, allowing for a streamlined collaboration experience.</li>
-      <li>While editing, you can now see when users are on the document with you. </li>
-      <li>Easily remove unwanted users by restricting their access to read-only.</li>
-      <li>Share a read-only link with as many people as you want to easily share your writing anywhere</li>
-      <li><s>Steals your information</s></li>
-    </ol>
+  </slide>
+  
+</carousel>
+     
+   
+    <h2 class="sectionHeading">Real Time Sharing</h2>
+    <p class="blurb">In Graphite Writer version 2 you can now share documents in real time. After months at the drawing board, we have designed a custom database that allows for incredibly fast real-time sharing. Our average document load time is just under 500 milliseconds, while similar programs struggle with 10 second loading times.</p>
 
   </div>
 <div  @click="toggleVideo" :class="{open: videoModal}" class="modal">
@@ -94,10 +89,20 @@
 <script>
 import '../assets/home.scss';
 import '../assets/player.js';
+
 export default {
   name: 'home',
+   
   data: () => ({
-    videoModal: false
+    videoModal: false,
+    flickityOptions: {
+      initialIndex: 1,
+      prevNextButtons: true,
+      pageDots: false,
+      wrapAround: true
+
+      // any options from Flickity can be used
+      }
   }),
   created() {
     document.title = `Graphite Writer BETA v${

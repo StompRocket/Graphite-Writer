@@ -1,3 +1,4 @@
+@import './vars.scss';
 .page.home {
   min-height: 100vh;
   background-color: #fff;
@@ -11,15 +12,31 @@
     font-size: 2em;
     margin: 2%;
   }
+  .blurb {
+	  font-size: 1.2rem;
+	  font-weight: 400;
+  }
+  .threeFeatures {
+	  h3 {
+		  font-weight: bold;
+		  color: $gray!important;
+		  font-size: 3rem;
+	  }
+  }
+  .sectionHeading {
+    font-size: 2rem;
+    margin-top: 5%;
+    font-weight: 600;
+  }
   & .banner-image {
     background-image: url("../assets/homepage-banner.jpg");
     background-repeat: no-repeat;
     background-position: center, center;
     background-size: cover;
-    height: 100vh;
+    height: 70vh;
   }
   & .center-box {
-    padding-top: calc(50vh - 3.5em - 100px);
+    padding-top: calc(35vh - 3.5em - 100px);
     & .button {
       font-size: .9em;
     }
@@ -35,6 +52,21 @@
     transform: translateX(-.5em);
     transform: translateY(.5em);
     padding-left: 3px;
+  }
+  .testamonialContainer {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 10px;
+    padding: 2%;
+  margin: 2%;
+  height: 20vh;
+	q {
+		font-size: 1.5rem;
+    font-weight: 500;
+	}
+	p {
+		font-size: 1.3rem;
+		color: $warning;
+	}
   }
   & h1.big {
     font-size: 3.5em;
