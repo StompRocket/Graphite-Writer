@@ -91,7 +91,7 @@ class MyClipboard extends Clipboard {
   }
 }
 
-Quill.register('modules/clipboard', MyClipboard, true);
+//Quill.register('modules/clipboard', MyClipboard, true);
 
 const toolbarOptions = [
   [{ font: [] }],
@@ -295,8 +295,9 @@ export default {
               this.editor.setContents(this.decryptedDoc.data);
 
               this.initTime = Date.now();
-              const endLoad = performance.now();
+
               // Get the header
+
               let header = document.getElementsByClassName('ql-toolbar')[0];
 
               let sticky = header.offsetTop + 100;
@@ -314,7 +315,7 @@ export default {
               };
 
               // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-
+              const endLoad = performance.now();
               firebase
                 .database()
                 .ref(`/analytics/loadTimes/`)
