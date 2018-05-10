@@ -243,6 +243,7 @@ export default {
     user: null
   }),
   created() {
+    window.scroll(0, 0);
     const startLoad = performance.now();
     const db = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
@@ -298,7 +299,7 @@ export default {
               // Get the header
               let header = document.getElementsByClassName('ql-toolbar')[0];
 
-              let sticky = header.offsetTop;
+              let sticky = header.offsetTop + 100;
               //console.log(header);
               window.onscroll = () => {
                 if (header) {
