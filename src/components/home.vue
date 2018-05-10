@@ -6,7 +6,7 @@
 	  		<h1 class="big" style="margin-bottom: 0; padding-bottom: 0;"><b>Graphite Writer</b> v2</h1>
 	  		<h2 style="margin-bottom: 1em; font-weight: 500;">A Modern Text Editor</h2>
 	  		<router-link class="button dark" to="/login">Start Now</router-link>
-        <router-link class="button dark" to="/v2"><i class="fas fa-play"></i> What's New</router-link>
+        <a  class="button dark"  @click="toggleVideo"><i class="fas fa-play"></i> What's New</a>
 	  	</div>
   	</div>
   </div>
@@ -74,7 +74,15 @@
     </ol>
 
   </div>
-
+<div  @click="toggleVideo" :class="{open: videoModal}" class="modal">
+  <button class="closeBtn"><i class="fas fa-times-circle"></i></button>
+  <div class="modal-content">
+  <div class="video-modal">
+    <div style="padding:42.5% 0 0 0;position:relative;">
+      <iframe src="https://player.vimeo.com/video/268322197" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+    </div>
+  </div>
+</div>
   <div class="container">
     &nbsp;
   </div>
@@ -84,12 +92,26 @@
 </div>
 </template>
 <script>
-import "../assets/home.scss";
+import '../assets/home.scss';
+import '../assets/player.js';
 export default {
-  name: "home",
-  data: () => ({}),
+  name: 'home',
+  data: () => ({
+    videoModal: false
+  }),
   created() {
-     document.title = `Graphite Writer BETA v${this.$parent.version} | Create Text Documents Online For Free`
+    document.title = `Graphite Writer BETA v${
+      this.$parent.version
+    } | Create Text Documents Online For Free`;
+  },
+  methods: {
+    toggleVideo() {
+      if (this.videoModal) {
+        this.videoModal = false;
+      } else {
+        this.videoModal = true;
+      }
+    }
   }
 };
 </script>
