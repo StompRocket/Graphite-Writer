@@ -61,6 +61,7 @@
 import "../node_modules/minireset.css/minireset.min.css";
 import "./assets/global.scss";
 const version = require("../package.json").version;
+console.log(`Graphite Writer BETA v${version}`);
 const firebase = require("firebase");
 export default {
   name: "App",
@@ -145,5 +146,4 @@ export default {
 </script>
 
 <style>
-
 </style>

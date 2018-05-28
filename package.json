@@ -1,6 +1,6 @@
 {
   "name": "graphite-writer",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A modren web based text editor, with Firebase, Vue JS, and Quill JS ",
   "author": "StompRocket hello@stomprocket.io",
   "private": true,
