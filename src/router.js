@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Classes from './views/classes.vue'
 import Class from './views/class'
 import Document from './views/document'
-
+import Login from './views/login'
 Vue.use(Router)
 
 export default new Router({

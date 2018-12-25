@@ -9,6 +9,7 @@ html, body, #app, .page {
   color: $grey;
 
 }
+
 .page {
   min-height: 82vh;
   grid-column-start: 1;
@@ -16,6 +17,7 @@ html, body, #app, .page {
   grid-row-start: 2;
   grid-row-end: 3;
 }
+
 .app__placeHolder {
   background: $grey;
   grid-column-start: 1;
@@ -23,17 +25,75 @@ html, body, #app, .page {
   grid-row-start: 1;
   grid-row-end: 2;
 }
+
 .app__user {
-  background-color:white;
+  @include rounded;
+  background-color: white;
   display: block;
   position: absolute;
   right: 1%;
   top: 9vh;
-  @include shadow;
+  @include shadow--large;
   width: 20vw;
-  height: 40vh;
+//  height: 40vh;
   padding: 2%;
   z-index: 9999999;
+  .user__card {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 2%;
+    align-items: center;
+
+    img {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-end: 2;
+      grid-column-start: 1;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+      border-radius: 100px;
+      align-self: center;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    div {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      align-self: center;
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+
+  }
+  button {
+    width: 100%;
+    display: block;
+    padding: 4% 2%;
+    font-size: 1rem;
+    background: $yellow;
+    border: none;
+    @include rounded;
+    font-weight: 700;
+    @include shadow;
+    @include transition;
+    margin-top: 4%;
+    &:hover {
+      background: $yellow--hover;
+      //box-shadow: none;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 a {
@@ -146,7 +206,7 @@ a {
   background-size: 5vh 5vh;
   border: rgba(0, 0, 0, 0.5) solid 2px;
   // @include transition;
-   &:hover {
+  &:hover {
     //@include shadow;
     outline: none;
     border-color: $yellow;
@@ -154,4 +214,5 @@ a {
   &:focus {
     outline: none;
   }
+
 }
