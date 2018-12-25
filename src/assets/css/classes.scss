@@ -12,6 +12,8 @@
   }
   .classes__recentDocumentsContainer {
     .classes__recentDocument {
+      color: $grey;
+      text-decoration: none;
       @include transition;
       margin-bottom: 1%;
       @include shadow;

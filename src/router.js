@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Classes from './views/classes.vue'
 import Class from './views/class'
 import Document from './views/document'
-import Login from './views/login'
+//import Login from './views/login'
 Vue.use(Router)
 
 export default new Router({
@@ -16,11 +16,11 @@ export default new Router({
       component: Classes
     },
     {
-      path: '/class/:id',
+      path: '/class/:uid/:id',
       name: 'class',
       component: Class
     }, {
-      path: '/n/:id',
+      path: '/n/:uid/:id',
       name: 'note',
       component: Document
     }

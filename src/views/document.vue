@@ -33,12 +33,12 @@
 
     methods: {
       goClass() {
-        this.$router.push('/class/test')
+        this.$router.push('/class/test/test')
       }
     },
     mounted() {
       let editor = new Quill('#editor', options)
-
+      this.$parent.loading = false;
     }
   }
 </script>

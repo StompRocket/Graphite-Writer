@@ -56,7 +56,7 @@
       this.loading = true;
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          this.loading = false;
+
           this.user = {
             uid: user.uid,
             name: user.displayName,
