@@ -5,30 +5,30 @@
       <p>New Note</p>
     </button>
     <div class="class__documentContainer">
-      <div class="class__document">
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
-      <div class="class__document">
+      </router-link>
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
-      <div class="class__document">
+      </router-link>
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
-      <div class="class__document">
+      </router-link>
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
-      <div class="class__document">
+      </router-link>
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
-      <div class="class__document">
+      </router-link>
+      <router-link to="/n/test" class="class__document">
         <h1>Left Triangle <span>Feb 30th</span></h1>
         <p>Edited: 2 min ago</p>
-      </div>
+      </router-link>
     </div>
   </main>
 </template>

@@ -38,6 +38,8 @@
     grid-column-gap: 2vw;
     grid-row-gap: 2vw;
     .class__document {
+      color: $grey;
+      text-decoration: none;
       height: 6vw;
       display: flex;
       justify-content: center;

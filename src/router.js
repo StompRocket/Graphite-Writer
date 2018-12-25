@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Classes from './views/classes.vue'
 import Class from './views/class'
+import Document from './views/document'
 
 Vue.use(Router)
 
@@ -18,6 +19,10 @@ export default new Router({
       path: '/class/:id',
       name: 'class',
       component: Class
+    }, {
+      path: '/n/:id',
+      name: 'note',
+      component: Document
     }
   ]
 })
