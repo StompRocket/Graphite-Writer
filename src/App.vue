@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="app__nav">
-      <img class="nav__logo" src="@/assets/brand/_wordmarkWhite.svg" alt="Graphite Writer">
+      <img @click="home" class="nav__logo" src="@/assets/brand/_wordmarkWhite.svg" alt="Graphite Writer">
       <input type="text" class="nav__search" placeholder="Search">
       <button class="nav__new"><p>New Note</p></button>
       <button class="nav__user"></button>
@@ -20,6 +20,11 @@
   import '@/assets/css/global.scss'
 
   export default {
-    name: 'appContainer'
+    name: 'appContainer',
+    methods: {
+      home() {
+        this.$router.push('/')
+      }
+    }
   }
 </script>

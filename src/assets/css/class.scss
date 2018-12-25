@@ -1,0 +1,67 @@
+@import "vars";
+.class {
+  padding: 2% 4%;
+  max-width: 100em;
+  .class__name {
+    font-weight: 700;
+    font-size: 5rem;
+  }
+  .class__newNote {
+    height: 2.5vw;
+    width: 7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $yellow;
+    padding: 0 1%;
+    font-size: 1rem;
+    font-weight: 700;
+    @include rounded;
+    border: none;
+    @include transition;
+    @include shadow;
+    &:hover {
+      box-shadow: none;
+      cursor: pointer;
+      background: $yellow--hover;
+
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .class__documentContainer {
+
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 2vw;
+    grid-row-gap: 2vw;
+    .class__document {
+      height: 6vw;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      @include shadow;
+      @include rounded;
+      @include transition;
+      padding: 5%;
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        span {
+          font-weight: 200;
+          font-size: 1.2rem;
+        }
+      }
+      p {
+        font-weight: 200;
+        margin-top: 1%;
+      }
+      &:hover {
+        background: $footer;
+        box-shadow: none;
+      }
+    }
+  }
+}
