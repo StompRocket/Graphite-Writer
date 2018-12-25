@@ -7,7 +7,7 @@
         <p>All Changes Saved</p>
       </div>
       <button class="nav__new">New Note</button>
-      <button @click="$parent.showUser" class="nav__user"></button>
+      <button :style="{ 'background-image' : 'url(\'' + $parent.user.image + '\')' }" @click="$parent.showUser" class="nav__user"></button>
     </nav>
     <div id="editor">
 
