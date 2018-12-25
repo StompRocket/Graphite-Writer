@@ -5,21 +5,21 @@
       <div class="classesContainer__class new">
         <h1>New Class</h1>
       </div>
-      <div class="classesContainer__class">
+      <router-link to="/class/test" class="classesContainer__class">
         <h1>English 1E</h1>
-      </div>
-      <div class="classesContainer__class">
+      </router-link>
+      <router-link to="/class/test" class="classesContainer__class">
         <h1>Spanish 1A</h1>
-      </div>
-      <div class="classesContainer__class">
+      </router-link>
+      <router-link to="/class/test" class="classesContainer__class">
         <h1>Design And Technology</h1>
-      </div>
-      <div class="classesContainer__class">
+      </router-link>
+      <router-link to="/class/test" class="classesContainer__class">
         <h1>CMA</h1>
-      </div>
-      <div class="classesContainer__class">
+      </router-link>
+      <router-link to="/class/test" class="classesContainer__class">
         <h1>Deductive Geometry</h1>
-      </div>
+      </router-link>
     </div>
     <h2 class="heading">Recent Documents</h2>
     <div class="classes__recentDocumentsContainer">

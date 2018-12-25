@@ -38,6 +38,7 @@
       &:hover {
         background: $footer;
         box-shadow: none;
+        cursor: pointer;
         //border: $grey--lighter solid 2px;
       }
 
@@ -62,6 +63,8 @@
     }
   }
   .classesContainer__class {
+    color: $grey;
+    text-decoration: none;
     width: 100%;
     @include shadow;
     height: 6vw;
@@ -77,6 +80,7 @@
     &:hover {
       background: $footer;
       box-shadow: none;
+      cursor: pointer;
      // border: $grey--lighter solid 2px;
     }
 
