@@ -3,6 +3,9 @@
 .document {
   background: $grey;
   padding: 2%;
+  .ql-editor::before {
+    padding-left: 2%;
+  }
 }
 
 .document__nav {

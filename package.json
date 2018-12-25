@@ -1,13 +1,17 @@
 {
   "name": "graphite-writer",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "release": "node release.js"
   },
   "dependencies": {
+    "enquirer": "^2.2.0",
+    "firebase": "^5.7.1",
+    "inquirer": "^6.2.1",
     "minireset.css": "0.0.3",
     "quill": "^1.3.6",
     "register-service-worker": "^1.5.2",

@@ -7,7 +7,7 @@
         <p>All Changes Saved</p>
       </div>
       <button class="nav__new">New Note</button>
-      <button class="nav__user"></button>
+      <button @click="$parent.showUser" class="nav__user"></button>
     </nav>
     <div id="editor">
 
@@ -22,7 +22,7 @@
   import 'quill/dist/quill.bubble.css'
 
   const options = {
-    placeholder: 'Compose an epic...',
+    placeholder: ' Compose an epic...',
     debug: 'info',
     readOnly: false,
     theme: 'bubble',
