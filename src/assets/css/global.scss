@@ -9,7 +9,9 @@ html, body, #app, .page {
   color: $grey;
 
 }
-
+.page {
+  min-height: 82vh;
+}
 .app__placeHolder {
   background: $grey;
 }

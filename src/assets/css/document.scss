@@ -2,8 +2,11 @@
 
 .document {
   background: $grey;
+  padding: 2%;
 }
+
 .document__nav {
+  z-index: 999999;
   width: 100%;
   display: flex;
   position: fixed;
@@ -12,6 +15,7 @@
   height: 9vh;
   align-items: center;
   padding: 0 1%;
+  background: $grey;
   .document__nav__logo {
     height: 60%;
     &:hover {
@@ -32,4 +36,17 @@
       font-weight: 200;
     }
   }
+
+}
+
+#editor {
+  background: white;
+  max-width: 70rem;
+  margin: 0 auto;
+  @include rounded;
+  @include shadow;
+  padding: 2%;
+  display: block;
+  z-index: 1;
+
 }

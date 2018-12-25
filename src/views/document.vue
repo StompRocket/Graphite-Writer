@@ -6,21 +6,39 @@
         <h1>Wrong Triangles</h1>
         <p>All Changes Saved</p>
       </div>
-      <button class="nav__new"><p>New Note</p></button>
+      <button class="nav__new">New Note</button>
       <button class="nav__user"></button>
     </nav>
+    <div id="editor">
+
+    </div>
   </main>
 </template>
 
 <script>
   import '@/assets/css/document.scss'
+  import Quill from 'quill'
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.bubble.css'
 
+  const options = {
+    placeholder: 'Compose an epic...',
+    debug: 'info',
+    readOnly: false,
+    theme: 'bubble',
+    scrollingContainer: 'html'
+  };
   export default {
     name: "document",
+
     methods: {
       goClass() {
         this.$router.push('/class/test')
       }
+    },
+    mounted() {
+      let editor = new Quill('#editor', options)
+
     }
   }
 </script>
