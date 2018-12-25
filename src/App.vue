@@ -80,7 +80,7 @@
         firebase.auth().signOut();
         window.location = 'https://graphitewriter.com'
       },
-      showUser(opt) {
+      showUser() {
         this.showUserCard = !this.showUserCard;
         this.prevent = true;
       },
