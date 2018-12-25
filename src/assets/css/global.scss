@@ -1,0 +1,114 @@
+@import "vars";
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700');
+
+html, body, #app, .page {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  font-family: 'Lato', sans-serif;
+  color: $grey;
+
+}
+a {
+  color: $yellow;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 9vh auto 10vh;
+}
+
+.app__nav {
+  background-color: $grey;
+  display: flex;
+  align-items: center;
+  padding: 0 1vw;
+  .nav__logo {
+    height: 50%;
+    margin-bottom: 15px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .nav__search {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
+    width: 30vw;
+    @include rounded;
+    border: none;
+    padding: 1%;
+    background: $grey--light;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    @include transition;
+    &:focus {
+      background: $grey--lighter;
+      color: $grey;
+      outline: none;
+    }
+    &:hover {
+      background: $grey--lighter;
+    }
+  }
+  .nav__new {
+    height: 50%;
+    width: 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $yellow;
+    padding: 0 1%;
+    font-size: 1rem;
+    font-weight: 700;
+    @include rounded;
+    border: none;
+    @include transition;
+    @include shadow;
+    &:hover {
+      box-shadow: none;
+      cursor: pointer;
+      background: $yellow--hover;
+
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .nav__user {
+    margin-left: 2%;
+    display: block;
+    height: 50%;
+    width: 4.5vh;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    border: none;
+    background: url('../user.jpg') no-repeat center center;
+    background-size: 5vh 5vh;
+    border: rgba(0, 0, 0, 0.5) solid 2px;
+   // @include transition;
+    &:focus, &:hover {
+      //@include shadow;
+      outline: none;
+      border-color: $yellow;
+    }
+  }
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+.app__footer {
+  background-color: $footer;
+  text-align: center;
+  padding: 1%;
+}

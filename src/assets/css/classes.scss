@@ -1,0 +1,81 @@
+@import "vars";
+
+.classes {
+  padding: 2% 4%;
+  max-width: 100em;
+  margin-left: auto;
+  margin-right: auto;
+  .heading {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 2% 0 0.5% 0;
+  }
+  .classes__recentDocumentsContainer {
+    .classes__recentDocument {
+      margin-bottom: 1%;
+      @include shadow;
+      width: 100%;
+      display: block;
+      padding: 1%;
+      @include rounded;
+      h1 {
+        font-weight: 700;
+        font-size: 1.6rem;
+        span {
+          font-weight: 200;
+          font-size: 1.3rem;
+        }
+      }
+      p {
+        margin-top: 0.5%;
+        color: $grey--lighter;
+        font-weight: bold;
+        span {
+          font-weight: 200;
+        }
+      }
+      &:hover {
+        background: $footer;
+        box-shadow: none;
+        //border: $grey--lighter solid 2px;
+      }
+
+    }
+  }
+  .classes__classesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-column-gap: 2vw;
+    grid-row-gap: 2vw;
+  }
+  .classesContainer__class.new {
+    background: $grey;
+    color: $yellow;
+    box-shadow: none;
+    &:hover {
+      background: $grey--light;
+      box-shadow: none;
+      border: $yellow solid 2px;
+    }
+  }
+  .classesContainer__class {
+    width: 100%;
+    @include shadow;
+    height: 6vw;
+    @include rounded;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    &:hover {
+      background: $footer;
+      box-shadow: none;
+      border: $grey--lighter solid 2px;
+    }
+
+  }
+}

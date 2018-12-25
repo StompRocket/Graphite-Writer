@@ -1,0 +1,21 @@
+$grey: #292929;
+$yellow: #EBBC43;
+$yellow--hover: #be963a;
+$rounding: 5pt;
+$grey--light: #434343;
+$grey--lighter: #6a6a6a;
+$footer: #eeeeee;
+@mixin rounded {
+  -webkit-border-radius: $rounding;
+  -moz-border-radius: $rounding;
+  border-radius: $rounding;
+}
+
+@mixin transition {
+  transition-duration: 0.5s;
+}
+
+@mixin shadow {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+}

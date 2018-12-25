@@ -1,29 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="app__nav">
+      <img class="nav__logo" src="@/assets/brand/_wordmarkWhite.svg" alt="Graphite Writer">
+      <input type="text" class="nav__search" placeholder="Search">
+      <button class="nav__new"><p>New Note</p></button>
+      <button class="nav__user"></button>
+    </nav>
     <router-view/>
+    <footer class="app__footer">
+      <p>Graphite Writer is a passion project created by <a href="https://brainstormincstudio.com" target="_blank">Ronan F</a> and Sasha S @ <a href="https://stomprocket.io" target="_blank">Stomp Rocket</a></p>
+      <p>Contribute to Graphite Writers development on our <a target="_blank" href="https://github.com/StompRocket/Graphite-Writer">github</a></p>
+      <small>Graphite Writer is an open source project licenced under Apache 2.0. By Using Graphite Writer you consent to our terms of use. Graphite Writer and its owners aren't responsible for any data loss.</small>
+    </footer>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+  import 'minireset.css'
+  import '@/assets/css/global.scss'
+
+  export default {
+    name: 'appContainer'
   }
-}
-</style>
+</script>
