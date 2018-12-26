@@ -11,7 +11,7 @@
       </router-link>
 
     </div>
-    <h2 class="heading">Recent Documents</h2>
+    <h2 class="heading">Recent Notes</h2>
     <div class="classes__recentDocumentsContainer">
       <router-link :to="'/n/'+note.data.class+'/'+ note.key" :key="note.key" v-for="note in userData.notes" class="classes__recentDocument">
         <h1>{{note.data.name}} <span>{{dayCreated(note.data.timeCreated)}}</span></h1>
