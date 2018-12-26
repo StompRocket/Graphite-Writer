@@ -8,8 +8,10 @@
       </div>
       <button @click="deleteNote" class="nav__new document__delete">Delete Note</button>
 
-      <button :style="{ 'background-image' : 'url(\'' + $parent.user.image + '\')' }" @click="$parent.showUser"
-              class="nav__user document__user"></button>
+      <div :class="{active: $parent.showUserHover}" class="nav__userContainer">
+        <button @mouseleave="$parent.userDoneHover" @mouseover="$parent.userHover" :style="{ 'background-image' : 'url(\'' +  $parent.user.image + '\')' }" @click="$parent.showUser"
+                class="nav__user"></button>
+      </div>
     </nav>
     <div id="editor">
 

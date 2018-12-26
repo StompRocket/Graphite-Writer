@@ -35,7 +35,7 @@ html, body, #app, .page {
   top: 9vh;
   @include shadow--large;
   width: 20vw;
-//  height: 40vh;
+  //  height: 40vh;
   padding: 2%;
   z-index: 9999999;
   .user__card {
@@ -119,7 +119,7 @@ a {
   background-color: $grey;
   display: flex;
   align-items: center;
-  padding: 0 1vw;
+  padding: 0 2vw;
   .nav__logo {
     height: 50%;
     margin-bottom: 15px;
@@ -194,25 +194,44 @@ a {
 }
 
 .nav__user {
-  margin-left: 2%;
+
+  margin: 0;
   display: block;
-  height: 50%;
+  height: 4.5vh;
   width: 4.5vh;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   border-radius: 100px;
+  background: url('../user.jpg') no-repeat center center white;
+  background-size: 4.5vh 4.5vh;
   border: none;
-  background: url('../user.jpg') no-repeat center center;
-  background-size: 5vh 5vh;
-  border: rgba(0, 0, 0, 0.5) solid 2px;
   // @include transition;
   &:hover {
     //@include shadow;
     outline: none;
-    border-color: $yellow;
+    @include shadow;
+
   }
   &:focus {
     outline: none;
   }
+
+}
+
+.nav__userContainer {
+  padding: 0;
+  margin-left: 2%;
+  border-radius: 100px;
+  background: none;
+  width: 5.5vh;
+  height: 5.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.nav__userContainer.active {
+  background: $footer;
 
 }

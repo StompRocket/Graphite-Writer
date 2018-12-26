@@ -3,9 +3,11 @@
     <nav v-if="$route.name != 'note'" class="app__nav">
       <img @click="home" class="nav__logo" src="@/assets/brand/_wordmarkWhite.svg" alt="Graphite Writer">
       <input type="text" class="nav__search" placeholder="Search">
+      <div :class="{active: showUserHover}" class="nav__userContainer">
+        <button @mouseleave="userDoneHover" @mouseover="userHover" :style="{ 'background-image' : 'url(\'' + user.image + '\')' }" @click="showUser"
+                class="nav__user"></button>
+      </div>
 
-      <button :style="{ 'background-image' : 'url(\'' + user.image + '\')' }" @click="showUser"
-              class="nav__user"></button>
     </nav>
     <div class="app__placeHolder" v-if="$route.name == 'note'"></div>
     <div @click="prevent = true" v-if="showUserCard" :style="{position: positionStyle }" class="app__user">
@@ -43,6 +45,7 @@
         prevent: false,
         loading: true,
         preventLogin: false,
+        showUserHover: false,
         user: {
           uid: null,
           name: null,
@@ -73,7 +76,15 @@
       })
     },
     methods: {
+      userDoneHover() {
+        if (!this.showUserCard) {
+          this.showUserHover = false;
+        }
 
+      },
+      userHover() {
+        this.showUserHover = true;
+      },
       logout() {
         this.showUserCard = false;
         this.preventLogin = true;
@@ -83,11 +94,17 @@
       },
       showUser() {
         this.showUserCard = !this.showUserCard;
+        if (this.showUserCard) {
+          this.showUserHover = true;
+        } else {
+          this.showUserHover = false;
+        }
         this.prevent = true;
       },
       checkFocus() {
         if (this.showUserCard && !this.prevent) {
           this.showUserCard = false
+          this.showUserHover =  false;
         } else {
           this.prevent = false
         }
