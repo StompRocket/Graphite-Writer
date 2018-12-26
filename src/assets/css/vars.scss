@@ -5,6 +5,9 @@ $rounding: 5pt;
 $grey--light: #434343;
 $grey--lighter: #6a6a6a;
 $footer: #eeeeee;
+$footer--lighter: #f7f7f7;
+$red: #F2545B;
+$red--hover: #c14348;
 @mixin rounded {
   -webkit-border-radius: $rounding;
   -moz-border-radius: $rounding;

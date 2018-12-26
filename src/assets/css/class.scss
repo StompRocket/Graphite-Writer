@@ -1,13 +1,23 @@
 @import "vars";
+
 .class {
   padding: 2% 4%;
   max-width: 100em;
   .class__name {
     font-weight: 700;
     font-size: 5rem;
+    display: block;
+    width: 100%;
+    border: none;
+    @include rounded;
+    padding: 0.5% 1%;
+    margin: 0.5% 0;
+    &:hover, &:focus {
+      background: $footer;
+      outline: none;
+    }
   }
   .class__newNote {
-
 
     display: inline-flex;
     align-items: center;
@@ -30,14 +40,33 @@
       outline: none;
     }
   }
-  .class__documentContainer {
-
+  .class__noNotes {
+    width: 100%;
+    background: $footer;
+    @include rounded;
     margin-top: 2%;
-    display: grid;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $grey;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .class__documentContainer {
+    @include rounded;
+    width: 100%;
+    background: $footer;
+    margin-top: 2%;
+    min-height: 40vh;
+    padding: 1%;
+    display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 6vw;
     grid-column-gap: 2vw;
     grid-row-gap: 2vw;
     .class__document {
+      background: white;
       color: $grey;
       text-decoration: none;
       height: 6vw;
@@ -62,7 +91,7 @@
       }
       &:hover {
         cursor: pointer;
-        background: $footer;
+        background: $footer--lighter;
         box-shadow: none;
       }
     }

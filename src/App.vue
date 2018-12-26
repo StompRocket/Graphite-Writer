@@ -3,7 +3,7 @@
     <nav v-if="$route.name != 'note'" class="app__nav">
       <img @click="home" class="nav__logo" src="@/assets/brand/_wordmarkWhite.svg" alt="Graphite Writer">
       <input type="text" class="nav__search" placeholder="Search">
-      <button class="nav__new">New Note</button>
+
       <button :style="{ 'background-image' : 'url(\'' + user.image + '\')' }" @click="showUser"
               class="nav__user"></button>
     </nav>
@@ -73,6 +73,7 @@
       })
     },
     methods: {
+
       logout() {
         this.showUserCard = false;
         this.preventLogin = true;

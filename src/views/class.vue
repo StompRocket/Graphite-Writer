@@ -1,9 +1,14 @@
 <template>
   <main class="page class">
-    <h1 class="class__name">{{classOb.name}}</h1>
+    <router-link to="/">Back</router-link>
+    <input @keyup="updateName" class="class__name" v-model="classOb.name">
     <button @click="newNote" class="class__newNote">New Note</button>
-    <div class="class__documentContainer">
-      <router-link :key="note.key" v-for="note in notes" :to="'/n/'+$route.params.id+'/'+ note.key"
+    <div @click="newNote" class="class__noNotes" v-if="notes.length === 0">
+      <p>You don't have any notes. Click to create a new note.</p>
+    </div>
+    <div v-if="notes.length > 0" class="class__documentContainer">
+
+      <router-link :key="note.key" v-for="note in sortedNotes" :to="'/n/'+$route.params.id+'/'+ note.key"
                    class="class__document">
         <h1>{{note.data.name}} <span>{{dayCreated(note.data.dayCreated)}}</span></h1>
         <p>Edited: {{lastEdited(note.data.lastEdited)}}</p>
@@ -57,6 +62,11 @@
 
     },
     methods: {
+      updateName() {
+        firebase.database().ref(`/users/${this.uid}/classes/${this.$route.params.id}/name`).set(this.classOb.name).then(e => {
+          console.log(e)
+        })
+      },
       newNote() {
         swal("New Note Name:", {
           content: "input",
@@ -80,7 +90,7 @@
               })
               //console.log(newRef.key)
               firebase.database().ref(`users/${this.uid}/classes/${this.$route.params.id}/notes/${newRef.key}`).set(newRef.key)
-              firebase.database().ref(`users/${this.uid}/notes/${newRef.key}`).set(newRef.key)
+              //firebase.database().ref(`users/${this.uid}/notes/${newRef.key}`).set(newRef.key)
               firebase.database().ref(`noteData/${newRef.key}`).set({data: newDocTemplate})
             })
           }
@@ -95,6 +105,17 @@
         return moment(time).fromNow()
       }
 
+    },
+    computed: {
+      sortedNotes() {
+        return this.notes.sort((a, b) => {
+          if (moment(a.data.lastEdited).unix() < moment(b.data.lastEdited).unix())
+            return 1;
+          if (moment(a.data.lastEdited).unix() > moment(b.data.lastEdited).unix())
+            return -1;
+          return 0;
+        });
+      }
     }
   }
 </script>

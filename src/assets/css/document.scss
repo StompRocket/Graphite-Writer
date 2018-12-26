@@ -8,8 +8,16 @@
   }
 }
 
-.document__nav {
+.document__delete {
+  background-color: $red;
+  color: white;
+  &:hover {
+    background-color: $red--hover;
+  }
+}
 
+.document__nav {
+  z-index: 50;
   width: 100%;
   display: flex;
   position: fixed;
@@ -30,9 +38,21 @@
     color: white;
     margin-left: 0.5%;
     width: 20vw;
-    h1 {
+    input {
+      background: none;
+      color: white;
       font-size: 1.5rem;
       font-weight: 700;
+      border: $grey solid 2px;
+      padding: 1%;
+      @include rounded;
+      &:hover {
+        border: $yellow solid 2px;
+      }
+      &:focus {
+        outline: none;
+        border: $yellow solid 2px;
+      }
     }
     p {
       font-size: 0.8rem;
@@ -50,6 +70,5 @@
   @include shadow;
   padding: 2%;
   display: block;
-
 
 }

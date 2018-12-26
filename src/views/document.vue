@@ -3,12 +3,13 @@
     <nav class="document__nav">
       <img @click="goClass" class="document__nav__logo" src="@/assets/brand/icon.svg" alt="">
       <div class="document__title">
-        <h1>{{noteMeta.name}}</h1>
+        <input @keyup="updateName" type="text" v-model="noteMeta.name">
         <p>{{timeMessage}}</p>
       </div>
-      <button class="nav__new">New Note</button>
+      <button @click="deleteNote" class="nav__new document__delete">Delete Note</button>
+
       <button :style="{ 'background-image' : 'url(\'' + $parent.user.image + '\')' }" @click="$parent.showUser"
-              class="nav__user"></button>
+              class="nav__user document__user"></button>
     </nav>
     <div id="editor">
 
@@ -25,6 +26,7 @@
   import 'firebase/auth'
   import 'firebase/database'
   import moment from 'moment'
+  import swal from 'sweetalert'
 
   const options = {
     placeholder: ' Compose an epic...',
@@ -45,6 +47,30 @@
     methods: {
       goClass() {
         this.$router.push(`/class/${this.uid}/${this.$route.params.class}`)
+      },
+      updateName() {
+        let timeStamp = moment().toJSON()
+        firebase.database().ref(`/notesMeta/${this.$route.params.id}/lastEdited`).set(timeStamp)
+        firebase.database().ref(`/notesMeta/${this.$route.params.id}/name`).set(this.noteMeta.name)
+        this.timeMessage = 'All Changes Saved'
+      },
+      deleteNote() {
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this note",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            firebase.database().ref(`/noteData/${this.$route.params.id}`).set(null)
+            firebase.database().ref(`/notesMeta/${this.$route.params.id}`).set(null)
+            //firebase.database().ref(`/users/${this.uid}/notes/${this.$route.params.id}`).set(null)
+            firebase.database().ref(`/users/${this.uid}/classes/${this.$route.params.class}/notes/${this.$route.params.id}`).set(null)
+            this.goClass()
+          }
+        });
       }
     },
     mounted() {

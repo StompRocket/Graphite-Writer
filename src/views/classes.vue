@@ -1,5 +1,6 @@
 <template>
   <main class="page classes">
+
     <h2 class="heading">Classes</h2>
     <div v-if="userData.classes" class="classes__classesContainer">
       <div @click="newClass" class="classesContainer__class new">
@@ -13,7 +14,8 @@
     </div>
     <h2 class="heading">Recent Notes</h2>
     <div class="classes__recentDocumentsContainer">
-      <router-link :to="'/n/'+note.data.class+'/'+ note.key" :key="note.key" v-for="note in userData.notes" class="classes__recentDocument">
+      <router-link :to="'/n/'+note.data.class+'/'+ note.key" :key="note.key" v-for="note in sortedNotes"
+                   class="classes__recentDocument">
         <h1>{{note.data.name}} <span>{{dayCreated(note.data.timeCreated)}}</span></h1>
         <p>{{getClassName(note.data.class).data.name}} <span>Last Edited: {{lastEdited(note.data.lastEdited)}}</span>
         </p>
@@ -49,30 +51,35 @@
           this.uid = user.uid;
           firebase.database().ref(`users/${uid}/`).on('value', snap => {
             let data = snap.val()
-            if(!data) {
+            if (!data) {
               this.$parent.loading = false;
             }
             //console.log(data)
             this.userData.classes = []
+            data.notes = {}
             for (let key in data.classes) {
               if (data.classes.hasOwnProperty(key)) {
 
                 this.userData.classes.push({key: key, data: data.classes[key]})
+                //console.log(data.classes[key].notes)
+                data.notes = Object.assign(data.notes, data.classes[key].notes);
               }
             }
+            this.$parent.loading = false
             this.userData.notes = []
             for (let key in data.notes) {
               if (data.notes.hasOwnProperty(key)) {
-              //  console.log(key + " -> " + data.notes[key]);
+                //  console.log(key + " -> " + data.notes[key]);
                 // this.userData.classes.push({key: key, data: data.classes[key]})
                 firebase.database().ref(`notesMeta/${key}`).on('value', note => {
-                //  console.log(note.val())
+                  //  console.log(note.val())
                   this.userData.notes.push({key: key, data: note.val()})
                 })
               }
             }
 
-            this.$parent.loading = false
+
+
           })
 
         }
@@ -102,6 +109,17 @@
             })
           }
 
+        });
+      }
+    },
+    computed: {
+      sortedNotes() {
+        return this.userData.notes.sort((a, b) => {
+          if (moment(a.data.lastEdited).unix() < moment(b.data.lastEdited).unix())
+            return 1;
+          if (moment(a.data.lastEdited).unix() > moment(b.data.lastEdited).unix())
+            return -1;
+          return 0;
         });
       }
     }
