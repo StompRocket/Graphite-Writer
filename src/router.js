@@ -20,7 +20,7 @@ export default new Router({
       name: 'class',
       component: Class
     }, {
-      path: '/n/:uid/:id',
+      path: '/n/:class/:id',
       name: 'note',
       component: Document
     }

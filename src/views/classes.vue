@@ -13,7 +13,7 @@
     </div>
     <h2 class="heading">Recent Documents</h2>
     <div class="classes__recentDocumentsContainer">
-      <router-link :to="'/n/'+uid+'/'+ note.key" :key="note.key" v-for="note in userData.notes" class="classes__recentDocument">
+      <router-link :to="'/n/'+note.data.class+'/'+ note.key" :key="note.key" v-for="note in userData.notes" class="classes__recentDocument">
         <h1>{{note.data.name}} <span>{{dayCreated(note.data.timeCreated)}}</span></h1>
         <p>{{getClassName(note.data.class).data.name}} <span>Last Edited: {{lastEdited(note.data.lastEdited)}}</span>
         </p>
@@ -49,7 +49,10 @@
           this.uid = user.uid;
           firebase.database().ref(`users/${uid}/`).on('value', snap => {
             let data = snap.val()
-            console.log(data)
+            if(!data) {
+              this.$parent.loading = false;
+            }
+            //console.log(data)
             this.userData.classes = []
             for (let key in data.classes) {
               if (data.classes.hasOwnProperty(key)) {
@@ -60,10 +63,10 @@
             this.userData.notes = []
             for (let key in data.notes) {
               if (data.notes.hasOwnProperty(key)) {
-                console.log(key + " -> " + data.notes[key]);
+              //  console.log(key + " -> " + data.notes[key]);
                 // this.userData.classes.push({key: key, data: data.classes[key]})
                 firebase.database().ref(`notesMeta/${key}`).on('value', note => {
-                  console.log(note.val())
+                //  console.log(note.val())
                   this.userData.notes.push({key: key, data: note.val()})
                 })
               }
@@ -92,7 +95,7 @@
           content: "input",
         })
         .then((value) => {
-          if (value) {
+          if (value && value != '' && value != ' ') {
             firebase.database().ref(`users/${this.uid}/classes`).push().set({
               name: value,
               notes: {}

@@ -3,7 +3,8 @@
     <h1 class="class__name">{{classOb.name}}</h1>
     <button @click="newNote" class="class__newNote">New Note</button>
     <div class="class__documentContainer">
-      <router-link :key="note.key" v-for="note in notes" :to="'/n/'+uid+'/'+ note.key" class="class__document">
+      <router-link :key="note.key" v-for="note in notes" :to="'/n/'+$route.params.id+'/'+ note.key"
+                   class="class__document">
         <h1>{{note.data.name}} <span>{{dayCreated(note.data.dayCreated)}}</span></h1>
         <p>Edited: {{lastEdited(note.data.lastEdited)}}</p>
       </router-link>
@@ -34,7 +35,7 @@
           this.uid = user.uid
           let uid = user.uid
           firebase.database().ref(`users/${uid}/classes/${this.$route.params.id}`).on('value', snap => {
-            console.log(snap.val())
+            //console.log(snap.val())
             if (!snap.val()) {
               this.$router.push('/')
             }
@@ -43,9 +44,9 @@
             this.notes = []
             for (let key in this.classOb.notes) {
               if (this.classOb.notes.hasOwnProperty(key)) {
-                console.log(key + " -> " + this.classOb.notes[key]);
+                //console.log(key + " -> " + this.classOb.notes[key]);
                 firebase.database().ref(`notesMeta/${key}`).on('value', note => {
-                  console.log(note.val())
+                  // console.log(note.val())
                   this.notes.push({key: key, data: note.val()})
                 })
               }
@@ -62,24 +63,28 @@
         })
         .then((value) => {
           let newDocTemplate;
-          firebase.database().ref('newDocTemplate/').once('value').then(template => {
-            newDocTemplate = template.val()
-            console.log(newDocTemplate)
-            let timeStamp = moment().toJSON();
-            let newRef = firebase.database().ref(`notesMeta/`).push()
-            newRef.set({
-              class: this.$route.params.id,
-              dayCreated: timeStamp,
-              keywords: [value],
-              lastEdited: timeStamp,
-              name: value,
-              owner: this.uid
+          if (value && value != '' && value != ' ') {
+            console.log(value + 'value')
+            firebase.database().ref('newDocTemplate/').once('value').then(template => {
+              newDocTemplate = template.val()
+              // console.log(newDocTemplate)
+              let timeStamp = moment().toJSON();
+              let newRef = firebase.database().ref(`notesMeta/`).push()
+              newRef.set({
+                class: this.$route.params.id,
+                dayCreated: timeStamp,
+                keywords: [value],
+                lastEdited: timeStamp,
+                name: value,
+                owner: this.uid
+              })
+              //console.log(newRef.key)
+              firebase.database().ref(`users/${this.uid}/classes/${this.$route.params.id}/notes/${newRef.key}`).set(newRef.key)
+              firebase.database().ref(`users/${this.uid}/notes/${newRef.key}`).set(newRef.key)
+              firebase.database().ref(`noteData/${newRef.key}`).set({data: newDocTemplate})
             })
-            console.log(newRef.key)
-            firebase.database().ref(`users/${this.uid}/classes/${this.$route.params.id}/notes/${newRef.key}`).set(newRef.key)
-            firebase.database().ref(`users/${this.uid}/notes/${newRef.key}`).set(newRef.key)
-            firebase.database().ref(`noteData/${newRef.key}`).set(newDocTemplate)
-          })
+          }
+
 
         });
       },
