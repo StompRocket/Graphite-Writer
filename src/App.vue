@@ -71,7 +71,7 @@
           firebase.auth().signInWithRedirect(google)
         } else if (localStorage.getItem('preventLogin') === 'true') {
           localStorage.setItem('preventLogin', 'false');
-          window.location = 'https://graphitewriter.com'
+          window.location = 'https://beta.graphitewriter.com'
         }
       })
     },
