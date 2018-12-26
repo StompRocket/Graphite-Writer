@@ -62,7 +62,7 @@
           console.log(data.val().data)
           editor.setContents(data.val().data)
           this.$parent.loading = false;
-          editor.on('text-change',  (delta, oldDelta, source) => {
+          editor.on('text-change', (delta, oldDelta, source) => {
             if (source == 'api') {
 
             } else if (source == 'user') {
