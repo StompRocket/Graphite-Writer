@@ -68,6 +68,8 @@
         })
       },
       newNote() {
+        this.$router.push(`/new/${this.$route.params.id}`)
+        /*
         swal("New Note Name:", {
           content: "input",
         })
@@ -97,6 +99,7 @@
 
 
         });
+        */
       },
       dayCreated(time) {
         return moment(time).format('MMM, Do')

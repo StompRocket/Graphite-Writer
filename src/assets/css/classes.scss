@@ -61,7 +61,7 @@
       background: $grey--light;
       box-shadow: none;
       @include shadow;
-     // border: $yellow solid 2px;
+      // border: $yellow solid 2px;
     }
   }
   .classesContainer__class {
@@ -83,8 +83,47 @@
       background: $footer;
       box-shadow: none;
       cursor: pointer;
-     // border: $grey--lighter solid 2px;
+      // border: $grey--lighter solid 2px;
     }
 
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #app {
+    grid-template-rows: 20vh auto 10vh;
+
+  }
+
+  .classes {
+    .heading {
+      font-size: 1rem;
+      margin-top: 5%;
+    }
+    .classes__classesContainer {
+      grid-template-columns: 1fr;
+      .classesContainer__class {
+        height: 10vh;
+      }
+    }
+    .classes__recentDocumentsContainer {
+
+      .classes__recentDocument {
+        margin-bottom: 2%;
+        padding: 2%;
+        h1 {
+          font-weight: 700;
+          font-size: 1.2rem;
+          span {
+            display: block;
+            font-weight: 200;
+            font-size: 1rem;
+          }
+        }
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
 }

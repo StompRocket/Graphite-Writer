@@ -97,3 +97,25 @@
     }
   }
 }
+@media screen and (max-width: 414px) {
+  .class {
+    .class__name {
+      font-size: 2rem;
+    }
+    .class__newNote {
+      padding: 2%;
+    }
+    .class__documentContainer {
+      grid-template-columns: 1fr;
+
+      .class__document {
+
+        h1 {
+          font-size:  1.2rem;
+
+        }
+      }
+    }
+  }
+
+}

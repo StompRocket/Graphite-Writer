@@ -109,6 +109,7 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 9vh auto 10vh;
+
 }
 
 .app__nav {
@@ -163,8 +164,8 @@ a {
   padding: 1%;
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 5;
 }
 
 .nav__new {
@@ -233,5 +234,21 @@ a {
 
 .nav__userContainer.active {
   background: $footer;
+
+}
+@media screen and (max-width: 414px) {
+  #app {grid-template-rows: 20vh auto 50vh;}
+  .app__nav {
+    flex-wrap: wrap;
+    .nav__logo {
+      height: 4vh;
+      margin: 1% auto;
+    }
+    .nav__search {
+      width: 80vw;
+      height: 7vh;
+      margin: 1% 2%;
+    }
+  }
 
 }
