@@ -1,17 +1,30 @@
 @import "vars";
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700');
 
-html, body, #app, .page {
+html, body {
   height: 100%;
   width: 100%;
   font-size: 100%;
   font-family: 'Lato', sans-serif;
   color: $grey;
+  overflow: scroll;
+
+}
+
+#app {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 9vh auto 10vh;
+  grid-row-gap: 0;
+  overflow-y: scroll;
 
 }
 
 .page {
-  min-height: 82vh;
+  width: 100%;
+  display: block;
+  min-height: 81vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
@@ -105,13 +118,6 @@ a {
   }
 }
 
-#app {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 9vh auto 10vh;
-
-}
-
 .app__nav {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -164,8 +170,8 @@ a {
   padding: 1%;
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
 .nav__new {
@@ -236,8 +242,11 @@ a {
   background: $footer;
 
 }
+
 @media screen and (max-width: 414px) {
-  #app {grid-template-rows: 20vh auto 50vh;}
+  #app {
+    grid-template-rows: 20vh auto 50vh;
+  }
   .app__nav {
     flex-wrap: wrap;
     .nav__logo {

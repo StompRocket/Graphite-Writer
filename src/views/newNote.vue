@@ -1,10 +1,20 @@
 <template>
   <main class="page newNote">
-    <select id="newNoteClass">
-      <option :selected="selected(i.key)" :key="i.key" v-for="i in classes" :value="i.key">{{i.data.name}}</option>
-      <option value="none">none</option>
-    </select>
-    <label for="newNoteClass">Class</label>
+    <div class="newNote__box box">
+      <div class="newNote__class">
+        <label class="newNote__header" for="newNoteClass">What Class Is This Note For?</label>
+
+        <select id="newNoteClass">
+          <option :selected="selected(i.key)" :key="i.key" v-for="i in classes" :value="i.key">{{i.data.name}}</option>
+          <option value="none">none</option>
+        </select>
+
+        <button class="newNote__next">Next</button>
+      </div>
+      <div class="newNote__template"></div>
+      <div class="newNote__name"></div>
+    </div>
+
   </main>
 </template>
 

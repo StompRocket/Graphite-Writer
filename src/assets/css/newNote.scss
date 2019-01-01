@@ -1,1 +1,66 @@
 @import "vars";
+
+.newNote {
+  background: $grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 7%;
+
+  .box {
+    width: 40vw;
+    height: 40vw;
+  }
+  select {
+    width: 100%;
+    padding: 4% 2%;
+    background: none;
+    font-size: 1rem;
+    border: $yellow solid;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    @include rounded;
+    @include transition;
+    font-weight: 700;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background: $footer;
+    }
+  }
+  .newNote__box {
+    @include shadow;
+    @include rounded;
+    background: white;
+    display: block;
+    padding: 5%;
+  }
+  .newNote__header {
+    font-size: 3vw;
+    font-weight: 700;
+  }
+
+  .newNote__class {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .newNote__next {
+    width: 100%;
+    display: block;
+    background: $yellow;
+    @include rounded;
+    border: none;
+    font-size: 1rem;
+    padding: 2%;
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+}

@@ -35,7 +35,7 @@
 
     readOnly: false,
     theme: 'bubble',
-    scrollingContainer: 'html'
+    scrollingContainer: 'body'
   };
   export default {
     name: "document",
