@@ -11,7 +11,7 @@ export default new Vuex.Store({
     token: false,
     docs: [],
     docsLoaded:false,
-   // api: "http://localhost:3008"
+  // api: "http://localhost:3008"
     api: "https://api.graphitewriter.com"
   },
   mutations: {
@@ -44,7 +44,9 @@ export default new Vuex.Store({
     userDocs(state, getters) {
 
         return state.docs.sort((a,b) => {
+          //console.log(moment.unix(a.opened), moment.unix(b.opened))
           return b.index - a.index
+
         })
 
     }

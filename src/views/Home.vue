@@ -55,7 +55,7 @@
         return this.$store.state.docsLoaded
       },
       docs() {
-        return this.$store.state.docs
+        return this.$store.getters.userDocs
       },
       filteredDocs() {
         if (this.search.length <= 0) {
@@ -77,7 +77,7 @@
     methods: {
 logOut() {
   this.$firebase.auth().signOut().then(() => {
-    window.href = "https://graphitewriter.com"
+    window.location.href = "https://graphitewriter.com"
   })
 },
       lastEdited(time) {

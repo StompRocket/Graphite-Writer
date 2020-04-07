@@ -92,6 +92,7 @@
       editor = new Quill("#doc", options)
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
+          console.log("there is user")
           this.$firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
             // Send token to your backend via HTTPS
             this.$store.commit("setToken", idToken)
@@ -115,6 +116,7 @@
             //console.log( this.$store.state.token)
           })
         } else {
+         // console.log("no user", `${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`)
 
             fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
               method: "get",
@@ -125,7 +127,7 @@
               if (!res.error) {
 
               this.doc = res
-
+this.loaded = true
 
               try {
                 editor.setContents(JSON.parse(this.doc.data))

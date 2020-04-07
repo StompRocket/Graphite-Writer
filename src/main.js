@@ -9,6 +9,7 @@ import _ from 'lodash'
 import 'firebase/auth'
 import 'firebase/remote-config'
 import 'firebase/analytics'
+import 'firebase/performance'
 import 'minireset.css'
 import './assets/main.scss'
 import "@/assets/print.scss"
@@ -20,10 +21,12 @@ const firebaseConfig = {
   projectId: "graphite-88e41",
   storageBucket: "graphite-88e41.appspot.com",
   messagingSenderId: "158148550453",
-  appId: "1:158148550453:web:ea17a3b23534164945f67c"
+  appId: "1:158148550453:web:ea17a3b23534164945f67c",
+  measurementId: "G-RX8D5M6ZGJ"
 };
 firebase.initializeApp(firebaseConfig)
-
+Vue.prototype.$analytics = firebase.analytics()
+Vue.prototype.$perf = firebase.performance();
 Vue.prototype.$firebase = firebase
 Vue.prototype.$swal = swal
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
