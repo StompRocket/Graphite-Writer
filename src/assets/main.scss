@@ -1,0 +1,198 @@
+@use "sass:color";
+@import "vars";
+@import "editor";
+@import "home";
+html, body, .page {
+  background: $secondary;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+
+.page {
+
+}
+
+
+.nav {
+  width: 100%;
+  background: $gray;
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  @include shadow;
+  align-items: center;
+}
+.brand--wordmark {
+  margin-top: -1vh;
+  height: 4vh;
+}
+.brand--icon {
+ height: 4vh;
+}
+.input {
+  @include rounding;
+  @include transition;
+  background: $secondary;
+  border: $secondary solid;
+  padding: 1rem;
+  font-size: 1rem;
+  color: $text;
+
+  &:hover {
+
+    background: color.adjust($secondary, $lightness: -5);
+  }
+
+  &:focus {
+
+    background: color.adjust($secondary, $lightness: -5);
+  }
+}
+
+
+
+.btn {
+  @include rounding();
+  @include shadow();
+  @include transition;
+  border: $primary solid;
+  background: $primary;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &:hover {
+
+    background: color.adjust($primary, $lightness: -30);
+  }
+}
+.modal_container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99999999;
+  background: rgba($gray, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal {
+    @include rounding;
+    @include shadow();
+    background: white;
+    padding: 1rem;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999999999999999;
+    h3 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    a {
+      color: $primary;
+      text-decoration: underline;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+    button {
+      box-shadow: none;
+      margin-left: auto;
+    }
+  }
+}
+.loading {
+  display: flex;
+  flex-direction: column;
+  img {
+    height: 3vh;
+  }
+}
+.loading--fullscreen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99999999;
+  background: $gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 3vh;
+  }
+  h1 {
+    color: $text;
+    font-size: 2rem;
+  }
+}
+.sk-cube-grid {
+  width: 8vh;
+  height: 8vh;
+  margin: 100px auto;
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: $primary;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
+  } 35% {
+      -webkit-transform: scale3D(0, 0, 1);
+      transform: scale3D(0, 0, 1);
+    }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
+  } 35% {
+      -webkit-transform: scale3D(0, 0, 1);
+      transform: scale3D(0, 0, 1);
+    }
+}

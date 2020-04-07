@@ -1,0 +1,19 @@
+$primary: #EBBC43;
+$secondary: #292929;
+$gray: #151515;
+$text: white;
+$warning: #FF6565;
+
+@mixin shadow {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+@mixin rounding {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+@mixin transition {
+  transition-duration: 0.25s;
+}
