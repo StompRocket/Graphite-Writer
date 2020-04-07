@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Edit from '../views/Edit.vue'
+import Share from '../views/shared.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
       path: '/d/:user/:docId',
       name: 'Edit',
       component: Edit
+    },
+    {
+      path: '/shared/:user/:docId',
+      name: 'Share',
+      component: Share
     },
     {
       path: '*',

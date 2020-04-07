@@ -10,8 +10,8 @@
       <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
       <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
       <button class="nav-item">Print</button>
-      <button class="nav-item delete">Delete</button>
-      <button class="btn share">SHARE</button>
+      <button class="nav-item delete" @click="deleteDoc">Delete</button>
+      <button @click="share" class="btn share">SHARE</button>
 
     </nav>
 
@@ -56,7 +56,29 @@
 
       </div>
     </div>
+    <div v-if="sharingModal" class="modal_container">
+      <div class="modal">
+        <h3>Sharing</h3>
+        <div class="share_link">
+          <p>Link:</p>
+          <input type="text" v-model="shareLink" disabled>
+        </div>
 
+        <p>A view only shared document has been created. Anyone with that link can view your document.</p>
+        <button @click="sharingModal = false" class="btn">OK</button>
+      </div>
+      <div class="modal_container" @click="sharingModal = false"></div>
+
+    </div>
+    <div v-if="error" class="modal_container">
+      <div class="modal">
+        <h3>Error</h3>
+        <p>You are not authorized to view this document</p>
+        <button @click="$router.push('/')" class="btn">OK</button>
+      </div>
+      <div class="modal_container" @click="$router.push('/')"></div>
+
+    </div>
   </div>
 </template>
 
@@ -74,7 +96,10 @@
     data() {
       return {
         doc: {},
-        saved: true
+        saved: true,
+        sharingModal: false,
+        shareLink: "",
+        error: false
       }
     },
     computed: {
@@ -83,6 +108,50 @@
       }
     },
     methods: {
+      deleteDoc() {
+        this.$swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
+              method: "delete",
+              headers: {
+                "Authorization": this.$store.getters.fbToken,
+                "content-type": "application/json"
+              },
+              body: JSON.stringify({deleteDoc: true, time: this.$moment().unix()})
+
+            }).then(res => res.json()).then(res => {
+              if (res.success) {
+               this.$router.push("/")
+              }
+            })
+          }
+        });
+      },
+      share() {
+        this.shareLink = `https://app.graphitewriter.com/shared/${this.$store.getters.user.uid}/${this.doc["_id"]}`
+        this.sharingModal = true
+        fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
+          method: "post",
+          headers: {
+            "Authorization": this.$store.getters.fbToken,
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({shared: true, time: this.$moment().unix()})
+
+        }).then(res => res.json()).then(res => {
+          if (res.success) {
+            this.saved = true
+            this.doc.date = body.time
+          }
+        })
+      },
       save(type) {
         //console.log(timeout, "saving")
         timeout = null
@@ -144,24 +213,28 @@
           }
 
         }).then(res => res.json()).then(res => {
-          this.doc = res
+          if (!res.error) {
+            this.doc = res
 
 
-          try {
-            editor.setContents(JSON.parse(this.doc.data))
-          } catch {
-            editor.setContents(this.doc.data)
-          }
-          editor.on('text-change',  (delta, oldDelta, source) => {
-            if (source == 'api') {
-            //  console.log("An API call triggered this change.");
-            } else if (source == 'user') {
-             // console.log("A user action triggered this change.", source, delta);
-              this.saved = false
-              window.clearTimeout(timeout)
-              timeout = window.setTimeout(() => this.save("document"), 1000)
+            try {
+              editor.setContents(JSON.parse(this.doc.data))
+            } catch {
+              editor.setContents(this.doc.data)
             }
-          });
+            editor.on('text-change', (delta, oldDelta, source) => {
+              if (source == 'api') {
+                //  console.log("An API call triggered this change.");
+              } else if (source == 'user') {
+                // console.log("A user action triggered this change.", source, delta);
+                this.saved = false
+                window.clearTimeout(timeout)
+                timeout = window.setTimeout(() => this.save("document"), 1000)
+              }
+            });
+          } else {
+            this.error = true
+          }
         })
         //console.log( this.$store.state.token)
       })

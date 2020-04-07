@@ -35,6 +35,9 @@ export default new Vuex.Store({
         return false
         }
     },
+    user(state) {
+      return state.user
+    },
     userDocs(state, getters) {
 
         return state.docs.sort((a,b) => {

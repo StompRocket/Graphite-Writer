@@ -70,3 +70,41 @@ html, body, .page {
     background: color.adjust($primary, $lightness: -30);
   }
 }
+.modal_container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99999999;
+  background: rgba($gray, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal {
+    @include rounding;
+    @include shadow();
+    background: white;
+    padding: 1rem;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999999999999999;
+    h3 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    a {
+      color: $primary;
+      text-decoration: underline;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+    button {
+      box-shadow: none;
+      margin-left: auto;
+    }
+  }
+}

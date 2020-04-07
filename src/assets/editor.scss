@@ -66,3 +66,14 @@ margin-right: 1rem;
   @include rounding;
   padding: 1rem;
 }
+.share_link {
+  width: 100%;
+  display: flex;
+  p {
+    margin-right: 1rem;
+  }
+  input {
+    margin-left: 1rem;
+    width: 90%;
+  }
+}

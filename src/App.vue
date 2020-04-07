@@ -21,7 +21,7 @@
           this.$store.commit("setUser", false)
           // No user is signed in.
           console.log(this.$route.name)
-          if (this.$route.name != "Shared") {
+          if (this.$route.name != "Share") {
 
             var provider = new this.$firebase.auth.GoogleAuthProvider();
             this.$firebase.auth().signInWithRedirect(provider);
