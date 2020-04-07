@@ -6,13 +6,13 @@
         <input type="text" class="input search" placeholder="Search">
       </form>
       <button class="btn new">NEW</button>
-      <button class="user"></button>
+      <button :style="{background: photoURL}" class="user"></button>
     </nav>
     <div class="documents">
-      <div v-for="i in 10" class="document">
-        <p class="title">The Great Artists of Carrot Nation {{i}}</p>
-        <p class="description">Opened: 5 min ago. Owner: You</p>
-      </div>
+      <router-link :to="'/d/' + user.uid + '/' + doc.id" :key="doc.id" v-for="doc in docs" class="document" >
+        <p class="title">{{doc.title}}</p>
+        <p class="description">Opened: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -21,6 +21,43 @@
 
   export default {
     name: 'Home',
-    components: {}
+    data() {
+      return {
+
+      }
+    },
+    computed: {
+      docs() {
+        return this.$store.state.docs
+      },
+      photoURL() {
+        return `url(${this.$store.state.user.photoURL}) no-repeat center center`
+      },
+      user() {
+        return this.$store.state.user
+      },
+
+    },
+    methods: {
+      lastEdited(time) {
+
+        return this.$moment.unix(time).fromNow()
+      }
+    },
+    components: {},
+    mounted() {
+      this.$firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+
+          this.$firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
+            // Send token to your backend via HTTPS
+            this.$store.commit("setToken", idToken)
+this.$store.dispatch("fetchDocs")
+            //console.log( this.$store.state.token)
+          })
+        }
+      })
+    }
+
   }
 </script>

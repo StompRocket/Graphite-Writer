@@ -12,9 +12,13 @@ Vue.use(VueRouter)
     component: Home
   },
     {
-      path: '/edit',
+      path: '/d/:user/:docId',
       name: 'Edit',
       component: Edit
+    },
+    {
+      path: '*',
+      redirect: "/"
     },
 ]
 

@@ -1,0 +1,68 @@
+
+#toolbar {
+  background: white;
+  border: none;
+  color: white !important;
+  position: fixed;
+  width: 100%;
+  top: 7vh;
+  z-index: 9999;
+  @include shadow;
+  padding: 1rem;
+}
+
+.nav.editor {
+  justify-content: flex-start;
+  position: fixed;
+  width: 100%;
+  margin-top: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.docTitle {
+  margin-left: 1rem;
+margin-right: 1rem;
+  width: 30rem;
+  .title {
+    background: $gray;
+    width: 100%;
+  }
+}
+
+.nav-item {
+  margin-right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: $text;
+}
+.saved {
+  color: $primary;
+  margin-right: auto;
+}
+.nav-item.delete {
+  color: $warning;
+}
+
+
+.editor__app {
+
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1600px;
+  margin-top: 8vh;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+.editor__document {
+  background: white;
+  width: 100%;
+  min-height: 90vh;
+  @include shadow;
+  @include rounding;
+  padding: 1rem;
+}

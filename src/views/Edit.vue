@@ -1,12 +1,16 @@
 <template>
   <div class="page">
     <nav class="nav editor">
-      <img class="brand--icon" src="@/assets/icon.svg">
+      <router-link to="/"><img class="brand--icon" src="@/assets/icon.svg"></router-link>
+
       <form @submit.prevent class="docTitle">
-        <input type="text" class="input title" placeholder="Document Name">
+        <input @keyup="saveTitle" v-model="doc.title" type="text" class="input title" placeholder="Document Name">
+
       </form>
+      <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
+      <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
       <button class="nav-item">Print</button>
-      <button class="nav-item">Delete</button>
+      <button class="nav-item delete">Delete</button>
       <button class="btn share">SHARE</button>
 
     </nav>
@@ -47,11 +51,11 @@
       <!-- Add subscript and superscript buttons -->
 
     </div>
-      <div class="editor__app">
-        <div class="editor__document" id="doc">
+    <div class="editor__app">
+      <div class="editor__document" id="doc">
 
-        </div>
       </div>
+    </div>
 
   </div>
 </template>
@@ -61,61 +65,108 @@
   import "quill/dist/quill.core.js"
   import "quill/dist/quill.core.css"
   import "quill/dist/quill.snow.css"
-  const toolbarOptions = [
-    [{
-      'font': []
-    }],
-    [{
-      'size': []
-    }],
-    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-    ['blockquote', 'link', 'code-block', 'image'],
-    [{
-      'color': []
-    }, {
-      'background': []
-    }], // dropdown with defaults from theme
-    [{
-      'header': 1
-    }, {
-      'header': 2
-    }], // custom button values
-    [{
-      'list': 'ordered'
-    }, {
-      'list': 'bullet'
-    }],
-    [{
-      'script': 'sub'
-    }, {
-      'script': 'super'
-    }], // superscript/subscript
-    [{
-      'indent': '-1'
-    }, {
-      'indent': '+1'
-    }], // outdent/indent
 
-    [{
-      'align': []
-    }],
-
-    ['clean'] // remove formatting button
-  ]
+  let editor
+  let timeout = null
   export default {
     name: 'Editor',
     components: {},
+    data() {
+      return {
+        doc: {},
+        saved: true
+      }
+    },
+    computed: {
+      lastEdited() {
+        return this.$moment.unix(this.doc.date).fromNow()
+      }
+    },
+    methods: {
+      save(type) {
+        //console.log(timeout, "saving")
+        timeout = null
+        this.saved = true
+        let body
+        switch (type) {
+          case "title":
+            body = {title: this.doc.title, time: this.$moment().unix()}
+            break;
+          case "document":
+            var delta = editor.getContents()
+            body = {data: delta, time: this.$moment().unix()}
+            break
+          default:
+            var delta = editor.getContents()
+            body = {title: this.doc.title, data: delta, time: this.$moment().unix()}
+        }
+        fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
+          method: "post",
+          headers: {
+            "Authorization": this.$store.getters.fbToken,
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(body)
+
+        }).then(res => res.json()).then(res => {
+          if (res.success) {
+            this.saved = true
+            this.doc.date = body.time
+          }
+        })
+
+      },
+      saveTitle() {
+        this.saved = false
+        window.clearTimeout(timeout)
+        timeout = window.setTimeout(() => this.save("title"), 1000)
+
+      }
+    },
     mounted() {
-      var options = {
-        debug: 'info',
+      const options = {
+        debug: 'warn',
         modules: {
           toolbar: "#toolbar"
         },
-      theme: "snow",
+        theme: "snow",
         placeholder: 'Compose an epic...',
       };
-      console.log("created", document.getElementById("doc"))
-      let editor = new Quill("#doc",options)
+
+      editor = new Quill("#doc", options)
+      this.$firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
+        // Send token to your backend via HTTPS
+        this.$store.commit("setToken", idToken)
+        fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
+          method: "get",
+          headers: {
+            "Authorization": this.$store.getters.fbToken
+          }
+
+        }).then(res => res.json()).then(res => {
+          this.doc = res
+
+
+          try {
+            editor.setContents(JSON.parse(this.doc.data))
+          } catch {
+            editor.setContents(this.doc.data)
+          }
+          editor.on('text-change',  (delta, oldDelta, source) => {
+            if (source == 'api') {
+            //  console.log("An API call triggered this change.");
+            } else if (source == 'user') {
+             // console.log("A user action triggered this change.", source, delta);
+              this.saved = false
+              window.clearTimeout(timeout)
+              timeout = window.setTimeout(() => this.save("document"), 1000)
+            }
+          });
+        })
+        //console.log( this.$store.state.token)
+      })
+
+
     }
   }
 </script>
