@@ -29,13 +29,18 @@ margin-right: 1rem;
     width: 100%;
   }
 }
-
+.nav-item.primary {
+  color: $primary;
+}
 .nav-item {
   margin-right: 1rem;
   background: none;
   border: none;
   font-size: 1rem;
   color: $text;
+}
+.nav-item.ml {
+  margin-left: auto;
 }
 .saved {
   color: $primary;

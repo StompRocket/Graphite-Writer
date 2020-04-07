@@ -9,7 +9,7 @@
       </form>
       <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
       <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
-      <button class="nav-item">Print</button>
+      <button class="nav-item" @click="print()">Print</button>
       <button class="nav-item delete" @click="deleteDoc">Delete</button>
       <button @click="share" class="btn share">SHARE</button>
 
@@ -79,11 +79,26 @@
       <div class="modal_container" @click="$router.push('/')"></div>
 
     </div>
+    <div v-if="!loaded" class="loading--fullscreen">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+      <img src="@/assets/wordmark.svg" alt="">
+    </div>
   </div>
 </template>
 
 <script>
   import Quill from "quill/dist/quill.min.js"
+  import JSONC from '../../jsonc.min'
   import "quill/dist/quill.core.js"
   import "quill/dist/quill.core.css"
   import "quill/dist/quill.snow.css"
@@ -99,7 +114,8 @@
         saved: true,
         sharingModal: false,
         shareLink: "",
-        error: false
+        error: false,
+        loaded: false
       }
     },
     computed: {
@@ -108,6 +124,9 @@
       }
     },
     methods: {
+      print() {
+        window.print()
+      },
       deleteDoc() {
         this.$swal({
           title: "Are you sure?",
@@ -128,7 +147,7 @@
 
             }).then(res => res.json()).then(res => {
               if (res.success) {
-               this.$router.push("/")
+                this.$router.push("/")
               }
             })
           }
@@ -222,6 +241,7 @@
             } catch {
               editor.setContents(this.doc.data)
             }
+            this.loaded = true
             editor.on('text-change', (delta, oldDelta, source) => {
               if (source == 'api') {
                 //  console.log("An API call triggered this change.");

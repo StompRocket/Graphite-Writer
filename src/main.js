@@ -11,6 +11,7 @@ import 'firebase/remote-config'
 import 'firebase/analytics'
 import 'minireset.css'
 import './assets/main.scss'
+import "@/assets/print.scss"
 Vue.config.productionTip = false
 const firebaseConfig = {
   apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",

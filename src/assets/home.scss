@@ -61,3 +61,19 @@
     background: color.adjust($text, $lightness: -30);
   }
 }
+.accountButton {
+  @include shadow;
+  background: white;
+  text-align: right;
+ padding: 1rem;
+  right: 0;
+  top: 7vh;
+  position: fixed;
+  button {
+    background: $warning;
+    border: none;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: none;
+  }
+}

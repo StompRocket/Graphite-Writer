@@ -10,13 +10,16 @@ export default new Vuex.Store({
     user: false,
     token: false,
     docs: [],
-    api: "http://localhost:3008"
+    docsLoaded:false,
+   // api: "http://localhost:3008"
+    api: "https://api.graphitewriter.com"
   },
   mutations: {
     setUser (state, user) {
       state.user = user
     },
     setDocs(state, docs) {
+      state.docsLoaded = true
       state.docs = docs
     },
     setToken (state, token) {

@@ -8,8 +8,9 @@
 
       </form>
       <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
+      <p class="nav-item primary">View Only Document</p>
 
-      <button class="nav-item">Print</button>
+      <button @click="print" class="nav-item ml">Print</button>
 
 
     </nav>
@@ -28,6 +29,20 @@
       </div>
       <div class="modal_container" @click="$router.push('/')"></div>
 
+    </div>
+    <div v-if="!loaded" class="loading--fullscreen">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+      <img src="@/assets/wordmark.svg" alt="">
     </div>
   </div>
 </template>
@@ -49,7 +64,8 @@
         saved: true,
         sharingModal: false,
         shareLink: "",
-        error: false
+        error: false,
+        loaded: false
       }
     },
     computed: {
@@ -57,7 +73,11 @@
         return this.$moment.unix(this.doc.date).fromNow()
       }
     },
-    methods: {},
+    methods: {
+      print() {
+        window.print()
+      },
+    },
     mounted() {
       const options = {
         debug: 'warn',
@@ -90,6 +110,7 @@
               } catch {
                 editor.setContents(this.doc.data)
               }
+              this.loaded = true
             })
             //console.log( this.$store.state.token)
           })

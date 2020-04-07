@@ -6,14 +6,33 @@
         <input v-model="search" type="text" class="input search" placeholder="Search">
       </form>
       <button class="btn new" @click="newDoc">NEW</button>
-      <img :src="$store.getters.user.photoURL" class="user" alt="">
+      <img @click="accountInfo = !accountInfo" :src="$store.getters.user.photoURL" class="user" alt="">
     </nav>
+    <div v-if="accountInfo" class="accountButton">
+      <p>{{user.email}}</p>
+      <button class="btn" @click="logOut">Logout</button>
+    </div>
+    <div v-if="!docsLoaded" class="loading">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+      <img src="@/assets/wordmark.svg" alt="">
+    </div>
     <div class="documents">
+
       <router-link :to="'/d/' + user.uid + '/' + doc.id" :key="doc.id" v-for="doc in filteredDocs" class="document">
         <p class="title">{{doc.title}}</p>
         <p class="description">Opened: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
       </router-link>
-      <div v-if="docs.length <= 0">
+      <div v-if="docs.length <= 0 && docsLoaded">
         <p>No docs</p>
       </div>
     </div>
@@ -26,10 +45,15 @@
     name: 'Home',
     data() {
       return {
-        search: ""
+        search: "",
+        loaded: false,
+        accountInfo: false
       }
     },
     computed: {
+      docsLoaded() {
+        return this.$store.state.docsLoaded
+      },
       docs() {
         return this.$store.state.docs
       },
@@ -51,6 +75,11 @@
 
     },
     methods: {
+logOut() {
+  this.$firebase.auth().signOut().then(() => {
+    window.href = "https://graphitewriter.com"
+  })
+},
       lastEdited(time) {
 
         return this.$moment.unix(time).fromNow()
@@ -88,6 +117,7 @@
             // Send token to your backend via HTTPS
             this.$store.commit("setToken", idToken)
             this.$store.dispatch("fetchDocs")
+            this.loaded = true
             //console.log( this.$store.state.token)
           })
         } else {
