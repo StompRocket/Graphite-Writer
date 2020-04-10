@@ -25,6 +25,7 @@
         <div class="sk-cube sk-cube9"></div>
       </div>
       <img src="@/assets/wordmark.svg" alt="">
+      <p class="version">v{{version}}</p>
     </div>
     <div class="documents">
 
@@ -47,7 +48,8 @@
       return {
         search: "",
         loaded: false,
-        accountInfo: false
+        accountInfo: false,
+        version: require("../../package.json").version
       }
     },
     computed: {

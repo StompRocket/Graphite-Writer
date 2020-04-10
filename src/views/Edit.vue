@@ -205,7 +205,7 @@
           if (res.success) {
             this.saved = true
             this.doc.date = body.time
-            this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId})
+            this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
           }
         })
 
@@ -248,7 +248,7 @@
               editor.setContents(this.doc.data)
             }
             this.loaded = true
-            this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId})
+            this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
             editor.on('text-change', (delta, oldDelta, source) => {
               if (source == 'api') {
                 //  console.log("An API call triggered this change.");

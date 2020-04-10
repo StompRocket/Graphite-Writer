@@ -141,7 +141,7 @@ this.error = true
             //console.log( this.$store.state.token)
 
         }
-        this.$analytics.logEvent("openedSharedDoc", {doc: this.$route.params.docId, user: user != false})
+        this.$analytics.logEvent("openedSharedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user, loggedIn: user !=false})
       })
 
 
