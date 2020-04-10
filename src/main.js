@@ -6,6 +6,7 @@ import firebase from 'firebase/app'
 import moment from 'moment'
 import swal from 'sweetalert'
 import _ from 'lodash'
+import * as Sentry from '@sentry/browser';
 import 'firebase/auth'
 import 'firebase/remote-config'
 import 'firebase/analytics'
@@ -31,6 +32,7 @@ Vue.prototype.$firebase = firebase
 Vue.prototype.$swal = swal
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
 Vue.prototype.$moment = moment
+Sentry.init({ dsn: 'https://651a929bd0444e42ab4dd37ba4f864ac@o130965.ingest.sentry.io/289169', release: 'Graphite-Writer-App@' + process.env.npm_package_version });
 let app
 firebase.auth().onAuthStateChanged(function(user) {
   if (!app) {

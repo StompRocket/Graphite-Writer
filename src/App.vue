@@ -4,14 +4,18 @@
   </div>
 </template>
 <script>
+  let version = require("../package.json").version
   export default {
     name: "app",
     mounted() {
+      this.$analytics.setUserProperties({appVersion: version})
       this.$firebase.auth().onAuthStateChanged((user) => {
+
       //  console.log(user, "user")
         if (user) {
           // User is signed in.
           this.$store.commit("setUser", user)
+          //this.$analytics.setUserID(user.uid)
           this.$firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
             // Send token to your backend via HTTPS
             this.$store.commit("setToken", idToken)

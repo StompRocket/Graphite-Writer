@@ -125,6 +125,7 @@
     },
     methods: {
       print() {
+        this.$analytics.logEvent("print")
         window.print()
       },
       deleteDoc() {
@@ -137,6 +138,7 @@
         })
         .then((willDelete) => {
           if (willDelete) {
+
             fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
               method: "delete",
               headers: {
@@ -147,7 +149,9 @@
 
             }).then(res => res.json()).then(res => {
               if (res.success) {
+
                 this.$router.push("/")
+                this.$analytics.logEvent("deletedDoc")
               }
             })
           }
@@ -166,6 +170,7 @@
 
         }).then(res => res.json()).then(res => {
           if (res.success) {
+            this.$analytics.logEvent("sharedDoc")
             this.saved = true
             this.doc.date = body.time
           }
@@ -200,6 +205,7 @@
           if (res.success) {
             this.saved = true
             this.doc.date = body.time
+            this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId})
           }
         })
 
@@ -242,6 +248,7 @@
               editor.setContents(this.doc.data)
             }
             this.loaded = true
+            this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId})
             editor.on('text-change', (delta, oldDelta, source) => {
               if (source == 'api') {
                 //  console.log("An API call triggered this change.");

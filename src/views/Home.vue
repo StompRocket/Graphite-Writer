@@ -40,7 +40,7 @@
 </template>
 
 <script>
-
+  let timeout = null
   export default {
     name: 'Home',
     data() {
@@ -55,6 +55,10 @@
         return this.$store.state.docsLoaded
       },
       docs() {
+        if (this.$store.getters.userDocs.length > 0) {
+          this.$analytics.setUserProperties({docCount: this.$store.getters.userDocs.length});
+        }
+
         return this.$store.getters.userDocs
       },
       filteredDocs() {
@@ -62,7 +66,9 @@
           return this.$store.state.docs
         } else {
           return this.$store.state.docs.filter(i => {
-         return   i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+            clearTimeout(timeout)
+            timeout = setTimeout(this.logSearch, 1000)
+            return i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
           })
         }
       },
@@ -75,11 +81,17 @@
 
     },
     methods: {
-logOut() {
-  this.$firebase.auth().signOut().then(() => {
-    window.location.href = "https://graphitewriter.com"
-  })
-},
+      logSearch() {
+        console.log("Log search")
+        timeout = null
+        this.$analytics.logEvent("searching")
+      },
+      logOut() {
+        this.$analytics.logEvent("logout")
+        this.$firebase.auth().signOut().then(() => {
+          window.location.href = "https://graphitewriter.com"
+        })
+      },
       lastEdited(time) {
 
         return this.$moment.unix(time).fromNow()
@@ -102,7 +114,8 @@ logOut() {
 
           }).then(res => res.json()).then(res => {
             if (res.success) {
-            this.$router.push(`/d/${this.$store.getters.user.uid}/${res.id}`)
+              this.$analytics.logEvent("newDoc")
+              this.$router.push(`/d/${this.$store.getters.user.uid}/${res.id}`)
             }
           })
         });
@@ -110,6 +123,7 @@ logOut() {
     },
     components: {},
     mounted() {
+      this.$analytics.logEvent("openedDocumentsPage")
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
 
@@ -122,6 +136,7 @@ logOut() {
           })
         } else {
           this.$store.commit("setUser", false)
+          this.$analytics.logEvent("login")
           // No user is signed in.
           console.log(this.$route.name)
           if (this.$route.name != "Share") {
