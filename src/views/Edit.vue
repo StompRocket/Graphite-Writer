@@ -119,6 +119,9 @@
       }
     },
     computed: {
+      user() {
+        return this.$store.getters.user
+      },
       lastEdited() {
         return this.$moment.unix(this.doc.date).fromNow()
       }
@@ -160,13 +163,14 @@
       share() {
         this.shareLink = `https://app.graphitewriter.com/shared/${this.$store.getters.user.uid}/${this.doc["_id"]}`
         this.sharingModal = true
+        let body = {shared: true, time: this.$moment().unix()}
         fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
           method: "post",
           headers: {
             "Authorization": this.$store.getters.fbToken,
             "content-type": "application/json"
           },
-          body: JSON.stringify({shared: true, time: this.$moment().unix()})
+          body: JSON.stringify(body)
 
         }).then(res => res.json()).then(res => {
           if (res.success) {
@@ -239,26 +243,41 @@
 
         }).then(res => res.json()).then(res => {
           if (!res.error) {
-            this.doc = res
 
-
-            try {
-              editor.setContents(JSON.parse(this.doc.data))
-            } catch {
-              editor.setContents(this.doc.data)
-            }
-            this.loaded = true
-            this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
-            editor.on('text-change', (delta, oldDelta, source) => {
-              if (source == 'api') {
-                //  console.log("An API call triggered this change.");
-              } else if (source == 'user') {
-                // console.log("A user action triggered this change.", source, delta);
-                this.saved = false
-                window.clearTimeout(timeout)
-                timeout = window.setTimeout(() => this.save("document"), 1000)
+            if (res.owner == this.user.uid) {
+              this.doc = res
+              try {
+                editor.setContents(JSON.parse(this.doc.data))
+              } catch {
+                editor.setContents(this.doc.data)
               }
-            });
+              this.loaded = true
+              this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+              editor.on('text-change', (delta, oldDelta, source) => {
+                if (source == 'api') {
+                  //  console.log("An API call triggered this change.");
+                } else if (source == 'user') {
+                  // console.log("A user action triggered this change.", source, delta);
+                  this.saved = false
+                  window.clearTimeout(timeout)
+                  timeout = window.setTimeout(() => this.save("document"), 1000)
+                }
+              });
+            } else {
+              this.loaded = true
+              this.$swal({
+                title: "No Access",
+                text: "You do not have access to this file",
+                icon: "warning",
+
+                dangerMode: true,
+              }).then(() => {
+                this.$router.push("/")
+                this.$analytics.logEvent("attemptedDocAccessNoOwner")
+              })
+            }
+
+
           } else {
             this.error = true
           }

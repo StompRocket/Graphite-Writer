@@ -135,6 +135,8 @@ this.loaded = true
                 editor.setContents(this.doc.data)
               }
             } else {
+                console.log(res)
+                this.loaded = true
 this.error = true
               }
             })
