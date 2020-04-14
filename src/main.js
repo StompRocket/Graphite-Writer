@@ -33,7 +33,15 @@ Vue.prototype.$firebase = firebase
 Vue.prototype.$swal = swal
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
 Vue.prototype.$moment = moment
-Sentry.init({ dsn: 'https://651a929bd0444e42ab4dd37ba4f864ac@o130965.ingest.sentry.io/289169', release: 'Graphite-Writer-App@' + version});
+if (window.location.hostname != "localhost") {
+  console.log("production", window.hostname)
+
+  Sentry.init({ dsn: 'https://651a929bd0444e42ab4dd37ba4f864ac@o130965.ingest.sentry.io/289169', release: 'Graphite-Writer-App@' + version});
+  Vue.prototype.$Sentry = Sentry
+} else {
+  console.log("development")
+}
+
 let app
 firebase.auth().onAuthStateChanged(function(user) {
   if (!app) {

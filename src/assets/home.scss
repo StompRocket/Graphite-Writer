@@ -2,7 +2,9 @@
 .search {
   @include shadow;
   width: 30vw;
-
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
 }
 
 .search__form {
@@ -26,16 +28,51 @@
 
 .new {
   margin-right: 2rem;
+  @media (max-width: 600px) {
+
+    margin-right: auto;
+    width: 70vw;
+  }
 }
 
 .documents {
   padding: 5%;
   display: grid;
- grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   max-width: 1600px;
   margin: 0 auto;
+  @media  (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media  (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 }
 
+.noDocs {
+  grid-column-start: 1;
+  grid-column-end: 5;
+
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  img {
+    max-height: 40%;
+  }
+  h3 {
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  p {
+    color: white;
+    margin-top: 0.5rem;
+  }
+}
 .document {
   @include rounding();
   @include shadow();

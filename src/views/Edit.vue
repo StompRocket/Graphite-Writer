@@ -1,34 +1,35 @@
 <template>
   <div class="page">
-    <nav class="nav editor">
-      <router-link to="/"><img class="brand--icon" src="@/assets/icon.svg"></router-link>
+    <div class="topBar">
+      <nav class="nav editor">
+        <router-link to="/"><img class="brand--icon" src="@/assets/icon.svg"></router-link>
 
-      <form @submit.prevent class="docTitle">
-        <input @keyup="saveTitle" v-model="doc.title" type="text" class="input title" placeholder="Document Name">
+        <form @submit.prevent class="docTitle">
+          <input @keyup="saveTitle" v-model="doc.title" type="text" class="input title" placeholder="Document Name">
 
-      </form>
-      <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
-      <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
-      <button class="nav-item" @click="print()">Print</button>
-      <button class="nav-item delete" @click="deleteDoc">Delete</button>
-      <button @click="share" class="btn share">SHARE</button>
+        </form>
+        <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
+        <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
+        <button class="nav-item" @click="print()">Print</button>
+        <button class="nav-item delete" @click="deleteDoc">Delete</button>
+        <button @click="share" class="btn share">SHARE</button>
 
-    </nav>
+      </nav>
 
 
-    <div id="toolbar">
-      <!-- Add font size dropdown -->
-      <select class="ql-size">
-        <option value="small"></option>
-        <!-- Note a missing, thus falsy value, is used to reset to default -->
-        <option selected></option>
-        <option value="large"></option>
-        <option value="huge"></option>
-      </select>
-      <!-- Add a bold button -->
-      <button class="ql-bold"></button>
-      <button class="ql-italic"></button>
-      <span class="ql-formats">
+      <div id="toolbar">
+        <!-- Add font size dropdown -->
+        <select class="ql-size">
+          <option value="small"></option>
+          <!-- Note a missing, thus falsy value, is used to reset to default -->
+          <option selected></option>
+          <option value="large"></option>
+          <option value="huge"></option>
+        </select>
+        <!-- Add a bold button -->
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <span class="ql-formats">
          <button type="button" class="ql-indent" value="-1"></button>
          <button type="button" class="ql-indent" value="+1"></button>
          <select class="ql-align">
@@ -41,16 +42,18 @@
          <button type="button" class="ql-list" value="ordered"></button>
          <button type="button" class="ql-list" value="bullet"></button>
       </span>
-      <span class="ql-formats">
+        <span class="ql-formats">
          <button type="button" class="ql-image"></button>
          <button type="button" class="ql-code-block"></button>
          <button type="button" class="ql-script" value="sub"></button>
          <button type="button" class="ql-script" value="super"></button>
          <button type="button" class="ql-clean"></button>
       </span>
-      <!-- Add subscript and superscript buttons -->
+        <!-- Add subscript and superscript buttons -->
 
+      </div>
     </div>
+
     <div class="editor__app">
       <div class="editor__document" id="doc">
 
@@ -265,20 +268,12 @@
               });
             } else {
               this.loaded = true
-              this.$swal({
-                title: "No Access",
-                text: "You do not have access to this file",
-                icon: "warning",
-
-                dangerMode: true,
-              }).then(() => {
-                this.$router.push("/")
-                this.$analytics.logEvent("attemptedDocAccessNoOwner")
-              })
+              this.error = true
             }
 
 
           } else {
+            this.loaded = true
             this.error = true
           }
         })

@@ -135,10 +135,15 @@ this.loaded = true
                 editor.setContents(this.doc.data)
               }
             } else {
-                console.log(res)
+                console.log(res, "error")
                 this.loaded = true
 this.error = true
+                console.log("no access")
               }
+            }).catch(err=> {
+              this.loaded = true
+              this.error = true
+              console.log("no access")
             })
             //console.log( this.$store.state.token)
 

@@ -29,12 +29,14 @@
     </div>
     <div class="documents">
 
-      <router-link :to="'/d/' + user.uid + '/' + doc.id" :key="doc.id" v-for="doc in filteredDocs" class="document">
+      <router-link :to="openUrl(doc)" :key="doc.id" v-for="doc in filteredDocs" class="document">
         <p class="title">{{doc.title}}</p>
         <p class="description">Opened: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
       </router-link>
-      <div v-if="docs.length <= 0 && docsLoaded">
-        <p>No docs</p>
+      <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
+        <img src="../assets/undraw_files_6b3d.svg" alt="No Documents">
+        <h3>No docs</h3>
+        <p>You don't have any documents yet. Press new on the top right of your screen to create one.</p>
       </div>
     </div>
   </div>
@@ -83,6 +85,13 @@
 
     },
     methods: {
+      openUrl (doc) {
+        if (doc.sharedDoc) {
+          return '/shared/' + this.user.uid + '/' + doc.id
+        } else {
+          return '/d/' + this.user.uid + '/' + doc.id
+        }
+      },
       logSearch() {
         console.log("Log search")
         timeout = null
@@ -103,7 +112,7 @@
           content: "input",
         })
         .then((value) => {
-          if (value.length <= 0) {
+          if (!value || value.length <= 0) {
             value = "Untitled"
           }
           fetch(`${this.$store.getters.api}/api/v1/documents/new`, {

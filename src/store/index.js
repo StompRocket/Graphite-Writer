@@ -28,6 +28,9 @@ export default new Vuex.Store({
   },
   getters: {
     api(state) {
+      if (window.location.hostname == "localhost") {
+        return "http://localhost:3008"
+      }
       return state.api
     },
     fbToken(state, getters) {
