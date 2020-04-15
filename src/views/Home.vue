@@ -69,7 +69,7 @@
     data() {
       return {
         featureModal: false,
-        prominentLocale: this.$config.getValue("prominentLocalDisplay") == "true" || window.location.hostname == "localhost",
+        prominentLocale: this.$config.getValue("prominentLocalDisplay") == "true",
         locale: "en",
         search: "",
         loaded: false,

@@ -30,17 +30,20 @@
       }
     },
     mounted() {
-      this.$config.settings = {
-        minimumFetchIntervalMillis: 18000000,
-      };
-      this.$config.fetchAndActivate()
-      .then(() => {
-      console.log("config activated")
-        this.$analytics.setUserProperties({prominentLocale: this.$config.getValue("prominentLocalDisplay")})
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      if (window.location.hostname != "localhost") {
+        this.$config.settings = {
+          minimumFetchIntervalMillis: 18000000,
+        };
+        this.$config.fetchAndActivate()
+        .then(() => {
+          console.log("config activated")
+          this.$analytics.setUserProperties({prominentLocale: this.$config.getValue("prominentLocalDisplay")})
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      }
+
       console.log(localStorage.getItem("local"))
       if (localStorage.getItem("local")) {
 
