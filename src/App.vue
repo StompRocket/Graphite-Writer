@@ -27,6 +27,9 @@
       }
     },
     mounted() {
+      this.$config.settings = {
+        minimumFetchIntervalMillis: 18000000,
+      };
       this.$config.fetchAndActivate()
       .then(() => {
       console.log("config activated")

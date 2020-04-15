@@ -34,6 +34,7 @@ Vue.prototype.$config = firebase.remoteConfig()
 Vue.prototype.$firebase = firebase
 Vue.prototype.$swal = swal
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
+
 Vue.prototype.$moment = moment
 if (window.location.hostname != "localhost") {
   console.log("production", window.hostname)
