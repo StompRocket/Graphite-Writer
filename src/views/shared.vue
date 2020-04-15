@@ -107,17 +107,34 @@
                 "Authorization": this.$store.getters.fbToken
               }
 
-            }).then(res => res.json()).then(res => {
-              this.doc = res
+            }).then(async res => {
+              let jsonRes = await res.json()
 
+              if (!jsonRes.error) {
 
-              try {
-                editor.setContents(JSON.parse(this.doc.data))
-              } catch {
-                editor.setContents(this.doc.data)
+                this.doc = jsonRes
+                console.log(jsonRes)
+                this.loaded = true
+
+                try {
+                  editor.setContents(JSON.parse(this.doc.data))
+                } catch {
+                  editor.setContents(this.doc.data)
+                }
+                this.loaded = true
+                this.trace.stop()
+              } else {
+
+                this.loaded = true
+
+                this.error = true
+
               }
+            }).catch(err=> {
+
               this.loaded = true
-              this.trace.stop()
+              this.error = true
+
             })
             //console.log( this.$store.state.token)
           })
@@ -128,10 +145,12 @@
             method: "get",
             headers: {}
 
-          }).then(res => res.json()).then(res => {
-            if (!res.error) {
+          }).then(async res => {
+           let jsonRes =  await res.json()
+            console.log(res, "request", jsonRes)
+            if (!jsonRes.error) {
 
-              this.doc = res
+              this.doc = jsonRes
               this.loaded = true
 
               try {
@@ -146,7 +165,8 @@
               this.error = true
               console.log("no access")
             }
-          }).catch(err => {
+          }).catch(err=> {
+            console.log(err, "request")
             this.loaded = true
             this.error = true
             console.log("no access")

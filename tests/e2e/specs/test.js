@@ -31,7 +31,7 @@ describe('New Doc Creation', () => {
     cy.get('.swal-modal').get('.swal-text').contains("New Doc Name:")
     cy.get('.swal-content').get('.swal-content__input').type("Testing Doc Name").get('.swal-footer').get('.swal-button').click()
     cy.url().should('include', '/d/')
-    cy.get("#doc").get(".ql-editor").should('have.value', 'Testing Doc Name')
+    cy.get("input.title").should('have.value', 'Testing Doc Name')
     cy.get("nav.editor")
     cy.get('img.brand--icon').click()
     cy.url().should('equal', 'http://localhost:8080/')
