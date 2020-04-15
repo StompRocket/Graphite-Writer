@@ -4,13 +4,12 @@
       <div></div>
       <div class="center">
         <img src="./assets/serverdown.svg" alt="">
-        <h1>Server Connection Error</h1>
-        <p>Graphite Writer is having trouble connecting to its server.</p>
+        <h1>{{$t("serverConError")}}</h1>
+        <p>{{$t("serverConErrorDesc")}}</p>
       </div>
       <div class="center">
         <p>Graphite Writer v{{version}}</p>
-        <p>If this problem persists please contact support.
-          <a href="mailto:ronan@graphitewriter.com">ronan@graphitewriter.com</a></p>
+        <p>{{$t("ifThisProblemPersists")}} <a href="mailto:ronan@graphitewriter.com">ronan@graphitewriter.com</a></p>
       </div>
 
     </div>
@@ -28,6 +27,20 @@
       }
     },
     mounted() {
+      this.$config.fetchAndActivate()
+      .then(() => {
+      console.log("config activated")
+        this.$analytics.setUserProperties({prominentLocale: this.$config.getValue("prominentLocalDisplay")})
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+      console.log(localStorage.getItem("local"))
+      if (localStorage.getItem("local")) {
+
+        this.$i18n.locale = localStorage.getItem("local")
+      }
+
       this.$analytics.setUserProperties({appVersion: version})
       fetch(this.$store.getters.api).then(res => {
         console.log(res.status)

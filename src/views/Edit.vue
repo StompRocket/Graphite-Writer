@@ -5,14 +5,14 @@
         <router-link to="/"><img class="brand--icon" src="@/assets/icon.svg"></router-link>
 
         <form @submit.prevent class="docTitle">
-          <input @keyup="saveTitle" v-model="doc.title" type="text" class="input title" placeholder="Document Name">
+          <input @keyup="saveTitle" v-model="doc.title" type="text" class="input title" :placeholder="$t('docName')">
 
         </form>
-        <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
-        <p class="saved nav-item">{{saved ? "saved" : "waiting"}}</p>
-        <button class="nav-item" @click="print()">Print</button>
-        <button class="nav-item delete" @click="deleteDoc">Delete</button>
-        <button @click="share" class="btn share">SHARE</button>
+        <p class="lastEdited nav-item">{{$t("lastEdited")}}: {{lastEdited}}</p>
+        <p class="saved nav-item">{{saved ? $t("saved") :  $t("waiting")}}</p>
+        <button class="nav-item" @click="print()">{{$t("print")}}</button>
+        <button class="nav-item delete" @click="deleteDoc">{{$t("delete")}}</button>
+        <button @click="share" class="btn share">{{$t("share")}}</button>
 
       </nav>
 
@@ -61,23 +61,23 @@
     </div>
     <div v-if="sharingModal" class="modal_container">
       <div class="modal">
-        <h3>Sharing</h3>
+        <h3>{{$t("sharing")}}</h3>
         <div class="share_link">
-          <p>Link:</p>
+          <p>{{$t("link")}}:</p>
           <input type="text" v-model="shareLink" disabled>
         </div>
 
-        <p>A view only shared document has been created. Anyone with that link can view your document.</p>
-        <button @click="sharingModal = false" class="btn">OK</button>
+        <p>{{$t("linkDesc")}}</p>
+        <button @click="sharingModal = false" class="btn">{{$t("ok")}}</button>
       </div>
       <div class="modal_container" @click="sharingModal = false"></div>
 
     </div>
     <div v-if="error" class="modal_container">
       <div class="modal">
-        <h3>Error</h3>
-        <p>You are not authorized to view this document</p>
-        <button @click="$router.push('/')" class="btn">OK</button>
+        <h3>{{$t("error")}}</h3>
+        <p>{{$t("errorNoAccess")}}</p>
+        <button @click="$router.push('/')" class="btn">{{$t("ok")}}</button>
       </div>
       <div class="modal_container" @click="$router.push('/')"></div>
 
@@ -231,7 +231,7 @@
           toolbar: "#toolbar"
         },
         theme: "snow",
-        placeholder: 'Compose an epic...',
+        placeholder: this.$t("compose"),
       };
 
       editor = new Quill("#doc", options)

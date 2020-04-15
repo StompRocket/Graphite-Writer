@@ -3,14 +3,17 @@
     <nav class="nav">
       <img class="brand--wordmark" src="@/assets/wordmark.svg">
       <form @submit.prevent class="search__form">
-        <input v-model="search" type="text" class="input search" placeholder="Search">
+        <input v-model="search" type="text" class="input search" :placeholder="$t('search')">
       </form>
-      <button class="btn new" @click="newDoc">NEW</button>
+      <button class="btn new" @click="newDoc">{{$t("new")}}</button>
+      <Locale v-if="prominentLocale"></Locale>
+
       <img @click="accountInfo = !accountInfo" :src="$store.getters.user.photoURL" class="user" alt="">
     </nav>
     <div v-if="accountInfo" class="accountButton">
-      <p>{{user.email}}</p>
-      <button class="btn" @click="logOut">Logout</button>
+      <Locale></Locale>
+      <p class="email">{{user.email}}</p>
+      <button class="btn" @click="logOut">{{$t("logout")}}</button>
     </div>
     <div v-if="!docsLoaded" class="loading">
       <div class="sk-cube-grid">
@@ -31,23 +34,43 @@
 
       <router-link :to="openUrl(doc)" :key="doc.id" v-for="doc in filteredDocs" class="document">
         <p class="title">{{doc.title}}</p>
-        <p class="description">Opened: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
+        <p class="description">{{$t("opened")}}: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
       </router-link>
       <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
         <img src="../assets/undraw_files_6b3d.svg" alt="No Documents">
-        <h3>No docs</h3>
-        <p>You don't have any documents yet. Press new on the top right of your screen to create one.</p>
+        <h3>{{$t("noDocs")}}</h3>
+        <p>{{$t("noDocsDesc")}}</p>
       </div>
+    </div>
+    <div v-if="featureModal" class="modal_container">
+      <div class="modal--feature">
+        <img src="../assets/undraw_around_the_world_v9nu.svg" alt="">
+        <h3>{{$t("feature.new")}}</h3>
+        <p>{{$t("feature.supports")}}</p>
+        <p>{{$t("feature.translate")}}</p>
+        <p>{{$t("feature.support")}}: <a href="mailto:support@graphitewriter.com">support@graphitewriter.com</a></p>
+        <p>{{$t("feature.useBox")}}</p>
+        <Locale></Locale>
+        <button @click="closeFeatureModal" class="btn">{{$t("ok")}}</button>
+      </div>
+      <div class="modal_container" @click="closeFeatureModal"></div>
+
     </div>
   </div>
 </template>
 
 <script>
+  import Locale from '@/components/locale.vue'
+
   let timeout = null
   export default {
     name: 'Home',
+
     data() {
       return {
+        featureModal: false,
+        prominentLocale: this.$config.getValue("prominentLocalDisplay") == "true" || window.location.hostname == "localhost",
+        locale: "en",
         search: "",
         loaded: false,
         accountInfo: false,
@@ -55,6 +78,7 @@
       }
     },
     computed: {
+
       docsLoaded() {
         return this.$store.state.docsLoaded
       },
@@ -85,7 +109,12 @@
 
     },
     methods: {
-      openUrl (doc) {
+      closeFeatureModal() {
+        this.featureModal = false
+        this.$analytics.logEvent("closedLanguageFeature")
+        localStorage.setItem("languageFeature", "true")
+      },
+      openUrl(doc) {
         if (doc.sharedDoc) {
           return '/shared/' + this.user.uid + '/' + doc.id
         } else {
@@ -108,7 +137,7 @@
         return this.$moment.unix(time).fromNow()
       },
       newDoc() {
-        swal("New Doc Name:", {
+        swal(this.$t("newDocName") + ":", {
           content: "input",
         })
         .then((value) => {
@@ -132,9 +161,10 @@
         });
       }
     },
-    components: {},
+    components: {Locale},
     mounted() {
       this.$analytics.logEvent("openedDocumentsPage")
+
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
 
@@ -143,6 +173,10 @@
             this.$store.commit("setToken", idToken)
             this.$store.dispatch("fetchDocs")
             this.loaded = true
+            if (!localStorage.getItem("languageFeature") && this.prominentLocale) {
+              this.featureModal = true
+              this.$analytics.logEvent("shownLanguageFeature")
+            }
             //console.log( this.$store.state.token)
           })
         } else {

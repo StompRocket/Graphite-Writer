@@ -87,7 +87,9 @@
 
   text-decoration: none;
   .title {
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
@@ -106,6 +108,10 @@
   right: 0;
   top: 7vh;
   position: fixed;
+  .email {
+    margin: 0.5rem auto;
+    text-align: left;
+  }
   button {
     background: $warning;
     border: none;

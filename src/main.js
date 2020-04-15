@@ -14,6 +14,7 @@ import 'firebase/performance'
 import 'minireset.css'
 import './assets/main.scss'
 import "@/assets/print.scss"
+import i18n from './i18n'
 Vue.config.productionTip = false
 const version = require("../package.json").version
 const firebaseConfig = {
@@ -29,6 +30,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 Vue.prototype.$analytics = firebase.analytics()
 Vue.prototype.$perf = firebase.performance();
+Vue.prototype.$config = firebase.remoteConfig()
 Vue.prototype.$firebase = firebase
 Vue.prototype.$swal = swal
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
@@ -48,6 +50,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     app = new Vue({
       router,
       store,
+      i18n,
       render: h => h(App)
     }).$mount('#app')
 

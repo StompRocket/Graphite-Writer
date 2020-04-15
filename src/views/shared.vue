@@ -4,13 +4,13 @@
       <router-link to="/"><img class="brand--icon" src="@/assets/icon.svg"></router-link>
 
       <form @submit.prevent class="docTitle">
-        <input disabled v-model="doc.title" type="text" class="input title" placeholder="Document Name">
+        <input disabled v-model="doc.title" type="text" class="input title" :placeholder="$t('docName')">
 
       </form>
-      <p class="lastEdited nav-item">Last edited: {{lastEdited}}</p>
-      <p class="nav-item primary">View Only Document</p>
+      <p class="lastEdited nav-item">{{$t("lastEdited")}}: {{lastEdited}}</p>
+      <p class="nav-item primary">{{$t("viewOnly")}}</p>
 
-      <button @click="print" class="nav-item ml">Print</button>
+      <button @click="print" class="nav-item ml">{{$t("print")}}</button>
 
 
     </nav>
@@ -23,9 +23,9 @@
     </div>
     <div v-if="error" class="modal_container">
       <div class="modal">
-        <h3>Error</h3>
-       <p>You are not authorized to view this document</p>
-        <button @click="$router.push('/')" class="btn">OK</button>
+        <h3>{{$t("error")}}</h3>
+       <p>{{$t("errorNoAccess")}}</p>
+        <button @click="$router.push('/')" class="btn">{{$t("ok")}}</button>
       </div>
       <div class="modal_container" @click="$router.push('/')"></div>
 
@@ -86,7 +86,7 @@
         },
         theme: "snow",
         readOnly: true,
-        placeholder: 'Compose an epic...',
+        placeholder: this.$t("compose"),
       };
 
       editor = new Quill("#doc", options)
