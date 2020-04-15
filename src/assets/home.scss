@@ -25,7 +25,9 @@
   background-size: cover;
   border: none;
 }
-
+.home {
+  min-height: 90vh;
+}
 .new {
   margin-right: 2rem;
   @media (max-width: 600px) {
@@ -41,6 +43,7 @@
   grid-template-columns: 1fr;
   max-width: 1600px;
   margin: 0 auto;
+
   @media  (min-width: 600px) {
     grid-template-columns: 1fr 1fr;
   }

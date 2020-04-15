@@ -143,25 +143,31 @@
       newDoc() {
         swal(this.$t("newDocName") + ":", {
           content: "input",
+          button: this.$t("ok")
         })
         .then((value) => {
-          if (!value || value.length <= 0) {
-            value = "Untitled"
-          }
-          fetch(`${this.$store.getters.api}/api/v1/documents/new`, {
-            method: "post",
-            headers: {
-              "Authorization": this.$store.getters.fbToken,
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({title: value, time: this.$moment().unix()})
-
-          }).then(res => res.json()).then(res => {
-            if (res.success) {
-              this.$analytics.logEvent("newDoc")
-              this.$router.push(`/d/${this.$store.getters.user.uid}/${res.id}`)
+          if (value != null) {
+            if (value.length <= 0) {
+              value = "Untitled"
             }
-          })
+
+            fetch(`${this.$store.getters.api}/api/v1/documents/new`, {
+              method: "post",
+              headers: {
+                "Authorization": this.$store.getters.fbToken,
+                "content-type": "application/json"
+              },
+              body: JSON.stringify({title: value, time: this.$moment().unix()})
+
+            }).then(res => res.json()).then(res => {
+              if (res.success) {
+                this.$analytics.logEvent("newDoc")
+                this.$router.push(`/d/${this.$store.getters.user.uid}/${res.id}`)
+              }
+            })
+          }
+
+
         });
       }
     },

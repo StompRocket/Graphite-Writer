@@ -282,7 +282,8 @@ html, body, .page {
   margin-top: 1rem;
 }
 .footer {
-  margin-top: auto;
+  max-width: 1300px;
+  margin: auto auto 2rem;
   width: 100%;
   background: $gray;
   color: $text;
@@ -297,6 +298,7 @@ html, body, .page {
   }
 .brand--row {
   display: flex;
+  flex-wrap: wrap;
   p {
     margin-left: 1rem;
   }
