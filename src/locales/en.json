@@ -1,5 +1,6 @@
 {
   "logout": "Logout",
+  "owner": "Owner",
   "new": "NEW",
   "search": "Search",
   "noDocs": "No Docs",
@@ -30,5 +31,16 @@
    "translate": "Because Graphite Writer is a free an open source project we are using Google Translate to support non English languages.",
    "support": "The accuracy of these translations can not be confirmed. If you see an issue or want to help please email support",
    "useBox": "Use the selection box below to change your preferred language"
- }
+ },
+  "footer": {
+    "languageDisclaimer": "Because Graphite Writer is a small open source project all non English translations are made with Google Translate.",
+    "languageAsk": "If you see any errors please let us know by emailing",
+    "freeAndOpenSource": "Graphite Writer is a free and open source project developed by",
+    "questionsAndSuggestions": "If you have any questions or suggestions please email us at",
+    "github": "Graphite Writer is released under the APL-2.0 License. If your interested in contributing to its development check out our",
+    "legal": "By using Graphite Writer you agree to our use of cookies and to be bound by our",
+    "tos": "terms of service",
+    "pp": "privacy policy",
+    "and": "and"
+  }
 }

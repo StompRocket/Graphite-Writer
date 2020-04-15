@@ -67,7 +67,7 @@
         shareLink: "",
         error: false,
         loaded: false,
-        trace: $perf.trace('loadSharedDoc')
+        trace: this.$perf.trace('loadSharedDoc')
       }
     },
     created() {

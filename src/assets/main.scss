@@ -159,7 +159,7 @@ html, body, .page {
       box-shadow: none;
       margin-left: auto;
     }
-  
+
   }
   .modal {
     @include rounding;
@@ -280,4 +280,50 @@ html, body, .page {
   color: white;
   text-align: center;
   margin-top: 1rem;
+}
+.footer {
+  margin-top: auto;
+  width: 100%;
+  background: $gray;
+  color: $text;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  .container {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-row-gap: 2rem;
+  }
+.brand--row {
+  display: flex;
+  p {
+    margin-left: 1rem;
+  }
+
+  align-items: center;
+  .local {
+    margin-left: auto;
+  }
+}
+  a {
+    color: $primary;
+  }
+  .about--row {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
+.container {
+  max-width: 1300px;
+  width: 100%;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

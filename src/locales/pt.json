@@ -1,5 +1,6 @@
 {
   "logout": "Sair",
+  "owner": "Proprietário",
   "new": "NOVO",
   "search": "Procurar",
   "noDocs": "Sem Documentos",
@@ -30,5 +31,16 @@
     "translate": "O Graphite Writer agora suporta vários idiomas!",
     "support": "A precisão dessas traduções não pode ser confirmada. Se você encontrar um problema ou quiser ajudar, envie um email para o suporte",
     "useBox": "Use a caixa de seleção abaixo para alterar seu idioma preferido"
+  },
+  "footer": {
+    "languageDisclaimer": "Como o Graphite Writer é um pequeno projeto de código aberto, todas as traduções que não são em inglês são feitas com o Google Translate.",
+    "languageAsk": "Se você encontrar algum erro, informe-nos por e-mail",
+    "freeAndOpenSource": "O Graphite Writer é um projeto gratuito e de código aberto desenvolvido pela",
+    "questionsAndSuggestions": "Se você tiver alguma dúvida ou sugestão, envie um email para",
+    "github": "O Graphite Writer é lançado sob a licença APL-2.0. Se você está interessado em contribuir para o seu desenvolvimento, consulte nosso",
+    "legal": "Ao usar o Graphite Writer, você concorda com o uso de cookies e fica vinculado pelos nossos",
+    "tos": "termos de serviço",
+    "pp": "política de Privacidade",
+    "and": "e"
   }
 }

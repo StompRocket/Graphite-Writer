@@ -34,7 +34,7 @@
 
       <router-link :to="openUrl(doc)" :key="doc.id" v-for="doc in filteredDocs" class="document">
         <p class="title">{{doc.title}}</p>
-        <p class="description">{{$t("opened")}}: {{lastEdited(doc.opened)}}. Owner: {{doc.owner}}</p>
+        <p class="description">{{$t("opened")}}: {{lastEdited(doc.opened)}}. {{$t("owner")}}: {{doc.owner}}</p>
       </router-link>
       <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
         <img src="../assets/undraw_files_6b3d.svg" alt="No Documents">

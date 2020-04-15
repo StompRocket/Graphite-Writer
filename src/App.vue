@@ -14,12 +14,15 @@
 
     </div>
     <router-view v-if="server"/>
+    <FooterComponent></FooterComponent>
   </div>
 </template>
 <script>
+  import FooterComponent from "./components/footer.vue"
   let version = require("../package.json").version
   export default {
     name: "app",
+    components: {FooterComponent},
     data() {
       return {
         version: version,
