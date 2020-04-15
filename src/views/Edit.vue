@@ -118,8 +118,12 @@
         sharingModal: false,
         shareLink: "",
         error: false,
-        loaded: false
+        loaded: false,
+        trace: this.$perf.trace('docLoad')
       }
+    },
+    created() {
+      this.trace.start()
     },
     computed: {
       user() {
@@ -255,6 +259,7 @@
                 editor.setContents(this.doc.data)
               }
               this.loaded = true
+              this.trace.stop()
               this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
               editor.on('text-change', (delta, oldDelta, source) => {
                 if (source == 'api') {

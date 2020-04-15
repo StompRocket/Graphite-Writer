@@ -74,8 +74,12 @@
         search: "",
         loaded: false,
         accountInfo: false,
-        version: require("../../package.json").version
+        version: require("../../package.json").version,
+        trace: this.$perf.trace('loadDocuments')
       }
+    },
+    created() {
+      this.trace.start()
     },
     computed: {
 
@@ -173,6 +177,7 @@
             this.$store.commit("setToken", idToken)
             this.$store.dispatch("fetchDocs")
             this.loaded = true
+            this.trace.stop()
             if (!localStorage.getItem("languageFeature") && this.prominentLocale) {
               this.featureModal = true
               this.$analytics.logEvent("shownLanguageFeature")
