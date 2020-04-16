@@ -14,6 +14,7 @@
     methods: {
       storeLocal() {
         console.log(this.$i18n.locale)
+        this.$moment.locale(this.$i18n.locale)
         window.localStorage.setItem("local", this.$i18n.locale)
         if (this.$analytics) {
           this.$analytics.setUserProperties({local: this.$i18n.locale})

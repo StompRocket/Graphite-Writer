@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import firebase from 'firebase/app'
 import moment from 'moment'
+import 'moment/locale/pt.js'
 import swal from 'sweetalert'
 import _ from 'lodash'
 import * as Sentry from '@sentry/browser';
