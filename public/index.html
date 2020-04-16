@@ -4,15 +4,18 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105872662-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      if (window.location.hostname != "localhost") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-105872662-1',  {
-        'linker': {
-          'accept_incoming': true
-        }
-      });
+        gtag('config', 'UA-105872662-1',  {
+          'linker': {
+            'accept_incoming': true
+          }
+        });
+      }
+
     </script>
 
     <meta charset="utf-8">

@@ -63,6 +63,9 @@ margin-right: 1rem;
   color: $primary;
   margin-right: auto;
 }
+.saved.error {
+  color: $warning;
+}
 .nav-item.delete {
   color: $warning;
 }

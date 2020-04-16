@@ -9,7 +9,8 @@
 
         </form>
         <p class="lastEdited nav-item">{{$t("lastEdited")}}: {{lastEdited}}</p>
-        <p class="saved nav-item">{{saved ? $t("saved") :  $t("waiting")}}</p>
+        <p v-if="!saveError" class="saved nav-item">{{saved ? $t("saved") :  $t("waiting")}}</p>
+        <p v-if="saveError" class="saved error nav-item">Error Saving</p>
         <button class="nav-item" @click="print()">{{$t("print")}}</button>
         <button class="nav-item delete" @click="deleteDoc">{{$t("delete")}}</button>
         <button @click="share" class="btn share">{{$t("share")}}</button>
@@ -115,6 +116,7 @@
       return {
         doc: {},
         saved: true,
+        saveError: false,
         sharingModal: false,
         shareLink: "",
         error: false,
@@ -196,7 +198,7 @@
       save(type) {
         //console.log(timeout, "saving")
         timeout = null
-        this.saved = true
+
         let body
         switch (type) {
           case "title":
@@ -225,11 +227,36 @@
             if (this.$analytics) {
               this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
             }
+          } else {
+            console.log(res)
+            if (res.error == "too large") {
+              if (this.$analytics) {
+                this.$analytics.logEvent("docToLarge")
+              }
+              this.$swal({
+                title: "ERROR SAVING",
+                text: "Because graphite writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+                icon: "warning"
+              })
+              this.saveError = true
+
+            } else {
+              if (this.$analytics) {
+                this.$analytics.logEvent("errorSavingDoc", {error: res.error})
+              }
+              this.$swal({
+                title: "ERROR SAVING",
+                text: "Graphite Writer had trouble saving this document. Please check your internet connection.",
+                icon: "warning"
+              })
+              this.saveError = true
+            }
           }
         })
 
       },
       saveTitle() {
+        this.saveError = false
         this.saved = false
         window.clearTimeout(timeout)
         timeout = window.setTimeout(() => this.save("title"), 1000)
@@ -245,6 +272,19 @@
         theme: "snow",
         placeholder: this.$t("compose"),
       };
+      window.addEventListener('beforeunload', (event) => {
+        // Cancel the event as stated by the standard.
+        if (!this.saved) {
+          if (this.$analytics) {
+            this.$analytics.logEvent("docNotSaved")
+          }
+          event.preventDefault();
+          // Chrome requires returnValue to be set.
+          event.returnValue = 'Not saved';
+          this.save()
+        }
+
+      });
 
       editor = new Quill("#doc", options)
       this.$firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
@@ -277,6 +317,7 @@
                 } else if (source == 'user') {
                   // console.log("A user action triggered this change.", source, delta);
                   this.saved = false
+                  this.saveError = false
                   window.clearTimeout(timeout)
                   timeout = window.setTimeout(() => this.save("document"), 1000)
                 }
