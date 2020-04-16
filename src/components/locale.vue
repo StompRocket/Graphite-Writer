@@ -15,8 +15,10 @@
       storeLocal() {
         console.log(this.$i18n.locale)
         window.localStorage.setItem("local", this.$i18n.locale)
-        this.$analytics.setUserProperties({local:this.$i18n.locale})
-        this.$analytics.logEvent("setLocal", {local:this.$i18n.locale})
+        if (this.$analytics) {
+          this.$analytics.setUserProperties({local: this.$i18n.locale})
+          this.$analytics.logEvent("setLocal", {local: this.$i18n.locale})
+        }
         if (this.$store.getters.fbToken) {
           fetch(`${this.$store.getters.api}/api/v1/user`, {
             method: "post",

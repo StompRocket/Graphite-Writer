@@ -135,7 +135,9 @@
     },
     methods: {
       print() {
-        this.$analytics.logEvent("print")
+        if (this.$analytics) {
+          this.$analytics.logEvent("print")
+        }
         window.print()
       },
       deleteDoc() {
@@ -161,7 +163,9 @@
               if (res.success) {
 
                 this.$router.push("/")
-                this.$analytics.logEvent("deletedDoc")
+                if (this.$analytics) {
+                  this.$analytics.logEvent("deletedDoc")
+                }
               }
             })
           }
@@ -181,7 +185,9 @@
 
         }).then(res => res.json()).then(res => {
           if (res.success) {
-            this.$analytics.logEvent("sharedDoc")
+            if (this.$analytics) {
+              this.$analytics.logEvent("sharedDoc")
+            }
             this.saved = true
             this.doc.date = body.time
           }
@@ -216,7 +222,9 @@
           if (res.success) {
             this.saved = true
             this.doc.date = body.time
-            this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+            if (this.$analytics) {
+              this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+            }
           }
         })
 
@@ -260,7 +268,9 @@
               }
               this.loaded = true
               this.trace.stop()
-              this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+              if (this.$analytics) {
+                this.$analytics.logEvent("openedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+              }
               editor.on('text-change', (delta, oldDelta, source) => {
                 if (source == 'api') {
                   //  console.log("An API call triggered this change.");

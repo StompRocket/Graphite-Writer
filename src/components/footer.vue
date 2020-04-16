@@ -32,10 +32,14 @@ const version = require("../../package").version
     },
     methods: {
       logPrivacyClick() {
-        this.$analytics.logEvent("privacyPolicyClicked")
+        if (this.$analytics) {
+          this.$analytics.logEvent("privacyPolicyClicked")
+        }
       },
       logTermsClick() {
-        this.$analytics.logEvent("termsOfServiceClicked")
+        if (this.$analytics) {
+          this.$analytics.logEvent("termsOfServiceClicked")
+        }
       },
     }
   }

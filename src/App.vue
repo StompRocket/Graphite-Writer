@@ -37,7 +37,10 @@
         this.$config.fetchAndActivate()
         .then(() => {
           console.log("config activated")
-          this.$analytics.setUserProperties({prominentLocale: this.$config.getValue("prominentLocalDisplay")})
+          if (this.$analytics) {
+            this.$analytics.setUserProperties({prominentLocale: this.$config.getValue("prominentLocalDisplay")})
+          }
+
         })
         .catch((err) => {
           console.error(err);
@@ -49,8 +52,9 @@
 
         this.$i18n.locale = localStorage.getItem("local")
       }
-
-      this.$analytics.setUserProperties({appVersion: version})
+      if (this.$analytics) {
+        this.$analytics.setUserProperties({appVersion: version})
+      }
       fetch(this.$store.getters.api).then(res => {
         console.log(res.status)
         if (res.status != 200) {

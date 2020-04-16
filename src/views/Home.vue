@@ -88,7 +88,9 @@
       },
       docs() {
         if (this.$store.getters.userDocs.length > 0) {
-          this.$analytics.setUserProperties({docCount: this.$store.getters.userDocs.length});
+          if (this.$analytics) {
+            this.$analytics.setUserProperties({docCount: this.$store.getters.userDocs.length});
+          }
         }
 
         return this.$store.getters.userDocs
@@ -115,7 +117,9 @@
     methods: {
       closeFeatureModal() {
         this.featureModal = false
-        this.$analytics.logEvent("closedLanguageFeature")
+        if (this.$analytics) {
+          this.$analytics.logEvent("closedLanguageFeature")
+        }
         localStorage.setItem("languageFeature", "true")
       },
       openUrl(doc) {
@@ -128,10 +132,14 @@
       logSearch() {
         console.log("Log search")
         timeout = null
-        this.$analytics.logEvent("searching")
+        if (this.$analytics) {
+          this.$analytics.logEvent("searching")
+        }
       },
       logOut() {
-        this.$analytics.logEvent("logout")
+        if (this.$analytics) {
+          this.$analytics.logEvent("logout")
+        }
         this.$firebase.auth().signOut().then(() => {
           window.location.href = "https://graphitewriter.com"
         })
@@ -161,7 +169,9 @@
 
             }).then(res => res.json()).then(res => {
               if (res.success) {
-                this.$analytics.logEvent("newDoc")
+                if (this.$analytics) {
+                  this.$analytics.logEvent("newDoc")
+                }
                 this.$router.push(`/d/${this.$store.getters.user.uid}/${res.id}`)
               }
             })
@@ -173,8 +183,9 @@
     },
     components: {Locale},
     mounted() {
-      this.$analytics.logEvent("openedDocumentsPage")
-
+      if (this.$analytics) {
+        this.$analytics.logEvent("openedDocumentsPage")
+      }
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
 
@@ -186,13 +197,17 @@
             this.trace.stop()
             if (!localStorage.getItem("languageFeature") && this.prominentLocale) {
               this.featureModal = true
-              this.$analytics.logEvent("shownLanguageFeature")
+              if (this.$analytics) {
+                this.$analytics.logEvent("shownLanguageFeature")
+              }
             }
             //console.log( this.$store.state.token)
           })
         } else {
           this.$store.commit("setUser", false)
-          this.$analytics.logEvent("login")
+          if (this.$analytics) {
+            this.$analytics.logEvent("login")
+          }
           // No user is signed in.
           console.log(this.$route.name)
           if (this.$route.name != "Share") {
