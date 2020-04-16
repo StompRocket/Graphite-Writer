@@ -51,8 +51,9 @@
       if (localStorage.getItem("local")) {
 
         this.$i18n.locale = localStorage.getItem("local")
-        this.$moment.locale(this.$i18n.locale)
+
       }
+      this.$moment.locale(this.$i18n.locale)
       if (this.$analytics) {
         this.$analytics.setUserProperties({appVersion: version})
       }
