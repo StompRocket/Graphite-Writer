@@ -2,43 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2123c13c-3acb-49ca-bb40-de49ab0a8452" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/e2e/specs/largeText.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/seedOneDoc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/fixtures/profile.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/fixtures/users.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/Graphite Writer /aunAuthDocs.spec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/Graphite Writer /home.spec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/Graphite Writer /langauge.spec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/Graphite Writer /serverDown.spec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/Graphite Writer /sharedDoc.spec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/screenshots/examples/cypress_api.spec.js/Cypress.config() -- Get and set configuration options (failed).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/screenshots/examples/misc.spec.js/my-image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/actions.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/aliasing.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/assertions.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/connectors.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/cookies.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/cypress_api.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/files.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/local_storage.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/location.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/misc.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/navigation.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/network_requests.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/querying.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/spies_stubs_clocks.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/traversal.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/utilities.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/viewport.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/waiting.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/examples/window.spec.js.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/pt.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/e2e/plugins/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/e2e/plugins/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/e2e/specs/aunAuthDocs.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/e2e/specs/aunAuthDocs.spec.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,14 +18,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.73175853">
+    <splitter split-orientation="horizontal" split-proportion="0.5496063">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/package.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="621">
-                  <caret line="27" column="21" lean-forward="true" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+                <state relative-caret-position="552">
+                  <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
                 </state>
               </provider>
             </entry>
@@ -110,20 +78,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/views/Edit.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="316">
-                  <caret line="217" column="36" selection-start-line="217" selection-start-column="36" selection-end-line="217" selection-end-column="36" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/assets/editor.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
-                  <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+                <state relative-caret-position="549">
+                  <caret line="265" column="60" lean-forward="true" selection-start-line="265" selection-start-column="60" selection-end-line="265" selection-end-column="60" />
                 </state>
               </provider>
             </entry>
@@ -156,7 +115,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/store/index.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="550">
@@ -164,6 +123,24 @@
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/locales/en.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="553">
+                  <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="54" selection-end-column="3" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/locales/pt.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="669">
+                  <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
                 </state>
               </provider>
             </entry>
@@ -209,8 +186,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/newDoc.js" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/langauge.js" />
-        <option value="$PROJECT_DIR$/src/locales/en.json" />
-        <option value="$PROJECT_DIR$/src/locales/pt.json" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/test.js" />
         <option value="$PROJECT_DIR$/tests/seed.js" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/aunAuthDocs.js" />
@@ -229,9 +204,11 @@
         <option value="$PROJECT_DIR$/tests/seedOneDoc.js" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/largeText.json" />
         <option value="$PROJECT_DIR$/tests/e2e/specs/aunAuthDocs.spec.js" />
-        <option value="$PROJECT_DIR$/src/views/Edit.vue" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/store/index.js" />
+        <option value="$PROJECT_DIR$/src/locales/en.json" />
+        <option value="$PROJECT_DIR$/src/views/Edit.vue" />
+        <option value="$PROJECT_DIR$/src/locales/pt.json" />
       </list>
     </option>
   </component>
@@ -277,6 +254,12 @@
               <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
               <item name="graphite" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="locales" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graphite" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -295,26 +278,6 @@
               <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
               <item name="graphite" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graphite" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="e2e" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graphite" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="e2e" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graphite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graphite" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="e2e" type="462c0819:PsiDirectoryNode" />
-              <item name="specs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -399,7 +362,7 @@
       <workItem from="1586798978962" duration="4228000" />
       <workItem from="1586893827528" duration="11912000" />
       <workItem from="1586968641330" duration="17558000" />
-      <workItem from="1587052846249" duration="5913000" />
+      <workItem from="1587052846249" duration="6509000" />
     </task>
     <servers />
   </component>
@@ -409,13 +372,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80931000" />
+    <option name="totallyTimeSpent" value="81527000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24970461" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24970461" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -429,7 +392,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33899558" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33899558" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -536,13 +499,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locales/en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/footer.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="943">
@@ -592,13 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/locales/pt.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -644,13 +593,6 @@
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/editor.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -713,20 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Edit.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="217" column="36" selection-start-line="217" selection-start-column="36" selection-end-line="217" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="27" column="21" lean-forward="true" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
@@ -734,6 +662,41 @@
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/editor.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Edit.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="265" column="60" lean-forward="true" selection-start-line="265" selection-start-column="60" selection-end-line="265" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locales/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="54" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/locales/pt.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="669">
+          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
         </state>
       </provider>
     </entry>

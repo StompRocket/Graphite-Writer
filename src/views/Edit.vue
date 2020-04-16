@@ -224,8 +224,8 @@
           }
           this.saved = false
           this.$swal({
-            title: "ERROR SAVING",
-            text: "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+            title: this.$t("ErrorTypes.savingSize.title"),
+            text: this.$t("ErrorTypes.savingSize.text"),
             icon: "warning"
           })
           this.saveError = true
@@ -252,8 +252,8 @@
                   this.$analytics.logEvent("docToLarge")
                 }
                 this.$swal({
-                  title: "ERROR SAVING",
-                  text: "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+                  title: this.$t("ErrorTypes.savingSize.title"),
+                  text: this.$t("ErrorTypes.savingSize.text"),
                   icon: "warning"
                 })
                 this.saveError = true
@@ -263,8 +263,8 @@
                   this.$analytics.logEvent("errorSavingDoc", {error: res.error})
                 }
                 this.$swal({
-                  title: "ERROR SAVING",
-                  text: "Graphite Writer had trouble saving this document. Please check your internet connection.",
+                  title: this.$t("ErrorTypes.saving.title"),
+                  text: this.$t("ErrorTypes.saving.text"),
                   icon: "warning"
                 })
                 this.saveError = true

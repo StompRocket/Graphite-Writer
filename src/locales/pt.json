@@ -42,5 +42,15 @@
     "tos": "termos de serviço",
     "pp": "política de Privacidade",
     "and": "e"
+  },
+  "ErrorTypes": {
+    "savingSize": {
+      "title": "ERRO AO SALVAR",
+      "text": "Como o Graphite Writer é um serviço gratuito, limitamos o tamanho do documento a 3mb para garantir espaço para todos."
+    },
+    "saving": {
+      "title": "ERRO AO SALVAR",
+      "text": "O Graphite Writer teve problemas ao salvar este documento. Verifique sua conexão com a Internet."
+    }
   }
 }
