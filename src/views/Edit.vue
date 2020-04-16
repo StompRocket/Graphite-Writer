@@ -106,7 +106,12 @@
   import "quill/dist/quill.core.js"
   import "quill/dist/quill.core.css"
   import "quill/dist/quill.snow.css"
-
+  function bytes(s) {
+    return ~-encodeURI(s).split(/%..|./).length
+  }
+  function jsonSize(s) {
+    return bytes(JSON.stringify(s))
+  }
   let editor
   let timeout = null
   export default {
@@ -212,47 +217,62 @@
             var delta = editor.getContents()
             body = {title: this.doc.title, data: delta, time: this.$moment().unix()}
         }
-        fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
-          method: "post",
-          headers: {
-            "Authorization": this.$store.getters.fbToken,
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-
-        }).then(res => res.json()).then(res => {
-          if (res.success) {
-            this.saved = true
-            this.doc.date = body.time
-            if (this.$analytics) {
-              this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
-            }
-          } else {
-            console.log(res)
-            if (res.error == "too large") {
-              if (this.$analytics) {
-                this.$analytics.logEvent("docToLarge")
-              }
-              this.$swal({
-                title: "ERROR SAVING",
-                text: "Because graphite writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
-                icon: "warning"
-              })
-              this.saveError = true
-
-            } else {
-              if (this.$analytics) {
-                this.$analytics.logEvent("errorSavingDoc", {error: res.error})
-              }
-              this.$swal({
-                title: "ERROR SAVING",
-                text: "Graphite Writer had trouble saving this document. Please check your internet connection.",
-                icon: "warning"
-              })
-              this.saveError = true
-            }
+        let size = jsonSize(body)
+        if (size > 3145728) {
+          if (this.$analytics) {
+            this.$analytics.logEvent("docToLarge")
           }
-        })
+          this.saved = false
+          this.$swal({
+            title: "ERROR SAVING",
+            text: "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+            icon: "warning"
+          })
+          this.saveError = true
+        } else {
+          fetch(`${this.$store.getters.api}/api/v1/documents/${this.$route.params.user}/${this.$route.params.docId}`, {
+            method: "post",
+            headers: {
+              "Authorization": this.$store.getters.fbToken,
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(body)
+
+          }).then(res => res.json()).then(res => {
+            if (res.success) {
+              this.saved = true
+              this.doc.date = body.time
+              if (this.$analytics) {
+                this.$analytics.logEvent("savedDoc", {doc: this.$route.params.docId, owner: this.$route.params.user})
+              }
+            } else {
+              console.log(res)
+              if (res.error == "too large") {
+                if (this.$analytics) {
+                  this.$analytics.logEvent("docToLarge")
+                }
+                this.$swal({
+                  title: "ERROR SAVING",
+                  text: "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+                  icon: "warning"
+                })
+                this.saveError = true
+
+              } else {
+                if (this.$analytics) {
+                  this.$analytics.logEvent("errorSavingDoc", {error: res.error})
+                }
+                this.$swal({
+                  title: "ERROR SAVING",
+                  text: "Graphite Writer had trouble saving this document. Please check your internet connection.",
+                  icon: "warning"
+                })
+                this.saveError = true
+              }
+            }
+          })
+        }
+
 
       },
       saveTitle() {
