@@ -1,6 +1,28 @@
 // https://docs.cypress.io/api/introduction/api.html
+describe('Logged Out view doc', () => {
+  beforeEach(() => {
+    // reset and seed the database prior to every test
+    cy.exec('npm run seedOne')
+  })
 
+  it('Visits editor screen for a doucment when logged out', () => {
+    cy.logout()
+    cy.visit('/d/5YKXaTqGh0evHNNmjJGRytkwYQt1/testingDoc')
+    cy.url().should('equal', 'http://localhost:8080/auth')
+  })
+})
+describe('Logged Out view home', () => {
+  beforeEach(() => {
+    // reset and seed the database prior to every test
+    cy.exec('npm run seedOne')
+  })
 
+  it('Visits editor screen for a doucment when logged out', () => {
+    cy.logout()
+    cy.visit('/')
+    cy.url().should('equal', 'http://localhost:8080/auth')
+  })
+})
 describe('Logged View editor for unshared Doc', () => {
   it('Visits editor for unshared doc', () => {
     cy.login()

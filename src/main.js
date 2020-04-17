@@ -80,15 +80,10 @@ if (window.location.hostname != "localhost") {
   }
 }
 
-let app
-firebase.auth().onAuthStateChanged(function (user) {
-  if (!app) {
-    app = new Vue({
-      router,
-      store,
-      i18n,
-      render: h => h(App)
-    }).$mount('#app')
 
-  }
-});
+let app = new Vue({
+  router,
+  store,
+  i18n,
+  render: h => h(App)
+}).$mount('#app')

@@ -1,56 +1,61 @@
 {
-  "logout": "Sair",
-  "owner": "Proprietário",
-  "new": "NOVO",
-  "search": "Procurar",
-  "noDocs": "Sem Documentos",
-  "noDocsDesc": "Você ainda não possui nenhum documento. Pressione novo no canto superior direito da tela para criar um.",
-  "opened": "Aberto",
-  "newDocName": "Nome Do Novo Documento",
-  "docName": "Nome Do Documento",
-  "lastEdited": "Última edição",
-  "viewOnly": "Exibir apenas",
-  "saved": "salvou",
-  "waiting": "esperando",
-  "print": "Impressão",
-  "delete": "Excluir",
-  "share": "Compartilhar",
-  "sharing": "Partilha",
-  "link": "Ligação",
-  "linkDesc": "Uma exibição somente documento compartilhado foi criada. Qualquer pessoa com esse link pode visualizar seu documento.",
-  "ok": "Bom",
-  "error": "Erro",
-  "errorNoAccess": "Você não está autorizado a visualizar este documento.",
-  "compose": "Compor um épico...",
-  "serverConError": "Erro de conexão do servidor",
-  "serverConErrorDesc": "O Graphite Writer está tendo problemas para se conectar ao servidor.",
-  "ifThisProblemPersists": "Se esse problema persistir, entre em contato com o suporte",
-  "feature": {
-    "new": "Línguas!",
-    "supports": "Graphite Writer now supports multiple languages!",
-    "translate": "O Graphite Writer agora suporta vários idiomas!",
-    "support": "A precisão dessas traduções não pode ser confirmada. Se você encontrar um problema ou quiser ajudar, envie um email para o suporte",
-    "useBox": "Use a caixa de seleção abaixo para alterar seu idioma preferido"
-  },
-  "footer": {
-    "languageDisclaimer": "Como o Graphite Writer é um pequeno projeto de código aberto, todas as traduções que não são em inglês são feitas com o Google Translate.",
-    "languageAsk": "Se você encontrar algum erro, informe-nos por e-mail",
-    "freeAndOpenSource": "O Graphite Writer é um projeto gratuito e de código aberto desenvolvido pela",
-    "questionsAndSuggestions": "Se você tiver alguma dúvida ou sugestão, envie um email para",
-    "github": "O Graphite Writer é lançado sob a licença APL-2.0. Se você está interessado em contribuir para o seu desenvolvimento, consulte nosso",
-    "legal": "Ao usar o Graphite Writer, você concorda com o uso de cookies e fica vinculado pelos nossos",
-    "tos": "termos de serviço",
-    "pp": "política de Privacidade",
-    "and": "e"
-  },
-  "ErrorTypes": {
-    "savingSize": {
-      "title": "ERRO AO SALVAR",
-      "text": "Como o Graphite Writer é um serviço gratuito, limitamos o tamanho do documento a 3mb para garantir espaço para todos."
-    },
-    "saving": {
-      "title": "ERRO AO SALVAR",
-      "text": "O Graphite Writer teve problemas ao salvar este documento. Verifique sua conexão com a Internet."
-    }
-  }
+	"ErrorTypes": {
+		"saving": {
+			"text": "O Graphite Writer teve problemas ao salvar este documento. Verifique sua conexão com a Internet.",
+			"title": "ERRO AO SALVAR"
+		},
+		"savingSize": {
+			"text": "Como o Graphite Writer é um serviço gratuito, limitamos o tamanho do documento a 3mb para garantir espaço para todos.",
+			"title": "ERRO AO SALVAR"
+		}
+	},
+	"compose": "Compor um épico...",
+	"delete": "Excluir",
+	"docName": "Nome Do Documento",
+	"error": "Erro",
+	"errorNoAccess": "Você não está autorizado a visualizar este documento.",
+	"feature": {
+		"new": "Línguas!",
+		"support": "A precisão dessas traduções não pode ser confirmada. Se você encontrar um problema ou quiser ajudar, envie um email para o suporte",
+		"supports": "Graphite Writer now supports multiple languages!",
+		"translate": "O Graphite Writer agora suporta vários idiomas!",
+		"useBox": "Use a caixa de seleção abaixo para alterar seu idioma preferido"
+	},
+	"footer": {
+		"and": "e",
+		"freeAndOpenSource": "O Graphite Writer é um projeto gratuito e de código aberto desenvolvido pela",
+		"github": "O Graphite Writer é lançado sob a licença APL-2.0. Se você está interessado em contribuir para o seu desenvolvimento, consulte nosso",
+		"languageAsk": "Se você encontrar algum erro, informe-nos por e-mail",
+		"languageDisclaimer": "Como o Graphite Writer é um pequeno projeto de código aberto, todas as traduções que não são em inglês são feitas com o Google Translate.",
+		"legal": "Ao usar o Graphite Writer, você concorda com o uso de cookies e fica vinculado pelos nossos",
+		"pp": "política de Privacidade",
+		"questionsAndSuggestions": "Se você tiver alguma dúvida ou sugestão, envie um email para",
+		"tos": "termos de serviço"
+	},
+	"ifThisProblemPersists": "Se esse problema persistir, entre em contato com o suporte",
+	"lastEdited": "Última edição",
+	"link": "Ligação",
+	"linkDesc": "Uma exibição somente documento compartilhado foi criada. Qualquer pessoa com esse link pode visualizar seu documento.",
+	"login": {
+		"button": "Entre com o Google",
+		"instructions": "Faça entre com Google para continuar.",
+		"title": "Bem-vindo ao Graphite Writer"
+	},
+	"logout": "Sair",
+	"new": "NOVO",
+	"newDocName": "Nome Do Novo Documento",
+	"noDocs": "Sem Documentos",
+	"noDocsDesc": "Você ainda não possui nenhum documento. Pressione novo no canto superior direito da tela para criar um.",
+	"ok": "Bom",
+	"opened": "Aberto",
+	"owner": "Proprietário",
+	"print": "Impressão",
+	"saved": "salvou",
+	"search": "Procurar",
+	"serverConError": "Erro de conexão do servidor",
+	"serverConErrorDesc": "O Graphite Writer está tendo problemas para se conectar ao servidor.",
+	"share": "Compartilhar",
+	"sharing": "Partilha",
+	"viewOnly": "Exibir apenas",
+	"waiting": "esperando"
 }

@@ -15,8 +15,29 @@
         </p>
       </div>
     </div>
-    <router-view v-if="server" />
-    <FooterComponent></FooterComponent>
+    <div v-if="!loaded" class="loading--fullscreen">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+      <img src="@/assets/wordmark.svg" alt="" />
+      <p class="version">v{{ version }}</p>
+      <p class="support">
+        Something Not Working? Email support
+        <a href="mailto:support@graphitewriter.com"
+          >support@graphitewriter.com</a
+        >
+      </p>
+    </div>
+    <router-view v-if="server && loaded" />
+    <FooterComponent v-if="server && loaded"></FooterComponent>
   </div>
 </template>
 <script>
@@ -39,6 +60,7 @@ export default {
     return {
       version: version,
       server: true,
+      loaded: false,
     }
   },
   mounted() {
@@ -87,6 +109,7 @@ export default {
       })
     this.$firebase.auth().onAuthStateChanged((user) => {
       //  console.log(user, "user")
+      this.loaded = true
       if (user) {
         // User is signed in.
         this.$store.commit('setUser', user)
@@ -103,9 +126,8 @@ export default {
         this.$store.commit('setUser', false)
         // No user is signed in.
         console.log(this.$route.name)
-        if (this.$route.name != 'Share') {
-          var provider = new this.$firebase.auth.GoogleAuthProvider()
-          this.$firebase.auth().signInWithRedirect(provider)
+        if (this.$route.name != 'Shared' && this.$route.name != 'Auth') {
+          this.$router.push('/auth')
         }
       }
     })
