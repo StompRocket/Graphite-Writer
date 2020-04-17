@@ -1,7 +1,7 @@
-
 .search {
   @include shadow;
   width: 30vw;
+
   @media (max-width: 600px) {
     width: 90vw;
   }
@@ -25,11 +25,14 @@
   background-size: cover;
   border: none;
 }
+
 .home {
   min-height: 90vh;
 }
+
 .new {
   margin-right: 2rem;
+
   @media (max-width: 600px) {
 
     margin-right: auto;
@@ -38,18 +41,25 @@
 }
 
 .documents {
-  padding: 5%;
+  padding: 2rem;
   display: grid;
   grid-template-columns: 1fr;
   max-width: 1600px;
   margin: 0 auto;
+  place-content: center;
+  place-items: center;
 
-  @media  (min-width: 600px) {
+  @media (min-width: 670px) {
     grid-template-columns: 1fr 1fr;
   }
-  @media  (min-width: 1024px) {
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1300px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+  }
 }
 
 .noDocs {
@@ -61,9 +71,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   img {
     max-height: 40%;
   }
+
   h3 {
     color: white;
     font-weight: bold;
@@ -71,11 +83,13 @@
     margin-top: 1rem;
     text-align: center;
   }
+
   p {
     color: white;
     margin-top: 0.5rem;
   }
 }
+
 .document {
   @include rounding();
   @include shadow();
@@ -87,8 +101,9 @@
   flex-direction: column;
   max-width: 300px;
   margin: 1rem;
-
+  width: 100%;
   text-decoration: none;
+
   .title {
     white-space: nowrap;
     overflow: hidden;
@@ -103,18 +118,21 @@
     background: color.adjust($text, $lightness: -30);
   }
 }
+
 .accountButton {
   @include shadow;
   background: white;
   text-align: right;
- padding: 1rem;
+  padding: 1rem;
   right: 0;
   top: 7vh;
   position: fixed;
+
   .email {
     margin: 0.5rem auto;
     text-align: left;
   }
+
   button {
     background: $warning;
     border: none;

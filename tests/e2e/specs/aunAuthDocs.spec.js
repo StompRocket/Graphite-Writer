@@ -33,13 +33,15 @@ describe('Large doc', () => {
   it('Opens owned doc and tries to upload large file', () => {
     cy.login()
     cy.visit('/d/5YKXaTqGh0evHNNmjJGRytkwYQt1/testingDoc')
-    cy.get("#doc").get(".ql-editor").type("test", {delay: 0}).then($el => {
+    cy.get("#doc").get(".ql-editor").type("test", {
+      delay: 0
+    }).then($el => {
       $el.text(text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text + text)
     })
     cy.wait(2000)
     cy.get(".swal-modal").contains('ERROR SAVING')
     cy.get(".swal-modal").contains('Because Graphite Writer is a free service, we limit our document sizes to 3mb')
-  //  cy.get("#doc").get(".ql-editor").type(text, {delay: 0})
+    //  cy.get("#doc").get(".ql-editor").type(text, {delay: 0})
 
   })
 })
