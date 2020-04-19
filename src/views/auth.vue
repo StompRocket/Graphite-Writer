@@ -8,13 +8,12 @@
     <div class="authScreen">
       <div class="authWindow">
         <img src="../assets/undraw_my_password_d6kg.svg" alt="Password Image" />
-        <h1>
-          {{ $t('login.title') }}
-        </h1>
+        <h1>{{ $t('login.title') }}</h1>
         <p>{{ $t('login.instructions') }}</p>
 
         <button @click="login" class="btn">
-          <i class="fab fa-google"></i> {{ $t('login.button') }}
+          <i class="fab fa-google"></i>
+          {{ $t('login.button') }}
         </button>
         <Locale v-if="prominentLocale"></Locale>
       </div>
@@ -32,21 +31,21 @@
         <div class="sk-cube sk-cube8"></div>
         <div class="sk-cube sk-cube9"></div>
       </div>
-      <img src="@/assets/wordmark.svg" alt="" />
+      <img src="@/assets/wordmark.svg" alt />
       <p class="version">v{{ version }}</p>
     </div>
 
     <div v-if="featureModal" class="modal_container">
       <div class="modal--feature">
-        <img src="../assets/undraw_around_the_world_v9nu.svg" alt="" />
+        <img src="../assets/undraw_around_the_world_v9nu.svg" alt />
         <h3>{{ $t('feature.new') }}</h3>
         <p>{{ $t('feature.supports') }}</p>
         <p>{{ $t('feature.translate') }}</p>
         <p>
           {{ $t('feature.support') }}:
-          <a href="mailto:support@graphitewriter.com"
-            >support@graphitewriter.com</a
-          >
+          <a
+            href="mailto:support@graphitewriter.com"
+          >support@graphitewriter.com</a>
         </p>
         <p>{{ $t('feature.useBox') }}</p>
         <Locale></Locale>
@@ -58,66 +57,78 @@
 </template>
 
 <script>
-import Locale from '@/components/locale.vue'
+import Locale from "@/components/locale.vue";
 
-let timeout = null
+let timeout = null;
 export default {
-  name: 'Auth',
+  name: "Auth",
 
   data() {
     return {
       featureModal: false,
-      prominentLocale: this.$config.getValue('prominentLocalDisplay') == 'true',
+      prominentLocale: this.$config.getValue("prominentLocalDisplay") == "true",
 
       loaded: false,
 
-      version: require('../../package.json').version,
-      trace: this.$perf.trace('openAuthScreen'),
-    }
+      version: require("../../package.json").version,
+      trace: this.$perf.trace("openAuthScreen")
+    };
   },
   created() {
-    this.trace.start()
+    this.trace.start();
   },
   computed: {
     user() {
-      return this.$store.state.user
-    },
+      return this.$store.state.user;
+    }
   },
   methods: {
     closeFeatureModal() {
-      this.featureModal = false
+      this.featureModal = false;
       if (this.$analytics) {
-        this.$analytics.logEvent('closedLanguageFeature')
+        this.$analytics.logEvent("closedLanguageFeature");
       }
-      localStorage.setItem('languageFeature', 'true')
+      localStorage.setItem("languageFeature", "true");
     },
     login() {
       if (this.$analytics) {
-        this.$analytics.logEvent('login')
+        this.$analytics.logEvent("login");
       }
-      var provider = new this.$firebase.auth.GoogleAuthProvider()
-      this.$firebase.auth().signInWithRedirect(provider)
-    },
+      this.$firebase.auth().useDeviceLanguage();
+      var provider = new this.$firebase.auth.GoogleAuthProvider();
+
+      this.$firebase
+        .auth()
+        .signInWithRedirect(provider)
+        .catch(err => {
+          this.$swal({
+            title: this.$t("error"),
+            text: this.$t("ErrorTypes.signin.text"),
+            icon: "error",
+            button: this.$t("ok")
+          });
+        });
+    }
   },
   components: { Locale },
   mounted() {
     if (this.$analytics) {
-      this.$analytics.logEvent('openedAuthPage')
+      this.$analytics.logEvent("openedAuthPage");
     }
-    this.$firebase.auth().onAuthStateChanged((user) => {
+    this.$firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.$store.commit('setUser', user)
-        if (this.$route.name == 'Auth') {
-          this.$router.push('/')
+        this.$store.commit("setUser", user);
+        if (this.$route.name == "Auth") {
+          this.$router.push("/");
         }
       } else {
-        this.loaded = true
-        this.$store.commit('setUser', false)
+        this.loaded = true;
+        this.$store.commit("setUser", false);
 
         // No user is signed in.
-        console.log(this.$route.name)
+        console.log(this.$route.name);
       }
-    })
-  },
-}
+    });
+  }
+};
 </script>

@@ -7,6 +7,9 @@
 		"savingSize": {
 			"text": "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
 			"title": "ERROR SAVING"
+		},
+		"signin": {
+			"text": "Error signing in with Google. Please make sure that you have external scripts, cookies, and redirects enabled."
 		}
 	},
 	"compose": "Compose an epic...",
