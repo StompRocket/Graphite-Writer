@@ -3,7 +3,7 @@
     <div class="serverError" v-if="!server">
       <div></div>
       <div class="center">
-        <img src="./assets/serverdown.svg" alt="" />
+        <img src="./assets/serverdown.svg" alt />
         <h1>{{ $t('serverConError') }}</h1>
         <p>{{ $t('serverConErrorDesc') }}</p>
       </div>
@@ -27,7 +27,7 @@
         <div class="sk-cube sk-cube8"></div>
         <div class="sk-cube sk-cube9"></div>
       </div>
-      <img src="@/assets/wordmark.svg" alt="" />
+      <img src="@/assets/wordmark.svg" alt />
       <p class="version">v{{ version }}</p>
       <p class="support">
         Something Not Working? Email support
@@ -53,6 +53,7 @@ function GetURLParameter(sParam) {
     }
   }
 }
+let tokenRefresh, focus
 export default {
   name: 'app',
   components: { FooterComponent },
@@ -64,6 +65,28 @@ export default {
     }
   },
   mounted() {
+    let getToken = (trig) => {
+      // console.log('token trigger', trig)
+      if (this.$firebase.currentUser) {
+        this.$firebase
+          .auth()
+          .currentUser.getIdToken(/* forceRefresh */ true)
+          .then((idToken) => {
+            this.$store.commit('setToken', idToken)
+          })
+      }
+    }
+    tokenRefresh = window.setInterval(function() {
+      getToken('interval')
+    }, 900000)
+    focus = window.addEventListener(
+      'focus',
+      function() {
+        getToken('focus')
+      },
+      false
+    )
+
     if (window.location.hostname != 'localhost') {
       this.$config.settings = {
         minimumFetchIntervalMillis: 18000000,
