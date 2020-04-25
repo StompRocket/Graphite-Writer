@@ -11,7 +11,9 @@
         <p>Graphite Writer v{{ version }}</p>
         <p>
           {{ $t('ifThisProblemPersists') }}
-          <a href="mailto:ronan@graphitewriter.com">ronan@graphitewriter.com</a>
+          <a
+            href="mailto:ronan@graphitewriter.com"
+          >ronan@graphitewriter.com</a>
         </p>
       </div>
     </div>
@@ -31,9 +33,9 @@
       <p class="version">v{{ version }}</p>
       <p class="support">
         Something Not Working? Email support
-        <a href="mailto:support@graphitewriter.com"
-          >support@graphitewriter.com</a
-        >
+        <a
+          href="mailto:support@graphitewriter.com"
+        >support@graphitewriter.com</a>
       </p>
     </div>
     <router-view v-if="server && loaded" />
@@ -41,119 +43,119 @@
   </div>
 </template>
 <script>
-import FooterComponent from './components/footer.vue'
-let version = require('../package.json').version
+import FooterComponent from "./components/footer.vue";
+let version = require("../package.json").version;
 function GetURLParameter(sParam) {
-  var sPageURL = window.location.search.substring(1)
-  var sURLVariables = sPageURL.split('&')
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split("&");
   for (var i = 0; i < sURLVariables.length; i++) {
-    var sParameterName = sURLVariables[i].split('=')
+    var sParameterName = sURLVariables[i].split("=");
     if (sParameterName[0] == sParam) {
-      return sParameterName[1]
+      return sParameterName[1];
     }
   }
 }
-let tokenRefresh, focus
+let tokenRefresh, focus;
 export default {
-  name: 'app',
+  name: "app",
   components: { FooterComponent },
   data() {
     return {
       version: version,
       server: true,
-      loaded: false,
-    }
+      loaded: false
+    };
   },
   mounted() {
-    let getToken = (trig) => {
+    let getToken = trig => {
       // console.log('token trigger', trig)
-      if (this.$firebase.currentUser) {
+      if (this.$firebase.auth().currentUser) {
         this.$firebase
           .auth()
           .currentUser.getIdToken(/* forceRefresh */ true)
-          .then((idToken) => {
-            this.$store.commit('setToken', idToken)
-          })
+          .then(idToken => {
+            this.$store.commit("setToken", idToken);
+          });
       }
-    }
+    };
     tokenRefresh = window.setInterval(function() {
-      getToken('interval')
-    }, 900000)
+      getToken("interval");
+    }, 900000);
     focus = window.addEventListener(
-      'focus',
+      "focus",
       function() {
-        getToken('focus')
+        getToken("focus");
       },
       false
-    )
+    );
 
-    if (window.location.hostname != 'localhost') {
+    if (window.location.hostname != "localhost") {
       this.$config.settings = {
-        minimumFetchIntervalMillis: 18000000,
-      }
+        minimumFetchIntervalMillis: 18000000
+      };
       this.$config
         .fetchAndActivate()
         .then(() => {
-          console.log('config activated')
+          console.log("config activated");
           if (this.$analytics) {
             this.$analytics.setUserProperties({
-              prominentLocale: this.$config.getValue('prominentLocalDisplay'),
-            })
+              prominentLocale: this.$config.getValue("prominentLocalDisplay")
+            });
           }
         })
-        .catch((err) => {
-          console.error(err)
-        })
+        .catch(err => {
+          console.error(err);
+        });
     }
 
-    console.log(localStorage.getItem('local'))
-    if (localStorage.getItem('local')) {
-      this.$i18n.locale = localStorage.getItem('local')
+    console.log(localStorage.getItem("local"));
+    if (localStorage.getItem("local")) {
+      this.$i18n.locale = localStorage.getItem("local");
     }
-    if (this.$supportedLocales.indexOf(GetURLParameter('lang')) > -1) {
-      this.$i18n.locale = GetURLParameter('lang')
-      localStorage.setItem('local', this.$i18n.locale)
+    if (this.$supportedLocales.indexOf(GetURLParameter("lang")) > -1) {
+      this.$i18n.locale = GetURLParameter("lang");
+      localStorage.setItem("local", this.$i18n.locale);
     }
 
-    this.$moment.locale(this.$i18n.locale)
+    this.$moment.locale(this.$i18n.locale);
     if (this.$analytics) {
-      this.$analytics.setUserProperties({ appVersion: version })
+      this.$analytics.setUserProperties({ appVersion: version });
     }
     fetch(this.$store.getters.api)
-      .then((res) => {
-        console.log(res.status)
+      .then(res => {
+        console.log(res.status);
         if (res.status != 200) {
-          this.server = false
+          this.server = false;
         }
       })
       .catch(() => {
-        this.server = false
-        this.$Sentry.captureMessage('Server connection error')
-      })
-    this.$firebase.auth().onAuthStateChanged((user) => {
+        this.server = false;
+        this.$Sentry.captureMessage("Server connection error");
+      });
+    this.$firebase.auth().onAuthStateChanged(user => {
       //  console.log(user, "user")
-      this.loaded = true
+      this.loaded = true;
       if (user) {
         // User is signed in.
-        this.$store.commit('setUser', user)
+        this.$store.commit("setUser", user);
         //this.$analytics.setUserID(user.uid)
         this.$firebase
           .auth()
           .currentUser.getIdToken(/* forceRefresh */ true)
-          .then((idToken) => {
+          .then(idToken => {
             // Send token to your backend via HTTPS
-            this.$store.commit('setToken', idToken)
+            this.$store.commit("setToken", idToken);
             // ...
-          })
+          });
       } else {
-        this.$store.commit('setUser', false)
+        this.$store.commit("setUser", false);
         // No user is signed in.
-        console.log(this.$route.name)
-        if (this.$route.name != 'Shared' && this.$route.name != 'Auth') {
-          this.$router.push('/auth')
+        console.log(this.$route.name);
+        if (this.$route.name != "Shared" && this.$route.name != "Auth") {
+          this.$router.push("/auth");
         }
       }
-    })
-  },
-}
+    });
+  }
+};
 </script>
