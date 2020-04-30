@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Edit from '../views/Edit.vue'
 import Share from '../views/shared.vue'
 import Auth from '../views/auth.vue'
+import Settings from '../views/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,14 @@ const routes = [{
     component: Auth,
     meta: {
       title: 'Graphite Writer | Login'
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
+    meta: {
+      title: 'Graphite Writer | Settings'
     }
   },
   {

@@ -2,6 +2,7 @@
 @import "vars";
 @import "editor";
 @import "home";
+@import "settings";
 
 html,
 body,
@@ -135,7 +136,15 @@ body,
     background: color.adjust($primary, $lightness: 10);
   }
 }
-
+.btn.red {
+  background: $warning;
+  border: $warning solid;
+  box-shadow: none;
+  &:hover {
+    border: color.adjust($warning, $lightness: 10) solid;
+    background: color.adjust($warning, $lightness: 10);
+  }
+}
 .modal_container {
   width: 100vw;
   height: 100vh;

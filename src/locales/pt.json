@@ -45,6 +45,8 @@
 		"title": "Bem-vindo ao Graphite Writer"
 	},
 	"logout": "Sair",
+	"language": "Língua",
+	"version": "Versão",
 	"new": "NOVO",
 	"newDocName": "Nome Do Novo Documento",
 	"noDocs": "Sem Documentos",

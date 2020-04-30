@@ -13,12 +13,12 @@
       <button class="btn new" @click="newDoc">{{ $t('new') }}</button>
       <Locale v-if="prominentLocale"></Locale>
 
-      <img
-        @click="accountInfo = !accountInfo"
-        :src="$store.getters.user.photoURL"
-        class="user"
-        alt=""
-      />
+      <router-link to="/settings"><img
+
+          :src="$store.getters.user.photoURL"
+          class="user"
+          alt=""
+      /></router-link>
     </nav>
     <div v-if="accountInfo" class="accountButton">
       <Locale></Locale>
