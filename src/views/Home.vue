@@ -1,7 +1,10 @@
 <template>
   <div class="home page">
     <nav class="nav">
-      <img class="brand--wordmark" src="@/assets/wordmark.svg" />
+      <router-link to="/">
+        <img class="brand--wordmark" src="@/assets/wordmark.svg" />
+      </router-link>
+
       <form @submit.prevent class="search__form">
         <input
           v-model="search"
