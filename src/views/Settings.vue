@@ -67,7 +67,13 @@
   let timeout = null
   export default {
     name: 'Home',
+    head: {
+      title: {
+        inner: "Graphite Writer",
+        complement: 'Settings'
+      },
 
+    },
     data() {
       return {
 

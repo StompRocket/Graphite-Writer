@@ -62,6 +62,15 @@ let editor
 let timeout = null
 export default {
   name: 'Shared',
+  head: {
+    title: {
+      inner: "Graphite Writer",
+      complement: 'Shared Document'
+    },
+    link: [
+      { rel: 'canonical', href: 'https://graphitewriter.com/s/', id: 'canonical' },
+    ]
+  },
   components: { Locale },
   data() {
     return {

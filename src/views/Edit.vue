@@ -116,6 +116,15 @@
   let timeout = null
   export default {
     name: 'Editor',
+    head: {
+      title: {
+        inner: "Graphite Writer",
+        complement: 'Edit'
+      },
+      link: [
+        { rel: 'canonical', href: 'https://graphitewriter.com/d/', id: 'canonical' },
+      ]
+    },
     components: {},
     data() {
       return {

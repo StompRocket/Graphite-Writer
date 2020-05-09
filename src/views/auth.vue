@@ -62,7 +62,13 @@ import Locale from "@/components/locale.vue";
 let timeout = null;
 export default {
   name: "Auth",
+  head: {
+    title: {
+      inner: "Graphite Writer",
+      complement: 'Login'
+    },
 
+  },
   data() {
     return {
       featureModal: false,

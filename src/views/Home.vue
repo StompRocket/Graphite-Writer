@@ -89,7 +89,13 @@ import Locale from '@/components/locale.vue'
 let timeout = null
 export default {
   name: 'Home',
+  head: {
+    title: {
+      inner: "Graphite Writer",
+      complement: 'Documents'
+    },
 
+  },
   data() {
     return {
       featureModal: false,
