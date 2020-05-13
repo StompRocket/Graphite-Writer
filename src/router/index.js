@@ -32,11 +32,6 @@ const routes = [{
     component: Settings,
   },
   {
-    path: '/feedback',
-    name: 'Feedback',
-    component: Feedback,
-  },
-  {
     path: '/d/:user/:docId',
     name: 'Edit',
     component: Edit,

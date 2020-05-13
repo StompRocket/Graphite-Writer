@@ -157,6 +157,9 @@ export default {
     feedBack() {
       window.localStorage.setItem("feedback", "true")
       this.feedback = false
+      if (this.$analytics) {
+        this.$analytics.logEvent('openedFeedback')
+      }
       var win = window.open("https://ronan092344.typeform.com/to/WkVNS1", '_blank');
       win.focus()
     },
