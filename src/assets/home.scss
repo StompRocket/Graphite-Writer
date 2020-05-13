@@ -182,3 +182,20 @@
 
   }
 }
+.feedBackBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gray;
+  font-weight: bold;
+  background-color: $primary;
+  padding: 0.5rem;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin-right: 5rem;
+    }
+  }
+}

@@ -136,6 +136,24 @@ body,
     background: color.adjust($primary, $lightness: 10);
   }
 }
+
+.btn--dark {
+  text-decoration: none;
+  @include rounding();
+  @include shadow();
+  @include transition;
+  border: $gray solid;
+  background: $gray;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &:hover {
+    border: color.adjust($gray, $lightness: 10) solid;
+    background: color.adjust($gray, $lightness: 10);
+  }
+}
 .btn.red {
   background: $warning;
   border: $warning solid;

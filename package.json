@@ -1,6 +1,6 @@
 {
   "name": "graphite-writer",
-  "version": "1.9.3",
+  "version": "1.9.5",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@sentry/browser": "^5.15.4",
+    "@typeform/embed": "^0.17.0",
     "core-js": "^3.6.4",
     "cypress-firebase": "^1.1.0",
     "firebase": "^7.13.2",

@@ -68,7 +68,7 @@ export default {
       complement: 'Shared Document'
     },
     link: [
-      { rel: 'canonical', href: 'https://graphitewriter.com/s/', id: 'canonical' },
+      { rel: 'canonical', href: 'https://graphitewriter.com/shared/', id: 'canonical' },
     ]
   },
   components: { Locale },

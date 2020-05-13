@@ -96,10 +96,10 @@ export default {
       this.$config
         .fetchAndActivate()
         .then(() => {
-          console.log("config activated");
+          console.log("config activated", this.$config.getValue("prominentLocalDisplay").asString(), this.$config.getValue("feedback").asString());
           if (this.$analytics) {
             this.$analytics.setUserProperties({
-              prominentLocale: this.$config.getValue("prominentLocalDisplay")
+              prominentLocale: this.$config.getValue("prominentLocalDisplay").asString()
             });
           }
         })

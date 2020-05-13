@@ -28,6 +28,13 @@
       <p class="email">{{ user.email }}</p>
       <button class="btn" @click="logOut">{{ $t('logout') }}</button>
     </div>
+    <div v-if="feedback" class="feedBackBar">
+      <div class="container">
+        <p>Do you Have Feedback?</p>
+        <button class="btn--dark" @click="feedBack()">Tell us what you think</button>
+      </div>
+
+    </div>
     <div v-if="!docsLoaded" class="loading">
       <div class="sk-cube-grid">
         <div class="sk-cube sk-cube1"></div>
@@ -99,13 +106,15 @@ export default {
   data() {
     return {
       featureModal: false,
-      prominentLocale: this.$config.getValue('prominentLocalDisplay') == 'true',
+      prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
+      feedbackConfig: this.$config.getValue('feedback').asBoolean(),
       locale: 'en',
       search: '',
       loaded: false,
       accountInfo: false,
       version: require('../../package.json').version,
       trace: this.$perf.trace('loadDocuments'),
+      feedback: false
     }
   },
   created() {
@@ -145,6 +154,12 @@ export default {
     },
   },
   methods: {
+    feedBack() {
+      window.localStorage.setItem("feedback", "true")
+      this.feedback = false
+      var win = window.open("https://ronan092344.typeform.com/to/WkVNS1", '_blank');
+      win.focus()
+    },
     closeFeatureModal() {
       this.featureModal = false
       if (this.$analytics) {
@@ -224,6 +239,9 @@ export default {
           .auth()
           .currentUser.getIdToken(/* forceRefresh */ true)
           .then((idToken) => {
+            if (!localStorage.getItem('feedback') && this.feedbackConfig) {
+              this.feedback = true
+            }
             // Send token to your backend via HTTPS
             this.$store.commit('setToken', idToken)
             this.$store.dispatch('fetchDocs')
