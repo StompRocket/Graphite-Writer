@@ -38,7 +38,7 @@
 	"ifThisProblemPersists": "If this problem persists please contact support",
 	"lastEdited": "Last edited",
 	"link": "Link",
-	"linkDesc": "A view only shared document has been created. Anyone with that link can view your document. Click to copy the link",
+	"linkDesc": "A view only shared document has been created. Anyone with that link can view your document. Click the link to copy it",
 	"login": {
 		"button": "Login With Google",
 		"instructions": "Please login with Google to continue.",
