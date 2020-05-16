@@ -62,5 +62,9 @@
 	"share": "SHARE",
 	"sharing": "Sharing",
 	"viewOnly": "View Only",
-	"waiting": "waiting"
+	"waiting": "waiting",
+	"settings": {
+		"encryption": "Encryption",
+		"learnMore": "learn more"
+	}
 }

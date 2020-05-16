@@ -49,6 +49,10 @@
             <Locale></Locale>
           </div>
           <div class="settingsItem">
+            <p>{{$t("settings.encryption")}}</p>
+            <router-link to="/settings/encryption">{{$t("settings.learnMore")}}</router-link>
+          </div>
+          <div class="settingsItem">
             <p>{{$t("version")}}</p>
             <p>{{version}}</p>
           </div>
@@ -112,6 +116,9 @@
     mounted() {
       if (this.$analytics) {
         this.$analytics.logEvent('openedSettingsPage')
+      }
+      if (this.$firebase.auth().currentUser) {
+        this.loaded = true
       }
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {

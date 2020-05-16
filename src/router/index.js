@@ -5,7 +5,8 @@ import Edit from '../views/Edit.vue'
 import Share from '../views/shared.vue'
 import Auth from '../views/auth.vue'
 import Settings from '../views/Settings.vue'
-import Feedback from '../views/Feedback.vue'
+import AboutEncryption from '../views/AboutEncryption.vue'
+
 import VueHead from 'vue-head'
 
 Vue.use(VueHead, {
@@ -30,6 +31,11 @@ const routes = [{
     path: '/settings',
     name: 'Settings',
     component: Settings,
+  },
+  {
+    path: '/settings/encryption',
+    name: 'Encryption Settings',
+    component: AboutEncryption,
   },
   {
     path: '/d/:user/:docId',

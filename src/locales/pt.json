@@ -62,5 +62,9 @@
 	"share": "Compartilhar",
 	"sharing": "Partilha",
 	"viewOnly": "Exibir apenas",
-	"waiting": "esperando"
+	"waiting": "esperando",
+	"settings": {
+		"encryption": "Criptografia",
+		"learnMore": "saber mais"
+	}
 }

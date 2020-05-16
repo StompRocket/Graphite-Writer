@@ -15,10 +15,30 @@
       /></router-link>
 
     </nav>
-
-    <div class="settingsScreen">
-      <div class="feedBackApp">
-        <div id="typeForm"></div>
+    <div v-if="!loaded" class="loading">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+      <img src="@/assets/wordmark.svg" alt=""/>
+      <p class="version">v{{ version }}</p>
+    </div>
+    <div v-if="loaded" class="settingsScreen">
+      <div class="settingsApp">
+        <img class="settingsImage" src="../assets/undraw_security_o890.svg" alt="Security guard guarding data">
+        <h1 class="heading">Graphite Writer Encryption</h1>
+        <p class="text">By default Graphite Writer documents are transferred over https, this means that your documents
+          are scrambled and encrypted between your device and our servers. However, documents are currently not stored in an encrypted format. We are working on building methods that will allow your documents to always be encrypted.</p>
+        <div class="actions">
+          <router-link class="btn" to="/settings">Done</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -26,7 +46,6 @@
 
 <script>
   import Locale from '@/components/locale.vue'
-  import * as typeformEmbed from '@typeform/embed'
 
   let timeout = null
   export default {
@@ -44,10 +63,10 @@
         prominentLocale: this.$config.getValue('prominentLocalDisplay') == 'true',
         locale: 'en',
 
-        loaded: false,
+        loaded: true,
         accountInfo: false,
         version: require('../../package.json').version,
-        trace: this.$perf.trace('loadSettings'),
+        trace: this.$perf.trace('loadSettingsAboutEncryption'),
       }
     },
     created() {
@@ -60,23 +79,11 @@
     },
     methods: {
 
-      logOut() {
-        if (this.$analytics) {
-          this.$analytics.logEvent('logout')
-        }
-        this.$firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          window.location.href = 'https://graphitewriter.com'
-        })
-      },
     },
     components: {Locale},
     mounted() {
-
       if (this.$analytics) {
-        this.$analytics.logEvent('openedFeedback')
+        this.$analytics.logEvent('loadSettingsAboutEncryption')
       }
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -89,15 +96,6 @@
 
             this.loaded = true
             this.trace.stop()
-            let object = document.getElementById("typeForm")
-            console.log(object)
-            typeformEmbed.makeWidget(object, "https://ronan092344.typeform.com/to/WkVNS1", {
-              onSubmit: () => {
-                console.log("submitted")
-                window.localStorage.setItem("feedback", "true")
-                this.$router.push("/")
-              }
-            })
             if (
               !localStorage.getItem('languageFeature') &&
               this.prominentLocale

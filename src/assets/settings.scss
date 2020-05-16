@@ -3,6 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  a {
+    color: $primary;
+  }
+  a.btn {
+    color: $text;
+    text-decoration: none;
+  }
 }
 .feedBackApp {
   @include rounding;
@@ -26,6 +33,15 @@
   text-align: center;
 width: 100vw;
   max-width: 600px;
+  .heading {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+  .text {
+    margin-bottom: 5rem;
+  }
+
   .userRow {
     display: flex;
     flex-direction: column;
@@ -51,6 +67,7 @@ width: 100vw;
   }
   .actions {
     margin-top: 1rem;
+    padding-bottom: 1rem;
   }
   .settingsRows {
     margin: 1rem 0;
