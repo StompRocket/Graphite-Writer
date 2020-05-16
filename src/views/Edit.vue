@@ -65,7 +65,7 @@
         <h3>{{$t("sharing")}}</h3>
         <div class="share_link">
           <p>{{$t("link")}}:</p>
-          <input type="text" v-model="shareLink" disabled>
+          <input id="sharedLink" @click="copyLink" type="text" v-model="shareLink" readonly>
         </div>
 
         <p>{{$t("linkDesc")}}</p>
@@ -150,6 +150,16 @@
       }
     },
     methods: {
+      copyLink() {
+        var copyText = document.getElementById("sharedLink");
+
+        /* Select the text field */
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+      },
       print() {
         if (this.$analytics) {
           this.$analytics.logEvent("print")
