@@ -154,7 +154,7 @@
     background: color.adjust($text, $lightness: -30);
   }
 }
-.doc__container {
+.doc__container, .collection__container {
  //background: red;
   width: 100%;
   padding: 0.5rem;
@@ -170,6 +170,13 @@
   flex-direction: column;
  // max-width: 300px;
 
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 
   width: 100%;
   text-decoration: none;

@@ -138,7 +138,7 @@
     },
     data() {
       return {
-        collectionsEnabled: false,
+        collectionsEnabled: this.$config.getValue('collectionsEnabled').asBoolean(),
         featureModal: false,
         prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
         feedbackConfig: this.$config.getValue('feedback').asBoolean(),
