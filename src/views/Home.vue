@@ -67,7 +67,7 @@
     <section v-if="docsLoaded" class="home__section">
       <h3>{{$t("homeContext.recentDocs")}}</h3>
       <div class="documents">
-        <div @contextmenu.prevent="$refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
+        <div @contextmenu.prevent="$refs.menu.close();  $refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
           <router-link
               :to="openUrl(doc)"
               :key="doc.id"
