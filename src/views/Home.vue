@@ -45,7 +45,7 @@
       <img src="@/assets/wordmark.svg" alt=""/>
       <p class="version">v{{ version }}</p>
     </div>
-    <section v-if="collectionsEnabled" class="home__section">
+    <section  v-if="collectionsEnabled && docsLoaded" class="home__section">
       <h3>Collections</h3>
       <div class="collections">
         <div v-for="i in 10" class="collection__container">
@@ -64,7 +64,7 @@
 
       </div>
     </section>
-    <section class="home__section">
+    <section v-if="docsLoaded" class="home__section">
       <h3>{{$t("homeContext.recentDocs")}}</h3>
       <div class="documents">
         <div @contextmenu.prevent="$refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
