@@ -2,15 +2,15 @@
   <div class="home page">
     <nav class="nav">
       <router-link to="/">
-        <img class="brand--wordmark" src="@/assets/wordmark.svg" />
+        <img class="brand--wordmark" src="@/assets/wordmark.svg"/>
       </router-link>
 
       <form @submit.prevent class="search__form">
         <input
-          v-model="search"
-          type="text"
-          class="input search"
-          :placeholder="$t('search')"
+            v-model="search"
+            type="text"
+            class="input search"
+            :placeholder="$t('search')"
         />
       </form>
       <button class="btn new" @click="newDoc">{{ $t('new') }}</button>
@@ -23,11 +23,6 @@
           alt=""
       /></router-link>
     </nav>
-    <div v-if="accountInfo" class="accountButton">
-      <Locale></Locale>
-      <p class="email">{{ user.email }}</p>
-      <button class="btn" @click="logOut">{{ $t('logout') }}</button>
-    </div>
     <div v-if="feedback" class="feedBackBar">
       <div class="container">
         <p>Do you Have Feedback?</p>
@@ -47,38 +42,74 @@
         <div class="sk-cube sk-cube8"></div>
         <div class="sk-cube sk-cube9"></div>
       </div>
-      <img src="@/assets/wordmark.svg" alt="" />
+      <img src="@/assets/wordmark.svg" alt=""/>
       <p class="version">v{{ version }}</p>
     </div>
-    <div class="documents">
-      <router-link
-        :to="openUrl(doc)"
-        :key="doc.id"
-        v-for="doc in filteredDocs"
-        class="document"
-      >
-        <p class="title">{{ doc.title }}</p>
-        <p class="description">
-          {{ $t('opened') }}: {{ lastEdited(doc.opened) }}. {{ $t('owner') }}:
-          {{ doc.owner }}
-        </p>
-      </router-link>
-      <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
-        <img src="../assets/undraw_files_6b3d.svg" alt="No Documents" />
-        <h3>{{ $t('noDocs') }}</h3>
-        <p>{{ $t('noDocsDesc') }}</p>
+    <section v-if="collectionsEnabled" class="home__section">
+      <h3>Collections</h3>
+      <div class="collections">
+        <div v-for="i in 10" class="collection__container">
+          <div class="collection">
+            <i class="fas fa-bookmark"></i>
+            <div class="text">
+              <p class="title">Humanitees</p>
+              <p class="description">
+                Last Edited: a day ago. docs: 20
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+
       </div>
-    </div>
+    </section>
+    <section class="home__section">
+      <h3>Recent Documents</h3>
+      <div class="documents">
+        <div @contextmenu.prevent="$refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
+          <router-link
+              :to="openUrl(doc)"
+              :key="doc.id"
+
+              class="document"
+          >
+            <p class="title">{{ doc.title }}</p>
+            <p class="description">
+              {{ $t('opened') }}: {{ lastEdited(doc.opened) }}. {{ $t('owner') }}:
+              {{ doc.owner }}
+            </p>
+          </router-link>
+        </div>
+        <vue-context ref="menu">
+          <template slot-scope="child" v-if="child.data">
+          <li>
+           <router-link :to="openUrl(child.data)" target="_blank">Open in new tab</router-link>
+          </li>
+          <li v-if="collectionsEnabled">
+            <a @click.prevent="onClick($event.target.innerText)">Option 2</a>
+          </li>
+            <li><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">Delete</a></li>
+          </template>
+        </vue-context>
+        <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
+          <img src="../assets/undraw_files_6b3d.svg" alt="No Documents"/>
+          <h3>{{ $t('noDocs') }}</h3>
+          <p>{{ $t('noDocsDesc') }}</p>
+        </div>
+      </div>
+    </section>
+
     <div v-if="featureModal" class="modal_container">
       <div class="modal--feature">
-        <img src="../assets/undraw_around_the_world_v9nu.svg" alt="" />
+        <img src="../assets/undraw_around_the_world_v9nu.svg" alt=""/>
         <h3>{{ $t('feature.new') }}</h3>
         <p>{{ $t('feature.supports') }}</p>
         <p>{{ $t('feature.translate') }}</p>
         <p>
           {{ $t('feature.support') }}:
           <a href="mailto:support@graphitewriter.com"
-            >support@graphitewriter.com</a
+          >support@graphitewriter.com</a
           >
         </p>
         <p>{{ $t('feature.useBox') }}</p>
@@ -91,131 +122,165 @@
 </template>
 
 <script>
-import Locale from '@/components/locale.vue'
+  import Locale from '@/components/locale.vue'
+  import VueContext from 'vue-context';
 
-let timeout = null
-export default {
-  name: 'Home',
-  head: {
-    title: {
-      inner: "Graphite Writer",
-      complement: 'Documents'
-    },
+  let timeout = null
+  export default {
+    name: 'Home',
+    components: {Locale, VueContext},
+    head: {
+      title: {
+        inner: "Graphite Writer",
+        complement: 'Documents'
+      },
 
-  },
-  data() {
-    return {
-      featureModal: false,
-      prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
-      feedbackConfig: this.$config.getValue('feedback').asBoolean(),
-      locale: 'en',
-      search: '',
-      loaded: false,
-      accountInfo: false,
-      version: require('../../package.json').version,
-      trace: this.$perf.trace('loadDocuments'),
-      feedback: false
-    }
-  },
-  created() {
-    this.trace.start()
-  },
-  computed: {
-    docsLoaded() {
-      return this.$store.state.docsLoaded
     },
-    docs() {
-      if (this.$store.getters.userDocs.length > 0) {
-        if (this.$analytics) {
-          this.$analytics.setUserProperties({
-            docCount: this.$store.getters.userDocs.length,
+    data() {
+      return {
+        collectionsEnabled: false,
+        featureModal: false,
+        prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
+        feedbackConfig: this.$config.getValue('feedback').asBoolean(),
+        locale: 'en',
+        search: '',
+        loaded: false,
+        accountInfo: false,
+        version: require('../../package.json').version,
+        trace: this.$perf.trace('loadDocuments'),
+        feedback: false
+      }
+    },
+    created() {
+      this.trace.start()
+    },
+    computed: {
+      docsLoaded() {
+        return this.$store.state.docsLoaded
+      },
+      docs() {
+        if (this.$store.getters.userDocs.length > 0) {
+          if (this.$analytics) {
+            this.$analytics.setUserProperties({
+              docCount: this.$store.getters.userDocs.length,
+            })
+          }
+        }
+
+        return this.$store.getters.userDocs
+      },
+      filteredDocs() {
+        if (this.search.length <= 0) {
+          return this.$store.state.docs
+        } else {
+          return this.$store.state.docs.filter((i) => {
+            clearTimeout(timeout)
+            timeout = setTimeout(this.logSearch, 1000)
+            return i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
           })
         }
-      }
-
-      return this.$store.getters.userDocs
+      },
+      photoURL() {
+        return `url(${this.$store.state.user.photoURL}) no-repeat center center`
+      },
+      user() {
+        return this.$store.state.user
+      },
     },
-    filteredDocs() {
-      if (this.search.length <= 0) {
-        return this.$store.state.docs
-      } else {
-        return this.$store.state.docs.filter((i) => {
-          clearTimeout(timeout)
-          timeout = setTimeout(this.logSearch, 1000)
-          return i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+    methods: {
+      deleteDoc(doc) {
+        this.$swal({
+          title: "Are you sure?",
+          text: `Once deleted, you will not be able to recover ${doc.title}`,
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
         })
-      }
-    },
-    photoURL() {
-      return `url(${this.$store.state.user.photoURL}) no-repeat center center`
-    },
-    user() {
-      return this.$store.state.user
-    },
-  },
-  methods: {
-    feedBack() {
-      window.localStorage.setItem("feedback", "true")
-      this.feedback = false
-      if (this.$analytics) {
-        this.$analytics.logEvent('openedFeedback')
-      }
-      var win = window.open("https://ronan092344.typeform.com/to/WkVNS1", '_blank');
-      win.focus()
-    },
-    closeFeatureModal() {
-      this.featureModal = false
-      if (this.$analytics) {
-        this.$analytics.logEvent('closedLanguageFeature')
-      }
-      localStorage.setItem('languageFeature', 'true')
-    },
-    openUrl(doc) {
-      if (doc.sharedDoc) {
-        return '/shared/' + this.user.uid + '/' + doc.id
-      } else {
-        return '/d/' + this.user.uid + '/' + doc.id
-      }
-    },
-    logSearch() {
-      console.log('Log search')
-      timeout = null
-      if (this.$analytics) {
-        this.$analytics.logEvent('searching')
-      }
-    },
-    logOut() {
-      if (this.$analytics) {
-        this.$analytics.logEvent('logout')
-      }
-      this.$firebase
+        .then((willDelete) => {
+          if (willDelete) {
+
+            fetch(`${this.$store.getters.api}/api/v1/documents/${this.user.uid}/${doc.id}`, {
+              method: "delete",
+              headers: {
+                "Authorization": this.$store.getters.fbToken,
+                "content-type": "application/json"
+              },
+              body: JSON.stringify({deleteDoc: true, time: this.$moment().unix()})
+
+            }).then(res => res.json()).then(res => {
+              if (res.success) {
+                this.$store.dispatch('fetchDocs')
+
+                if (this.$analytics) {
+                  this.$analytics.logEvent("deletedDoc")
+                }
+              }
+            })
+          }
+        });
+      },
+      feedBack() {
+        window.localStorage.setItem("feedback", "true")
+        this.feedback = false
+        if (this.$analytics) {
+          this.$analytics.logEvent('openedFeedback')
+        }
+        var win = window.open("https://ronan092344.typeform.com/to/WkVNS1", '_blank');
+        win.focus()
+      },
+      closeFeatureModal() {
+        this.featureModal = false
+        if (this.$analytics) {
+          this.$analytics.logEvent('closedLanguageFeature')
+        }
+        localStorage.setItem('languageFeature', 'true')
+      },
+      openUrl(doc) {
+        if (doc.sharedDoc) {
+          return '/shared/' + this.user.uid + '/' + doc.id
+        } else {
+          return '/d/' + this.user.uid + '/' + doc.id
+        }
+      },
+      logSearch() {
+        console.log('Log search')
+        timeout = null
+        if (this.$analytics) {
+          this.$analytics.logEvent('searching')
+        }
+      },
+      logOut() {
+        if (this.$analytics) {
+          this.$analytics.logEvent('logout')
+        }
+        this.$firebase
         .auth()
         .signOut()
         .then(() => {
           window.location.href = 'https://graphitewriter.com'
         })
-    },
-    lastEdited(time) {
-      return this.$moment.unix(time).fromNow()
-    },
-    newDoc() {
-      swal(this.$t('newDocName') + ':', {
-        content: 'input',
-        button: this.$t('ok'),
-      }).then((value) => {
-        if (value != null) {
-          if (value.length <= 0) {
-            value = 'Untitled'
-          }
+      },
+      lastEdited(time) {
+        return this.$moment.unix(time).fromNow()
+      },
+      newDoc() {
+        swal(this.$t('newDocName') + ':', {
+          content: 'input',
+          button: this.$t('ok'),
+        }).then((value) => {
+          if (value != null) {
+            if (value.length <= 0) {
+              value = 'Untitled'
+            }
 
-          fetch(`${this.$store.getters.api}/api/v1/documents/new`, {
-            method: 'post',
-            headers: {
-              Authorization: this.$store.getters.fbToken,
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify({ title: value, time: this.$moment().unix() }),
-          })
+            fetch(`${this.$store.getters.api}/api/v1/documents/new`, {
+              method: 'post',
+              headers: {
+                Authorization: this.$store.getters.fbToken,
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify({title: value, time: this.$moment().unix()}),
+            })
             .then((res) => res.json())
             .then((res) => {
               if (res.success) {
@@ -227,18 +292,18 @@ export default {
                 )
               }
             })
-        }
-      })
+          }
+        })
+      },
     },
-  },
-  components: { Locale },
-  mounted() {
-    if (this.$analytics) {
-      this.$analytics.logEvent('openedDocumentsPage')
-    }
-    this.$firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$firebase
+
+    mounted() {
+      if (this.$analytics) {
+        this.$analytics.logEvent('openedDocumentsPage')
+      }
+      this.$firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.$firebase
           .auth()
           .currentUser.getIdToken(/* forceRefresh */ true)
           .then((idToken) => {
@@ -261,9 +326,9 @@ export default {
             }
             //console.log( this.$store.state.token)
           })
-      } else {
-      }
-    })
-  },
-}
+        } else {
+        }
+      })
+    },
+  }
 </script>

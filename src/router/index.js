@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Documents from '../views/Documents.vue'
 import Edit from '../views/Edit.vue'
 import Share from '../views/shared.vue'
 import Auth from '../views/auth.vue'
@@ -21,6 +22,12 @@ const routes = [{
   component: Home,
 
 },
+  {
+    path: '/docs',
+    name: 'Documents',
+    component: Documents,
+
+  },
   {
     path: '/auth',
     name: 'Auth',

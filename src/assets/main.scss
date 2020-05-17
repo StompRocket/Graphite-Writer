@@ -3,7 +3,6 @@
 @import "editor";
 @import "home";
 @import "settings";
-
 html,
 body,
 .page {
@@ -136,7 +135,18 @@ body,
     background: color.adjust($primary, $lightness: 10);
   }
 }
-
+.btn--inline {
+  display: inline;
+  background: none;
+  font-size: 1rem;
+  border: none;
+}
+.btn--inline.red {
+  color: $warning;
+  &:hover {
+    color: $warning;
+  }
+}
 .btn--dark {
   text-decoration: none;
   @include rounding();
