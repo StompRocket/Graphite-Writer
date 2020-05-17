@@ -65,7 +65,7 @@
       </div>
     </section>
     <section class="home__section">
-      <h3>Recent Documents</h3>
+      <h3>{{$t("homeContext.recentDocs")}}</h3>
       <div class="documents">
         <div @contextmenu.prevent="$refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
           <router-link
@@ -84,12 +84,12 @@
         <vue-context ref="menu">
           <template slot-scope="child" v-if="child.data">
           <li>
-           <router-link :to="openUrl(child.data)" target="_blank">Open in new tab</router-link>
+           <router-link :to="openUrl(child.data)" target="_blank">{{$t("homeContext.OpenTab")}}</router-link>
           </li>
           <li v-if="collectionsEnabled">
-            <a @click.prevent="onClick($event.target.innerText)">Option 2</a>
+            <a @click.prevent="">{{$t("homeContext.editTags")}}</a>
           </li>
-            <li><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">Delete</a></li>
+            <li><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">{{$t("delete")}}</a></li>
           </template>
         </vue-context>
         <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
@@ -138,7 +138,7 @@
     },
     data() {
       return {
-        collectionsEnabled: this.$config.getValue('collectionsEnabled').asBoolean(),
+        collectionsEnabled: this.$config.getValue('collectionsEnabled').asBoolean() || window.location.hostname === "localhost",
         featureModal: false,
         prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
         feedbackConfig: this.$config.getValue('feedback').asBoolean(),

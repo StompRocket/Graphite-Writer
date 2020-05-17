@@ -66,5 +66,10 @@
 	"settings": {
 		"encryption": "Criptografia",
 		"learnMore": "saber mais"
+	},
+	"homeContext": {
+		"OpenTab": "Abrir em uma nova guia",
+		"editTags": "Editar tags",
+		"recentDocs": "Documentos Recentes"
 	}
 }
