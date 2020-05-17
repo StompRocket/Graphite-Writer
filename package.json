@@ -13,6 +13,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@johmun/vue-tags-input": "^2.1.0",
     "@sentry/browser": "^5.15.4",
     "@typeform/embed": "^0.17.0",
     "core-js": "^3.6.4",

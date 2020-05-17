@@ -24,12 +24,27 @@ export default new Vuex.Store({
     },
     setToken (state, token) {
       state.token = token
+    },
+    setTags(state, data) {
+      //console.log('setting tags')
+      let id = data.id
+      let tags = data.tags
+      let i = 0
+      let index = 0
+      for (i in state.docs) {
+        if (state.docs[i]["id"] === id) {
+          index = i
+        }
+        i++
+      }
+     // console.log("for", state.docs[index].title)
+      state.docs[index].tags = tags
     }
   },
   getters: {
     api(state) {
       if (window.location.hostname == "localhost") {
-       // return "http://localhost:3008"
+        return "http://localhost:3008"
       }
       return state.api
     },
@@ -52,6 +67,25 @@ export default new Vuex.Store({
 
         })
 
+    },
+    collections(state) {
+      let result = {}
+      state.docs.forEach(doc => {
+        doc.tags.forEach(tag => {
+          if (result[tag.text]) {
+            result[tag.text].docs.push(doc.id)
+          } else {
+            result[tag.text] = {
+              id: tag.text,
+              title: tag.text.replace(/_/g, " "),
+              docs: [doc.id]
+            }
+          }
+
+          console.log(tag.text)
+        })
+      })
+      return result
     }
   },
   actions: {
@@ -67,6 +101,7 @@ export default new Vuex.Store({
 
         }).then(res => res.json()).then(res => {
           context.commit("setDocs", res)
+          console.log(res)
           return res
         })
 

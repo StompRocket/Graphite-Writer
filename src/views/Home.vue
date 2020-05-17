@@ -45,16 +45,16 @@
       <img src="@/assets/wordmark.svg" alt=""/>
       <p class="version">v{{ version }}</p>
     </div>
-    <section  v-if="collectionsEnabled && docsLoaded" class="home__section">
+    <section v-if="collectionsEnabled && docsLoaded" class="home__section">
       <h3>Collections</h3>
       <div class="collections">
-        <div v-for="i in 10" class="collection__container">
+        <div v-for="collection in $store.getters.collections" class="collection__container">
           <div class="collection">
             <i class="fas fa-bookmark"></i>
             <div class="text">
-              <p class="title">Humanitees</p>
+              <p class="title">{{collection.title}}</p>
               <p class="description">
-                Last Edited: a day ago. docs: 20
+               Docs: {{collection.docs.length}}
               </p>
             </div>
           </div>
@@ -67,7 +67,8 @@
     <section v-if="docsLoaded" class="home__section">
       <h3>{{$t("homeContext.recentDocs")}}</h3>
       <div class="documents">
-        <div @contextmenu.prevent="$refs.menu.close();  $refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="doc__container">
+        <div @contextmenu.prevent="$refs.menu.close();  $refs.menu.open($event, doc)" v-for="doc in filteredDocs"
+             class="doc__container">
           <router-link
               :to="openUrl(doc)"
               :key="doc.id"
@@ -83,12 +84,12 @@
         </div>
         <vue-context ref="menu">
           <template slot-scope="child" v-if="child.data">
-          <li>
-           <router-link :to="openUrl(child.data)" target="_blank">{{$t("homeContext.OpenTab")}}</router-link>
-          </li>
-          <li v-if="collectionsEnabled">
-            <a @click.prevent="">{{$t("homeContext.editTags")}}</a>
-          </li>
+            <li>
+              <router-link :to="openUrl(child.data)" target="_blank">{{$t("homeContext.OpenTab")}}</router-link>
+            </li>
+            <li v-if="collectionsEnabled && child.data.owner === 'You'">
+              <a @click.prevent="openTagModal(child.data)">{{$t("homeContext.editTags")}}</a>
+            </li>
             <li><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">{{$t("delete")}}</a></li>
           </template>
         </vue-context>
@@ -118,17 +119,33 @@
       </div>
       <div class="modal_container" @click="closeFeatureModal"></div>
     </div>
+    <div v-if="tagModal" class="modal_container light">
+      <div class="modal">
+        <h3>Tags</h3>
+        <p>Tags are used to automatically organize your documents into collections.</p>
+        <vue-tags-input
+            :validation="validation"
+            v-model="tag"
+            :tags="tags"
+            @tags-changed="newTags => tags = newTags"
+        />
+        <p>Please only use letters, numbers, and spaces</p>
+        <button @click="closeTagModal" class="btn">{{ $t('done') }}</button>
+      </div>
+      <div class="modal_container light" @click="closeTagModal"></div>
+    </div>
   </div>
 </template>
 
 <script>
   import Locale from '@/components/locale.vue'
   import VueContext from 'vue-context';
+  import VueTagsInput from '@johmun/vue-tags-input';
 
   let timeout = null
   export default {
     name: 'Home',
-    components: {Locale, VueContext},
+    components: {Locale, VueContext, VueTagsInput},
     head: {
       title: {
         inner: "Graphite Writer",
@@ -138,6 +155,18 @@
     },
     data() {
       return {
+        tagModalDoc: false,
+        tags: [],
+        tag: '',
+        tagModal: false,
+        validation: [{
+          classes: 'no-braces',
+          rule: ({text}) => {
+            let regex = /[^A-Za-z0-9\s]+/
+            // console.log(text,regex.test(text) )
+            return regex.test(text)
+          },
+        }],
         collectionsEnabled: this.$config.getValue('collectionsEnabled').asBoolean() || window.location.hostname === "localhost",
         featureModal: false,
         prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
@@ -188,6 +217,57 @@
       },
     },
     methods: {
+      openTagModal(doc) {
+        this.tagModalDoc = doc
+        // console.log(this.tagModalDoc)
+        try {
+
+          this.tags = doc.tags.map(i => {
+            i.text = i.text.replace(/_/g, " ")
+            return i
+          })
+        } catch {
+          this.tags = []
+        }
+
+        this.tag = ''
+        this.tagModal = true
+
+      },
+      closeTagModal() {
+
+        this.tagModal = false
+        let tags = this.tags
+        if (!tags) {
+          tags = []
+        }
+        tags = tags.filter(tag => {
+          return tag.tiClasses.indexOf("ti-invalid") == -1
+        })
+        tags = tags.map(i => {
+          i.text = i.text.replace(/ /g, "_")
+          return i
+        })
+        // console.log(tags, "tags", this.tagModalDoc.id)
+        this.$store.commit("setTags", {
+          id: this.tagModalDoc.id,
+          tags: tags
+        })
+        fetch(`${this.$store.getters.api}/api/v1/collections/${this.user.uid}/${this.tagModalDoc.id}`, {
+          method: "post",
+          headers: {
+            "Authorization": this.$store.getters.fbToken,
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({tags: tags, time: this.$moment().unix()})
+
+        }).then(res => res.json()).then(res => {
+          if (res.success) {
+            console.log('updated tags')
+          }
+        })
+
+      },
       deleteDoc(doc) {
         this.$swal({
           title: "Are you sure?",

@@ -173,6 +173,9 @@ body,
     background: color.adjust($warning, $lightness: 10);
   }
 }
+.modal_container.light {
+  background:  rgba($gray, 0.2);
+}
 .modal_container {
   width: 100vw;
   height: 100vh;
@@ -180,7 +183,7 @@ body,
   top: 0;
   right: 0;
   z-index: 99999999;
-  background: rgba($gray, 0.8);
+  background: rgba($gray, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
