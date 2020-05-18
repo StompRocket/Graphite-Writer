@@ -1,76 +1,95 @@
 {
-	"ErrorTypes": {
-		"saving": {
-			"text": "Graphite Writer had trouble saving this document. Please check your internet connection.",
-			"title": "ERROR SAVING"
-		},
-		"savingSize": {
-			"text": "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
-			"title": "ERROR SAVING"
-		},
-		"signin": {
-			"text": "Error signing in with Google. Please make sure that you have external scripts, cookies, and redirects enabled."
-		}
-	},
-	"compose": "Compose an epic...",
-	"delete": "Delete",
-	"docName": "Document Name",
-	"error": "Error",
-	"errorNoAccess": "You are not authorized to view this document.",
-	"feature": {
-		"new": "Languages!",
-		"support": "The accuracy of these translations can not be confirmed. If you see an issue or want to help please email support",
-		"supports": "Graphite Writer now supports multiple languages!",
-		"translate": "Because Graphite Writer is a free an open source project we are using Google Translate to support non English languages.",
-		"useBox": "Use the selection box below to change your preferred language"
-	},
-	"footer": {
-		"and": "and",
-		"freeAndOpenSource": "Graphite Writer is a free and open source project developed by",
-		"github": "Graphite Writer is released under the APL-2.0 License. If your interested in contributing to its development check out our",
-		"languageAsk": "If you see any errors please let us know by emailing",
-		"languageDisclaimer": "Because Graphite Writer is a small open source project all non English translations are made with Google Translate.",
-		"legal": "By using Graphite Writer you agree to our use of cookies and to be bound by our",
-		"pp": "privacy policy",
-		"questionsAndSuggestions": "If you have any questions or suggestions please email us at",
-		"tos": "terms of service"
-	},
-	"ifThisProblemPersists": "If this problem persists please contact support",
-	"lastEdited": "Last edited",
-	"link": "Link",
-	"linkDesc": "A view only shared document has been created. Anyone with that link can view your document. Click the link to copy it",
-	"login": {
-		"button": "Login With Google",
-		"instructions": "Please login with Google to continue.",
-		"title": "Welcome To Graphite Writer"
-	},
-	"logout": "Logout",
-	"language": "Language",
-	"version": "Version",
-	"new": "NEW",
-	"newDocName": "New Doc Name",
-	"noDocs": "No Docs",
-	"noDocsDesc": "You don't have any documents yet. Press new on the top right of your screen to create one.",
-	"ok": "OK",
-	"done": "done",
-	"opened": "Opened",
-	"owner": "Owner",
-	"print": "Print",
-	"saved": "saved",
-	"search": "Search",
-	"serverConError": "Server Connection Error",
-	"serverConErrorDesc": "Graphite Writer is having trouble connecting to its server.",
-	"share": "SHARE",
-	"sharing": "Sharing",
-	"viewOnly": "View Only",
-	"waiting": "waiting",
-	"settings": {
-		"encryption": "Encryption",
-		"learnMore": "learn more"
-	},
-	"homeContext": {
-		"OpenTab": "Open in new tab",
-		"editTags": "Edit tags",
-		"recentDocs": "Recent Documents"
-	}
+  "ErrorTypes": {
+    "saving": {
+      "text": "Graphite Writer had trouble saving this document. Please check your internet connection.",
+      "title": "ERROR SAVING"
+    },
+    "savingSize": {
+      "text": "Because Graphite Writer is a free service, we limit our document sizes to 3mb in order to ensure room for everyone.",
+      "title": "ERROR SAVING"
+    },
+    "signin": {
+      "text": "Error signing in with Google. Please make sure that you have external scripts, cookies, and redirects enabled."
+    }
+  },
+  "compose": "Compose an epic...",
+  "delete": "Delete",
+  "docName": "Document Name",
+  "error": "Error",
+  "errorNoAccess": "You are not authorized to view this document.",
+  "feature": {
+    "new": "Languages!",
+    "support": "The accuracy of these translations can not be confirmed. If you see an issue or want to help please email support",
+    "supports": "Graphite Writer now supports multiple languages!",
+    "translate": "Because Graphite Writer is a free an open source project we are using Google Translate to support non English languages.",
+    "useBox": "Use the selection box below to change your preferred language"
+  },
+  "footer": {
+    "and": "and",
+    "freeAndOpenSource": "Graphite Writer is a free and open source project developed by",
+    "github": "Graphite Writer is released under the APL-2.0 License. If your interested in contributing to its development check out our",
+    "languageAsk": "If you see any errors please let us know by emailing",
+    "languageDisclaimer": "Because Graphite Writer is a small open source project all non English translations are made with Google Translate.",
+    "legal": "By using Graphite Writer you agree to our use of cookies and to be bound by our",
+    "pp": "privacy policy",
+    "questionsAndSuggestions": "If you have any questions or suggestions please email us at",
+    "tos": "terms of service"
+  },
+  "ifThisProblemPersists": "If this problem persists please contact support",
+  "lastEdited": "Last edited",
+  "link": "Link",
+  "linkDesc": "A view only shared document has been created. Anyone with that link can view your document. Click the link to copy it",
+  "login": {
+    "button": "Login With Google",
+    "instructions": "Please login with Google to continue.",
+    "title": "Welcome To Graphite Writer"
+  },
+  "logout": "Logout",
+  "language": "Language",
+  "version": "Version",
+  "new": "NEW",
+  "newDocName": "New Doc Name",
+  "noDocs": "No Docs",
+  "noDocsDesc": "You don't have any documents yet. Press new on the top right of your screen to create one.",
+  "ok": "OK",
+  "done": "done",
+  "back": "back",
+  "opened": "Opened",
+  "owner": "Owner",
+  "print": "Print",
+  "saved": "saved",
+  "search": "Search",
+  "serverConError": "Server Connection Error",
+  "serverConErrorDesc": "Graphite Writer is having trouble connecting to its server.",
+  "share": "SHARE",
+  "sharing": "Sharing",
+  "viewOnly": "View Only",
+  "waiting": "waiting",
+  "settings": {
+    "encryption": "Encryption",
+    "learnMore": "learn more"
+  },
+  "settingsText": "settings",
+  "docs": "docs",
+  "collections": {
+    "youHaveNone": "You have no collections",
+    "instructions": "Right click on a document and select edit tags to create your first collection",
+    "about": "Collections can be used to sort your documents. Think of them as smart folders",
+    "dontNeed": "Don't need collections? Turn them off in",
+    "tagsFor": "Tags for ",
+    "used": "Tags are used to automatically organize your documents into collections.",
+    "onlyUse": "Please only use letters, numbers, and spaces. Hit enter to add tag"
+  },
+  "collectionsOnboard": {
+    "title": "Collections!",
+    "subHead": "Graphite Writer now supports collections",
+    "thinkOf": "Think of collections as \"smart folders.\" Collections automatically create folders based upon tags you create.",
+    "allows": "This allows you to sort your documents with any characteristics you define.",
+    "getStarted": "To get started, right click on one of your documents and select edit tags."
+  },
+  "homeContext": {
+    "OpenTab": "Open in new tab",
+    "editTags": "Edit tags",
+    "recentDocs": "Recent Documents"
+  }
 }

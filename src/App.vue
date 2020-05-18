@@ -107,7 +107,11 @@ export default {
           console.error(err);
         });
     }
-
+if (localStorage.getItem("collectionsSetting") == "true" || !localStorage.getItem("collectionsSetting")) {
+  this.$store.commit("collectionsSetting", true)
+} else {
+  this.$store.commit("collectionsSetting", false)
+}
     console.log(localStorage.getItem("local"));
     if (localStorage.getItem("local")) {
       this.$i18n.locale = localStorage.getItem("local");

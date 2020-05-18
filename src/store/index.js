@@ -11,10 +11,19 @@ export default new Vuex.Store({
     token: false,
     docs: [],
     docsLoaded:false,
+    feedback: false,
+    collectionsSetting: true,
+    tags: [],
   // api: "http://localhost:3008"
     api: "https://api.graphitewriter.com"
   },
   mutations: {
+    collectionsSetting(state, val) {
+      state.collectionsSetting = val
+    },
+    feedback(state, res) {
+      state.feedback = res
+    },
     setUser (state, user) {
       state.user = user
     },
@@ -39,12 +48,19 @@ export default new Vuex.Store({
       }
      // console.log("for", state.docs[index].title)
       state.docs[index].tags = tags
+      state.tags += tags
     }
   },
   getters: {
+    collectionsSetting(state) {
+      return state.collectionsSetting
+    },
+    feedback(state) {
+      return state.feedback
+    },
     api(state) {
       if (window.location.hostname == "localhost") {
-        return "http://localhost:3008"
+     //   return "http://localhost:3008"
       }
       return state.api
     },
@@ -70,21 +86,29 @@ export default new Vuex.Store({
     },
     collections(state) {
       let result = {}
-      state.docs.forEach(doc => {
-        doc.tags.forEach(tag => {
-          if (result[tag.text]) {
-            result[tag.text].docs.push(doc.id)
-          } else {
-            result[tag.text] = {
-              id: tag.text,
-              title: tag.text.replace(/_/g, " "),
-              docs: [doc.id]
-            }
-          }
+      //console.log(state.tags)
+      if (state.tags) {
 
-          console.log(tag.text)
-        })
+      }
+      state.docs.forEach(doc => {
+        if (doc.tags && doc.tags.length >= 1) {
+          doc.tags.forEach(tag => {
+            if (result[tag.text]) {
+              result[tag.text].docs.push(doc.id)
+            } else {
+              result[tag.text] = {
+                id: tag.text,
+                title: tag.text.replace(/_/g, " "),
+                docs: [doc.id]
+              }
+            }
+
+            //  console.log(tag.text)
+          })
+        }
+
       })
+      state.tags = Object.keys(result)
       return result
     }
   },
@@ -101,7 +125,7 @@ export default new Vuex.Store({
 
         }).then(res => res.json()).then(res => {
           context.commit("setDocs", res)
-          console.log(res)
+       //   console.log(res)
           return res
         })
 

@@ -49,6 +49,13 @@
             <Locale></Locale>
           </div>
           <div class="settingsItem">
+            <p>Collections enabled</p>
+            <div><select v-model="collections" class="input">
+              <option value="true">enabled</option>
+              <option value="false">disabled</option>
+            </select></div>
+          </div>
+          <div class="settingsItem">
             <p>{{$t("settings.encryption")}}</p>
             <router-link to="/settings/encryption">{{$t("settings.learnMore")}}</router-link>
           </div>
@@ -97,6 +104,16 @@
       user() {
         return this.$store.state.user
       },
+      collections: {
+        get() {
+          return this.$store.getters.collectionsSetting
+        },
+        set(val) {
+          console.log(val)
+          window.localStorage.setItem("collectionsSetting", val)
+          this.$store.commit("collectionsSetting", val)
+        }
+      }
     },
     methods: {
 
