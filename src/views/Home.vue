@@ -154,6 +154,7 @@
             :validation="validation"
             v-model="tag"
             :tags="tags"
+            :autocomplete-items="autoCompleteItems"
             @tags-changed="newTags => tags = newTags"
         />
         <p>{{$t("collections.onlyUse")}}</p>
@@ -212,10 +213,17 @@
       this.trace.start()
     },
     computed: {
+      autoCompleteItems() {
+        let items = []
+        Object.keys(this.collections).forEach(key => {
+          items.push(this.collections[key].title)
+        })
+        return items
+      },
       collectionsFeatureModal: {
         get() {
           console.log(localStorage.getItem("collectionsFeatureModal"), "collections settings")
-          if ( localStorage.getItem("collectionsFeatureModal") !== "true") {
+          if (localStorage.getItem("collectionsFeatureModal") !== "true") {
             if (!this.shownCollections && !this.featureModal) {
               return true
             }
