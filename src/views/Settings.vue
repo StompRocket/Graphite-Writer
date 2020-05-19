@@ -49,7 +49,7 @@
             <Locale></Locale>
           </div>
           <div class="settingsItem">
-            <p>Collections enabled</p>
+            <p>Collections</p>
             <div><select v-model="collections" class="input">
               <option value="true">enabled</option>
               <option value="false">disabled</option>
