@@ -26,6 +26,9 @@
   top: 0;
   z-index: 9999;
   width: 100%;
+  @media (max-width: 600px) {
+  position: absolute;
+  }
 }
 
 .docTitle {
@@ -82,12 +85,12 @@ margin-right: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   max-width: 1600px;
-  margin-top: 8vh;
+  margin-top: 10rem;
   margin-left: auto;
   margin-right: auto;
   height: 100%;
   @media (max-width: 600px) {
-    margin-top: 23rem;
+    margin-top: 20rem;
   }
 }
 .editor__document {
