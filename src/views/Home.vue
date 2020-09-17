@@ -223,7 +223,7 @@
       collectionsFeatureModal: {
         get() {
           console.log(localStorage.getItem("collectionsFeatureModal"), "collections settings")
-          if (localStorage.getItem("collectionsFeatureModal") !== "true") {
+          if (localStorage.getItem("collectionsFeatureModal") !== "true" && false) {
             if (!this.shownCollections && !this.featureModal) {
               return true
             }
