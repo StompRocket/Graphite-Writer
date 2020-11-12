@@ -1,0 +1,107 @@
+@use "sass:color";
+@import "vars";
+.redesign__documentGroup {
+  max-width: 1600px;
+  margin: 2rem auto 2rem auto;
+  padding: 1rem;
+  h3 {
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+}
+.redesign__document__grid {
+margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 670px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  }
+  grid-gap: 1rem;
+}
+.redesign__document{
+  @include shadow();
+  @include transition;
+  background: $text;
+  color: $gray;
+   padding: 1rem;
+
+  text-decoration: none;
+  width: 100%;
+  &:hover {
+    background: color.adjust($text, $lightness: -30);
+  }
+ }
+.redesign__document__icon {
+  color: $primary;
+  font-size: 2rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.redesign__document__container {
+  width: 100%;
+  display: grid;
+}
+.redesign__document--collection{
+  cursor: pointer;
+  @include shadow();
+  @include transition;
+  background: $text;
+  color: $gray;
+  text-decoration: none;
+  background: white;
+  padding: 1rem;
+  display: flex;
+  &:hover {
+    background: color.adjust($text, $lightness: -30);
+  }
+}
+.redesign__collection__title {
+  margin-left: 1rem;
+}
+.redesign__document__title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.redesign__document__desc {
+
+}
+.redesign__collections__onboarding {
+  max-width: 1600px;
+  margin: 1rem auto;
+  display: flex;
+  width: 100%;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: $grayEmpty;
+  a {
+    color: $primary;
+  }
+}
+.redesign__collection__heading {
+  max-width: 1600px;
+  margin: 1rem auto;
+  padding: 1rem;
+  a {
+    color: $primary;
+    font-weight: bold;
+  }
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+  color: white;
+  margin-top: 2rem;
+}
+}
