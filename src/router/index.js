@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import HomeBeta from '../views/HomeVersionTwo.vue'
 import Documents from '../views/Documents.vue'
 import Collection from '../views/Collection.vue'
 import Edit from '../views/Edit.vue'
@@ -20,9 +21,10 @@ Vue.use(VueRouter)
 const routes = [{
   path: '/',
   name: 'Home',
-  component: Home,
+  component: HomeBeta,
 
 },
+
   {
     path: '/collection/:id',
     name: 'Collection',
