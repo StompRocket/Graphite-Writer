@@ -92,14 +92,13 @@
 .documents {
   //padding: 2rem;
 
-  display: grid;
+ display: grid;
   grid-template-columns: 1fr;
   max-width: 1600px;
   margin: 0 auto;
-  place-content: center;
-  place-items: center;
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
+  //place-content: center;
+ // place-items: center;
+
   @media (min-width: 670px) {
     grid-template-columns: 1fr 1fr;
   }
@@ -110,6 +109,7 @@
 
   @media (min-width: 1300px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+
   }
 }
 
@@ -197,7 +197,7 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-
+  overflow: hidden;
   width: 100%;
   text-decoration: none;
 
@@ -208,6 +208,7 @@
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
+   // max-width: 100%;
   }
 
   &:hover {

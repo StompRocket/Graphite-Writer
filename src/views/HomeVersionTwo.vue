@@ -45,12 +45,30 @@
       <img src="@/assets/wordmark.svg" alt=""/>
       <p class="version">v{{ version }}</p>
     </div>
-    <div v-if="docsLoaded" class="redesign__collection__heading">
-      <router-link  to="/">{{$t("back")}}</router-link>
-      <h1>{{title}}</h1>
-    </div>
+<div v-if="collectionsEnabled && docsLoaded && docs.length > 0" class="redesign__documentGroup">
+    <h3>Collections</h3>
+    <div class="redesign__document__grid">
+      <router-link :to="'/collection/'+ collection.id" v-for="collection in collections" :key="collection.id" class="redesign__document--collection">
+        <i class="fas fa-bookmark redesign__document__icon"></i>
+        <div class="redesign__collection__title">
+          <p class="redesign__document__title">{{collection.title}}</p>
+          <p class="redesign__document__desc">{{$t("docs")}}: {{collection.docs.length}}</p>
+        </div>
+      </router-link>
 
-    <section v-if="docsLoaded" class="redesign__documentGroup">
+    </div>
+  </div>
+    <div v-if="collectionsCount == 0 && docsLoaded" class="redesign__collections__onboarding">
+      <p>{{$t("collections.youHaveNone")}}</p>
+      <p>{{$t("collections.instructions")}}</p>
+      <br>
+      <p>{{$t("collections.about")}}</p>
+      <br>
+      <p>{{$t("collections.dontNeed")}}
+        <router-link to="/settings">{{$t("settingsText")}}</router-link>
+      </p>
+    </div>
+    <div v-if="docsLoaded" class="redesign__documentGroup">
       <h3>{{$t("homeContext.recentDocs")}}</h3>
       <div class="redesign__document__grid">
         <div :key="doc.id" @contextmenu.prevent="$refs.menu.close();  $refs.menu.open($event, doc)" v-for="doc in filteredDocs" class="redesign__document__container">
@@ -61,38 +79,75 @@
 
           </router-link>
         </div>
-        <!--
-        <div :key="doc.id" @contextmenu.prevent="$refs.menu.close();  $refs.menu.open($event, doc)" v-for="doc in filteredDocs"
-             class="doc__container">
-          <router-link
-              :to="openUrl(doc)"
 
-
-              class="document"
-          >
-            <p class="title">{{ doc.title }}</p>
-            <p class="description">
-              {{ $t('opened') }}: {{ lastEdited(doc.opened) }}. {{ $t('owner') }}:
-              {{ doc.owner }}
-            </p>
-          </router-link>
-        </div>-->
         <vue-context ref="menu">
           <template slot-scope="child" v-if="child.data">
             <li>
               <router-link :to="openUrl(child.data)" target="_blank">{{$t("homeContext.OpenTab")}}</router-link>
             </li>
-            <li><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">{{$t("delete")}}</a></li>
+            <li v-if="collectionsEnabled && child.data.owner === 'You'">
+              <a @click.prevent="openTagModal(child.data)">{{$t("homeContext.editTags")}}</a>
+            </li>
+            <li v-if="child.data.owner === 'You'"><a @click.prevent="deleteDoc(child.data)" class="btn--inline red">{{$t("delete")}}</a>
+            </li>
           </template>
         </vue-context>
-        <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
-          <img src="../assets/undraw_files_6b3d.svg" alt="No Documents"/>
-          <h3>{{ $t('noDocs') }}</h3>
-          <p>{{ $t('noDocsDesc') }}</p>
-        </div>
-      </div>
-    </section>
 
+      </div>
+      <div v-if="docs.length <= 0 && docsLoaded" class="noDocs">
+        <img src="../assets/undraw_files_6b3d.svg" alt="No Documents"/>
+        <h3>{{ $t('noDocs') }}</h3>
+        <p>{{ $t('noDocsDesc') }}</p>
+      </div>
+    </div>
+    <div v-if="featureModal" class="modal_container">
+      <div class="modal--feature">
+        <img src="../assets/undraw_around_the_world_v9nu.svg" alt=""/>
+        <h3>{{ $t('feature.new') }}</h3>
+        <p>{{ $t('feature.supports') }}</p>
+        <p>{{ $t('feature.translate') }}</p>
+        <p>
+          {{ $t('feature.support') }}:
+          <a href="mailto:support@graphitewriter.com"
+          >support@graphitewriter.com</a
+          >
+        </p>
+        <p>{{ $t('feature.useBox') }}</p>
+        <Locale></Locale>
+        <button @click="closeFeatureModal" class="btn">{{ $t('ok') }}</button>
+      </div>
+      <div class="modal_container" @click="closeFeatureModal"></div>
+    </div>
+    <div v-if="collectionsFeatureModal && false" class="modal_container">
+      <div class="modal--feature">
+        <img src="../assets/undraw_folder_39kl.svg" alt=""/>
+        <h3>{{$t("collectionsOnboard.title")}}</h3>
+        <p>{{$t("collectionsOnboard.subHead")}}</p>
+        <p>{{$t("collectionsOnboard.thinkOf")}}</p>
+        <p>{{$t("collectionsOnboard.allows")}}</p>
+        <p>{{$t("collectionsOnboard.getStarted")}}</p>
+        <p>{{ $t('feature.useBox') }}</p>
+        <Locale></Locale>
+        <button @click="collectionsFeatureModal = false" class="btn">{{ $t('ok') }}</button>
+      </div>
+      <div class="modal_container" @click="collectionsFeatureModal = false"></div>
+    </div>
+    <div v-if="tagModal" class="modal_container light">
+      <div class="modal">
+        <h3>{{$t("collections.tagsFor")}} "{{tagModalDoc.title}}"</h3>
+        <p>{{$t("collections.used")}}</p>
+        <vue-tags-input
+            :validation="validation"
+            v-model="tag"
+            :tags="tags"
+            :autocomplete-items="autoCompleteItems"
+            @tags-changed="newTags => tags = newTags"
+        />
+        <p>{{$t("collections.onlyUse")}}</p>
+        <button @click="closeTagModal" class="btn">{{ $t('done') }}</button>
+      </div>
+      <div class="modal_container light" @click="closeTagModal"></div>
+    </div>
   </div>
 </template>
 
@@ -100,6 +155,7 @@
   import Locale from '@/components/locale.vue'
   import VueContext from 'vue-context';
   import VueTagsInput from '@johmun/vue-tags-input';
+  import "../assets/redesign.scss"
 
   let timeout = null
   export default {
@@ -126,7 +182,7 @@
             return regex.test(text)
           },
         }],
-        collectionsEnabled: this.$config.getValue('collectionsEnabled').asBoolean() || window.location.hostname === "localhost",
+        collectionsEnabledOnServer: this.$config.getValue('collectionsEnabled').asBoolean() || window.location.hostname,
         featureModal: false,
         prominentLocale: this.$config.getValue('prominentLocalDisplay').asBoolean(),
         feedbackConfig: this.$config.getValue('feedback').asBoolean(),
@@ -135,16 +191,61 @@
         loaded: false,
         accountInfo: false,
         version: require('../../package.json').version,
-        trace: this.$perf.trace('loadCollectionDocuments'),
-        feedback: false
+        trace: this.$perf.trace('loadDocuments'),
+        feedback: false,
+        shownCollections: false
       }
     },
     created() {
       this.trace.start()
     },
     computed: {
-      title() {
-        return this.$store.getters.collections[this.$route.params.id].title
+      autoCompleteItems() {
+        let items = []
+        Object.keys(this.collections).forEach(key => {
+          items.push(this.collections[key].title)
+        })
+        return items
+      },
+      collectionsFeatureModal: {
+        get() {
+          console.log(localStorage.getItem("collectionsFeatureModal"), "collections settings")
+          if (localStorage.getItem("collectionsFeatureModal") !== "true") {
+            if (!this.shownCollections && !this.featureModal) {
+              return true
+            }
+          }
+          return false
+
+        },
+        set(val) {
+          localStorage.setItem("collectionsFeatureModal", "true")
+          this.shownCollections = true
+        }
+      },
+      collectionsEnabled() {
+        if (this.$store.getters.collectionsSetting === "true" || this.$store.getters.collectionsSetting === true) {
+          console.log('true computed')
+          if (this.collectionsEnabledOnServer) {
+            if (this.$analytics) {
+              this.$analytics.setUserProperties({"collectionsEnabled": true})
+            }
+            return true
+          }
+
+        }
+        if (this.$analytics) {
+          this.$analytics.setUserProperties({"collectionsEnabled": false})
+        }
+        return false
+
+
+      },
+      collections() {
+        return this.$store.getters.collections ? this.$store.getters.collections : []
+      },
+      collectionsCount() {
+        return Object.keys(this.collections).length
       },
       docsLoaded() {
         return this.$store.state.docsLoaded
@@ -160,16 +261,11 @@
 
         return this.$store.getters.userDocs
       },
-      collectionFilter() {
-        return this.docs.filter(i => {
-          return this.$store.getters.collections[this.$route.params.id].docs.indexOf(i.id) >= 0
-        })
-      },
       filteredDocs() {
         if (this.search.length <= 0) {
-          return this.collectionFilter
+          return this.$store.state.docs
         } else {
-          return this.collectionFilter.filter((i) => {
+          return this.$store.state.docs.filter((i) => {
             clearTimeout(timeout)
             timeout = setTimeout(this.logSearch, 1000)
             return i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
@@ -231,6 +327,7 @@
         }).then(res => res.json()).then(res => {
           if (res.success) {
             console.log('updated tags')
+            this.$forceUpdate()
           }
         })
 
@@ -345,8 +442,9 @@
     },
 
     mounted() {
+      console.log(this.$store.getters.collectionsSetting, "collections")
       if (this.$analytics) {
-        this.$analytics.logEvent('openedCollectionDocumentsPage')
+        this.$analytics.logEvent('openedDocumentsPage')
       }
       this.$firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -360,9 +458,6 @@
             // Send token to your backend via HTTPS
             this.$store.commit('setToken', idToken)
             this.$store.dispatch('fetchDocs')
-            if (!this.$store.getters.collections[this.$route.params.id]) {
-              this.$router.push("/")
-            }
             this.loaded = true
             this.trace.stop()
             if (
