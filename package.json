@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
-    "@sentry/browser": "^5.15.5",
+    "@sentry/browser": "^6.18.2",
     "@sentry/tracing": "^6.18.2",
     "@sentry/vue": "^6.18.2",
     "@typeform/embed": "^0.17.0",
