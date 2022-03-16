@@ -1,6 +1,6 @@
 {
   "name": "graphite-writer",
-  "version": "1.12.4",
+  "version": "1.13.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -17,7 +17,6 @@
     "@sentry/browser": "^5.15.5",
     "@typeform/embed": "^0.17.0",
     "core-js": "^3.6.4",
-    "cypress-firebase": "^1.1.0",
     "firebase": "^7.13.2",
     "firebase-admin": "^8.10.0",
     "lodash": "^4.17.15",
@@ -41,7 +40,7 @@
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-plugin-vuex": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
-    "cypress": "^4.4.0",
+    "cypress-firebase": "^1.1.0",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-i18n": "~0.6.1",

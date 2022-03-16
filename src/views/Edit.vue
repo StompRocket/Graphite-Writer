@@ -19,17 +19,27 @@
 
 
       <div id="toolbar">
+        <!---
         <!-- Add font size dropdown -->
-        <select class="ql-size">
-          <option value="small"></option>
-          <!-- Note a missing, thus falsy value, is used to reset to default -->
-          <option selected></option>
-          <option value="large"></option>
-          <option value="huge"></option>
-        </select>
+
+  <select class="ql-font">
+    <option selected=""></option>
+    <option value="serif"></option>
+    <option value="monospace"></option>
+  </select>
+  <select class="ql-size">
+    <option value="small"></option>
+    <option selected=""></option>
+    <option value="large"></option>
+    <option value="huge"></option>
+  </select>
+
+        
         <!-- Add a bold button -->
         <button class="ql-bold"></button>
         <button class="ql-italic"></button>
+        <button class="ql-strike" type="button"></button>
+        
         <span class="ql-formats">
          <button type="button" class="ql-indent" value="-1"></button>
          <button type="button" class="ql-indent" value="+1"></button>
@@ -51,7 +61,7 @@
          <button type="button" class="ql-clean"></button>
       </span>
         <!-- Add subscript and superscript buttons -->
-
+      --->
       </div>
     </div>
 
@@ -306,7 +316,9 @@
       const options = {
         debug: 'warn',
         modules: {
-          toolbar: "#toolbar"
+          toolbar: {
+            container: '#toolbar',
+          }
         },
         theme: "snow",
         placeholder: this.$t("compose"),
