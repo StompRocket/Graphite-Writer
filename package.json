@@ -1,6 +1,6 @@
 {
   "name": "graphite-writer",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,6 +15,8 @@
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
     "@sentry/browser": "^5.15.5",
+    "@sentry/tracing": "^6.18.2",
+    "@sentry/vue": "^6.18.2",
     "@typeform/embed": "^0.17.0",
     "core-js": "^3.6.4",
     "firebase": "^7.13.2",

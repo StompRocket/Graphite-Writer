@@ -8,6 +8,7 @@ import 'moment/locale/pt.js'
 import swal from 'sweetalert'
 import _ from 'lodash'
 import * as Sentry from '@sentry/browser'
+import { BrowserTracing } from "@sentry/tracing";
 import 'firebase/auth'
 import 'firebase/remote-config'
 import 'firebase/analytics'
@@ -55,6 +56,11 @@ if (window.location.hostname != 'localhost') {
   Sentry.init({
     dsn:
       'https://651a929bd0444e42ab4dd37ba4f864ac@o130965.ingest.sentry.io/289169',
+      integrations: [new BrowserTracing({
+        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+        tracingOrigins: ["localhost", "app.graphitewriter.com", /^\//],
+      })],
+      tracesSampleRate: 0.2,
     release: 'Graphite-Writer-App@' + version,
   })
   Vue.prototype.$Sentry = Sentry
