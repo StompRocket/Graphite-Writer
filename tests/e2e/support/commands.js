@@ -26,8 +26,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import { attachCustomCommands } from "cypress-firebase";
-const fbConfig = {
-  apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
+const fbConfig = 
+{ apiKey: "AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI",
   authDomain: "graphite-88e41.firebaseapp.com",
   databaseURL: "https://graphite-88e41.firebaseio.com",
   projectId: "graphite-88e41",
@@ -35,7 +35,7 @@ const fbConfig = {
   messagingSenderId: "158148550453",
   appId: "1:158148550453:web:ea17a3b23534164945f67c",
   measurementId: "G-RX8D5M6ZGJ"
-};
+}
 
 firebase.initializeApp(fbConfig);
 

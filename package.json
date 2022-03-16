@@ -8,8 +8,8 @@
     "cypress": "$(npm bin)/cypress open",
     "test:e2e": "vue-cli-service test:e2e",
     "deploy": "node ./deploy.js",
-    "seed": "node ./tests/seed.js",
-    "seedOne": "node ./tests/seedOneDoc.js",
+    "seed": "NODE_TLS_REJECT_UNAUTHORIZED='0' && node --trace-warnings ./tests/seed.js",
+    "seedOne": "NODE_TLS_REJECT_UNAUTHORIZED='0' && node --trace-warnings ./tests/seedOneDoc.js",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
@@ -23,7 +23,7 @@
     "minireset.css": "0.0.6",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
-    "mongodb": "^3.5.6",
+    "mongodb": "^4.4.1",
     "quill": "^1.3.7",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
@@ -40,6 +40,7 @@
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-plugin-vuex": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
+    "cypress": "^9.5.2",
     "cypress-firebase": "^1.1.0",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
