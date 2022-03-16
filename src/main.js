@@ -63,7 +63,7 @@ if (window.location.hostname != 'localhost') {
        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
         tracingOrigins: ["localhost", "app.graphitewriter.com", /^\//],
       })],
-      tracesSampleRate: 0.2,
+      tracesSampleRate: 1,
     release: 'Graphite-Writer-App@' + version,
   })
 } else {
