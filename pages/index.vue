@@ -1,5 +1,10 @@
 <template>
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+    <div class="bg-secondary h-screen">
+        <navbar/>
+       <main class="p-4">
+        
+       </main>
+       
+</div>
+
 </template>
