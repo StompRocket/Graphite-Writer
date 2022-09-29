@@ -17,6 +17,12 @@ module.exports = {
       'back-gray': "#151515",
       'gray-empty': '#3c3c3c',
       'light': '#F7F7F7',
+      },
+      height: {
+        '9/10': '90%',
+      },
+      gridTemplateRows: {
+'footer': 'auto, 1fr, 1fr'
       }
     },
   },

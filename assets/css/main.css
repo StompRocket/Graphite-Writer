@@ -10,4 +10,12 @@
     .gw-search {
         @apply focus:drop-shadow-md drop-shadow block px-4 py-2 rounded-md bg-secondary hover:bg-gray-empty active:bg-gray-empty focus:bg-gray-empty transition-all duration-150 text-white outline-none ease-out;
     }
+    .gw-heading-lg {
+        @apply font-bold text-3xl;
+    }
+}
+
+.homegrid {
+    display: grid;
+    grid-template-rows: 5.5em 1fr;
 }
