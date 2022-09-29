@@ -17,5 +17,5 @@
 
 .homegrid {
     display: grid;
-    grid-template-rows: 5.5em 1fr;
+    grid-template-rows: auto 1fr;
 }
