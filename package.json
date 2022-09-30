@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.7",
+    "@tiptap/extension-blockquote": "^2.0.0-beta.199",
+    "@tiptap/extension-bullet-list": "^2.0.0-beta.199",
     "@tiptap/extension-character-count": "^2.0.0-beta.199",
+    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.199",
     "@tiptap/extension-color": "^2.0.0-beta.199",
     "@tiptap/extension-dropcursor": "^2.0.0-beta.199",
     "@tiptap/extension-font-family": "^2.0.0-beta.199",
@@ -24,16 +27,19 @@
     "@tiptap/extension-history": "^2.0.0-beta.199",
     "@tiptap/extension-italic": "^2.0.0-beta.199",
     "@tiptap/extension-link": "^2.0.0-beta.199",
+    "@tiptap/extension-list-item": "^2.0.0-beta.199",
     "@tiptap/extension-placeholder": "^2.0.0-beta.199",
     "@tiptap/extension-strike": "^2.0.0-beta.199",
     "@tiptap/extension-subscript": "^2.0.0-beta.199",
     "@tiptap/extension-superscript": "^2.0.0-beta.199",
     "@tiptap/extension-text-align": "^2.0.0-beta.199",
     "@tiptap/extension-text-style": "^2.0.0-beta.199",
+    "@tiptap/extension-typography": "^2.0.0-beta.199",
     "@tiptap/extension-underline": "^2.0.0-beta.199",
     "@tiptap/starter-kit": "^2.0.0-beta.199",
     "@tiptap/vue-3": "^2.0.0-beta.199",
     "install": "^0.13.0",
+    "lowlight": "^2.7.0",
     "npm": "^8.19.2"
   }
 }

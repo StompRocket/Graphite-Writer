@@ -10,7 +10,7 @@
           >
 
        
-            <tip-tap class="w-full"></tip-tap>
+            <tip-tap/>
 
           </div>
         </div>
@@ -24,6 +24,11 @@
 
 useHead({
   title: "Editor",
+  style: [
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css",
+    },
+  ],
 });
 definePageMeta({
   title: "Editor",
