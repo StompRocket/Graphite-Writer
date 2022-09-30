@@ -45,6 +45,7 @@
     import FontFamily from '@tiptap/extension-font-family'
     import Gapcursor from '@tiptap/extension-gapcursor'
     import Placeholder from '@tiptap/extension-placeholder'
+    import TextAlign from '@tiptap/extension-text-align'
 
    // import TPHistory from '@tiptap/extension-history'
 
@@ -53,7 +54,6 @@
     const editor = useEditor({
       content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
       extensions: [
-      //TPHistory,
         StarterKit,
         Highlight,
         Italic,
@@ -67,10 +67,8 @@
         Color,
         Dropcursor,
         Gapcursor,
-        Placeholder.configure({
-          emptyEditorClass: 'text-gray-400 font-light',
-  placeholder: 'Compose an epic...',
-}),
+        TextAlign,
+        Placeholder,
         Link.configure({
   protocols: ['ftp', 'mailto'],
   HTMLAttributes: {

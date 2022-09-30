@@ -967,6 +967,11 @@
   "resolved" "https://registry.npmjs.org/@tiptap/extension-superscript/-/extension-superscript-2.0.0-beta.199.tgz"
   "version" "2.0.0-beta.199"
 
+"@tiptap/extension-text-align@^2.0.0-beta.199":
+  "integrity" "sha512-eIBokfIBxQQaMnWw0T+oYTUr5e2GrQMQfZWmyM6EeUS+RIFb10icL859ALHQm2sBplG6Pf2Rty28PuOPNCVJzw=="
+  "resolved" "https://registry.npmjs.org/@tiptap/extension-text-align/-/extension-text-align-2.0.0-beta.199.tgz"
+  "version" "2.0.0-beta.199"
+
 "@tiptap/extension-text-style@^2.0.0-beta.193", "@tiptap/extension-text-style@^2.0.0-beta.199":
   "integrity" "sha512-rxF2w37aPceraDScZT/tIMRDCMeCvqnrX8Pah33CXGLaU9rSh13F7yzh9w+T+9q/qPNw7TIUXHwtO6QQb8GcOA=="
   "resolved" "https://registry.npmjs.org/@tiptap/extension-text-style/-/extension-text-style-2.0.0-beta.199.tgz"
