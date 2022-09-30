@@ -9,9 +9,9 @@
             class="editor col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-start-4 xl:col-span-6 my-12 min-h-[90vh] bg-white rounded-md text-secondary p-4"
           >
 
-       
+          <client-only>
             <tip-tap/>
-
+</client-only>
           </div>
         </div>
         <gw-footer />
