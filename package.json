@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.3",
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.12",
     "nuxt": "3.0.0-rc.11"
   }

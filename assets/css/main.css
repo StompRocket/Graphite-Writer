@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     html,body {
         @apply bg-back-gray;
@@ -13,6 +14,9 @@
         @apply px-8 py-4 text-center font-bold text-white transition-all duration-150 rounded-md active:bg-gray-50 active:text-gray-50 focus:outline-none ease-out;
         @apply bg-primary hover:bg-primary-hover;
     }
+    .gw-btn-text {
+        @apply transition-all duration-150 ease-out hover:text-opacity-70 cursor-pointer;
+    }
     .gw-search {
         @apply backdrop-filter filter backdrop-blur-sm focus:drop-shadow-md drop-shadow block px-4 py-2 rounded-md bg-secondary hover:bg-gray-empty active:bg-gray-empty focus:bg-gray-empty transition-all duration-150 text-white outline-none ease-out firefox:bg-opacity-100 bg-opacity-95;
     }
@@ -21,6 +25,9 @@
     }
     .nav-spacer {
         height: 5.5em;
+    }
+    .gw-input {
+        @apply p-2 bg-secondary rounded-md focus:outline-none outline-none transition-colors duration-200 ease-out focus:bg-secondary-hover  hover:bg-secondary-hover text-white text-base border-2 border-zinc-700 hover:border-zinc-600 focus:border-zinc-500;
     }
 
 }

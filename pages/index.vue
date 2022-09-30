@@ -8,7 +8,7 @@
        <!--<no-documents/>-->
        <div class="w-full h-9/10  p-4 ">
       <recent-collections/>
-      
+     <recent-documents class="mt-10"/>    
         
 
        </div>

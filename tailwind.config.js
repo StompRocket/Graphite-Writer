@@ -10,6 +10,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors: {
         'primary': '#EBBC43',
         'primary-hover': '#F5DA8F',
@@ -21,9 +22,14 @@ module.exports = {
       },
       height: {
         '9/10': '90%',
+        '80vh': '80vh',
+      },
+      gridTemplateColumns: {
+        'document-search-result': '3fr, 1fr, 1fr'
       },
       gridTemplateRows: {
 'footer': 'auto, 1fr, 1fr'
+
       }
     },
   },
@@ -34,6 +40,9 @@ module.exports = {
      
     },
     plugins: [
+      require('@tailwindcss/forms')({
+        strategy: 'class'
+      }),
     plugin(function ({ addVariant, e, postcss }) {
       addVariant('firefox', ({ container, separator }) => {
       const isFirefoxRule = postcss.atRule({

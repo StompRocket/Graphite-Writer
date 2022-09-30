@@ -2,8 +2,8 @@
     <footer class="bg-back-gray w-full p-4 grid grid-rows-footer gap-4 ">
         <div class="flex">
             <img src="~/assets/images/wordmark.svg" alt="Graphite Writer Logo" class="h-8"/>
-            <select name="Language" id="languageSelect" class="ml-auto">
-                <option value="english">english</option>
+            <select name="Language" id="languageSelect" class="form-select ml-auto gw-input px-8 text-left">
+                <option value="english" class="text-left">english   </option>
             </select>
         </div>
         <div class="flex flex-grid grid-cols-3 gap-4 items-center">
