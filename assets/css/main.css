@@ -39,4 +39,6 @@
 .logo-adjust {
     margin-top: -8px
 }
-
+.ProseMirror-focused {
+    outline: none;
+}

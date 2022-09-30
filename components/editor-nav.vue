@@ -2,7 +2,8 @@
 <template>
     <nav class="backdrop-filter filter backdrop-blur-md  fixed w-full items-center justify-left p-4 bg-back-gray bg-opacity-95 firefox:bg-opacity-100 grid grid-cols-12 sm:grid-rows-1 grid-rows-2 gap-4 z-50">
         <div class="md:col-span-4  sm:col-span-6 col-span-12 flex items-bottom">
-            <img src="~/assets/images/icon.svg" alt="Graphite Writer Logo" class="h-12">
+            <nuxt-link to="/"> <img src="~/assets/images/icon.svg" alt="Graphite Writer Logo" class="h-12"></nuxt-link>
+           
             <div class="ml-4 flex flex-col justify-center">
                 <input type="text" placeholder="Document Title" class="gw-input focus:outline-none">
                 <p class="text-sm text-white">Last edited: 5min ago <span class="text-primary">saved</span></p>

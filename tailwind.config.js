@@ -43,6 +43,7 @@ module.exports = {
       require('@tailwindcss/forms')({
         strategy: 'class'
       }),
+      require('@tailwindcss/typography'),
     plugin(function ({ addVariant, e, postcss }) {
       addVariant('firefox', ({ container, separator }) => {
       const isFirefoxRule = postcss.atRule({

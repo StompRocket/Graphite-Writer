@@ -20,3 +20,11 @@
     
 
 </template>
+<script setup>
+    useHead({
+      title: 'Documents'
+    })
+    definePageMeta({
+  title: 'Documents'
+})
+  </script>

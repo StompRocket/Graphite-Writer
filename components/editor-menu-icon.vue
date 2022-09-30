@@ -1,0 +1,8 @@
+<template>
+    <button :class="{ 'bg-gray-200': active }"  class="py-2 px-1 mr-1 rounded-sm" :alt="description">
+  <img :src="activeIcon && active? '/assets/icons/'+activeIcon+'.svg' : '/assets/icons/'+icon+'.svg'" :alt="description" class="w-5">
+</button>
+    </template>
+    <script setup>
+        const props = defineProps(['active', 'description','icon', 'activeIcon'])
+        </script>
