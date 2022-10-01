@@ -1,6 +1,6 @@
 
 <template>
-    <nav class="backdrop-filter filter backdrop-blur-md  fixed w-full items-center justify-left p-4 bg-back-gray bg-opacity-95 firefox:bg-opacity-100 grid grid-cols-12 sm:grid-rows-1 grid-rows-2 gap-4 z-50">
+    <nav class="backdrop-filter filter backdrop-blur-md  fixed w-full items-center justify-left p-4 bg-back-gray bg-opacity-95 firefox:bg-opacity-100 grid grid-cols-12 sm:grid-rows-1 grid-rows-2 gap-4 z-50 h-[11rem] sm:h-auto">
         <div class="md:col-span-4  sm:col-span-6 col-span-12 flex items-bottom">
             <nuxt-link to="/"> <img src="~/assets/images/icon.svg" alt="Graphite Writer Logo" class="h-12"></nuxt-link>
            

@@ -1,8 +1,8 @@
 <template>
         <client-only>
-  <div class="relative w-full min-h-[90vh] col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-start-4 xl:col-span-6 my-12">
+  <div class="relative w-full col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-start-4 xl:col-span-6 ">
 
-      <div class="flex items-center sticky top-[6em] z-20 bg-white px-4 pt-2 rounded-t-md ">
+      <div class="flex items-center sticky sm:top-[6em] top-[11em] z-20 bg-white px-4 pt-2 rounded-t-md ">
         <editor-menu-icon
           :active="editor.isActive('bold')"
           icon="bold"
@@ -111,7 +111,8 @@
      
       <editor-content
         :editor="editor"
-        class="focus:outline-none prose w-full max-w-full min-h-[90vh] bg-white rounded-b-md text-secondary px-4 pb-4 mt-0 pt-1"
+        class="focus:outline-none prose w-full max-w-full min-h-[80vh] bg-white rounded-b-md text-secondary px-4 pb-4 mt-0 pt-1"
+        @click="editor.chain().focus().run()"
       />
   
 
@@ -142,6 +143,7 @@ import Image from '@tiptap/extension-image'
 
 // import Placeholder from '@tiptap/extension-placeholder'
 import TextAlign from "@tiptap/extension-text-align";
+import Placeholder from '@tiptap/extension-placeholder';
 
 let colorPickerOpen = ref(false)
 let color = ref("")
@@ -171,6 +173,9 @@ const editor = useEditor({
     Color,
     TextAlign,
     Typography,
+    Placeholder.configure({
+      placeholder: 'Compose an epic...',
+    }),
     Image.configure({
   allowBase64: true,
 }),
@@ -234,6 +239,13 @@ const opacityTextColor = computed(() => {
 </script>
 
 <style lang="css">
+  .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+}
 code {
   color: inherit;
   padding: 0;

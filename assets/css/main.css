@@ -23,9 +23,7 @@
     .gw-heading-lg {
         @apply font-bold text-3xl;
     }
-    .nav-spacer {
-        height: 5.5em;
-    }
+   
     .gw-input {
         @apply p-2 bg-secondary rounded-md focus:outline-none outline-none transition-colors duration-200 ease-out focus:bg-secondary-hover  hover:bg-secondary-hover text-white text-base border-2 border-zinc-700 hover:border-zinc-600 focus:border-zinc-500;
     }
@@ -33,6 +31,17 @@
 }
 
 .homegrid {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+.nav-spacer {
+    @apply h-[11em] md:h-[5.5em];
+  
+}
+.editor-nav-spacer {
+    @apply h-[11em] sm:h-[5.5em];
+}
+.editorgrid {
     display: grid;
     grid-template-rows: auto 1fr;
 }

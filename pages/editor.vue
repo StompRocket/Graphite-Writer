@@ -1,10 +1,10 @@
 <template>
   <div>
     <editor-nav />
-    <div class="bg-secondary min-h-screen text-white homegrid">
-      <div class="nav-spacer"></div>
+    <div class="bg-secondary min-h-screen text-white editorgrid">
+      <div class="editor-nav-spacer"></div>
       <main class="w-full relative">
-        <div class="w-full h-9/10 p-4 grid grid-cols-12">
+        <div class="w-full p-4 grid grid-cols-12 my-4 sm:my-12">
          
 
           <client-only>
