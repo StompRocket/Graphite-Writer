@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <client-only>
-      <div class="flex items-center">
+        <client-only>
+  <div class="relative w-full min-h-[90vh] col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-start-4 xl:col-span-6 my-12">
+
+      <div class="flex items-center sticky top-[6em] z-20 bg-white px-4 pt-2 rounded-t-md ">
         <editor-menu-icon
           :active="editor.isActive('bold')"
           icon="bold"
@@ -53,10 +54,13 @@
         />
 
         <div class="relative">
-          <button class=" p-3 rounded-full" @click="openColorPicker" :style="{'background-color': editor.getAttributes('textStyle').color ?? 'black'}"></button>
+          <button :style="{'background-color': opacityTextColor}" class=" py-2 px-1 mr-1 rounded-sm hover:bg-gray-100 transition-colors duration-200 ease-out" @click="openColorPicker">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" ><path fill="none" d="M0 0h24v24H0z"/><path d="M15.246 14H8.754l-1.6 4H5l6-15h2l6 15h-2.154l-1.6-4zm-.8-2L12 5.885 9.554 12h4.892zM3 20h18v2H3v-2z" :fill="editor.getAttributes('textStyle').color ?? 'black'"/></svg>
+          
+          </button>
           <div v-if="colorPickerOpen" class="absolute z-30 drop-shadow-md w-[15em] rounded-md p-2 bg-white" v-click-outside="closeColorPicker" >
             
-            <color-picker :color="color" @color-change="updateTextColor" :visible-formats="['rgb']" default-format="rgb" alpha-channel="hide" format-switch-button="false" copy-button="false"/>
+            <color-picker class="text-black" :color="color" @color-change="updateTextColor" :visible-formats="['rgb']" default-format="rgb" alpha-channel="hide" format-switch-button="false" copy-button="false"/>
           <button :style="{'background-color': updateColor}" class="gw-btn mt-2 w-full" @click="closeColorPicker">Set Color</button>  
           </div>
          
@@ -67,6 +71,13 @@
           icon="list-unordered"
           description="Bullet list text"
           @click="editor.chain().focus().toggleBulletList().run()"
+        />
+
+        <editor-menu-icon
+          :active="editor.isActive('horizontalRule')"
+          icon="separator"
+          description="Insert a horizontal rule"
+          @click="editor.chain().focus().setHorizontalRule().run()"
         />
 
         <editor-menu-icon
@@ -97,12 +108,15 @@
           @click="editor.commands.redo()"
         />
       </div>
+     
       <editor-content
         :editor="editor"
-        class="focus:outline-none prose w-full max-w-full"
+        class="focus:outline-none prose w-full max-w-full min-h-[90vh] bg-white rounded-b-md text-secondary px-4 pb-4 mt-0 pt-1"
       />
-    </client-only>
+  
+
   </div>
+</client-only>
 </template>
 <script setup>
 import { reactive, ref } from 'vue'
@@ -123,6 +137,9 @@ import FontFamily from "@tiptap/extension-font-family";
 import Typography from "@tiptap/extension-typography";
 import { lowlight } from "lowlight/lib/common.js";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Image from '@tiptap/extension-image'
+
+
 // import Placeholder from '@tiptap/extension-placeholder'
 import TextAlign from "@tiptap/extension-text-align";
 
@@ -135,6 +152,8 @@ let updateColor = ref("")
 //TODO: implment color extension
 //TODO: implement text align extension
 //TODO: implement wordcount extension
+
+//TODO: use tippy to create tooltips for the icons https://atomiks.github.io/tippyjs/v6/getting-started/
 
 const editor = useEditor({
   content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
@@ -152,6 +171,10 @@ const editor = useEditor({
     Color,
     TextAlign,
     Typography,
+    Image.configure({
+  allowBase64: true,
+}),
+
     CodeBlockLowlight.configure({
       lowlight,
     }),
@@ -192,8 +215,21 @@ function updateTextColor(eventData) {
 function closeColorPicker() {
   editor.value.chain().focus().setColor(updateColor.value).run()
   colorPickerOpen.value = false
+  console.log(editor.value.getAttributes('textStyle'), opacityTextColor.value)
 }
 
+const opacityTextColor = computed(() => {
+  let str = editor.value.getAttributes('textStyle').color
+  if (str) {
+    str = str.slice(0, 3) + "a" + str.slice(3);
+    str = str.slice(0, str.length -1) + ", 0.5" + str.slice(str.length -1);
+    console.log(str)
+  return str
+  } else {
+    return 'white'
+  }
+  
+})
 
 </script>
 
