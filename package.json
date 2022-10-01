@@ -38,8 +38,10 @@
     "@tiptap/extension-underline": "^2.0.0-beta.199",
     "@tiptap/starter-kit": "^2.0.0-beta.199",
     "@tiptap/vue-3": "^2.0.0-beta.199",
+    "click-outside-vue3": "^4.0.1",
     "install": "^0.13.0",
     "lowlight": "^2.7.0",
-    "npm": "^8.19.2"
+    "npm": "^8.19.2",
+    "vue-accessible-color-picker": "^4.0.6"
   }
 }

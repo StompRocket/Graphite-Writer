@@ -42,3 +42,6 @@
 .ProseMirror-focused {
     outline: none;
 }
+.vacp-copy-button {
+    display: none!important;
+}
