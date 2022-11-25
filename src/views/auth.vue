@@ -10,7 +10,6 @@
         <img src="../assets/undraw_my_password_d6kg.svg" alt="Password Image" />
         <h1>{{ $t('login.title') }}</h1>
         <p>{{ $t('login.instructions') }}</p>
-
         <button @click="login" class="btn">
           <i class="fab fa-google"></i>
           {{ $t('login.button') }}
@@ -97,16 +96,18 @@ export default {
       localStorage.setItem("languageFeature", "true");
     },
     login() {
+      console.log("Logging in");
       if (this.$analytics) {
         this.$analytics.logEvent("login");
       }
       this.$firebase.auth().useDeviceLanguage();
       var provider = new this.$firebase.auth.GoogleAuthProvider();
-
+console.log("signin with popup")
       this.$firebase
         .auth()
         .signInWithRedirect(provider)
         .catch(err => {
+          console.log(err, "error signing in")
           this.$swal({
             title: this.$t("error"),
             text: this.$t("ErrorTypes.signin.text"),

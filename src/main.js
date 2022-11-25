@@ -21,7 +21,8 @@ Vue.config.productionTip = false
 const version = require('../package.json').version
 const firebaseConfig = {
   apiKey: 'AIzaSyAkp9Xj0ckAT1l7yLPp1CU5812g_Y8ebYI',
-  authDomain: 'graphitewriter.com',
+  authDomain: 'app.graphitewriter.com',
+  //authDomain: "graphite-88e41.firebaseapp.com",
   databaseURL: 'https://graphite-88e41.firebaseio.com',
   projectId: 'graphite-88e41',
   storageBucket: 'graphite-88e41.appspot.com',
