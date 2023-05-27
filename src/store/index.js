@@ -76,7 +76,7 @@ export default new Vuex.Store({
       return state.user
     },
     userDocs(state, getters) {
-
+        console.log("userDocs", state.docs)
         return state.docs.sort((a,b) => {
           //console.log(moment.unix(a.opened), moment.unix(b.opened))
           return b.index - a.index
@@ -116,7 +116,7 @@ export default new Vuex.Store({
     fetchDocs(context) {
       console.log("fetch docs")
       if ( context.getters.fbToken) {
-
+        console.log("token", context.getters.api)
         fetch(`${context.getters.api}/api/v1/documents`, {
           method: "get",
           headers: {
@@ -125,11 +125,15 @@ export default new Vuex.Store({
 
         }).then(res => res.json()).then(res => {
           context.commit("setDocs", res)
-       //   console.log(res)
+          console.log(res)
           return res
+        }).catch(res => {
+          console.log("error fetching docs", res)
         })
 
 
+      } else {
+        console.log("no token")
       }
     }
   },
