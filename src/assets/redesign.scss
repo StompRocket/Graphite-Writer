@@ -105,3 +105,11 @@ h1 {
   margin-top: 2rem;
 }
 }
+
+.home__sortoptionrow {
+display: flex;
+justify-content: space-between;
+.sortoptions {
+color: white;
+}
+}
