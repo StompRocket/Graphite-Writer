@@ -279,8 +279,9 @@ export default {
                     return i.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
                 })
             }
+
             if (this.documentSortMode == "alphabetical") {
-                return res.sort((a, b) => {
+                return res.toSorted((a, b) => {
                     if (a.title.toLowerCase() > b.title.toLowerCase()) {
                         return 1
                     } else {
