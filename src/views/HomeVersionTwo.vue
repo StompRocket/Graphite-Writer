@@ -249,7 +249,22 @@ export default {
 
         },
         collections() {
-            return this.$store.getters.collections ? this.$store.getters.collections : []
+            let res = this.$store.getters.collections ? Object.values(this.$store.getters.collections) : []
+            if (this.documentSortMode == "alphabetical") {
+                return res.toSorted((a, b) => {
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                        return 1
+                    } else {
+                        return -1
+                    }
+
+                })
+            } else {
+                return res
+            }
+
+            return res
+
         },
         collectionsCount() {
             return Object.keys(this.collections).length
